@@ -7,7 +7,7 @@
       "server",
       "spa"
     ],
-    "main": "dist/commonjs/aurelia-middleware-koa.js",
+    "main": "dist/commonjs/index.js",
     "typings": "dist/commonjs/aurelia-middleware-koa.d.ts",
     "repository": {
       "type": "git",
