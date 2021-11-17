@@ -13,13 +13,22 @@ System.register([], function (exports_1, context_1) {
         execute: function () {
             bootstrapper;
             from;
-            './bootstrapper/ssr-bootstrapper-webpack';
+            './jsdom/bootstrapper/ssr-bootstrapper-webpack';
             ssrEngine;
             from;
-            './ssr-engine/aurelia-ssr-engine';
+            './jsdom/ssr-engine/aurelia-ssr-engine';
             palNodeJS;
             from;
-            './pal-nodejs/index';
+            './jsdom/pal-nodejs/index';
+            linkedomBootstrapper;
+            from;
+            './linkedom/bootstrapper/ssr-bootstrapper-webpack';
+            linkedomSsrEngine;
+            from;
+            './linkedom/ssr-engine/aurelia-ssr-engine';
+            linkedomPalNodeJS;
+            from;
+            './linkedom/pal-nodejs/index';
         }
     };
 });
