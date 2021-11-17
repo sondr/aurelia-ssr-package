@@ -20,6 +20,9 @@ System.register([], function (exports_1, context_1) {
             palNodeJS;
             from;
             './jsdom/pal-nodejs/index';
+            aureliaKoaMiddleware;
+            from;
+            './jsdom/middleware-koa/aurelia-middleware-koa';
             linkedomBootstrapper;
             from;
             './linkedom/bootstrapper/ssr-bootstrapper-webpack';
@@ -29,6 +32,9 @@ System.register([], function (exports_1, context_1) {
             linkedomPalNodeJS;
             from;
             './linkedom/pal-nodejs/index';
+            linkedomAureliaKoaMiddleware;
+            from;
+            './linkedom/middleware-koa/aurelia-middleware-koa';
         }
     };
 });
