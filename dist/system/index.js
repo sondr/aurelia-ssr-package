@@ -1,40 +1,34 @@
-System.register([], function (exports_1, context_1) {
+System.register(["./jsdom/bootstrapper/ssr-bootstrapper-webpack", "./jsdom/ssr-engine/aurelia-ssr-engine", "./jsdom/pal-nodejs/index", "./jsdom/middleware-koa/aurelia-middleware-koa", "./linkedom/bootstrapper/ssr-bootstrapper-webpack", "./linkedom/ssr-engine/aurelia-ssr-engine", "./linkedom/pal-nodejs/index", "./linkedom/middleware-koa/aurelia-middleware-koa"], function (exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
-    function exportStar_1(m) {
-        var exports = {};
-        for (var n in m) {
-            if (n !== "default") exports[n] = m[n];
-        }
-        exports_1(exports);
-    }
     return {
-        setters: [],
+        setters: [
+            function (bootstrapper_1) {
+                exports_1("bootstrapper", bootstrapper_1);
+            },
+            function (ssrEngine_1) {
+                exports_1("ssrEngine", ssrEngine_1);
+            },
+            function (palNodeJS_1) {
+                exports_1("palNodeJS", palNodeJS_1);
+            },
+            function (aureliaKoaMiddleware_1) {
+                exports_1("aureliaKoaMiddleware", aureliaKoaMiddleware_1);
+            },
+            function (linkedomBootstrapper_1) {
+                exports_1("linkedomBootstrapper", linkedomBootstrapper_1);
+            },
+            function (linkedomSsrEngine_1) {
+                exports_1("linkedomSsrEngine", linkedomSsrEngine_1);
+            },
+            function (linkedomPalNodeJS_1) {
+                exports_1("linkedomPalNodeJS", linkedomPalNodeJS_1);
+            },
+            function (linkedomAureliaKoaMiddleware_1) {
+                exports_1("linkedomAureliaKoaMiddleware", linkedomAureliaKoaMiddleware_1);
+            }
+        ],
         execute: function () {
-            bootstrapper;
-            from;
-            './jsdom/bootstrapper/ssr-bootstrapper-webpack';
-            ssrEngine;
-            from;
-            './jsdom/ssr-engine/aurelia-ssr-engine';
-            palNodeJS;
-            from;
-            './jsdom/pal-nodejs/index';
-            aureliaKoaMiddleware;
-            from;
-            './jsdom/middleware-koa/aurelia-middleware-koa';
-            linkedomBootstrapper;
-            from;
-            './linkedom/bootstrapper/ssr-bootstrapper-webpack';
-            linkedomSsrEngine;
-            from;
-            './linkedom/ssr-engine/aurelia-ssr-engine';
-            linkedomPalNodeJS;
-            from;
-            './linkedom/pal-nodejs/index';
-            linkedomAureliaKoaMiddleware;
-            from;
-            './linkedom/middleware-koa/aurelia-middleware-koa';
         }
     };
 });

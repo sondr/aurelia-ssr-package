@@ -10,10 +10,10 @@ define(["require", "exports", "./utils"], function (require, exports, utils_1) {
      */
     function default_1(html, transformerCtx, options) {
         if (/aurelia-app="main">/im.test(html)) {
-            return utils_1.replaceString(html, /aurelia-app="main">/im, 'aurelia-app="main">' + transformerCtx.aurelia.host.innerHTML);
+            return (0, utils_1.replaceString)(html, /aurelia-app="main">/im, 'aurelia-app="main">' + transformerCtx.aurelia.host.innerHTML);
         }
         else {
-            return utils_1.replaceString(html, /<body[^>]*>/im, utils_1.replaceString(transformerCtx.aurelia.host.outerHTML, '</body>', ''));
+            return (0, utils_1.replaceString)(html, /<body[^>]*>/im, (0, utils_1.replaceString)(transformerCtx.aurelia.host.outerHTML, '</body>', ''));
         }
     }
     exports.default = default_1;

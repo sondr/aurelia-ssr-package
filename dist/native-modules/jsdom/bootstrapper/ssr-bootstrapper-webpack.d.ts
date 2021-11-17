@@ -5,6 +5,6 @@ declare function stop(): void;
 export default function (configure: any): {
     initialize: typeof initialize;
     stop: typeof stop;
-    start: () => Promise<{}>;
+    start: () => Promise<unknown>;
 };
 export {};

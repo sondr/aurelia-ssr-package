@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.cleanup = void 0;
 // aurelia-binding array observer
 var pop = Array.prototype.pop;
 var push = Array.prototype.push;

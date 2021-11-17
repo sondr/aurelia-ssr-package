@@ -11,7 +11,7 @@ var utils_1 = require("./utils");
 function default_1(html, transformerCtx, options) {
     var title = transformerCtx.document.head.querySelector('title');
     if (title) {
-        return utils_1.replaceString(html, /<title>((.|[\n\r])*)<\/title>/im, title.outerHTML);
+        return (0, utils_1.replaceString)(html, /<title>((.|[\n\r])*)<\/title>/im, title.outerHTML);
     }
     return html;
 }

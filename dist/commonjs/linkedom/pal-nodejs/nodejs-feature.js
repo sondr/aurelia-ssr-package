@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.NodeJsFeature = void 0;
 var NodeJsFeature = /** @class */ (function () {
     function NodeJsFeature(global) {
         this.global = global;

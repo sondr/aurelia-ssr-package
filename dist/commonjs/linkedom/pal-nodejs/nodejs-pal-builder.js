@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.ensurePerformance = exports.buildPal = void 0;
 var nodejs_platform_1 = require("./nodejs-platform");
 var nodejs_feature_1 = require("./nodejs-feature");
 var nodejs_dom_1 = require("./nodejs-dom");
@@ -10,7 +11,7 @@ function buildPal() {
     // set url to enable global var localStorage and sessionStorage
     // var jsdom = new JSDOM(undefined, { url: "http://localhost/" });
     // var global: IGlobal = <IGlobal>jsdom.window;
-    var linkedom = linkedom_1.parseHTML(undefined);
+    var linkedom = (0, linkedom_1.parseHTML)(undefined);
     var global = linkedom.window;
     ensurePerformance(global.window);
     var platform = new nodejs_platform_1.NodeJsPlatform(global, linkedom);

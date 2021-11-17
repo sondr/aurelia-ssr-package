@@ -1,39 +1,13 @@
-define(["require", "exports"], function (require, exports) {
+define(["require", "exports", "./jsdom/bootstrapper/ssr-bootstrapper-webpack", "./jsdom/ssr-engine/aurelia-ssr-engine", "./jsdom/pal-nodejs/index", "./jsdom/middleware-koa/aurelia-middleware-koa", "./linkedom/bootstrapper/ssr-bootstrapper-webpack", "./linkedom/ssr-engine/aurelia-ssr-engine", "./linkedom/pal-nodejs/index", "./linkedom/middleware-koa/aurelia-middleware-koa"], function (require, exports, bootstrapper, ssrEngine, palNodeJS, aureliaKoaMiddleware, linkedomBootstrapper, linkedomSsrEngine, linkedomPalNodeJS, linkedomAureliaKoaMiddleware) {
     "use strict";
-    function __export(m) {
-        for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
-    }
     Object.defineProperty(exports, "__esModule", { value: true });
-    __export(module_1);
-    bootstrapper;
-    from;
-    './jsdom/bootstrapper/ssr-bootstrapper-webpack';
-    __export(module_2);
-    ssrEngine;
-    from;
-    './jsdom/ssr-engine/aurelia-ssr-engine';
-    __export(module_3);
-    palNodeJS;
-    from;
-    './jsdom/pal-nodejs/index';
-    __export(module_4);
-    aureliaKoaMiddleware;
-    from;
-    './jsdom/middleware-koa/aurelia-middleware-koa';
-    __export(module_5);
-    linkedomBootstrapper;
-    from;
-    './linkedom/bootstrapper/ssr-bootstrapper-webpack';
-    __export(module_6);
-    linkedomSsrEngine;
-    from;
-    './linkedom/ssr-engine/aurelia-ssr-engine';
-    __export(module_7);
-    linkedomPalNodeJS;
-    from;
-    './linkedom/pal-nodejs/index';
-    __export(module_8);
-    linkedomAureliaKoaMiddleware;
-    from;
-    './linkedom/middleware-koa/aurelia-middleware-koa';
+    exports.linkedomAureliaKoaMiddleware = exports.linkedomPalNodeJS = exports.linkedomSsrEngine = exports.linkedomBootstrapper = exports.aureliaKoaMiddleware = exports.palNodeJS = exports.ssrEngine = exports.bootstrapper = void 0;
+    exports.bootstrapper = bootstrapper;
+    exports.ssrEngine = ssrEngine;
+    exports.palNodeJS = palNodeJS;
+    exports.aureliaKoaMiddleware = aureliaKoaMiddleware;
+    exports.linkedomBootstrapper = linkedomBootstrapper;
+    exports.linkedomSsrEngine = linkedomSsrEngine;
+    exports.linkedomPalNodeJS = linkedomPalNodeJS;
+    exports.linkedomAureliaKoaMiddleware = linkedomAureliaKoaMiddleware;
 });

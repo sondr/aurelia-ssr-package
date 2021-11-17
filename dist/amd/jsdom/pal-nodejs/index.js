@@ -2,7 +2,8 @@
 define(["require", "exports", "aurelia-pal", "./nodejs-pal-builder", "./nodejs-pal-builder"], function (require, exports, aurelia_pal_1, nodejs_pal_builder_1, nodejs_pal_builder_2) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.ensurePerformance = nodejs_pal_builder_2.ensurePerformance;
+    exports.reset = exports.globalize = exports.initialize = exports.ensurePerformance = void 0;
+    Object.defineProperty(exports, "ensurePerformance", { enumerable: true, get: function () { return nodejs_pal_builder_2.ensurePerformance; } });
     /**
     * Initializes the PAL with the NodeJS-targeted implementation.
     */
@@ -11,8 +12,8 @@ define(["require", "exports", "aurelia-pal", "./nodejs-pal-builder", "./nodejs-p
         if (aurelia_pal_1.isInitialized) {
             return;
         }
-        var pal = nodejs_pal_builder_1.buildPal();
-        aurelia_pal_1.initializePAL(function (platform, feature, dom) {
+        var pal = (0, nodejs_pal_builder_1.buildPal)();
+        (0, aurelia_pal_1.initializePAL)(function (platform, feature, dom) {
             Object.assign(platform, pal.platform);
             Object.setPrototypeOf(platform, pal.platform.constructor.prototype);
             Object.assign(dom, pal.dom);
@@ -90,7 +91,9 @@ define(["require", "exports", "aurelia-pal", "./nodejs-pal-builder", "./nodejs-p
             }
         };
         global.PAL = {
-            DOM: aurelia_pal_1.DOM, PLATFORM: aurelia_pal_1.PLATFORM, FEATURE: aurelia_pal_1.FEATURE
+            DOM: aurelia_pal_1.DOM,
+            PLATFORM: aurelia_pal_1.PLATFORM,
+            FEATURE: aurelia_pal_1.FEATURE
         };
         return global;
     }

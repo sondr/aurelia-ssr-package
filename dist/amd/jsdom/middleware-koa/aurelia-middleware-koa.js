@@ -1,7 +1,8 @@
 define(["require", "exports", "../ssr-engine/aurelia-ssr-engine"], function (require, exports, aurelia_ssr_engine_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.aureliaKoaMiddleware = function (renderOptions, initializationOptions) {
+    exports.aureliaKoaMiddleware = void 0;
+    var aureliaKoaMiddleware = function (renderOptions, initializationOptions) {
         return function (ctx, next) {
             var url = ctx.request.URL;
             var pathname = url.pathname;
@@ -12,7 +13,7 @@ define(["require", "exports", "../ssr-engine/aurelia-ssr-engine"], function (req
             }
             // set client request headers
             renderOptions.headers = Object.assign({}, ctx.req.headers);
-            return aurelia_ssr_engine_1.render(Object.assign({ url: url }, renderOptions), initializationOptions)
+            return (0, aurelia_ssr_engine_1.render)(Object.assign({ url: url }, renderOptions), initializationOptions)
                 .then(function (html) {
                 ctx.body = html;
             })
@@ -23,4 +24,5 @@ define(["require", "exports", "../ssr-engine/aurelia-ssr-engine"], function (req
             });
         };
     };
+    exports.aureliaKoaMiddleware = aureliaKoaMiddleware;
 });

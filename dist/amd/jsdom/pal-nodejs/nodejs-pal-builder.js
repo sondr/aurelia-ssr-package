@@ -1,6 +1,7 @@
 define(["require", "exports", "./nodejs-platform", "./nodejs-feature", "./nodejs-dom", "jsdom"], function (require, exports, nodejs_platform_1, nodejs_feature_1, nodejs_dom_1, jsdom_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    exports.ensurePerformance = exports.buildPal = void 0;
     function buildPal() {
         // https://github.com/jsdom/jsdom/issues/2304
         // set url to enable global var localStorage and sessionStorage

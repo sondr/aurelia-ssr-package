@@ -1,13 +1,14 @@
 define(["require", "exports", "./nodejs-platform", "./nodejs-feature", "./nodejs-dom", "linkedom"], function (require, exports, nodejs_platform_1, nodejs_feature_1, nodejs_dom_1, linkedom_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    exports.ensurePerformance = exports.buildPal = void 0;
     //import { JSDOM } from 'jsdom';
     function buildPal() {
         // https://github.com/jsdom/jsdom/issues/2304
         // set url to enable global var localStorage and sessionStorage
         // var jsdom = new JSDOM(undefined, { url: "http://localhost/" });
         // var global: IGlobal = <IGlobal>jsdom.window;
-        var linkedom = linkedom_1.parseHTML(undefined);
+        var linkedom = (0, linkedom_1.parseHTML)(undefined);
         var global = linkedom.window;
         ensurePerformance(global.window);
         var platform = new nodejs_platform_1.NodeJsPlatform(global, linkedom);

@@ -90,7 +90,9 @@ System.register(["aurelia-pal", "./nodejs-pal-builder"], function (exports_1, co
             }
         };
         global.PAL = {
-            DOM: aurelia_pal_1.DOM, PLATFORM: aurelia_pal_1.PLATFORM, FEATURE: aurelia_pal_1.FEATURE
+            DOM: aurelia_pal_1.DOM,
+            PLATFORM: aurelia_pal_1.PLATFORM,
+            FEATURE: aurelia_pal_1.FEATURE
         };
         return global;
     }

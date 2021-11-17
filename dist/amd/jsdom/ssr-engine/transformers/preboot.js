@@ -33,9 +33,9 @@ define(["require", "exports", "preboot", "./utils"], function (require, exports,
                 ]
             }, options.prebootOptions);
             var inlinePrebootCode = preboot.getInlineCode(prebootOptions);
-            html = utils_1.replaceString(html, '</head>', "\r\n<script>" + inlinePrebootCode + "</script>\r\n</head>");
+            html = (0, utils_1.replaceString)(html, '</head>', "\r\n<script>" + inlinePrebootCode + "</script>\r\n</head>");
             // preboot_browser can replay events that were stored by the preboot code
-            html = utils_1.replaceString(html, '</body>', "\r\n<script src=\"preboot_browser.js\"></script>\n      <script>\n      document.addEventListener('aurelia-started', function () {\n        setTimeout(function () { preboot.complete(); }, " + options.replayDelay + ");\n      });\n      </script>\r\n</body>");
+            html = (0, utils_1.replaceString)(html, '</body>', "\r\n<script src=\"preboot_browser.js\"></script>\n      <script>\n      document.addEventListener('aurelia-started', function () {\n        setTimeout(function () { preboot.complete(); }, " + options.replayDelay + ");\n      });\n      </script>\r\n</body>");
         }
         return html;
     }

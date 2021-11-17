@@ -46,11 +46,12 @@ System.register(["./reflect", "./property-descriptor", "./transformers", "./clea
         }
     }
     function start(options, requestUrl, headers) {
-        var _a = options.main(), initialize = _a.initialize, start = _a.start;
+        var _a;
+        var _b = options.main(), initialize = _b.initialize, start = _b.start;
         var PLATFORM = initialize().PLATFORM;
         // url of jsdom should be equal to the request url
         // this dictates what page aurelia loads on startup
-        if (PLATFORM ? .jsdom ? .reconfigure :  : ) {
+        if ((_a = PLATFORM === null || PLATFORM === void 0 ? void 0 : PLATFORM.jsdom) === null || _a === void 0 ? void 0 : _a.reconfigure) {
             PLATFORM.jsdom.reconfigure({ url: requestUrl });
         }
         return typeof headers !== 'undefined' ? start(headers) : start();

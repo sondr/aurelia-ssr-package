@@ -45,11 +45,12 @@ function setInputDefaultValues(body) {
     }
 }
 function start(options, requestUrl, headers) {
+    var _a;
     const { initialize, start } = options.main();
     const { PLATFORM } = initialize();
     // url of jsdom should be equal to the request url
     // this dictates what page aurelia loads on startup
-    if (PLATFORM ? .jsdom ? .reconfigure :  : ) {
+    if ((_a = PLATFORM === null || PLATFORM === void 0 ? void 0 : PLATFORM.jsdom) === null || _a === void 0 ? void 0 : _a.reconfigure) {
         PLATFORM.jsdom.reconfigure({ url: requestUrl });
     }
     return typeof headers !== 'undefined' ? start(headers) : start();

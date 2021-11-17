@@ -88,7 +88,9 @@ export function globalize() {
         }
     };
     global.PAL = {
-        DOM: DOM, PLATFORM: PLATFORM, FEATURE: FEATURE
+        DOM: DOM,
+        PLATFORM: PLATFORM,
+        FEATURE: FEATURE
     };
     return global;
 }

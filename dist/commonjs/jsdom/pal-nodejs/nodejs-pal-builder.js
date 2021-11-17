@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.ensurePerformance = exports.buildPal = void 0;
 var nodejs_platform_1 = require("./nodejs-platform");
 var nodejs_feature_1 = require("./nodejs-feature");
 var nodejs_dom_1 = require("./nodejs-dom");

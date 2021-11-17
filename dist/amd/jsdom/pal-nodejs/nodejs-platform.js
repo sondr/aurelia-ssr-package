@@ -1,6 +1,7 @@
 define(["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    exports.NodeJsPlatform = void 0;
     var NodeJsPlatform = /** @class */ (function () {
         function NodeJsPlatform(global, jsdom) {
             this.global = global;

@@ -1,6 +1,7 @@
 define(["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    exports.transform = void 0;
     // tslint:disable:no-var-requires
     var transformers = [
         require('./template').default,
