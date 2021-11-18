@@ -67,6 +67,8 @@ function start(options: AppInitializationOptions, requestUrl: string, headers?: 
   // this dictates what page aurelia loads on startup
   if (PLATFORM?.jsdom?.reconfigure) {
     PLATFORM.jsdom.reconfigure({ url: requestUrl });
+  }else if(PLATFORM.jsdom){
+    PLATFORM.jsdom.location = new URL(requestUrl);
   }
 
   return typeof headers !== 'undefined' ? start(headers) : start();

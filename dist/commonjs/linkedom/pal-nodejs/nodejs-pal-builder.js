@@ -15,7 +15,7 @@ function buildPal() {
     // have to use a base for linkeddom to find body later
     var emtpyHtmlString = "<html><head></head><body></body></html>";
     var linkedom = (0, linkedom_1.parseHTML)(emtpyHtmlString);
-    console.dir(linkedom);
+    linkedom.location = new URL('http://localhost/');
     var global = linkedom.window;
     ensurePerformance(global.window);
     console.log("ensured perf");

@@ -10,9 +10,9 @@ export function buildPal() {
     // var global: IGlobal = <IGlobal>jsdom.window;
     console.log("before linkeddom");
     // have to use a base for linkeddom to find body later
-    const emtpyHtmlString = "<html><head></head><body></body></html>";
+    var emtpyHtmlString = "<html><head></head><body></body></html>";
     var linkedom = parseHTML(emtpyHtmlString);
-    console.dir(linkedom);
+    linkedom.location = new URL('http://localhost/');
     var global = linkedom.window;
     ensurePerformance(global.window);
     console.log("ensured perf");

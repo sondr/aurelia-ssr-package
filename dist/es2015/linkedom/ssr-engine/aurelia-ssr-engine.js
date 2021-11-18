@@ -55,6 +55,9 @@ function start(options, requestUrl, headers) {
     if ((_a = PLATFORM === null || PLATFORM === void 0 ? void 0 : PLATFORM.jsdom) === null || _a === void 0 ? void 0 : _a.reconfigure) {
         PLATFORM.jsdom.reconfigure({ url: requestUrl });
     }
+    else if (PLATFORM.jsdom) {
+        PLATFORM.jsdom.location = new URL(requestUrl);
+    }
     return typeof headers !== 'undefined' ? start(headers) : start();
 }
 export { render };
