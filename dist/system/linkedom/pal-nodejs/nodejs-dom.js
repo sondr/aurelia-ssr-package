@@ -110,7 +110,9 @@ System.register([], function (exports_1, context_1) {
                     return node;
                 };
                 NodeJsDom.prototype.adoptNode = function (node) {
-                    return this.global.document.adoptNode(node);
+                    this.removeNode(node);
+                    return this.global.document.importNode(node, true);
+                    //return this.global.document.adoptNode(node);
                 };
                 NodeJsDom.prototype.appendNode = function (newNode, parentNode) {
                     (parentNode || this.global.document.body).appendChild(newNode);

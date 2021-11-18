@@ -102,7 +102,9 @@ export class NodeJsDom implements IDom {
   }
 
   adoptNode(node: Node): Node {
-    return this.global.document.adoptNode(node);
+    this.removeNode(node);
+    return this.global.document.importNode(node, true);
+    //return this.global.document.adoptNode(node);
   }
 
   appendNode(newNode: Node, parentNode?: Node): void {

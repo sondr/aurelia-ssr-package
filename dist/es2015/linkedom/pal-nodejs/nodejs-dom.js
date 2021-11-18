@@ -83,7 +83,9 @@ export class NodeJsDom {
         return node;
     }
     adoptNode(node) {
-        return this.global.document.adoptNode(node);
+        this.removeNode(node);
+        return this.global.document.importNode(node, true);
+        //return this.global.document.adoptNode(node);
     }
     appendNode(newNode, parentNode) {
         (parentNode || this.global.document.body).appendChild(newNode);
