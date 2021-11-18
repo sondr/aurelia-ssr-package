@@ -8,9 +8,14 @@ System.register(["./nodejs-platform", "./nodejs-feature", "./nodejs-dom", "linke
         // set url to enable global var localStorage and sessionStorage
         // var jsdom = new JSDOM(undefined, { url: "http://localhost/" });
         // var global: IGlobal = <IGlobal>jsdom.window;
-        var linkedom = linkedom_1.parseHTML(undefined);
+        console.log("before linkeddom");
+        // have to use a base for linkeddom to find body later
+        var emtpyHtmlString = "<html><head></head><body></body></html>";
+        var linkedom = linkedom_1.parseHTML(emtpyHtmlString);
+        console.dir(linkedom);
         var global = linkedom.window;
         ensurePerformance(global.window);
+        console.log("ensured perf");
         var platform = new nodejs_platform_1.NodeJsPlatform(global, linkedom);
         var dom = new nodejs_dom_1.NodeJsDom(global);
         var feature = new nodejs_feature_1.NodeJsFeature(global);

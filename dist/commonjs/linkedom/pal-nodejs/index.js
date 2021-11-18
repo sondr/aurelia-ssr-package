@@ -14,7 +14,9 @@ function initialize() {
     if (aurelia_pal_1.isInitialized) {
         return;
     }
+    console.log("pal building");
     var pal = (0, nodejs_pal_builder_1.buildPal)();
+    console.log("pal build");
     (0, aurelia_pal_1.initializePAL)(function (platform, feature, dom) {
         Object.assign(platform, pal.platform);
         Object.setPrototypeOf(platform, pal.platform.constructor.prototype);

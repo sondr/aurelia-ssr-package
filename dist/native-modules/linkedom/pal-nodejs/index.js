@@ -10,7 +10,9 @@ export function initialize() {
     if (isInitialized) {
         return;
     }
+    console.log("pal building");
     var pal = buildPal();
+    console.log("pal build");
     initializePAL(function (platform, feature, dom) {
         Object.assign(platform, pal.platform);
         Object.setPrototypeOf(platform, pal.platform.constructor.prototype);

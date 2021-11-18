@@ -17,6 +17,7 @@ define(["require", "exports", "aurelia-framework", "aurelia-loader-webpack", "au
     function initialize() {
         var initialize = palNodeJS.initialize;
         var PLATFORM = pal.PLATFORM;
+        console.log("bootstrapper initializing");
         initialize();
         // expose anything the ssr-engine needs
         return {
@@ -29,9 +30,11 @@ define(["require", "exports", "aurelia-framework", "aurelia-loader-webpack", "au
         console.log("au started:");
         console.log("pal:");
         console.dir(pal);
+        console.dir(pal.DOM.querySelectorAll);
         aurelia.host = pal.DOM.querySelectorAll('body')[0];
         console.log("au host exosts:" + aurelia.host);
         var attribute = pal.DOM.createAttribute('aurelia-app');
+        console.log("attribute: " + attribute);
         attribute.value = 'main';
         console.log("au host attributes exist: " + ((_a = aurelia === null || aurelia === void 0 ? void 0 : aurelia.host) === null || _a === void 0 ? void 0 : _a.attributes) != null);
         aurelia.host.attributes.setNamedItem(attribute);

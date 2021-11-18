@@ -11,7 +11,9 @@ System.register(["aurelia-pal", "./nodejs-pal-builder"], function (exports_1, co
         if (aurelia_pal_1.isInitialized) {
             return;
         }
+        console.log("pal building");
         var pal = nodejs_pal_builder_1.buildPal();
+        console.log("pal build");
         aurelia_pal_1.initializePAL(function (platform, feature, dom) {
             Object.assign(platform, pal.platform);
             Object.setPrototypeOf(platform, pal.platform.constructor.prototype);
