@@ -46,8 +46,11 @@ System.register(["./reflect", "./property-descriptor", "./transformers", "./clea
     }
     function start(options, requestUrl, headers) {
         var _a;
+        console.log("engine start");
         var _b = options.main(), initialize = _b.initialize, start = _b.start;
+        console.log("engine opts got");
         var PLATFORM = initialize().PLATFORM;
+        console.log("engine opts initialized");
         // url of jsdom should be equal to the request url
         // this dictates what page aurelia loads on startup
         if ((_a = PLATFORM === null || PLATFORM === void 0 ? void 0 : PLATFORM.jsdom) === null || _a === void 0 ? void 0 : _a.reconfigure) {

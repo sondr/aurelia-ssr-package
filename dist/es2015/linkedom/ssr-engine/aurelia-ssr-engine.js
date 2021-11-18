@@ -45,8 +45,11 @@ function setInputDefaultValues(body) {
 }
 function start(options, requestUrl, headers) {
     var _a;
+    console.log("engine start");
     const { initialize, start } = options.main();
+    console.log("engine opts got");
     const { PLATFORM } = initialize();
+    console.log("engine opts initialized");
     // url of jsdom should be equal to the request url
     // this dictates what page aurelia loads on startup
     if ((_a = PLATFORM === null || PLATFORM === void 0 ? void 0 : PLATFORM.jsdom) === null || _a === void 0 ? void 0 : _a.reconfigure) {

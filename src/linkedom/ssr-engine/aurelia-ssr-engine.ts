@@ -4,7 +4,6 @@ import { RenderOptions, AppInitializationOptions, AureliaPalNodeJS, AureliaPal }
 import { transform } from './transformers';
 import { Aurelia } from 'aurelia-framework';
 import { cleanup } from './cleanup';
-import {  } from '../pal-nodejs/index';
 
 function render(options: RenderOptions, initOptions: AppInitializationOptions) {
   if (!options.url) {
@@ -57,10 +56,12 @@ function setInputDefaultValues(body: HTMLBodyElement) {
 }
 
 function start(options: AppInitializationOptions, requestUrl: string, headers?: any) {
+  console.log("engine start");
   const { initialize, start } = options.main();
-  
+  console.log("engine opts got");
 
   const { PLATFORM } = initialize();
+  console.log("engine opts initialized");
 
   // url of jsdom should be equal to the request url
   // this dictates what page aurelia loads on startup

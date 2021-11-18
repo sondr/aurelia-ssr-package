@@ -38,6 +38,8 @@ function start(configure: any) {
     aurelia.host = pal.DOM.querySelectorAll('body')[0];
     console.log("au host exosts:" + aurelia.host);
 
+    
+
     const attribute = pal.DOM.createAttribute('aurelia-app');
     attribute.value = 'main';
     console.log("au host attributes exist: " + aurelia?.host?.attributes != null);
