@@ -43,6 +43,7 @@ function start(configure: any) {
 
 
     const attribute = pal.DOM.createAttribute('aurelia-app');
+    console.log("attribute: " + attribute);
     attribute.value = 'main';
     console.log("au host attributes exist: " + aurelia?.host?.attributes != null);
     aurelia.host.attributes.setNamedItem(attribute);

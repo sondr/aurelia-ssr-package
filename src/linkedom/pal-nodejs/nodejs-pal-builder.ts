@@ -16,7 +16,9 @@ export function buildPal(): { global: IGlobal, platform: IPlatform, dom: IDom, f
   // var global: IGlobal = <IGlobal>jsdom.window;
 
   console.log("before linkeddom");
-  var linkedom = parseHTML(undefined);
+  // have to use a base for linkeddom to find body later
+  const emtpyHtmlString = "<html><head></head><body></body></html>";
+  var linkedom = parseHTML(emtpyHtmlString);
   console.dir(linkedom);
   var global: IGlobal = (linkedom.window as unknown) as IGlobal;
 
