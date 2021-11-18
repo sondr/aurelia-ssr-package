@@ -102,6 +102,7 @@ export class NodeJsDom implements IDom {
   }
 
   adoptNode(node: Node): Node {
+    //let parentNode = node.parentNode!;
     this.removeNode(node);
     return this.global.document.importNode(node, true);
     //return this.global.document.adoptNode(node);
@@ -119,11 +120,12 @@ export class NodeJsDom implements IDom {
     }
   }
 
+  // needs verifying
   removeNode(node: Node, parentNode?: Node): void {
     if (node.parentNode) {
       node.parentNode.removeChild(node);
     }
-    else {
+    else if(parentNode) {
       parentNode!.removeChild(node);
     }
   }

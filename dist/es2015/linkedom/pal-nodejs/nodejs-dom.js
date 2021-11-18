@@ -83,6 +83,7 @@ export class NodeJsDom {
         return node;
     }
     adoptNode(node) {
+        //let parentNode = node.parentNode!;
         this.removeNode(node);
         return this.global.document.importNode(node, true);
         //return this.global.document.adoptNode(node);
@@ -102,7 +103,7 @@ export class NodeJsDom {
         if (node.parentNode) {
             node.parentNode.removeChild(node);
         }
-        else {
+        else if (parentNode) {
             parentNode.removeChild(node);
         }
     }

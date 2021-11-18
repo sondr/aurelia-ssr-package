@@ -107,6 +107,7 @@ define(["require", "exports"], function (require, exports) {
             return node;
         };
         NodeJsDom.prototype.adoptNode = function (node) {
+            //let parentNode = node.parentNode!;
             this.removeNode(node);
             return this.global.document.importNode(node, true);
             //return this.global.document.adoptNode(node);
@@ -126,7 +127,7 @@ define(["require", "exports"], function (require, exports) {
             if (node.parentNode) {
                 node.parentNode.removeChild(node);
             }
-            else {
+            else if (parentNode) {
                 parentNode.removeChild(node);
             }
         };

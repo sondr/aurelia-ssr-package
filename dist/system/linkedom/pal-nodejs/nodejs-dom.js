@@ -110,6 +110,7 @@ System.register([], function (exports_1, context_1) {
                     return node;
                 };
                 NodeJsDom.prototype.adoptNode = function (node) {
+                    //let parentNode = node.parentNode!;
                     this.removeNode(node);
                     return this.global.document.importNode(node, true);
                     //return this.global.document.adoptNode(node);
@@ -129,7 +130,7 @@ System.register([], function (exports_1, context_1) {
                     if (node.parentNode) {
                         node.parentNode.removeChild(node);
                     }
-                    else {
+                    else if (parentNode) {
                         parentNode.removeChild(node);
                     }
                 };
