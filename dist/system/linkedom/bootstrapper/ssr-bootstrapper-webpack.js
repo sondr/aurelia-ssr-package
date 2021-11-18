@@ -12,10 +12,16 @@ System.register(["aurelia-framework", "aurelia-loader-webpack", "aurelia-binding
         };
     }
     function start(configure) {
+        var _a;
         var aurelia = new aurelia_framework_1.Aurelia(new aurelia_loader_webpack_1.WebpackLoader());
+        console.log("au started:");
+        console.log("pal:");
+        console.dir(pal);
         aurelia.host = pal.DOM.querySelectorAll('body')[0];
+        console.log("au host exosts:" + aurelia.host);
         var attribute = pal.DOM.createAttribute('aurelia-app');
         attribute.value = 'main';
+        console.log("au host attributes exist: " + ((_a = aurelia === null || aurelia === void 0 ? void 0 : aurelia.host) === null || _a === void 0 ? void 0 : _a.attributes) != null);
         aurelia.host.attributes.setNamedItem(attribute);
         return new Promise(function (resolve) {
             // we need to wait for aurelia-composed as otherwise

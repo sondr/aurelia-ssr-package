@@ -58,6 +58,7 @@ function setInputDefaultValues(body: HTMLBodyElement) {
 
 function start(options: AppInitializationOptions, requestUrl: string, headers?: any) {
   const { initialize, start } = options.main();
+  
 
   const { PLATFORM } = initialize();
 
