@@ -22,6 +22,7 @@ function initialize() {
     const { initialize } = palNodeJS;
     const { PLATFORM } = pal;
 
+    console.log("bootstrapper initializing");
     initialize();
 
     // expose anything the ssr-engine needs
@@ -35,10 +36,11 @@ function start(configure: any) {
     console.log("au started:");
     console.log("pal:");
     console.dir(pal);
+    console.dir(pal.DOM.querySelectorAll);
     aurelia.host = pal.DOM.querySelectorAll('body')[0];
     console.log("au host exosts:" + aurelia.host);
 
-    
+
 
     const attribute = pal.DOM.createAttribute('aurelia-app');
     attribute.value = 'main';

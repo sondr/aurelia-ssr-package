@@ -15,10 +15,13 @@ export function buildPal(): { global: IGlobal, platform: IPlatform, dom: IDom, f
   // var jsdom = new JSDOM(undefined, { url: "http://localhost/" });
   // var global: IGlobal = <IGlobal>jsdom.window;
 
+  console.log("before linkeddom");
   var linkedom = parseHTML(undefined);
+  console.dir(linkedom);
   var global: IGlobal = (linkedom.window as unknown) as IGlobal;
 
   ensurePerformance(global.window);
+  console.log("ensured perf");
 
   var platform = new NodeJsPlatform(global, linkedom);
   var dom = new NodeJsDom(global);

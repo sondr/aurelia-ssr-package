@@ -12,7 +12,9 @@ export function initialize(): void {
     return;
   }
 
+  console.log("pal building");
   let pal = buildPal();
+  console.log("pal build");
 
   initializePAL((platform, feature, dom) => {
     Object.assign(platform, pal.platform);
