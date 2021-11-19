@@ -110,8 +110,10 @@ System.register([], function (exports_1, context_1) {
                     return node;
                 };
                 NodeJsDom.prototype.adoptNode = function (node) {
-                    //let parentNode = node.parentNode!;
-                    this.removeNode(node);
+                    var parentNode = node.parentNode;
+                    if (parentNode) {
+                        this.removeNode(node, parentNode);
+                    }
                     return this.global.document.importNode(node, true);
                     //return this.global.document.adoptNode(node);
                 };
@@ -128,15 +130,15 @@ System.register([], function (exports_1, context_1) {
                 };
                 // needs verifying
                 NodeJsDom.prototype.removeNode = function (node, parentNode) {
-                    // Probable linkedom way
-                    node.remove();
+                    // Does not work for linkeddom
+                    //(node as Element).remove();
                     // old method, wont work without else if(parentNode) in place of else
-                    // if (node.parentNode) {
-                    //   node.parentNode.removeChild(node);
-                    // }
-                    // else {
-                    //   parentNode!.removeChild(node);
-                    // }
+                    if (node.parentNode) {
+                        node.parentNode.removeChild(node);
+                    }
+                    else {
+                        parentNode.removeChild(node);
+                    }
                 };
                 return NodeJsDom;
             }());

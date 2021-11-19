@@ -83,8 +83,10 @@ export class NodeJsDom {
         return node;
     }
     adoptNode(node) {
-        //let parentNode = node.parentNode!;
-        this.removeNode(node);
+        let parentNode = node.parentNode;
+        if (parentNode) {
+            this.removeNode(node, parentNode);
+        }
         return this.global.document.importNode(node, true);
         //return this.global.document.adoptNode(node);
     }
@@ -101,14 +103,14 @@ export class NodeJsDom {
     }
     // needs verifying
     removeNode(node, parentNode) {
-        // Probable linkedom way
-        node.remove();
+        // Does not work for linkeddom
+        //(node as Element).remove();
         // old method, wont work without else if(parentNode) in place of else
-        // if (node.parentNode) {
-        //   node.parentNode.removeChild(node);
-        // }
-        // else {
-        //   parentNode!.removeChild(node);
-        // }
+        if (node.parentNode) {
+            node.parentNode.removeChild(node);
+        }
+        else {
+            parentNode.removeChild(node);
+        }
     }
 }

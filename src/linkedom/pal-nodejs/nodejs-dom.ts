@@ -102,8 +102,10 @@ export class NodeJsDom implements IDom {
   }
 
   adoptNode(node: Node): Node {
-    //let parentNode = node.parentNode!;
-    this.removeNode(node);
+    let parentNode = node.parentNode!;
+    if (parentNode) {
+      this.removeNode(node, parentNode);
+    }
     return this.global.document.importNode(node, true);
     //return this.global.document.adoptNode(node);
   }
@@ -122,15 +124,15 @@ export class NodeJsDom implements IDom {
 
   // needs verifying
   removeNode(node: Node, parentNode?: Node): void {
-    // Probable linkedom way
-    (node as Element).remove();
+    // Does not work for linkeddom
+    //(node as Element).remove();
 
     // old method, wont work without else if(parentNode) in place of else
-    // if (node.parentNode) {
-    //   node.parentNode.removeChild(node);
-    // }
-    // else {
-    //   parentNode!.removeChild(node);
-    // }
+    if (node.parentNode) {
+      node.parentNode.removeChild(node);
+    }
+    else {
+      parentNode!.removeChild(node);
+    }
   }
 }
