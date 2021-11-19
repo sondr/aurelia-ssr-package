@@ -8,14 +8,13 @@ export function buildPal() {
     // set url to enable global var localStorage and sessionStorage
     // var jsdom = new JSDOM(undefined, { url: "http://localhost/" });
     // var global: IGlobal = <IGlobal>jsdom.window;
-    console.log("before linkeddom");
     // have to use a base for linkeddom to find body later
     var emtpyHtmlString = "<html><head></head><body></body></html>";
     var linkedom = parseHTML(emtpyHtmlString);
     linkedom.location = new URL('http://localhost/');
+    linkedom.history = {};
     var global = linkedom.window;
     ensurePerformance(global.window);
-    console.log("ensured perf");
     var platform = new NodeJsPlatform(global, linkedom);
     var dom = new NodeJsDom(global);
     var feature = new NodeJsFeature(global);

@@ -126,13 +126,17 @@ System.register([], function (exports_1, context_1) {
                         parentNode.replaceChild(newNode, node);
                     }
                 };
+                // needs verifying
                 NodeJsDom.prototype.removeNode = function (node, parentNode) {
-                    if (node.parentNode) {
-                        node.parentNode.removeChild(node);
-                    }
-                    else if (parentNode) {
-                        parentNode.removeChild(node);
-                    }
+                    // Probable linkedom way
+                    node.remove();
+                    // old method, wont work without else if(parentNode) in place of else
+                    // if (node.parentNode) {
+                    //   node.parentNode.removeChild(node);
+                    // }
+                    // else {
+                    //   parentNode!.removeChild(node);
+                    // }
                 };
                 return NodeJsDom;
             }());

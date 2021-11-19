@@ -99,12 +99,16 @@ export class NodeJsDom {
             parentNode.replaceChild(newNode, node);
         }
     }
+    // needs verifying
     removeNode(node, parentNode) {
-        if (node.parentNode) {
-            node.parentNode.removeChild(node);
-        }
-        else if (parentNode) {
-            parentNode.removeChild(node);
-        }
+        // Probable linkedom way
+        node.remove();
+        // old method, wont work without else if(parentNode) in place of else
+        // if (node.parentNode) {
+        //   node.parentNode.removeChild(node);
+        // }
+        // else {
+        //   parentNode!.removeChild(node);
+        // }
     }
 }

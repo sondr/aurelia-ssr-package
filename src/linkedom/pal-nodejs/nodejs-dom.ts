@@ -122,11 +122,15 @@ export class NodeJsDom implements IDom {
 
   // needs verifying
   removeNode(node: Node, parentNode?: Node): void {
-    if (node.parentNode) {
-      node.parentNode.removeChild(node);
-    }
-    else if(parentNode) {
-      parentNode!.removeChild(node);
-    }
+    // Probable linkedom way
+    (node as Element).remove();
+
+    // old method, wont work without else if(parentNode) in place of else
+    // if (node.parentNode) {
+    //   node.parentNode.removeChild(node);
+    // }
+    // else {
+    //   parentNode!.removeChild(node);
+    // }
   }
 }

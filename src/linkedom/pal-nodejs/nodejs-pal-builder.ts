@@ -15,16 +15,15 @@ export function buildPal(): { global: IGlobal, platform: IPlatform, dom: IDom, f
   // var jsdom = new JSDOM(undefined, { url: "http://localhost/" });
   // var global: IGlobal = <IGlobal>jsdom.window;
 
-  console.log("before linkeddom");
   // have to use a base for linkeddom to find body later
   var emtpyHtmlString = "<html><head></head><body></body></html>";
   var linkedom = parseHTML(emtpyHtmlString);
   linkedom.location = new URL('http://localhost/') as unknown as Location;
+  (linkedom as unknown as any).history = {};
 
   var global: IGlobal = (linkedom.window as unknown) as IGlobal;
 
   ensurePerformance(global.window);
-  console.log("ensured perf");
 
   var platform = new NodeJsPlatform(global, linkedom);
   var dom = new NodeJsDom(global);
