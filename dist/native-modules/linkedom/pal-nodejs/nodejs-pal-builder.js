@@ -12,7 +12,13 @@ export function buildPal() {
     var emtpyHtmlString = "<html><head></head><body></body></html>";
     var linkedom = parseHTML(emtpyHtmlString);
     linkedom.location = new URL('http://localhost/');
-    linkedom.history = {};
+    linkedom.history = {
+        go: function (delta) { },
+        back: function () { },
+        forward: function () { },
+        replaceState: function (data, title, url) { },
+        pushState: function (data, title, url) { }
+    };
     var global = linkedom.window;
     ensurePerformance(global.window);
     var platform = new NodeJsPlatform(global, linkedom);

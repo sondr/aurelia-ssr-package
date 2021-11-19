@@ -12,7 +12,13 @@ System.register(["./nodejs-platform", "./nodejs-feature", "./nodejs-dom", "linke
         var emtpyHtmlString = "<html><head></head><body></body></html>";
         var linkedom = linkedom_1.parseHTML(emtpyHtmlString);
         linkedom.location = new URL('http://localhost/');
-        linkedom.history = {};
+        linkedom.history = {
+            go: function (delta) { },
+            back: function () { },
+            forward: function () { },
+            replaceState: function (data, title, url) { },
+            pushState: function (data, title, url) { }
+        };
         var global = linkedom.window;
         ensurePerformance(global.window);
         var platform = new nodejs_platform_1.NodeJsPlatform(global, linkedom);

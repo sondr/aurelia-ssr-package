@@ -19,7 +19,13 @@ export function buildPal(): { global: IGlobal, platform: IPlatform, dom: IDom, f
   var emtpyHtmlString = "<html><head></head><body></body></html>";
   var linkedom = parseHTML(emtpyHtmlString);
   linkedom.location = new URL('http://localhost/') as unknown as Location;
-  (linkedom as unknown as any).history = {};
+  (linkedom as unknown as any).history = {
+    go:(delta?: number)=>{},
+    back:()=>{},
+    forward:()=>{},
+    replaceState: (data: object, title: string, url: string) => {  },
+    pushState: (data: object, title: string, url: string) => {  }
+  }
 
   var global: IGlobal = (linkedom.window as unknown) as IGlobal;
 
