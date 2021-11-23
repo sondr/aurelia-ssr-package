@@ -17,15 +17,19 @@ System.register(["./jsdom/bootstrapper/ssr-bootstrapper-webpack", "./jsdom/ssr-e
             },
             function (linkedomBootstrapper_1) {
                 exports_1("linkedomBootstrapper", linkedomBootstrapper_1);
+                exports_1("happydomBootstrapper", linkedomBootstrapper_1);
             },
             function (linkedomSsrEngine_1) {
                 exports_1("linkedomSsrEngine", linkedomSsrEngine_1);
+                exports_1("happydomSsrEngine", linkedomSsrEngine_1);
             },
             function (linkedomPalNodeJS_1) {
                 exports_1("linkedomPalNodeJS", linkedomPalNodeJS_1);
+                exports_1("happydomPalNodeJS", linkedomPalNodeJS_1);
             },
             function (linkedomAureliaKoaMiddleware_1) {
                 exports_1("linkedomAureliaKoaMiddleware", linkedomAureliaKoaMiddleware_1);
+                exports_1("happydomAureliaKoaMiddleware", linkedomAureliaKoaMiddleware_1);
             }
         ],
         execute: function () {
