@@ -35,7 +35,7 @@ define(["require", "exports", "../CSSRule"], function (require, exports, CSSRule
              * @returns CSS text.
              */
             get: function () {
-                return this.selectorText + " { " + this.style.cssText + " }";
+                return "".concat(this.selectorText, " { ").concat(this.style.cssText, " }");
             },
             enumerable: false,
             configurable: true

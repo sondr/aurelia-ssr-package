@@ -149,7 +149,7 @@ var FileReader = /** @class */ (function (_super) {
                     case FileReaderFormatEnum.dataURL: {
                         // Spec seems very unclear here; see https://github.com/w3c/FileAPI/issues/104.
                         var contentType = WhatwgMIMEType.parse(blob.type) || 'application/octet-stream';
-                        (_this.result) = "data:" + contentType + ";base64," + data.toString('base64');
+                        (_this.result) = "data:".concat(contentType, ";base64,").concat(data.toString('base64'));
                         break;
                     }
                     case FileReaderFormatEnum.text: {

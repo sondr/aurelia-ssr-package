@@ -5976,7 +5976,7 @@ define(["require", "exports", "../attribute/Attr"], function (require, exports, 
                         var part = parts_2[_i];
                         if (part) {
                             var _a = part.trim().split(':'), name_2 = _a[0], value = _a[1];
-                            newStyle.push(name_2 + ": " + value.trim() + ";");
+                            newStyle.push("".concat(name_2, ": ").concat(value.trim(), ";"));
                             this[index] = name_2;
                             index++;
                         }
@@ -6032,11 +6032,11 @@ define(["require", "exports", "../attribute/Attr"], function (require, exports, 
                     if (part) {
                         var _a = part.trim().split(':'), name_3 = _a[0], existingValue = _a[1];
                         if (name_3 === propertyName) {
-                            newStyle.push(name_3 + ": " + value + ";");
+                            newStyle.push("".concat(name_3, ": ").concat(value, ";"));
                             isExisting = true;
                         }
                         else {
-                            newStyle.push(name_3 + ": " + existingValue.trim() + ";");
+                            newStyle.push("".concat(name_3, ": ").concat(existingValue.trim(), ";"));
                         }
                         this[index] = name_3;
                         index++;
@@ -6044,7 +6044,7 @@ define(["require", "exports", "../attribute/Attr"], function (require, exports, 
                 }
             }
             if (!isExisting) {
-                newStyle.push(propertyName + ": " + value + (priority ? '' + priority : '') + ";");
+                newStyle.push("".concat(propertyName, ": ").concat(value).concat(priority ? '' + priority : '', ";"));
                 this[index] = propertyName;
                 index++;
             }
@@ -6070,7 +6070,7 @@ define(["require", "exports", "../attribute/Attr"], function (require, exports, 
                     if (part) {
                         var _a = part.trim().split(':'), name_4 = _a[0], value = _a[1];
                         if (name_4 !== propertyName) {
-                            newStyle.push(name_4 + ": " + value.trim() + ";");
+                            newStyle.push("".concat(name_4, ": ").concat(value.trim(), ";"));
                             this[index] = name_4;
                             index++;
                             hasProperty = true;

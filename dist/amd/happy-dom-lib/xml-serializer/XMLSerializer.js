@@ -22,17 +22,17 @@ define(["require", "exports", "../nodes/node/Node", "../config/SelfClosingElemen
                     var element = root;
                     var tagName = element.tagName.toLowerCase();
                     if (UnclosedElements_1.default.includes(tagName)) {
-                        return "<" + tagName + this._getAttributes(element) + ">";
+                        return "<".concat(tagName).concat(this._getAttributes(element), ">");
                     }
                     else if (SelfClosingElements_1.default.includes(tagName)) {
-                        return "<" + tagName + this._getAttributes(element) + "/>";
+                        return "<".concat(tagName).concat(this._getAttributes(element), "/>");
                     }
                     var innerHTML = '';
                     for (var _i = 0, _a = root.childNodes; _i < _a.length; _i++) {
                         var node = _a[_i];
                         innerHTML += this.serializeToString(node);
                     }
-                    return "<" + tagName + this._getAttributes(element) + ">" + innerHTML + "</" + tagName + ">";
+                    return "<".concat(tagName).concat(this._getAttributes(element), ">").concat(innerHTML, "</").concat(tagName, ">");
                 case Node_1.default.DOCUMENT_FRAGMENT_NODE:
                 case Node_1.default.DOCUMENT_NODE:
                     var html = '';
@@ -42,15 +42,15 @@ define(["require", "exports", "../nodes/node/Node", "../config/SelfClosingElemen
                     }
                     return html;
                 case Node_1.default.COMMENT_NODE:
-                    return "<!--" + root.textContent + "-->";
+                    return "<!--".concat(root.textContent, "-->");
                 case Node_1.default.TEXT_NODE:
                     return root['textContent'];
                 case Node_1.default.DOCUMENT_TYPE_NODE:
                     var doctype = root;
                     var identifier = doctype.publicId ? ' PUBLIC' : doctype.systemId ? ' SYSTEM' : '';
-                    var publicId = doctype.publicId ? " \"" + doctype.publicId + "\"" : '';
-                    var systemId = doctype.systemId ? " \"" + doctype.systemId + "\"" : '';
-                    return "<!DOCTYPE " + doctype.name + identifier + publicId + systemId + ">";
+                    var publicId = doctype.publicId ? " \"".concat(doctype.publicId, "\"") : '';
+                    var systemId = doctype.systemId ? " \"".concat(doctype.systemId, "\"") : '';
+                    return "<!DOCTYPE ".concat(doctype.name).concat(identifier).concat(publicId).concat(systemId, ">");
             }
             return '';
         };

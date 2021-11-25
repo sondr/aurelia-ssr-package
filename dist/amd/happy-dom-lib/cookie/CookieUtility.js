@@ -68,7 +68,7 @@ define(["require", "exports"], function (require, exports) {
                         (!value && newCookieValue) ||
                         (value && !newCookieValue)) {
                         if (value) {
-                            newCookies.push(name_1 + "=" + value);
+                            newCookies.push("".concat(name_1, "=").concat(value));
                         }
                         else {
                             newCookies.push(name_1);
@@ -78,7 +78,7 @@ define(["require", "exports"], function (require, exports) {
             }
             if (!isExpired) {
                 if (newCookieValue) {
-                    newCookies.push(newCookieName + "=" + newCookieValue);
+                    newCookies.push("".concat(newCookieName, "=").concat(newCookieValue));
                 }
                 else {
                     newCookies.push(newCookieName);

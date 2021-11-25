@@ -43,7 +43,7 @@ System.register(["../CSSRule"], function (exports_1, context_1) {
                      * @returns CSS text.
                      */
                     get: function () {
-                        return this.selectorText + " { " + this.style.cssText + " }";
+                        return "".concat(this.selectorText, " { ").concat(this.style.cssText, " }");
                     },
                     enumerable: false,
                     configurable: true

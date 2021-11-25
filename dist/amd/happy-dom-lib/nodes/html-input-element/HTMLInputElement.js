@@ -701,7 +701,7 @@ define(["require", "exports", "../html-element/HTMLElement", "./ValidityState", 
              */
             set: function (start) {
                 if (!this._isSelectionSupported()) {
-                    throw new DOMException_1.default("The input element's type (" + this.type + ") does not support selection.", DOMExceptionNameEnum_1.default.invalidStateError);
+                    throw new DOMException_1.default("The input element's type (".concat(this.type, ") does not support selection."), DOMExceptionNameEnum_1.default.invalidStateError);
                 }
                 this.setSelectionRange(start, Math.max(start, this.selectionEnd), this._selectionDirection);
             },
@@ -730,7 +730,7 @@ define(["require", "exports", "../html-element/HTMLElement", "./ValidityState", 
              */
             set: function (end) {
                 if (!this._isSelectionSupported()) {
-                    throw new DOMException_1.default("The input element's type (" + this.type + ") does not support selection.", DOMExceptionNameEnum_1.default.invalidStateError);
+                    throw new DOMException_1.default("The input element's type (".concat(this.type, ") does not support selection."), DOMExceptionNameEnum_1.default.invalidStateError);
                 }
                 this.setSelectionRange(this.selectionStart, end, this._selectionDirection);
             },
@@ -756,7 +756,7 @@ define(["require", "exports", "../html-element/HTMLElement", "./ValidityState", 
              */
             set: function (direction) {
                 if (!this._isSelectionSupported()) {
-                    throw new DOMException_1.default("The input element's type (" + this.type + ") does not support selection.", DOMExceptionNameEnum_1.default.invalidStateError);
+                    throw new DOMException_1.default("The input element's type (".concat(this.type, ") does not support selection."), DOMExceptionNameEnum_1.default.invalidStateError);
                 }
                 this.setSelectionRange(this._selectionStart, this._selectionEnd, direction);
             },
@@ -853,7 +853,7 @@ define(["require", "exports", "../html-element/HTMLElement", "./ValidityState", 
         HTMLInputElement.prototype.setSelectionRange = function (start, end, direction) {
             if (direction === void 0) { direction = 'none'; }
             if (!this._isSelectionSupported()) {
-                throw new DOMException_1.default("The input element's type (" + this.type + ") does not support selection.", DOMExceptionNameEnum_1.default.invalidStateError);
+                throw new DOMException_1.default("The input element's type (".concat(this.type, ") does not support selection."), DOMExceptionNameEnum_1.default.invalidStateError);
             }
             this._selectionEnd = Math.min(end, this.value.length);
             this._selectionStart = Math.min(start, this._selectionEnd);
@@ -878,7 +878,7 @@ define(["require", "exports", "../html-element/HTMLElement", "./ValidityState", 
             if (end === void 0) { end = null; }
             if (selectionMode === void 0) { selectionMode = HTMLInputElementSelectionModeEnum_1.default.preserve; }
             if (!this._isSelectionSupported()) {
-                throw new DOMException_1.default("The input element's type (" + this.type + ") does not support selection.", DOMExceptionNameEnum_1.default.invalidStateError);
+                throw new DOMException_1.default("The input element's type (".concat(this.type, ") does not support selection."), DOMExceptionNameEnum_1.default.invalidStateError);
             }
             if (start === null) {
                 start = this._selectionStart;

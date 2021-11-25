@@ -415,7 +415,7 @@ define(["require", "exports", "../../event/EventTarget", "../../mutation-observe
          * @param listener Listener.
          */
         Node.prototype.toString = function () {
-            return "[object " + this.constructor.name + "]";
+            return "[object ".concat(this.constructor.name, "]");
         };
         /**
          * Observeres the node.

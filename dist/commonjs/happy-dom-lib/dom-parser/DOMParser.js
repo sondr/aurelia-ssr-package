@@ -89,7 +89,7 @@ var DOMParser = /** @class */ (function () {
             case 'application/xhtml+xml':
                 return new XMLDocument_1.default();
             default:
-                throw new DOMException_1.default("Unknown mime type \"" + mimeType + "\".");
+                throw new DOMException_1.default("Unknown mime type \"".concat(mimeType, "\"."));
         }
     };
     DOMParser._ownerDocument = null;

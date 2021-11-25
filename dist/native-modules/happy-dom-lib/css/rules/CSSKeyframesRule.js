@@ -41,7 +41,7 @@ var CSSKeyframesRule = /** @class */ (function (_super) {
                 var cssRule = _a[_i];
                 cssText += cssRule.cssText + ' ';
             }
-            return "@keyframes " + this.name + " { " + cssText + "}";
+            return "@keyframes ".concat(this.name, " { ").concat(cssText, "}");
         },
         enumerable: false,
         configurable: true

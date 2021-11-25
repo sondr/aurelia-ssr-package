@@ -25,8 +25,8 @@ System.register(["../ssr-engine/aurelia-ssr-engine"], function (exports_1, conte
                         ctx.body = html;
                     })
                         .catch(function (e) {
-                        ctx.body = "<html><body>Failed to render " + pathname + "</body></html>";
-                        console.log("Failed to render " + pathname);
+                        ctx.body = "<html><body>Failed to render ".concat(pathname, "</body></html>");
+                        console.log("Failed to render ".concat(pathname));
                         console.log(e);
                     });
                 };

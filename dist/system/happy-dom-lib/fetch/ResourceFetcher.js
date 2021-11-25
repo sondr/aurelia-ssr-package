@@ -71,7 +71,7 @@ System.register(["../location/RelativeURL", "../exception/DOMException"], functi
                                 case 1:
                                     response = _a.sent();
                                     if (!response.ok) {
-                                        throw new DOMException_1.default("Failed to perform request to \"" + options.url + "\". Status code: " + response.status);
+                                        throw new DOMException_1.default("Failed to perform request to \"".concat(options.url, "\". Status code: ").concat(response.status));
                                     }
                                     return [4 /*yield*/, response.text()];
                                 case 2: return [2 /*return*/, _a.sent()];
@@ -98,7 +98,7 @@ System.register(["../location/RelativeURL", "../exception/DOMException"], functi
                     }
                     var response = request('GET', url);
                     if (response.isError()) {
-                        throw new DOMException_1.default("Failed to perform request to \"" + url + "\". Status code: " + response.statusCode);
+                        throw new DOMException_1.default("Failed to perform request to \"".concat(url, "\". Status code: ").concat(response.statusCode));
                     }
                     return response.getBody();
                 };

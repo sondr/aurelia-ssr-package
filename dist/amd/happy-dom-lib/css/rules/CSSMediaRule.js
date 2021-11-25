@@ -40,7 +40,7 @@ define(["require", "exports", "../CSSRule", "../MediaList"], function (require, 
                     var cssRule = _a[_i];
                     cssText += cssRule.cssText;
                 }
-                return "@media " + this.conditionalText + " { " + cssText + " }";
+                return "@media ".concat(this.conditionalText, " { ").concat(cssText, " }");
             },
             enumerable: false,
             configurable: true

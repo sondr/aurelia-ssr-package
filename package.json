@@ -50,7 +50,6 @@
       "aurelia-loader-webpack":"^2.2.4",
       "aurelia-framework": "^1.0.0",
       "aurelia-pal": "^1.0.0",
-      "happy-dom":"^2.24.4",
       "jsdom":"^18.1.0",
       "koa": "^2.3.0",
       "linkedom": "^0.13.0",

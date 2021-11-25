@@ -29,7 +29,7 @@ var ClassList = /** @class */ (function () {
             var className = classNames_1[_a];
             if (!list.includes(className)) {
                 if (className.includes(' ')) {
-                    throw new DOMException_1.default("Failed to execute 'add' on 'DOMTokenList': The token provided ('" + className + "') contains HTML space characters, which are not valid in tokens.");
+                    throw new DOMException_1.default("Failed to execute 'add' on 'DOMTokenList': The token provided ('".concat(className, "') contains HTML space characters, which are not valid in tokens."));
                 }
                 list.push(className);
             }

@@ -41,7 +41,7 @@ System.register(["../CSSRule"], function (exports_1, context_1) {
                      * @returns CSS text.
                      */
                     get: function () {
-                        return this.keyText + " { " + this.style.cssText + " }";
+                        return "".concat(this.keyText, " { ").concat(this.style.cssText, " }");
                     },
                     enumerable: false,
                     configurable: true

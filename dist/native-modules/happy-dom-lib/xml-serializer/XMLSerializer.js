@@ -23,17 +23,17 @@ var XMLSerializer = /** @class */ (function () {
                 var element = root;
                 var tagName = element.tagName.toLowerCase();
                 if (UnclosedElements.includes(tagName)) {
-                    return "<" + tagName + this._getAttributes(element) + ">";
+                    return "<".concat(tagName).concat(this._getAttributes(element), ">");
                 }
                 else if (SelfClosingElements.includes(tagName)) {
-                    return "<" + tagName + this._getAttributes(element) + "/>";
+                    return "<".concat(tagName).concat(this._getAttributes(element), "/>");
                 }
                 var innerHTML = '';
                 for (var _i = 0, _a = root.childNodes; _i < _a.length; _i++) {
                     var node = _a[_i];
                     innerHTML += this.serializeToString(node);
                 }
-                return "<" + tagName + this._getAttributes(element) + ">" + innerHTML + "</" + tagName + ">";
+                return "<".concat(tagName).concat(this._getAttributes(element), ">").concat(innerHTML, "</").concat(tagName, ">");
             case Node.DOCUMENT_FRAGMENT_NODE:
             case Node.DOCUMENT_NODE:
                 var html = '';
@@ -43,15 +43,15 @@ var XMLSerializer = /** @class */ (function () {
                 }
                 return html;
             case Node.COMMENT_NODE:
-                return "<!--" + root.textContent + "-->";
+                return "<!--".concat(root.textContent, "-->");
             case Node.TEXT_NODE:
                 return root['textContent'];
             case Node.DOCUMENT_TYPE_NODE:
                 var doctype = root;
                 var identifier = doctype.publicId ? ' PUBLIC' : doctype.systemId ? ' SYSTEM' : '';
-                var publicId = doctype.publicId ? " \"" + doctype.publicId + "\"" : '';
-                var systemId = doctype.systemId ? " \"" + doctype.systemId + "\"" : '';
-                return "<!DOCTYPE " + doctype.name + identifier + publicId + systemId + ">";
+                var publicId = doctype.publicId ? " \"".concat(doctype.publicId, "\"") : '';
+                var systemId = doctype.systemId ? " \"".concat(doctype.systemId, "\"") : '';
+                return "<!DOCTYPE ".concat(doctype.name).concat(identifier).concat(publicId).concat(systemId, ">");
         }
         return '';
     };

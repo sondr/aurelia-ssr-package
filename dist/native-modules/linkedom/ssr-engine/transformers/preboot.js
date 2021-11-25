@@ -32,9 +32,9 @@ export default function (html, transformerCtx, options) {
             ]
         }, options.prebootOptions);
         var inlinePrebootCode = preboot.getInlineCode(prebootOptions);
-        html = replaceString(html, '</head>', "\r\n<script>" + inlinePrebootCode + "</script>\r\n</head>");
+        html = replaceString(html, '</head>', "\r\n<script>".concat(inlinePrebootCode, "</script>\r\n</head>"));
         // preboot_browser can replay events that were stored by the preboot code
-        html = replaceString(html, '</body>', "\r\n<script src=\"preboot_browser.js\"></script>\n      <script>\n      document.addEventListener('aurelia-started', function () {\n        setTimeout(function () { preboot.complete(); }, " + options.replayDelay + ");\n      });\n      </script>\r\n</body>");
+        html = replaceString(html, '</body>', "\r\n<script src=\"preboot_browser.js\"></script>\n      <script>\n      document.addEventListener('aurelia-started', function () {\n        setTimeout(function () { preboot.complete(); }, ".concat(options.replayDelay, ");\n      });\n      </script>\r\n</body>"));
     }
     return html;
 }

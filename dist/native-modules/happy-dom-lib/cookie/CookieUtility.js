@@ -65,7 +65,7 @@ var CookieUtility = /** @class */ (function () {
                     (!value && newCookieValue) ||
                     (value && !newCookieValue)) {
                     if (value) {
-                        newCookies.push(name_1 + "=" + value);
+                        newCookies.push("".concat(name_1, "=").concat(value));
                     }
                     else {
                         newCookies.push(name_1);
@@ -75,7 +75,7 @@ var CookieUtility = /** @class */ (function () {
         }
         if (!isExpired) {
             if (newCookieValue) {
-                newCookies.push(newCookieName + "=" + newCookieValue);
+                newCookies.push("".concat(newCookieName, "=").concat(newCookieValue));
             }
             else {
                 newCookies.push(newCookieName);

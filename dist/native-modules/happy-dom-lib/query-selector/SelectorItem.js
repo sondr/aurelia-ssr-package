@@ -117,7 +117,7 @@ var SelectorItem = /** @class */ (function () {
             var aNumber = Number(a);
             var bNumber = b !== undefined ? Number(b) : 0;
             if (isNaN(aNumber) || isNaN(bNumber)) {
-                throw new DOMException("The selector \"" + this.selector + "\" is not valid.");
+                throw new DOMException("The selector \"".concat(this.selector, "\" is not valid."));
             }
             for (var i = 0, max = children.length; i <= max; i += aNumber) {
                 if (childIndex === i + bNumber - 1) {
@@ -128,7 +128,7 @@ var SelectorItem = /** @class */ (function () {
         }
         var number = Number(place);
         if (isNaN(number)) {
-            throw new DOMException("The selector \"" + this.selector + "\" is not valid.");
+            throw new DOMException("The selector \"".concat(this.selector, "\" is not valid."));
         }
         return children[number - 1] === element;
     };
@@ -193,7 +193,7 @@ var SelectorItem = /** @class */ (function () {
      */
     SelectorItem.prototype.matchesAttributeName = function (element, attributeName) {
         if (ATTRIBUTE_NAME_REGEXP.test(attributeName)) {
-            throw new DOMException("The selector \"" + this.selector + "\" is not valid.");
+            throw new DOMException("The selector \"".concat(this.selector, "\" is not valid."));
         }
         return !!element._attributes[attributeName.toLowerCase()];
     };
@@ -212,7 +212,7 @@ var SelectorItem = /** @class */ (function () {
         var attribute = element._attributes[attributeName.toLowerCase()];
         var value = attributeValue;
         if (ATTRIBUTE_NAME_REGEXP.test(attributeName)) {
-            throw new DOMException("The selector \"" + this.selector + "\" is not valid.");
+            throw new DOMException("The selector \"".concat(this.selector, "\" is not valid."));
         }
         if (!attribute) {
             return false;
@@ -224,7 +224,7 @@ var SelectorItem = /** @class */ (function () {
                     return attribute.value && attribute.value.split(' ').includes(value);
                 // [attribute|="value"] - Starts with the specified word.
                 case '|':
-                    return attribute && attribute.value && new RegExp("^" + value + "[- ]").test(attribute.value);
+                    return attribute && attribute.value && new RegExp("^".concat(value, "[- ]")).test(attribute.value);
                 // [attribute^="value"] - Begins with a specified value.
                 case '^':
                     return attribute && attribute.value && attribute.value.startsWith(value);

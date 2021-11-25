@@ -417,7 +417,7 @@ var Node = /** @class */ (function (_super) {
      * @param listener Listener.
      */
     Node.prototype.toString = function () {
-        return "[object " + this.constructor.name + "]";
+        return "[object ".concat(this.constructor.name, "]");
     };
     /**
      * Observeres the node.

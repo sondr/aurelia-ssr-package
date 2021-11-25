@@ -63,7 +63,7 @@ var URL = /** @class */ (function () {
          * @returns Href.
          */
         get: function () {
-            var credentials = this.username ? this.username + ":" + this.password + "@" : '';
+            var credentials = this.username ? "".concat(this.username, ":").concat(this.password, "@") : '';
             return this.protocol + '//' + credentials + this.host + this.pathname + this.search + this.hash;
         },
         /**
