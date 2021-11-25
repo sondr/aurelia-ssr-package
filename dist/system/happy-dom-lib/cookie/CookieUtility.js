@@ -1,0 +1,98 @@
+System.register([], function (exports_1, context_1) {
+    "use strict";
+    var CookieUtility;
+    var __moduleName = context_1 && context_1.id;
+    return {
+        setters: [],
+        execute: function () {
+            /**
+             * Cookie utility.
+             */
+            CookieUtility = /** @class */ (function () {
+                function CookieUtility() {
+                }
+                /**
+                 * Returns a cookie string.
+                 *
+                 * @param location Location.
+                 * @param cookies Current cookie string.
+                 * @param newCookie New cookie string.
+                 * @returns Generated cookie string.
+                 */
+                CookieUtility.getCookieString = function (location, cookies, newCookie) {
+                    var newCookieParts = newCookie.split(';');
+                    var _a = newCookieParts
+                        .shift()
+                        .trim()
+                        .split('='), newCookieName = _a[0], newCookieValue = _a[1];
+                    var isExpired = false;
+                    for (var _i = 0, newCookieParts_1 = newCookieParts; _i < newCookieParts_1.length; _i++) {
+                        var part = newCookieParts_1[_i];
+                        var _b = part.trim().split('='), key = _b[0], value = _b[1];
+                        switch (key.toLowerCase()) {
+                            case 'expires':
+                                var expires = new Date(value).getTime();
+                                var now = Date.now();
+                                if (expires < now) {
+                                    isExpired = true;
+                                    break;
+                                }
+                                break;
+                            case 'domain':
+                                var hostnameParts = location.hostname.split('.');
+                                if (hostnameParts.length > 2) {
+                                    hostnameParts.shift();
+                                }
+                                var currentDomain = hostnameParts.join('.');
+                                if (!value.endsWith(currentDomain)) {
+                                    return cookies;
+                                }
+                                break;
+                            case 'path':
+                                var pathname = location.pathname;
+                                var currentPath = pathname.startsWith('/') ? pathname.replace('/', '') : pathname;
+                                var path = value.startsWith('/') ? value.replace('/', '') : value;
+                                if (path && !currentPath.startsWith(path)) {
+                                    return cookies;
+                                }
+                                break;
+                            case 'max-age':
+                                if (parseInt(value) <= 0) {
+                                    return cookies;
+                                }
+                                break;
+                        }
+                    }
+                    var newCookies = [];
+                    if (cookies) {
+                        for (var _c = 0, _d = cookies.split(';'); _c < _d.length; _c++) {
+                            var cookie = _d[_c];
+                            var _e = cookie.trim().split('='), name_1 = _e[0], value = _e[1];
+                            if ((name_1 && name_1 !== newCookieName) ||
+                                (!value && newCookieValue) ||
+                                (value && !newCookieValue)) {
+                                if (value) {
+                                    newCookies.push(name_1 + "=" + value);
+                                }
+                                else {
+                                    newCookies.push(name_1);
+                                }
+                            }
+                        }
+                    }
+                    if (!isExpired) {
+                        if (newCookieValue) {
+                            newCookies.push(newCookieName + "=" + newCookieValue);
+                        }
+                        else {
+                            newCookies.push(newCookieName);
+                        }
+                    }
+                    return newCookies.join('; ');
+                };
+                return CookieUtility;
+            }());
+            exports_1("default", CookieUtility);
+        }
+    };
+});

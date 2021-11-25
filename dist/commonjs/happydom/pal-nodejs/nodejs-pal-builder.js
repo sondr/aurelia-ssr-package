@@ -4,13 +4,14 @@ exports.ensurePerformance = exports.buildPal = void 0;
 var nodejs_platform_1 = require("./nodejs-platform");
 var nodejs_feature_1 = require("./nodejs-feature");
 var nodejs_dom_1 = require("./nodejs-dom");
-var happy_dom_1 = require("happy-dom");
+//import { Window } from 'happy-dom';
+var index_1 = require("../../happy-dom-lib/index");
 function buildPal() {
     // https://github.com/jsdom/jsdom/issues/2304
     // set url to enable global var localStorage and sessionStorage
     // var jsdom = new JSDOM(undefined, { url: "http://localhost/" });
     // var global: IGlobal = <IGlobal>jsdom.window;
-    var happyDom = new happy_dom_1.Window();
+    var happyDom = new index_1.Window();
     happyDom.window.location.replace('http://localhost/');
     var global = happyDom.window;
     ensurePerformance(global.window);

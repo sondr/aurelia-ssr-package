@@ -33,12 +33,11 @@ function initialize() {
 
 function start(configure: any) {
     const aurelia = new Aurelia(new WebpackLoader());
-    console.log("au started:");
     console.log("pal:");
     console.dir(pal);
-    console.dir(pal.DOM.querySelectorAll);
     aurelia.host = pal.DOM.querySelectorAll('body')[0];
-    console.log("au host exosts:" + aurelia.host);
+    console.log("au host:");
+    console.log(aurelia.host.innerHTML);
 
 
 

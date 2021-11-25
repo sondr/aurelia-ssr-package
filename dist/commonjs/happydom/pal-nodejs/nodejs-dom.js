@@ -25,7 +25,6 @@ var NodeJsDom = /** @class */ (function () {
         this.boundary = 'aurelia-dom-boundary';
         this.title = "";
         this.activeElement = null;
-        var d = global.window.document;
         this.Element = global.Element;
         this.NodeList = global.NodeList;
         this.SVGElement = global.SVGElement || /** @class */ (function (_super) {

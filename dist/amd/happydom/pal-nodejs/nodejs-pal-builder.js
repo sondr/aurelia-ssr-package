@@ -1,4 +1,4 @@
-define(["require", "exports", "./nodejs-platform", "./nodejs-feature", "./nodejs-dom", "happy-dom"], function (require, exports, nodejs_platform_1, nodejs_feature_1, nodejs_dom_1, happy_dom_1) {
+define(["require", "exports", "./nodejs-platform", "./nodejs-feature", "./nodejs-dom", "../../happy-dom-lib/index"], function (require, exports, nodejs_platform_1, nodejs_feature_1, nodejs_dom_1, index_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     exports.ensurePerformance = exports.buildPal = void 0;
@@ -7,7 +7,7 @@ define(["require", "exports", "./nodejs-platform", "./nodejs-feature", "./nodejs
         // set url to enable global var localStorage and sessionStorage
         // var jsdom = new JSDOM(undefined, { url: "http://localhost/" });
         // var global: IGlobal = <IGlobal>jsdom.window;
-        var happyDom = new happy_dom_1.Window();
+        var happyDom = new index_1.Window();
         happyDom.window.location.replace('http://localhost/');
         var global = happyDom.window;
         ensurePerformance(global.window);

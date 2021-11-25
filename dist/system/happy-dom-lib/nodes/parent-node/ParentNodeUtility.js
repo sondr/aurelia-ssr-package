@@ -1,0 +1,203 @@
+System.register(["../../query-selector/QuerySelector", "../../xml-parser/XMLParser", "../element/HTMLCollectionFactory"], function (exports_1, context_1) {
+    "use strict";
+    var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+        if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+            if (ar || !(i in from)) {
+                if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+                ar[i] = from[i];
+            }
+        }
+        return to.concat(ar || Array.prototype.slice.call(from));
+    };
+    var QuerySelector_1, XMLParser_1, HTMLCollectionFactory_1, ParentNodeUtility;
+    var __moduleName = context_1 && context_1.id;
+    return {
+        setters: [
+            function (QuerySelector_1_1) {
+                QuerySelector_1 = QuerySelector_1_1;
+            },
+            function (XMLParser_1_1) {
+                XMLParser_1 = XMLParser_1_1;
+            },
+            function (HTMLCollectionFactory_1_1) {
+                HTMLCollectionFactory_1 = HTMLCollectionFactory_1_1;
+            }
+        ],
+        execute: function () {
+            /**
+             * Parent node utility.
+             */
+            ParentNodeUtility = /** @class */ (function () {
+                function ParentNodeUtility() {
+                }
+                /**
+                 * Inserts a set of Node objects or DOMString objects after the last child of the ParentNode. DOMString objects are inserted as equivalent Text nodes.
+                 *
+                 * @param parentNode Parent node.
+                 * @param nodes List of Node or DOMString.
+                 */
+                ParentNodeUtility.append = function (parentNode) {
+                    var nodes = [];
+                    for (var _i = 1; _i < arguments.length; _i++) {
+                        nodes[_i - 1] = arguments[_i];
+                    }
+                    for (var _a = 0, nodes_1 = nodes; _a < nodes_1.length; _a++) {
+                        var node = nodes_1[_a];
+                        if (typeof node === 'string') {
+                            var newChildNodes = XMLParser_1.default.parse(parentNode.ownerDocument, node).childNodes.slice();
+                            for (var _b = 0, newChildNodes_1 = newChildNodes; _b < newChildNodes_1.length; _b++) {
+                                var newChildNode = newChildNodes_1[_b];
+                                parentNode.appendChild(newChildNode);
+                            }
+                        }
+                        else {
+                            parentNode.appendChild(node);
+                        }
+                    }
+                };
+                /**
+                 * Inserts a set of Node objects or DOMString objects before the first child of the ParentNode. DOMString objects are inserted as equivalent Text nodes.
+                 *
+                 * @param parentNode Parent node.
+                 * @param nodes List of Node or DOMString.
+                 */
+                ParentNodeUtility.prepend = function (parentNode) {
+                    var nodes = [];
+                    for (var _i = 1; _i < arguments.length; _i++) {
+                        nodes[_i - 1] = arguments[_i];
+                    }
+                    var firstChild = parentNode.firstChild;
+                    for (var _a = 0, nodes_2 = nodes; _a < nodes_2.length; _a++) {
+                        var node = nodes_2[_a];
+                        if (typeof node === 'string') {
+                            var newChildNodes = XMLParser_1.default.parse(parentNode.ownerDocument, node).childNodes.slice();
+                            for (var _b = 0, newChildNodes_2 = newChildNodes; _b < newChildNodes_2.length; _b++) {
+                                var newChildNode = newChildNodes_2[_b];
+                                parentNode.insertBefore(newChildNode, firstChild);
+                            }
+                        }
+                        else {
+                            parentNode.insertBefore(node, firstChild);
+                        }
+                    }
+                };
+                /**
+                 * Replaces the existing children of a ParentNode with a specified new set of children.
+                 *
+                 * @param parentNode Parent node.
+                 * @param nodes List of Node or DOMString.
+                 */
+                ParentNodeUtility.replaceChildren = function (parentNode) {
+                    var nodes = [];
+                    for (var _i = 1; _i < arguments.length; _i++) {
+                        nodes[_i - 1] = arguments[_i];
+                    }
+                    for (var _a = 0, _b = parentNode.childNodes.slice(); _a < _b.length; _a++) {
+                        var node = _b[_a];
+                        parentNode.removeChild(node);
+                    }
+                    this.append.apply(this, __spreadArray([parentNode], nodes, false));
+                };
+                /**
+                 * Returns an elements by class name.
+                 *
+                 * @param parentNode Parent node.
+                 * @param className Tag name.
+                 * @returns Matching element.
+                 */
+                ParentNodeUtility.getElementsByClassName = function (parentNode, className) {
+                    return QuerySelector_1.default.querySelectorAll(parentNode, '.' + className.split(' ').join('.'));
+                };
+                /**
+                 * Returns an elements by tag name.
+                 *
+                 * @param parentNode Parent node.
+                 * @param tagName Tag name.
+                 * @returns Matching element.
+                 */
+                ParentNodeUtility.getElementsByTagName = function (parentNode, tagName) {
+                    var upperTagName = tagName.toUpperCase();
+                    var matches = HTMLCollectionFactory_1.default.create();
+                    for (var _i = 0, _a = parentNode.children; _i < _a.length; _i++) {
+                        var child = _a[_i];
+                        if (child.tagName === upperTagName) {
+                            matches.push(child);
+                        }
+                        for (var _b = 0, _c = this.getElementsByTagName(child, tagName); _b < _c.length; _b++) {
+                            var match = _c[_b];
+                            matches.push(match);
+                        }
+                    }
+                    return matches;
+                };
+                /**
+                 * Returns an elements by tag name and namespace.
+                 *
+                 * @param parentNode Parent node.
+                 * @param namespaceURI Namespace URI.
+                 * @param tagName Tag name.
+                 * @returns Matching element.
+                 */
+                ParentNodeUtility.getElementsByTagNameNS = function (parentNode, namespaceURI, tagName) {
+                    var upperTagName = tagName.toUpperCase();
+                    var matches = HTMLCollectionFactory_1.default.create();
+                    for (var _i = 0, _a = parentNode.children; _i < _a.length; _i++) {
+                        var child = _a[_i];
+                        if (child.tagName === upperTagName && child.namespaceURI === namespaceURI) {
+                            matches.push(child);
+                        }
+                        for (var _b = 0, _c = this.getElementsByTagNameNS(child, namespaceURI, tagName); _b < _c.length; _b++) {
+                            var match = _c[_b];
+                            matches.push(match);
+                        }
+                    }
+                    return matches;
+                };
+                /**
+                 * Returns the first element matching a tag name.
+                 * This is not part of the browser standard and is only used internally in the document.
+                 *
+                 * @param parentNode Parent node.
+                 * @param tagName Tag name.
+                 * @returns Matching element.
+                 */
+                ParentNodeUtility.getElementByTagName = function (parentNode, tagName) {
+                    var upperTagName = tagName.toUpperCase();
+                    for (var _i = 0, _a = parentNode.children; _i < _a.length; _i++) {
+                        var child = _a[_i];
+                        if (child.tagName === upperTagName) {
+                            return child;
+                        }
+                        var match = this.getElementByTagName(child, tagName);
+                        if (match) {
+                            return match;
+                        }
+                    }
+                    return null;
+                };
+                /**
+                 * Returns an element by ID.
+                 *
+                 * @param parentNode Parent node.
+                 * @param id ID.
+                 * @returns Matching element.
+                 */
+                ParentNodeUtility.getElementById = function (parentNode, id) {
+                    for (var _i = 0, _a = parentNode.children; _i < _a.length; _i++) {
+                        var child = _a[_i];
+                        if (child.id === id) {
+                            return child;
+                        }
+                        var match = this.getElementById(child, id);
+                        if (match) {
+                            return match;
+                        }
+                    }
+                    return null;
+                };
+                return ParentNodeUtility;
+            }());
+            exports_1("default", ParentNodeUtility);
+        }
+    };
+});

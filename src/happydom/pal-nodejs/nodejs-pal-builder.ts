@@ -6,7 +6,8 @@ import { IFeature } from '../../interface/pal-nodejs/feature';
 import { NodeJsPlatform } from './nodejs-platform';
 import { NodeJsFeature } from './nodejs-feature';
 import { NodeJsDom } from './nodejs-dom';
-import { Window } from 'happy-dom';
+//import { Window } from 'happy-dom';
+import { Window } from '../../happy-dom-lib/index';
 
 export function buildPal(): { global: IGlobal, platform: IPlatform, dom: IDom, feature: IFeature } {
   // https://github.com/jsdom/jsdom/issues/2304

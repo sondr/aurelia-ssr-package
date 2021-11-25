@@ -15,12 +15,11 @@ System.register(["aurelia-framework", "aurelia-loader-webpack", "aurelia-binding
     function start(configure) {
         var _a;
         var aurelia = new aurelia_framework_1.Aurelia(new aurelia_loader_webpack_1.WebpackLoader());
-        console.log("au started:");
         console.log("pal:");
         console.dir(pal);
-        console.dir(pal.DOM.querySelectorAll);
         aurelia.host = pal.DOM.querySelectorAll('body')[0];
-        console.log("au host exosts:" + aurelia.host);
+        console.log("au host:");
+        console.log(aurelia.host.innerHTML);
         var attribute = pal.DOM.createAttribute('aurelia-app');
         console.log("attribute: " + attribute);
         attribute.value = 'main';

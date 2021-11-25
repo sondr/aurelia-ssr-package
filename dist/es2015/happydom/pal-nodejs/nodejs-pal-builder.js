@@ -1,7 +1,8 @@
 import { NodeJsPlatform } from './nodejs-platform';
 import { NodeJsFeature } from './nodejs-feature';
 import { NodeJsDom } from './nodejs-dom';
-import { Window } from 'happy-dom';
+//import { Window } from 'happy-dom';
+import { Window } from '../../happy-dom-lib/index';
 export function buildPal() {
     // https://github.com/jsdom/jsdom/issues/2304
     // set url to enable global var localStorage and sessionStorage

@@ -14,7 +14,6 @@ declare module './global' {
 export class NodeJsDom implements IDom {
 
   constructor(public global: IGlobal) {
-    const d: Document = global.window.document;
     this.Element = global.Element;
     this.NodeList = global.NodeList;
     this.SVGElement = global.SVGElement || class SVGElement extends global.Element { };

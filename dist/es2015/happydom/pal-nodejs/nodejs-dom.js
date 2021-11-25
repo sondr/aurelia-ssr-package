@@ -7,7 +7,6 @@ export class NodeJsDom {
         this.boundary = 'aurelia-dom-boundary';
         this.title = "";
         this.activeElement = null;
-        const d = global.window.document;
         this.Element = global.Element;
         this.NodeList = global.NodeList;
         this.SVGElement = global.SVGElement || class SVGElement extends global.Element {
