@@ -1,32 +1,20 @@
-import Attr from './Attr';
+import Attr from '../../attribute/Attr';
+import Element from './Element';
 /**
  *
  */
 export default class NamedNodeMap extends Array<Attr> {
+    private _ownerElement;
     /**
-     * @param name
+     * Adds class names.
+     *
+     * @param ownerElement Owner element.
      */
+    constructor(ownerElement: Element);
     getNamedItem(name: string): Attr;
-    /**
-     * @param namespace
-     * @param name
-     */
     getNamedItemNS(namespace: string, name: string): Attr;
-    /**
-     * @param attr
-     */
     setNamedItem(attr: Attr): Attr;
-    /**
-     * @param attr
-     */
     setNamedItemNS(attr: Attr): Attr;
-    /**
-     * @param name
-     */
     removeNamedItem(name: string): Attr;
-    /**
-     * @param namespace
-     * @param name
-     */
     removeNamedItemNS(namespace: string, name: string): Attr;
 }

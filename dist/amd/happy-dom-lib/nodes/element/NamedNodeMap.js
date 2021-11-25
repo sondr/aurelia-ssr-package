@@ -13,7 +13,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-define(["require", "exports", "./Attr"], function (require, exports, Attr_1) {
+define(["require", "exports"], function (require, exports) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     /**
@@ -21,58 +21,41 @@ define(["require", "exports", "./Attr"], function (require, exports, Attr_1) {
      */
     var NamedNodeMap = /** @class */ (function (_super) {
         __extends(NamedNodeMap, _super);
-        function NamedNodeMap() {
-            return _super !== null && _super.apply(this, arguments) || this;
+        /**
+         * Adds class names.
+         *
+         * @param ownerElement Owner element.
+         */
+        function NamedNodeMap(ownerElement) {
+            var _this = _super.call(this) || this;
+            _this._ownerElement = ownerElement;
+            return _this;
         }
-        /**
-         * @param name
-         */
         NamedNodeMap.prototype.getNamedItem = function (name) {
-            var s = name;
-            s = s + 's';
-            return new Attr_1.default();
+            return this._ownerElement.getAttributeNode(name);
         };
-        /**
-         * @param namespace
-         * @param name
-         */
         NamedNodeMap.prototype.getNamedItemNS = function (namespace, name) {
-            var s = namespace + name;
-            s = s + 's';
-            return new Attr_1.default();
+            return this._ownerElement.getAttributeNodeNS(namespace, name);
         };
-        /**
-         * @param attr
-         */
         NamedNodeMap.prototype.setNamedItem = function (attr) {
-            var s = attr.name + attr.value;
-            s = s + 's';
-            return new Attr_1.default();
+            return this._ownerElement.setAttributeNode(attr);
         };
-        /**
-         * @param attr
-         */
         NamedNodeMap.prototype.setNamedItemNS = function (attr) {
-            var s = attr.name + attr.value;
-            s = s + 's';
-            return new Attr_1.default();
+            return this._ownerElement.setAttributeNodeNS(attr);
         };
-        /**
-         * @param name
-         */
         NamedNodeMap.prototype.removeNamedItem = function (name) {
-            var s = name;
-            s = s + 's';
-            return new Attr_1.default();
+            var attr = this.getNamedItem(name);
+            if (attr != null) {
+                this._ownerElement.removeAttributeNode(attr);
+            }
+            return attr;
         };
-        /**
-         * @param namespace
-         * @param name
-         */
         NamedNodeMap.prototype.removeNamedItemNS = function (namespace, name) {
-            var s = namespace + name;
-            s = s + 's';
-            return new Attr_1.default();
+            var attr = this.getNamedItemNS(namespace, name);
+            if (attr != null) {
+                this._ownerElement.removeAttributeNodeNS(attr);
+            }
+            return attr;
         };
         return NamedNodeMap;
     }(Array));

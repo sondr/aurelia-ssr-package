@@ -22,7 +22,7 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
     }
     return to.concat(ar || Array.prototype.slice.call(from));
 };
-define(["require", "exports", "../node/Node", "../shadow-root/ShadowRoot", "../../attribute/Attr", "../../attribute/NamedNodeMap", "./DOMRect", "./Range", "./ClassList", "../../query-selector/QuerySelector", "../../query-selector/SelectorItem", "../../mutation-observer/MutationRecord", "../../mutation-observer/MutationTypeEnum", "../../config/NamespaceURI", "../../xml-parser/XMLParser", "../../xml-serializer/XMLSerializer", "../child-node/ChildNodeUtility", "../parent-node/ParentNodeUtility", "../child-node/NonDocumentChildNodeUtility", "../../exception/DOMException", "./HTMLCollectionFactory"], function (require, exports, Node_1, ShadowRoot_1, Attr_1, NamedNodeMap_1, DOMRect_1, Range_1, ClassList_1, QuerySelector_1, SelectorItem_1, MutationRecord_1, MutationTypeEnum_1, NamespaceURI_1, XMLParser_1, XMLSerializer_1, ChildNodeUtility_1, ParentNodeUtility_1, NonDocumentChildNodeUtility_1, DOMException_1, HTMLCollectionFactory_1) {
+define(["require", "exports", "../node/Node", "../shadow-root/ShadowRoot", "../../attribute/Attr", "./NamedNodeMap", "./DOMRect", "./Range", "./ClassList", "../../query-selector/QuerySelector", "../../query-selector/SelectorItem", "../../mutation-observer/MutationRecord", "../../mutation-observer/MutationTypeEnum", "../../config/NamespaceURI", "../../xml-parser/XMLParser", "../../xml-serializer/XMLSerializer", "../child-node/ChildNodeUtility", "../parent-node/ParentNodeUtility", "../child-node/NonDocumentChildNodeUtility", "../../exception/DOMException", "./HTMLCollectionFactory"], function (require, exports, Node_1, ShadowRoot_1, Attr_1, NamedNodeMap_1, DOMRect_1, Range_1, ClassList_1, QuerySelector_1, SelectorItem_1, MutationRecord_1, MutationTypeEnum_1, NamespaceURI_1, XMLParser_1, XMLSerializer_1, ChildNodeUtility_1, ParentNodeUtility_1, NonDocumentChildNodeUtility_1, DOMException_1, HTMLCollectionFactory_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     /**
@@ -222,7 +222,7 @@ define(["require", "exports", "../node/Node", "../shadow-root/ShadowRoot", "../.
              * @returns Attributes.
              */
             get: function () {
-                var attributes = new NamedNodeMap_1.default();
+                var attributes = new NamedNodeMap_1.default(this);
                 Array.prototype.push.apply(attributes, Object.values(this._attributes));
                 Object.assign(attributes, this._attributes);
                 return attributes;

@@ -1,7 +1,7 @@
 import Node from '../node/Node';
 import ShadowRoot from '../shadow-root/ShadowRoot';
 import Attr from '../../attribute/Attr';
-import NamedNodeMap from '../../attribute/NamedNodeMap';
+import NamedNodeMap from './NamedNodeMap';
 import DOMRect from './DOMRect';
 import Range from './Range';
 import ClassList from './ClassList';
@@ -196,7 +196,7 @@ export default class Element extends Node implements IElement {
 	 * @returns Attributes.
 	 */
 	public get attributes(): NamedNodeMap {
-		const attributes = new NamedNodeMap();
+		const attributes = new NamedNodeMap(this);
 		Array.prototype.push.apply(attributes, Object.values(this._attributes));
 		Object.assign(attributes, this._attributes);
 

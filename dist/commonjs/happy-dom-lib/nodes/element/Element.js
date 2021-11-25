@@ -27,7 +27,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var Node_1 = require("../node/Node");
 var ShadowRoot_1 = require("../shadow-root/ShadowRoot");
 var Attr_1 = require("../../attribute/Attr");
-var NamedNodeMap_1 = require("../../attribute/NamedNodeMap");
+var NamedNodeMap_1 = require("./NamedNodeMap");
 var DOMRect_1 = require("./DOMRect");
 var Range_1 = require("./Range");
 var ClassList_1 = require("./ClassList");
@@ -240,7 +240,7 @@ var Element = /** @class */ (function (_super) {
          * @returns Attributes.
          */
         get: function () {
-            var attributes = new NamedNodeMap_1.default();
+            var attributes = new NamedNodeMap_1.default(this);
             Array.prototype.push.apply(attributes, Object.values(this._attributes));
             Object.assign(attributes, this._attributes);
             return attributes;

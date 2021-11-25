@@ -1,4 +1,4 @@
-System.register(["../node/Node", "../shadow-root/ShadowRoot", "../../attribute/Attr", "../../attribute/NamedNodeMap", "./DOMRect", "./Range", "./ClassList", "../../query-selector/QuerySelector", "../../query-selector/SelectorItem", "../../mutation-observer/MutationRecord", "../../mutation-observer/MutationTypeEnum", "../../config/NamespaceURI", "../../xml-parser/XMLParser", "../../xml-serializer/XMLSerializer", "../child-node/ChildNodeUtility", "../parent-node/ParentNodeUtility", "../child-node/NonDocumentChildNodeUtility", "../../exception/DOMException", "./HTMLCollectionFactory"], function (exports_1, context_1) {
+System.register(["../node/Node", "../shadow-root/ShadowRoot", "../../attribute/Attr", "./NamedNodeMap", "./DOMRect", "./Range", "./ClassList", "../../query-selector/QuerySelector", "../../query-selector/SelectorItem", "../../mutation-observer/MutationRecord", "../../mutation-observer/MutationTypeEnum", "../../config/NamespaceURI", "../../xml-parser/XMLParser", "../../xml-serializer/XMLSerializer", "../child-node/ChildNodeUtility", "../parent-node/ParentNodeUtility", "../child-node/NonDocumentChildNodeUtility", "../../exception/DOMException", "./HTMLCollectionFactory"], function (exports_1, context_1) {
     "use strict";
     var __extends = (this && this.__extends) || (function () {
         var extendStatics = function (d, b) {
@@ -284,7 +284,7 @@ System.register(["../node/Node", "../shadow-root/ShadowRoot", "../../attribute/A
                      * @returns Attributes.
                      */
                     get: function () {
-                        var attributes = new NamedNodeMap_1.default();
+                        var attributes = new NamedNodeMap_1.default(this);
                         Array.prototype.push.apply(attributes, Object.values(this._attributes));
                         Object.assign(attributes, this._attributes);
                         return attributes;

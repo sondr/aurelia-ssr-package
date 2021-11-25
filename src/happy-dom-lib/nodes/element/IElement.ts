@@ -1,6 +1,6 @@
 import IShadowRoot from '../shadow-root/IShadowRoot';
 import Attr from '../../attribute/Attr';
-import NamedNodeMap from '../../attribute/NamedNodeMap';
+import NamedNodeMap from './NamedNodeMap';
 import DOMRect from './DOMRect';
 import Range from './Range';
 import ClassList from './ClassList';

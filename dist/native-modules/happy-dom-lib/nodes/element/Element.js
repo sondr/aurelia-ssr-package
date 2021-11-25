@@ -25,7 +25,7 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
 import Node from '../node/Node';
 import ShadowRoot from '../shadow-root/ShadowRoot';
 import Attr from '../../attribute/Attr';
-import NamedNodeMap from '../../attribute/NamedNodeMap';
+import NamedNodeMap from './NamedNodeMap';
 import DOMRect from './DOMRect';
 import Range from './Range';
 import ClassList from './ClassList';
@@ -238,7 +238,7 @@ var Element = /** @class */ (function (_super) {
          * @returns Attributes.
          */
         get: function () {
-            var attributes = new NamedNodeMap();
+            var attributes = new NamedNodeMap(this);
             Array.prototype.push.apply(attributes, Object.values(this._attributes));
             Object.assign(attributes, this._attributes);
             return attributes;

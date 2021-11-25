@@ -35,10 +35,11 @@ function start(configure: any) {
     const aurelia = new Aurelia(new WebpackLoader());
     console.log("pal:");
     console.dir(pal);
-    aurelia.host = pal.DOM.querySelectorAll('body')[0];
+    aurelia.host = pal.DOM.querySelector('body');
     console.log("au host:");
-    console.log(aurelia.host);
-    console.log(Object.keys(aurelia.host));
+    console.log(Object.keys(aurelia.host.attributes));
+    console.log("setNamedItem:");
+    console.log(aurelia.host.attributes.setNamedItem);
 
 
 
