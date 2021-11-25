@@ -37,7 +37,8 @@ function start(configure: any) {
     console.dir(pal);
     aurelia.host = pal.DOM.querySelectorAll('body')[0];
     console.log("au host:");
-    console.log(aurelia.host.innerHTML);
+    console.log(aurelia.host);
+    console.log(Object.keys(aurelia.host));
 
 
 

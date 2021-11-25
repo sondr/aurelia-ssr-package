@@ -19,7 +19,8 @@ System.register(["aurelia-framework", "aurelia-loader-webpack", "aurelia-binding
         console.dir(pal);
         aurelia.host = pal.DOM.querySelectorAll('body')[0];
         console.log("au host:");
-        console.log(aurelia.host.innerHTML);
+        console.log(aurelia.host);
+        console.log(Object.keys(aurelia.host));
         var attribute = pal.DOM.createAttribute('aurelia-app');
         console.log("attribute: " + attribute);
         attribute.value = 'main';
