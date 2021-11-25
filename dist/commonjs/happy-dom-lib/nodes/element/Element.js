@@ -240,10 +240,11 @@ var Element = /** @class */ (function (_super) {
          * @returns Attributes.
          */
         get: function () {
-            var attributes = new NamedNodeMap_1.default(this);
-            Array.prototype.push.apply(attributes, Object.values(this._attributes));
-            Object.assign(attributes, this._attributes);
-            return attributes;
+            var nodemap = new NamedNodeMap_1.default(this);
+            //Object.assign();
+            //Array.prototype.push.apply(attributes, Object.values(this._attributes));
+            //Object.assign(nodemap, this._attributes);
+            return nodemap;
         },
         enumerable: false,
         configurable: true

@@ -3,7 +3,7 @@ import Element from './Element';
 /**
  *
  */
-export default class NamedNodeMap extends Array<Attr> {
+export default class NamedNodeMap {
     private _ownerElement;
     /**
      * Adds class names.
@@ -17,4 +17,5 @@ export default class NamedNodeMap extends Array<Attr> {
     setNamedItemNS(attr: Attr): Attr;
     removeNamedItem(name: string): Attr;
     removeNamedItemNS(namespace: string, name: string): Attr;
+    get length(): number;
 }

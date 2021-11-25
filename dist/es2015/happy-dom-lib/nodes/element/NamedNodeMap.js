@@ -1,14 +1,13 @@
 /**
  *
  */
-export default class NamedNodeMap extends Array {
+export default class NamedNodeMap {
     /**
      * Adds class names.
      *
      * @param ownerElement Owner element.
      */
     constructor(ownerElement) {
-        super();
         this._ownerElement = ownerElement;
     }
     getNamedItem(name) {
@@ -36,5 +35,8 @@ export default class NamedNodeMap extends Array {
             this._ownerElement.removeAttributeNodeNS(attr);
         }
         return attr;
+    }
+    get length() {
+        return Object.keys(this._ownerElement._attributes).length;
     }
 }

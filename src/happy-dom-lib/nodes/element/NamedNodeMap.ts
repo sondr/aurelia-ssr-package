@@ -4,7 +4,7 @@ import Element from './Element';
 /**
  *
  */
-export default class NamedNodeMap extends Array<Attr> {
+export default class NamedNodeMap {// extends Array<Attr> {
 	private _ownerElement: Element;
 
 	/**
@@ -13,28 +13,26 @@ export default class NamedNodeMap extends Array<Attr> {
 	 * @param ownerElement Owner element.
 	 */
 	constructor(ownerElement: Element) {
-		super();
-
 		this._ownerElement = ownerElement;
 	}
 
-	getNamedItem(name: string): Attr {
+	public getNamedItem(name: string): Attr {
 		return this._ownerElement.getAttributeNode(name);
 	}
 
-	getNamedItemNS(namespace: string, name: string): Attr {
+	public getNamedItemNS(namespace: string, name: string): Attr {
 		return this._ownerElement.getAttributeNodeNS(namespace, name);
 	}
 
-	setNamedItem(attr: Attr): Attr {
+	public setNamedItem(attr: Attr): Attr {
 		return this._ownerElement.setAttributeNode(attr);
 	}
 
-	setNamedItemNS(attr: Attr): Attr {
+	public setNamedItemNS(attr: Attr): Attr {
 		return this._ownerElement.setAttributeNodeNS(attr);
 	}
 
-	removeNamedItem(name: string): Attr {
+	public removeNamedItem(name: string): Attr {
 		const attr = this.getNamedItem(name);
 		if (attr != null) {
 			this._ownerElement.removeAttributeNode(attr);
@@ -43,7 +41,7 @@ export default class NamedNodeMap extends Array<Attr> {
 		return attr;
 	}
 
-	removeNamedItemNS(namespace: string, name: string): Attr {
+	public removeNamedItemNS(namespace: string, name: string): Attr {
 		const attr = this.getNamedItemNS(namespace, name);
 
 		if (attr != null) {
@@ -51,5 +49,9 @@ export default class NamedNodeMap extends Array<Attr> {
 		}
 
 		return attr;
+	}
+
+	public get length(): number{
+		return Object.keys(this._ownerElement._attributes).length;
 	}
 }

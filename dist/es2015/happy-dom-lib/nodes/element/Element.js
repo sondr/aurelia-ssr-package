@@ -170,10 +170,11 @@ export default class Element extends Node {
      * @returns Attributes.
      */
     get attributes() {
-        const attributes = new NamedNodeMap(this);
-        Array.prototype.push.apply(attributes, Object.values(this._attributes));
-        Object.assign(attributes, this._attributes);
-        return attributes;
+        const nodemap = new NamedNodeMap(this);
+        //Object.assign();
+        //Array.prototype.push.apply(attributes, Object.values(this._attributes));
+        //Object.assign(nodemap, this._attributes);
+        return nodemap;
     }
     /**
      * First element child.
