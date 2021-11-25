@@ -17,7 +17,6 @@ export function buildPal(): { global: IGlobal, platform: IPlatform, dom: IDom, f
 
   var happyDom =  new hd.Window();
   happyDom.window.location.replace('http://localhost/');
-  
 
   var global: IGlobal = (happyDom.window as unknown) as IGlobal;
 
