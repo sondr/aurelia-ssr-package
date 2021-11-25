@@ -1,3 +1,4 @@
+import Attr from './Attr';
 /**
  *
  */
@@ -8,7 +9,7 @@ export default class NamedNodeMap extends Array {
     getNamedItem(name) {
         let s = name;
         s = s + 's';
-        return null;
+        return new Attr();
     }
     /**
      * @param namespace
@@ -17,7 +18,7 @@ export default class NamedNodeMap extends Array {
     getNamedItemNS(namespace, name) {
         let s = namespace + name;
         s = s + 's';
-        return null;
+        return new Attr();
     }
     /**
      * @param attr
@@ -25,7 +26,7 @@ export default class NamedNodeMap extends Array {
     setNamedItem(attr) {
         let s = attr.name + attr.value;
         s = s + 's';
-        return null;
+        return new Attr();
     }
     /**
      * @param attr
@@ -33,7 +34,7 @@ export default class NamedNodeMap extends Array {
     setNamedItemNS(attr) {
         let s = attr.name + attr.value;
         s = s + 's';
-        return null;
+        return new Attr();
     }
     /**
      * @param name
@@ -41,7 +42,7 @@ export default class NamedNodeMap extends Array {
     removeNamedItem(name) {
         let s = name;
         s = s + 's';
-        return null;
+        return new Attr();
     }
     /**
      * @param namespace
@@ -50,6 +51,6 @@ export default class NamedNodeMap extends Array {
     removeNamedItemNS(namespace, name) {
         let s = namespace + name;
         s = s + 's';
-        return null;
+        return new Attr();
     }
 }

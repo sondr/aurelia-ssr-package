@@ -13,7 +13,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-define(["require", "exports"], function (require, exports) {
+define(["require", "exports", "./Attr"], function (require, exports, Attr_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     /**
@@ -30,7 +30,7 @@ define(["require", "exports"], function (require, exports) {
         NamedNodeMap.prototype.getNamedItem = function (name) {
             var s = name;
             s = s + 's';
-            return null;
+            return new Attr_1.default();
         };
         /**
          * @param namespace
@@ -39,7 +39,7 @@ define(["require", "exports"], function (require, exports) {
         NamedNodeMap.prototype.getNamedItemNS = function (namespace, name) {
             var s = namespace + name;
             s = s + 's';
-            return null;
+            return new Attr_1.default();
         };
         /**
          * @param attr
@@ -47,7 +47,7 @@ define(["require", "exports"], function (require, exports) {
         NamedNodeMap.prototype.setNamedItem = function (attr) {
             var s = attr.name + attr.value;
             s = s + 's';
-            return null;
+            return new Attr_1.default();
         };
         /**
          * @param attr
@@ -55,7 +55,7 @@ define(["require", "exports"], function (require, exports) {
         NamedNodeMap.prototype.setNamedItemNS = function (attr) {
             var s = attr.name + attr.value;
             s = s + 's';
-            return null;
+            return new Attr_1.default();
         };
         /**
          * @param name
@@ -63,7 +63,7 @@ define(["require", "exports"], function (require, exports) {
         NamedNodeMap.prototype.removeNamedItem = function (name) {
             var s = name;
             s = s + 's';
-            return null;
+            return new Attr_1.default();
         };
         /**
          * @param namespace
@@ -72,7 +72,7 @@ define(["require", "exports"], function (require, exports) {
         NamedNodeMap.prototype.removeNamedItemNS = function (namespace, name) {
             var s = namespace + name;
             s = s + 's';
-            return null;
+            return new Attr_1.default();
         };
         return NamedNodeMap;
     }(Array));

@@ -7,7 +7,7 @@ import { NodeJsPlatform } from './nodejs-platform';
 import { NodeJsFeature } from './nodejs-feature';
 import { NodeJsDom } from './nodejs-dom';
 //import { Window } from 'happy-dom';
-import { Window } from '../../happy-dom-lib/index';
+import * as hd from '../../happy-dom-lib/index';
 
 export function buildPal(): { global: IGlobal, platform: IPlatform, dom: IDom, feature: IFeature } {
   // https://github.com/jsdom/jsdom/issues/2304
@@ -15,10 +15,9 @@ export function buildPal(): { global: IGlobal, platform: IPlatform, dom: IDom, f
   // var jsdom = new JSDOM(undefined, { url: "http://localhost/" });
   // var global: IGlobal = <IGlobal>jsdom.window;
 
-  var happyDom = new Window();
+  var happyDom =  new hd.Window();
   happyDom.window.location.replace('http://localhost/');
-  happyDom.document.body.
-
+  
 
   var global: IGlobal = (happyDom.window as unknown) as IGlobal;
 

@@ -1,4 +1,4 @@
-System.register([], function (exports_1, context_1) {
+System.register(["./Attr"], function (exports_1, context_1) {
     "use strict";
     var __extends = (this && this.__extends) || (function () {
         var extendStatics = function (d, b) {
@@ -15,10 +15,14 @@ System.register([], function (exports_1, context_1) {
             d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
         };
     })();
-    var NamedNodeMap;
+    var Attr_1, NamedNodeMap;
     var __moduleName = context_1 && context_1.id;
     return {
-        setters: [],
+        setters: [
+            function (Attr_1_1) {
+                Attr_1 = Attr_1_1;
+            }
+        ],
         execute: function () {
             /**
              *
@@ -34,7 +38,7 @@ System.register([], function (exports_1, context_1) {
                 NamedNodeMap.prototype.getNamedItem = function (name) {
                     var s = name;
                     s = s + 's';
-                    return null;
+                    return new Attr_1.default();
                 };
                 /**
                  * @param namespace
@@ -43,7 +47,7 @@ System.register([], function (exports_1, context_1) {
                 NamedNodeMap.prototype.getNamedItemNS = function (namespace, name) {
                     var s = namespace + name;
                     s = s + 's';
-                    return null;
+                    return new Attr_1.default();
                 };
                 /**
                  * @param attr
@@ -51,7 +55,7 @@ System.register([], function (exports_1, context_1) {
                 NamedNodeMap.prototype.setNamedItem = function (attr) {
                     var s = attr.name + attr.value;
                     s = s + 's';
-                    return null;
+                    return new Attr_1.default();
                 };
                 /**
                  * @param attr
@@ -59,7 +63,7 @@ System.register([], function (exports_1, context_1) {
                 NamedNodeMap.prototype.setNamedItemNS = function (attr) {
                     var s = attr.name + attr.value;
                     s = s + 's';
-                    return null;
+                    return new Attr_1.default();
                 };
                 /**
                  * @param name
@@ -67,7 +71,7 @@ System.register([], function (exports_1, context_1) {
                 NamedNodeMap.prototype.removeNamedItem = function (name) {
                     var s = name;
                     s = s + 's';
-                    return null;
+                    return new Attr_1.default();
                 };
                 /**
                  * @param namespace
@@ -76,7 +80,7 @@ System.register([], function (exports_1, context_1) {
                 NamedNodeMap.prototype.removeNamedItemNS = function (namespace, name) {
                     var s = namespace + name;
                     s = s + 's';
-                    return null;
+                    return new Attr_1.default();
                 };
                 return NamedNodeMap;
             }(Array));

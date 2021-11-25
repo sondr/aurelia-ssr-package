@@ -1,13 +1,13 @@
 System.register(["./nodejs-platform", "./nodejs-feature", "./nodejs-dom", "../../happy-dom-lib/index"], function (exports_1, context_1) {
     "use strict";
-    var nodejs_platform_1, nodejs_feature_1, nodejs_dom_1, index_1, intersectSetter, intersectMethod;
+    var nodejs_platform_1, nodejs_feature_1, nodejs_dom_1, hd, intersectSetter, intersectMethod;
     var __moduleName = context_1 && context_1.id;
     function buildPal() {
         // https://github.com/jsdom/jsdom/issues/2304
         // set url to enable global var localStorage and sessionStorage
         // var jsdom = new JSDOM(undefined, { url: "http://localhost/" });
         // var global: IGlobal = <IGlobal>jsdom.window;
-        var happyDom = new index_1.Window();
+        var happyDom = new hd.Window();
         happyDom.window.location.replace('http://localhost/');
         var global = happyDom.window;
         ensurePerformance(global.window);
@@ -110,8 +110,8 @@ System.register(["./nodejs-platform", "./nodejs-feature", "./nodejs-dom", "../..
             function (nodejs_dom_1_1) {
                 nodejs_dom_1 = nodejs_dom_1_1;
             },
-            function (index_1_1) {
-                index_1 = index_1_1;
+            function (hd_1) {
+                hd = hd_1;
             }
         ],
         execute: function () {

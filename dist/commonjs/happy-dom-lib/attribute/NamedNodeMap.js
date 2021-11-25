@@ -15,6 +15,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
+var Attr_1 = require("./Attr");
 /**
  *
  */
@@ -29,7 +30,7 @@ var NamedNodeMap = /** @class */ (function (_super) {
     NamedNodeMap.prototype.getNamedItem = function (name) {
         var s = name;
         s = s + 's';
-        return null;
+        return new Attr_1.default();
     };
     /**
      * @param namespace
@@ -38,7 +39,7 @@ var NamedNodeMap = /** @class */ (function (_super) {
     NamedNodeMap.prototype.getNamedItemNS = function (namespace, name) {
         var s = namespace + name;
         s = s + 's';
-        return null;
+        return new Attr_1.default();
     };
     /**
      * @param attr
@@ -46,7 +47,7 @@ var NamedNodeMap = /** @class */ (function (_super) {
     NamedNodeMap.prototype.setNamedItem = function (attr) {
         var s = attr.name + attr.value;
         s = s + 's';
-        return null;
+        return new Attr_1.default();
     };
     /**
      * @param attr
@@ -54,7 +55,7 @@ var NamedNodeMap = /** @class */ (function (_super) {
     NamedNodeMap.prototype.setNamedItemNS = function (attr) {
         var s = attr.name + attr.value;
         s = s + 's';
-        return null;
+        return new Attr_1.default();
     };
     /**
      * @param name
@@ -62,7 +63,7 @@ var NamedNodeMap = /** @class */ (function (_super) {
     NamedNodeMap.prototype.removeNamedItem = function (name) {
         var s = name;
         s = s + 's';
-        return null;
+        return new Attr_1.default();
     };
     /**
      * @param namespace
@@ -71,7 +72,7 @@ var NamedNodeMap = /** @class */ (function (_super) {
     NamedNodeMap.prototype.removeNamedItemNS = function (namespace, name) {
         var s = namespace + name;
         s = s + 's';
-        return null;
+        return new Attr_1.default();
     };
     return NamedNodeMap;
 }(Array));

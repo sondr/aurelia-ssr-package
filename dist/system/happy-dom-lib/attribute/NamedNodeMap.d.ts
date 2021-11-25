@@ -28,5 +28,5 @@ export default class NamedNodeMap extends Array<Attr> {
      * @param namespace
      * @param name
      */
-    removeNamedItemNS(namespace: any, name: any): Attr;
+    removeNamedItemNS(namespace: string, name: string): Attr;
 }

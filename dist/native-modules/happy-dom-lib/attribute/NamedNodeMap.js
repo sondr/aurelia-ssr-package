@@ -13,6 +13,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+import Attr from './Attr';
 /**
  *
  */
@@ -27,7 +28,7 @@ var NamedNodeMap = /** @class */ (function (_super) {
     NamedNodeMap.prototype.getNamedItem = function (name) {
         var s = name;
         s = s + 's';
-        return null;
+        return new Attr();
     };
     /**
      * @param namespace
@@ -36,7 +37,7 @@ var NamedNodeMap = /** @class */ (function (_super) {
     NamedNodeMap.prototype.getNamedItemNS = function (namespace, name) {
         var s = namespace + name;
         s = s + 's';
-        return null;
+        return new Attr();
     };
     /**
      * @param attr
@@ -44,7 +45,7 @@ var NamedNodeMap = /** @class */ (function (_super) {
     NamedNodeMap.prototype.setNamedItem = function (attr) {
         var s = attr.name + attr.value;
         s = s + 's';
-        return null;
+        return new Attr();
     };
     /**
      * @param attr
@@ -52,7 +53,7 @@ var NamedNodeMap = /** @class */ (function (_super) {
     NamedNodeMap.prototype.setNamedItemNS = function (attr) {
         var s = attr.name + attr.value;
         s = s + 's';
-        return null;
+        return new Attr();
     };
     /**
      * @param name
@@ -60,7 +61,7 @@ var NamedNodeMap = /** @class */ (function (_super) {
     NamedNodeMap.prototype.removeNamedItem = function (name) {
         var s = name;
         s = s + 's';
-        return null;
+        return new Attr();
     };
     /**
      * @param namespace
@@ -69,7 +70,7 @@ var NamedNodeMap = /** @class */ (function (_super) {
     NamedNodeMap.prototype.removeNamedItemNS = function (namespace, name) {
         var s = namespace + name;
         s = s + 's';
-        return null;
+        return new Attr();
     };
     return NamedNodeMap;
 }(Array));
