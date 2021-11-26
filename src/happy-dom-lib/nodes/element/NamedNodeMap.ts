@@ -6,7 +6,7 @@ import Element from './Element';
  */
 export default class NamedNodeMap {// extends Array<Attr> {
 	private _ownerElement: Element;
-	private readonly length: number = 0;
+	public readonly length: number = 0;
 
 	/**
 	 * Adds class names.

@@ -5,7 +5,7 @@ import Element from './Element';
  */
 export default class NamedNodeMap {
     private _ownerElement;
-    private readonly length;
+    readonly length: number;
     /**
      * Adds class names.
      *
