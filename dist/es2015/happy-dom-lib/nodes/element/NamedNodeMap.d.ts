@@ -5,6 +5,7 @@ import Element from './Element';
  */
 export default class NamedNodeMap {
     private _ownerElement;
+    private readonly length;
     /**
      * Adds class names.
      *
@@ -17,5 +18,4 @@ export default class NamedNodeMap {
     setNamedItemNS(attr: Attr): Attr;
     removeNamedItem(name: string): Attr;
     removeNamedItemNS(namespace: string, name: string): Attr;
-    get length(): number;
 }

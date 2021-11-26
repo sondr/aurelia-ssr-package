@@ -8,7 +8,12 @@ var NamedNodeMap = /** @class */ (function () {
      * @param ownerElement Owner element.
      */
     function NamedNodeMap(ownerElement) {
+        this.length = 0;
         this._ownerElement = ownerElement;
+        var attributes = this._ownerElement._attributes;
+        Object.assign(this, attributes);
+        // sets this.length as well as attributes array
+        Array.prototype.push.apply(this, Object.values(attributes));
     }
     NamedNodeMap.prototype.getNamedItem = function (name) {
         return this._ownerElement.getAttributeNode(name);
@@ -36,13 +41,6 @@ var NamedNodeMap = /** @class */ (function () {
         }
         return attr;
     };
-    Object.defineProperty(NamedNodeMap.prototype, "length", {
-        get: function () {
-            return Object.keys(this._ownerElement._attributes).length;
-        },
-        enumerable: false,
-        configurable: true
-    });
     return NamedNodeMap;
 }());
 export default NamedNodeMap;

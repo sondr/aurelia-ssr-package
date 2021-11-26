@@ -8,7 +8,12 @@ export default class NamedNodeMap {
      * @param ownerElement Owner element.
      */
     constructor(ownerElement) {
+        this.length = 0;
         this._ownerElement = ownerElement;
+        const attributes = this._ownerElement._attributes;
+        Object.assign(this, attributes);
+        // sets this.length as well as attributes array
+        Array.prototype.push.apply(this, Object.values(attributes));
     }
     getNamedItem(name) {
         return this._ownerElement.getAttributeNode(name);
@@ -35,8 +40,5 @@ export default class NamedNodeMap {
             this._ownerElement.removeAttributeNodeNS(attr);
         }
         return attr;
-    }
-    get length() {
-        return Object.keys(this._ownerElement._attributes).length;
     }
 }

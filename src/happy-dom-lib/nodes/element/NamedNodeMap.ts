@@ -6,6 +6,7 @@ import Element from './Element';
  */
 export default class NamedNodeMap {// extends Array<Attr> {
 	private _ownerElement: Element;
+	private readonly length: number = 0;
 
 	/**
 	 * Adds class names.
@@ -14,6 +15,11 @@ export default class NamedNodeMap {// extends Array<Attr> {
 	 */
 	constructor(ownerElement: Element) {
 		this._ownerElement = ownerElement;
+
+		const attributes = this._ownerElement._attributes;
+		Object.assign(this, attributes);
+		// sets this.length as well as attributes array
+		Array.prototype.push.apply(this, Object.values(attributes));
 	}
 
 	public getNamedItem(name: string): Attr {
@@ -51,7 +57,7 @@ export default class NamedNodeMap {// extends Array<Attr> {
 		return attr;
 	}
 
-	public get length(): number{
-		return Object.keys(this._ownerElement._attributes).length;
-	}
+	// public get length(): number{
+	// 	return Object.keys(this._ownerElement._attributes).length;
+	// }
 }
