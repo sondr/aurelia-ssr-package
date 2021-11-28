@@ -209,7 +209,7 @@ export default class Text extends Node {
         return clone;
     }
     get wholeText() {
-        const text = [];
+        const text = [this.textContent];
         let { previousSibling, nextSibling } = this;
         // iterating previous text nodes
         while (previousSibling) {

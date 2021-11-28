@@ -237,7 +237,7 @@ export default class Text extends Node implements IText {
 	}
 
 	public get wholeText() {
-		const text = [];
+		const text = [this.textContent];
 		let { previousSibling, nextSibling } = this;
 
 		// iterating previous text nodes

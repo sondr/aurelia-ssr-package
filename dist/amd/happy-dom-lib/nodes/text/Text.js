@@ -275,7 +275,7 @@ define(["require", "exports", "../node/Node", "../../mutation-observer/MutationR
         };
         Object.defineProperty(Text.prototype, "wholeText", {
             get: function () {
-                var text = [];
+                var text = [this.textContent];
                 var _a = this, previousSibling = _a.previousSibling, nextSibling = _a.nextSibling;
                 // iterating previous text nodes
                 while (previousSibling) {
