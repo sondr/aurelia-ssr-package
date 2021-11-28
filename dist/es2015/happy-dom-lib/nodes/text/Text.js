@@ -208,4 +208,29 @@ export default class Text extends Node {
         clone._data = this._data;
         return clone;
     }
+    get wholeText() {
+        const text = [];
+        let { previousSibling, nextSibling } = this;
+        // iterating previous text nodes
+        while (previousSibling) {
+            if (previousSibling.nodeType === Node.TEXT_NODE) {
+                text.unshift(previousSibling.textContent);
+            }
+            else {
+                break;
+            }
+            previousSibling = previousSibling.previousSibling;
+        }
+        // iterating next text nodes
+        while (nextSibling) {
+            if (nextSibling.nodeType === Node.TEXT_NODE) {
+                text.push(nextSibling.textContent);
+            }
+            else {
+                break;
+            }
+            nextSibling = nextSibling.nextSibling;
+        }
+        return text.join('');
+    }
 }

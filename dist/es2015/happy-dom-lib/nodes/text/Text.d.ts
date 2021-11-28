@@ -144,4 +144,5 @@ export default class Text extends Node implements IText {
      * @returns Cloned node.
      */
     cloneNode(deep?: boolean): IText;
+    get wholeText(): string;
 }

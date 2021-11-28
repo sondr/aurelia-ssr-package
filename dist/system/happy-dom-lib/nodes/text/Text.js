@@ -296,6 +296,35 @@ System.register(["../node/Node", "../../mutation-observer/MutationRecord", "../.
                     clone._data = this._data;
                     return clone;
                 };
+                Object.defineProperty(Text.prototype, "wholeText", {
+                    get: function () {
+                        var text = [];
+                        var _a = this, previousSibling = _a.previousSibling, nextSibling = _a.nextSibling;
+                        // iterating previous text nodes
+                        while (previousSibling) {
+                            if (previousSibling.nodeType === Node_1.default.TEXT_NODE) {
+                                text.unshift(previousSibling.textContent);
+                            }
+                            else {
+                                break;
+                            }
+                            previousSibling = previousSibling.previousSibling;
+                        }
+                        // iterating next text nodes
+                        while (nextSibling) {
+                            if (nextSibling.nodeType === Node_1.default.TEXT_NODE) {
+                                text.push(nextSibling.textContent);
+                            }
+                            else {
+                                break;
+                            }
+                            nextSibling = nextSibling.nextSibling;
+                        }
+                        return text.join('');
+                    },
+                    enumerable: false,
+                    configurable: true
+                });
                 return Text;
             }(Node_1.default));
             exports_1("default", Text);

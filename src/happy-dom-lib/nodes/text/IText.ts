@@ -9,4 +9,6 @@ export default interface IText extends ICharacterData {
 	 * @returns Cloned node.
 	 */
 	cloneNode(deep: boolean): IText;
+
+	readonly wholeText: string;
 }
