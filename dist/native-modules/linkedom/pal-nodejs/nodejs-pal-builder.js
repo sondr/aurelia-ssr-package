@@ -14,6 +14,8 @@ export function buildPal() {
     var loc = new URL('http://localhost/');
     linkedom.location = loc;
     linkedom.window.location = loc;
+    Object.defineProperty(linkedom.window.document, 'URL', { get: function () { console.log("getting doc.URL"); return linkedom.window.location.toString(); } });
+    Object.defineProperty(linkedom.window.document, 'documentURI', { get: function () { console.log("getting doc.documentURI"); return linkedom.window.location.toString(); } });
     linkedom.history = {
         go: function (delta) { console.log("history.go"); },
         back: function () { console.log("history.back"); },

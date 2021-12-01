@@ -65,6 +65,11 @@ function start(options, requestUrl, headers) {
         console.log(loc);
         PLATFORM.jsdom.location = loc;
         PLATFORM.jsdom.window.location = loc;
+        console.log("reconfi");
+        console.log(PLATFORM.jsdom.window.document.URL);
+        //PLATFORM.jsdom.window.document.URL = () => { console.log("call doc uri"); return loc.toString(); }
+        // Object.defineProperty(PLATFORM.jsdom.window.document, 'URL', { get:function(){ console.log("getting doc.URL"); return loc.toString(); } });
+        // Object.defineProperty(PLATFORM.jsdom.window.document, 'documentURI', { get:function(){ console.log("getting doc.documentURI"); return loc.toString(); } });
     }
     return typeof headers !== 'undefined' ? start(headers) : start();
 }

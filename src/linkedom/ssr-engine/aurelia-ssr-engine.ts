@@ -67,12 +67,19 @@ function start(options: AppInitializationOptions, requestUrl: string, headers?: 
   // this dictates what page aurelia loads on startup
   if (PLATFORM?.jsdom?.reconfigure) {
     PLATFORM.jsdom.reconfigure({ url: requestUrl });
-  }else if(PLATFORM.jsdom){
+  } else if (PLATFORM.jsdom) {
     const loc = new URL(requestUrl);
     console.log("setting loc");
     console.log(loc);
     PLATFORM.jsdom.location = loc;
     PLATFORM.jsdom.window.location = loc;
+
+    console.log("reconfi");
+    console.log(PLATFORM.jsdom.window.document.URL);
+
+    //PLATFORM.jsdom.window.document.URL = () => { console.log("call doc uri"); return loc.toString(); }
+    // Object.defineProperty(PLATFORM.jsdom.window.document, 'URL', { get:function(){ console.log("getting doc.URL"); return loc.toString(); } });
+    // Object.defineProperty(PLATFORM.jsdom.window.document, 'documentURI', { get:function(){ console.log("getting doc.documentURI"); return loc.toString(); } });
   }
 
   return typeof headers !== 'undefined' ? start(headers) : start();
