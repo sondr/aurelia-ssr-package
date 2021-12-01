@@ -17,7 +17,6 @@ var pal = require('aurelia-pal');
 function initialize() {
     var initialize = palNodeJS.initialize;
     var PLATFORM = pal.PLATFORM;
-    console.log("bootstrapper initializing");
     initialize();
     // expose anything the ssr-engine needs
     return {
@@ -25,19 +24,18 @@ function initialize() {
     };
 }
 function start(configure) {
-    var _a;
     var aurelia = new Aurelia(new WebpackLoader());
-    console.log("pal:");
-    console.dir(pal);
+    // console.log("pal:");
+    // console.dir(pal);
     aurelia.host = pal.DOM.querySelector('body');
-    console.log("au host:");
-    console.log(Object.keys(aurelia.host.attributes));
-    console.log("setNamedItem:");
-    console.log(aurelia.host.attributes.setNamedItem);
+    //console.log("au host:");
+    // console.log(Object.keys(aurelia.host.attributes));
+    // console.log("setNamedItem:");
+    // console.log(aurelia.host.attributes.setNamedItem);
     var attribute = pal.DOM.createAttribute('aurelia-app');
-    console.log("attribute: " + attribute);
+    //console.log("attribute: " + attribute);
     attribute.value = 'main';
-    console.log("au host attributes exist: " + ((_a = aurelia === null || aurelia === void 0 ? void 0 : aurelia.host) === null || _a === void 0 ? void 0 : _a.attributes) != null);
+    //console.log("au host attributes exist: " + aurelia?.host?.attributes != null);
     aurelia.host.attributes.setNamedItem(attribute);
     return new Promise(function (resolve) {
         // we need to wait for aurelia-composed as otherwise

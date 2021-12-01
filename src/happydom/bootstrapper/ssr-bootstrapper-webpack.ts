@@ -22,7 +22,6 @@ function initialize() {
     const { initialize } = palNodeJS;
     const { PLATFORM } = pal;
 
-    console.log("bootstrapper initializing");
     initialize();
 
     // expose anything the ssr-engine needs
@@ -33,20 +32,20 @@ function initialize() {
 
 function start(configure: any) {
     const aurelia = new Aurelia(new WebpackLoader());
-    console.log("pal:");
-    console.dir(pal);
+    // console.log("pal:");
+    // console.dir(pal);
     aurelia.host = pal.DOM.querySelector('body');
-    console.log("au host:");
-    console.log(Object.keys(aurelia.host.attributes));
-    console.log("setNamedItem:");
-    console.log(aurelia.host.attributes.setNamedItem);
+    //console.log("au host:");
+    // console.log(Object.keys(aurelia.host.attributes));
+    // console.log("setNamedItem:");
+    // console.log(aurelia.host.attributes.setNamedItem);
 
 
 
     const attribute = pal.DOM.createAttribute('aurelia-app');
-    console.log("attribute: " + attribute);
+    //console.log("attribute: " + attribute);
     attribute.value = 'main';
-    console.log("au host attributes exist: " + aurelia?.host?.attributes != null);
+    //console.log("au host attributes exist: " + aurelia?.host?.attributes != null);
     aurelia.host.attributes.setNamedItem(attribute);
 
     return new Promise(resolve => {
