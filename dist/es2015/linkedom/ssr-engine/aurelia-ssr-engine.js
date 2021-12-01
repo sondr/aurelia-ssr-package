@@ -56,7 +56,11 @@ function start(options, requestUrl, headers) {
         PLATFORM.jsdom.reconfigure({ url: requestUrl });
     }
     else if (PLATFORM.jsdom) {
-        PLATFORM.jsdom.location = new URL(requestUrl);
+        const loc = new URL(requestUrl);
+        console.log("setting loc");
+        console.log(loc);
+        PLATFORM.jsdom.location = loc;
+        PLATFORM.jsdom.window.location = loc;
     }
     return typeof headers !== 'undefined' ? start(headers) : start();
 }

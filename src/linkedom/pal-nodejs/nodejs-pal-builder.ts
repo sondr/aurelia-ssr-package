@@ -18,13 +18,15 @@ export function buildPal(): { global: IGlobal, platform: IPlatform, dom: IDom, f
   // have to use a base for linkeddom to find body later
   var emtpyHtmlString = "<html><head></head><body></body></html>";
   var linkedom = parseHTML(emtpyHtmlString);
-  linkedom.location = new URL('http://localhost/') as unknown as Location;
+  const loc = new URL('http://localhost/') as unknown as Location;
+  linkedom.location = loc;
+  linkedom.window.location = loc;
   (linkedom as unknown as any).history = {
-    go:(delta?: number)=>{},
-    back:()=>{},
-    forward:()=>{},
-    replaceState: (data: object, title: string, url: string) => {  },
-    pushState: (data: object, title: string, url: string) => {  }
+    go:(delta?: number)=>{ console.log("history.go"); },
+    back:()=>{ console.log("history.back"); },
+    forward:()=>{ console.log("history.forward");},
+    replaceState: (data: object, title: string, url: string) => { console.log("history.replaceState:" + url);  },
+    pushState: (data: object, title: string, url: string) => { console.log("history.pushState:" + url);  }
   }
 
   var global: IGlobal = (linkedom.window as unknown) as IGlobal;

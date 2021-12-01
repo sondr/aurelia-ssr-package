@@ -11,13 +11,15 @@ export function buildPal() {
     // have to use a base for linkeddom to find body later
     var emtpyHtmlString = "<html><head></head><body></body></html>";
     var linkedom = parseHTML(emtpyHtmlString);
-    linkedom.location = new URL('http://localhost/');
+    const loc = new URL('http://localhost/');
+    linkedom.location = loc;
+    linkedom.window.location = loc;
     linkedom.history = {
-        go: (delta) => { },
-        back: () => { },
-        forward: () => { },
-        replaceState: (data, title, url) => { },
-        pushState: (data, title, url) => { }
+        go: (delta) => { console.log("history.go"); },
+        back: () => { console.log("history.back"); },
+        forward: () => { console.log("history.forward"); },
+        replaceState: (data, title, url) => { console.log("history.replaceState:" + url); },
+        pushState: (data, title, url) => { console.log("history.pushState:" + url); }
     };
     var global = linkedom.window;
     ensurePerformance(global.window);
