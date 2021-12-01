@@ -33,19 +33,19 @@ function initialize() {
 
 function start(configure: any) {
     const aurelia = new Aurelia(new WebpackLoader());
-    console.log("au started:");
-    console.log("pal:");
-    console.dir(pal);
-    console.dir(pal.DOM.querySelectorAll);
+    // console.log("au started:");
+    // console.log("pal:");
+    // console.dir(pal);
+    // console.dir(pal.DOM.querySelectorAll);
     aurelia.host = pal.DOM.querySelectorAll('body')[0];
-    console.log("au host exosts:" + aurelia.host);
+    //console.log("au host exosts:" + aurelia.host);
 
 
 
     const attribute = pal.DOM.createAttribute('aurelia-app');
-    console.log("attribute: " + attribute);
+    //console.log("attribute: " + attribute);
     attribute.value = 'main';
-    console.log("au host attributes exist: " + aurelia?.host?.attributes != null);
+    //console.log("au host attributes exist: " + aurelia?.host?.attributes != null);
     aurelia.host.attributes.setNamedItem(attribute);
 
     return new Promise(resolve => {
