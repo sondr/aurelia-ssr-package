@@ -27,7 +27,7 @@ export function buildPal(): { global: IGlobal, platform: IPlatform, dom: IDom, f
     go: (delta?: number) => { console.log("history.go"); },
     back: () => { console.log("history.back"); },
     forward: () => { console.log("history.forward"); },
-    replaceState: (data: object, title: string, url: string) => { console.log("history.replaceState:" + url); },
+    replaceState: (data: object, title: string, url: string) => { console.log("history.replaceState:" + url); console.log(data); console.log(title); },
     pushState: (data: object, title: string, url: string) => { console.log("history.pushState:" + url); }
   }
 

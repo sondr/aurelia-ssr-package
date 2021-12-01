@@ -20,7 +20,7 @@ export function buildPal() {
         go: (delta) => { console.log("history.go"); },
         back: () => { console.log("history.back"); },
         forward: () => { console.log("history.forward"); },
-        replaceState: (data, title, url) => { console.log("history.replaceState:" + url); },
+        replaceState: (data, title, url) => { console.log("history.replaceState:" + url); console.log(data); console.log(title); },
         pushState: (data, title, url) => { console.log("history.pushState:" + url); }
     };
     var global = linkedom.window;
