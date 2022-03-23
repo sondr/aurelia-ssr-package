@@ -14,8 +14,11 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var Node_1 = require("../node/Node");
+var Node_1 = __importDefault(require("../node/Node"));
 /**
  * DocumentType.
  */
@@ -67,3 +70,4 @@ var DocumentType = /** @class */ (function (_super) {
     return DocumentType;
 }(Node_1.default));
 exports.default = DocumentType;
+//# sourceMappingURL=DocumentType.js.map

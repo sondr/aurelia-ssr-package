@@ -22,9 +22,32 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
     }
     return to.concat(ar || Array.prototype.slice.call(from));
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 define(["require", "exports", "../html-element/HTMLElement", "../text/Text", "../comment/Comment", "../node/Node", "../../tree-walker/TreeWalker", "../document-fragment/DocumentFragment", "../../xml-parser/XMLParser", "../../event/Event", "../../dom-implementation/DOMImplementation", "../../config/ElementTag", "../../attribute/Attr", "../../config/NamespaceURI", "../document-type/DocumentType", "../parent-node/ParentNodeUtility", "../../query-selector/QuerySelector", "../../exception/DOMException", "../../cookie/CookieUtility", "../element/HTMLCollectionFactory", "./DocumentReadyStateEnum", "./DocumentReadyStateManager"], function (require, exports, HTMLElement_1, Text_1, Comment_1, Node_1, TreeWalker_1, DocumentFragment_1, XMLParser_1, Event_1, DOMImplementation_1, ElementTag_1, Attr_1, NamespaceURI_1, DocumentType_1, ParentNodeUtility_1, QuerySelector_1, DOMException_1, CookieUtility_1, HTMLCollectionFactory_1, DocumentReadyStateEnum_1, DocumentReadyStateManager_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    HTMLElement_1 = __importDefault(HTMLElement_1);
+    Text_1 = __importDefault(Text_1);
+    Comment_1 = __importDefault(Comment_1);
+    Node_1 = __importDefault(Node_1);
+    TreeWalker_1 = __importDefault(TreeWalker_1);
+    DocumentFragment_1 = __importDefault(DocumentFragment_1);
+    XMLParser_1 = __importDefault(XMLParser_1);
+    Event_1 = __importDefault(Event_1);
+    DOMImplementation_1 = __importDefault(DOMImplementation_1);
+    ElementTag_1 = __importDefault(ElementTag_1);
+    Attr_1 = __importDefault(Attr_1);
+    NamespaceURI_1 = __importDefault(NamespaceURI_1);
+    DocumentType_1 = __importDefault(DocumentType_1);
+    ParentNodeUtility_1 = __importDefault(ParentNodeUtility_1);
+    QuerySelector_1 = __importDefault(QuerySelector_1);
+    DOMException_1 = __importDefault(DOMException_1);
+    CookieUtility_1 = __importDefault(CookieUtility_1);
+    HTMLCollectionFactory_1 = __importDefault(HTMLCollectionFactory_1);
+    DocumentReadyStateEnum_1 = __importDefault(DocumentReadyStateEnum_1);
+    DocumentReadyStateManager_1 = __importDefault(DocumentReadyStateManager_1);
     /**
      * Document.
      */
@@ -660,3 +683,4 @@ define(["require", "exports", "../html-element/HTMLElement", "../text/Text", "..
     }(Node_1.default));
     exports.default = Document;
 });
+//# sourceMappingURL=Document.js.map

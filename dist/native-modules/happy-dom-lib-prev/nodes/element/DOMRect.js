@@ -17,3 +17,4 @@ var DOMRect = /** @class */ (function () {
     return DOMRect;
 }());
 export default DOMRect;
+//# sourceMappingURL=DOMRect.js.map

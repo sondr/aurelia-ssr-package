@@ -184,3 +184,4 @@ export default class URLSearchParams {
         return new Iterator();
     }
 }
+//# sourceMappingURL=URLSearchParams.js.map

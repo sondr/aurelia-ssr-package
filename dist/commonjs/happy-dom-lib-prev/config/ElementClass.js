@@ -1,16 +1,19 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var HTMLTemplateElement_1 = require("../nodes/html-template-element/HTMLTemplateElement");
-var HTMLFormElement_1 = require("../nodes/html-form-element/HTMLFormElement");
-var HTMLElement_1 = require("../nodes/html-element/HTMLElement");
-var HTMLInputElement_1 = require("../nodes/html-input-element/HTMLInputElement");
-var HTMLTextAreaElement_1 = require("../nodes/html-text-area-element/HTMLTextAreaElement");
-var SVGSVGElement_1 = require("../nodes/svg-element/SVGSVGElement");
-var SVGElement_1 = require("../nodes/svg-element/SVGElement");
-var HTMLScriptElement_1 = require("../nodes/html-script-element/HTMLScriptElement");
-var HTMLImageElement_1 = require("../nodes/html-image-element/HTMLImageElement");
-var HTMLStyleElement_1 = require("../nodes/html-style-element/HTMLStyleElement");
-var HTMLLinkElement_1 = require("../nodes/html-link-element/HTMLLinkElement");
+var HTMLTemplateElement_1 = __importDefault(require("../nodes/html-template-element/HTMLTemplateElement"));
+var HTMLFormElement_1 = __importDefault(require("../nodes/html-form-element/HTMLFormElement"));
+var HTMLElement_1 = __importDefault(require("../nodes/html-element/HTMLElement"));
+var HTMLInputElement_1 = __importDefault(require("../nodes/html-input-element/HTMLInputElement"));
+var HTMLTextAreaElement_1 = __importDefault(require("../nodes/html-text-area-element/HTMLTextAreaElement"));
+var SVGSVGElement_1 = __importDefault(require("../nodes/svg-element/SVGSVGElement"));
+var SVGElement_1 = __importDefault(require("../nodes/svg-element/SVGElement"));
+var HTMLScriptElement_1 = __importDefault(require("../nodes/html-script-element/HTMLScriptElement"));
+var HTMLImageElement_1 = __importDefault(require("../nodes/html-image-element/HTMLImageElement"));
+var HTMLStyleElement_1 = __importDefault(require("../nodes/html-style-element/HTMLStyleElement"));
+var HTMLLinkElement_1 = __importDefault(require("../nodes/html-link-element/HTMLLinkElement"));
 exports.default = {
     HTMLTemplateElement: HTMLTemplateElement_1.default,
     HTMLFormElement: HTMLFormElement_1.default,
@@ -86,3 +89,4 @@ exports.default = {
     SVGSVGElement: SVGSVGElement_1.default,
     SVGElement: SVGElement_1.default
 };
+//# sourceMappingURL=ElementClass.js.map

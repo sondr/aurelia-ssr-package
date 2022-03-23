@@ -25,3 +25,4 @@ export default class ErrorEvent extends UIEvent {
         }
     }
 }
+//# sourceMappingURL=ErrorEvent.js.map

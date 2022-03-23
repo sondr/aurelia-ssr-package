@@ -101,3 +101,4 @@ export default class HTMLTemplateElement extends HTMLElement {
         return super.cloneNode(deep);
     }
 }
+//# sourceMappingURL=HTMLTemplateElement.js.map

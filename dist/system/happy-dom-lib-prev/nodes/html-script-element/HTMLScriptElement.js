@@ -272,3 +272,4 @@ System.register(["../html-element/HTMLElement", "./ScriptUtility"], function (ex
         }
     };
 });
+//# sourceMappingURL=HTMLScriptElement.js.map

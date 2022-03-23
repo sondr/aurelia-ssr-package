@@ -21,3 +21,4 @@ export default class ProgressEvent extends Event {
         }
     }
 }
+//# sourceMappingURL=ProgressEvent.js.map

@@ -60,3 +60,4 @@ var HTMLInputElementValueSanitizer = /** @class */ (function () {
     return HTMLInputElementValueSanitizer;
 }());
 exports.default = HTMLInputElementValueSanitizer;
+//# sourceMappingURL=HTMLInputElementValueSanitizer.js.map

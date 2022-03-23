@@ -1,6 +1,9 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var XMLParser_1 = require("../../xml-parser/XMLParser");
+var XMLParser_1 = __importDefault(require("../../xml-parser/XMLParser"));
 /**
  * Child node utility.
  */
@@ -117,3 +120,4 @@ var ChildNodeUtility = /** @class */ (function () {
     return ChildNodeUtility;
 }());
 exports.default = ChildNodeUtility;
+//# sourceMappingURL=ChildNodeUtility.js.map

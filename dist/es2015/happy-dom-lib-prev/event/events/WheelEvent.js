@@ -26,3 +26,4 @@ export default class WheelEvent extends UIEvent {
 WheelEvent.DOM_DELTA_PIXEL = 0;
 WheelEvent.DOM_DELTA_LINE = 1;
 WheelEvent.DOM_DELTA_PAGE = 2;
+//# sourceMappingURL=WheelEvent.js.map

@@ -48,3 +48,4 @@ define(["require", "exports"], function (require, exports) {
     }());
     exports.default = NamedNodeMap;
 });
+//# sourceMappingURL=NamedNodeMap.js.map

@@ -101,3 +101,4 @@ var HTMLLabelElement = /** @class */ (function (_super) {
     return HTMLLabelElement;
 }(HTMLElement));
 export default HTMLLabelElement;
+//# sourceMappingURL=HTMLLabelElement.js.map

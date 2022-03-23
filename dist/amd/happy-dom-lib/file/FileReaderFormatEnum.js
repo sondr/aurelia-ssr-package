@@ -10,3 +10,4 @@ define(["require", "exports"], function (require, exports) {
     })(FileReaderFormatEnum || (FileReaderFormatEnum = {}));
     exports.default = FileReaderFormatEnum;
 });
+//# sourceMappingURL=FileReaderFormatEnum.js.map

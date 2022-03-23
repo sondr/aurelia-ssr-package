@@ -105,3 +105,4 @@ define(["require", "exports", "aurelia-pal", "./nodejs-pal-builder", "./nodejs-p
     }
     exports.reset = reset;
 });
+//# sourceMappingURL=index.js.map

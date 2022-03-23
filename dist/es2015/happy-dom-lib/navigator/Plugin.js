@@ -48,3 +48,4 @@ export default class Plugin {
         return '[object Plugin]';
     }
 }
+//# sourceMappingURL=Plugin.js.map

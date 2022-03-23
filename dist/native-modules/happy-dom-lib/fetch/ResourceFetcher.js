@@ -93,3 +93,4 @@ var ResourceFetcher = /** @class */ (function () {
     return ResourceFetcher;
 }());
 export default ResourceFetcher;
+//# sourceMappingURL=ResourceFetcher.js.map

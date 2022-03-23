@@ -29,3 +29,4 @@ export default class DataTransferItemList {
         this.DataTransferItem = [];
     }
 }
+//# sourceMappingURL=DataTransferItemList.js.map

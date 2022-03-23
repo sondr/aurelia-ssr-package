@@ -13,9 +13,13 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 define(["require", "exports", "../Event"], function (require, exports, Event_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    Event_1 = __importDefault(Event_1);
     /**
      *
      */
@@ -44,3 +48,4 @@ define(["require", "exports", "../Event"], function (require, exports, Event_1) 
     }(Event_1.default));
     exports.default = ProgressEvent;
 });
+//# sourceMappingURL=ProgressEvent.js.map

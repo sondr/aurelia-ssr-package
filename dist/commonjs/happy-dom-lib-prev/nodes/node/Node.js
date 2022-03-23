@@ -14,12 +14,15 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var EventTarget_1 = require("../../event/EventTarget");
-var MutationRecord_1 = require("../../mutation-observer/MutationRecord");
-var MutationTypeEnum_1 = require("../../mutation-observer/MutationTypeEnum");
-var DOMException_1 = require("../../exception/DOMException");
-var NodeListFactory_1 = require("./NodeListFactory");
+var EventTarget_1 = __importDefault(require("../../event/EventTarget"));
+var MutationRecord_1 = __importDefault(require("../../mutation-observer/MutationRecord"));
+var MutationTypeEnum_1 = __importDefault(require("../../mutation-observer/MutationTypeEnum"));
+var DOMException_1 = __importDefault(require("../../exception/DOMException"));
+var NodeListFactory_1 = __importDefault(require("./NodeListFactory"));
 /**
  * Node.
  */
@@ -465,3 +468,4 @@ var Node = /** @class */ (function (_super) {
     return Node;
 }(EventTarget_1.default));
 exports.default = Node;
+//# sourceMappingURL=Node.js.map

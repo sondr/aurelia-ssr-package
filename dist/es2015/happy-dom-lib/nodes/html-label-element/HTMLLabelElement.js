@@ -66,3 +66,4 @@ export default class HTMLLabelElement extends HTMLElement {
         return super.cloneNode(deep);
     }
 }
+//# sourceMappingURL=HTMLLabelElement.js.map

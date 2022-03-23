@@ -1,6 +1,9 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var NodeFilter_1 = require("./NodeFilter");
+var NodeFilter_1 = __importDefault(require("./NodeFilter"));
 exports.default = {
     /* ELEMENT_NODE */
     1: NodeFilter_1.default.SHOW_ELEMENT,
@@ -27,3 +30,4 @@ exports.default = {
     /* NOTATION_NODE */
     12: NodeFilter_1.default.SHOW_NOTATION
 };
+//# sourceMappingURL=NodeFilterMask.js.map

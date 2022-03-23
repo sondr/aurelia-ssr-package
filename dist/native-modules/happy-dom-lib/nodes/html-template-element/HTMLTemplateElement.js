@@ -141,3 +141,4 @@ var HTMLTemplateElement = /** @class */ (function (_super) {
     return HTMLTemplateElement;
 }(HTMLElement));
 export default HTMLTemplateElement;
+//# sourceMappingURL=HTMLTemplateElement.js.map

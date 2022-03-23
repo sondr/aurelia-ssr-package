@@ -10,3 +10,4 @@ var SVGNumber = /** @class */ (function () {
     return SVGNumber;
 }());
 export default SVGNumber;
+//# sourceMappingURL=SVGNumber.js.map

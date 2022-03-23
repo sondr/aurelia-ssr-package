@@ -96,3 +96,4 @@ System.register(["./HistoryScrollRestorationEnum"], function (exports_1, context
         }
     };
 });
+//# sourceMappingURL=History.js.map

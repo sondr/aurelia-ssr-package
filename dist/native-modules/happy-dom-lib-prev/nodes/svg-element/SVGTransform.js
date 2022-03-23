@@ -42,3 +42,4 @@ var SVGTransform = /** @class */ (function () {
     return SVGTransform;
 }());
 export default SVGTransform;
+//# sourceMappingURL=SVGTransform.js.map

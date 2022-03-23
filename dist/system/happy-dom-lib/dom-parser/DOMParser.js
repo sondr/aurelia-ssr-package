@@ -117,3 +117,4 @@ System.register(["../xml-parser/XMLParser", "../nodes/node/Node", "../exception/
         }
     };
 });
+//# sourceMappingURL=DOMParser.js.map

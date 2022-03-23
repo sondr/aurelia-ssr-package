@@ -22,3 +22,4 @@ export default class Image extends HTMLImageElement {
         }
     }
 }
+//# sourceMappingURL=Image.js.map

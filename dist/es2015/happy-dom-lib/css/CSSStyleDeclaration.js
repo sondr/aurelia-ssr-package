@@ -4634,3 +4634,4 @@ export default class CSSStyleDeclaration {
         return '';
     }
 }
+//# sourceMappingURL=CSSStyleDeclaration.js.map

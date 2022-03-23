@@ -180,3 +180,4 @@ export default class HTMLScriptElement extends HTMLElement {
         }
     }
 }
+//# sourceMappingURL=HTMLScriptElement.js.map

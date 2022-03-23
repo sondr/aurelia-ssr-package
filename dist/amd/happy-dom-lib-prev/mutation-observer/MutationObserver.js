@@ -1,6 +1,11 @@
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 define(["require", "exports", "../exception/DOMException", "./MutationListener"], function (require, exports, DOMException_1, MutationListener_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    DOMException_1 = __importDefault(DOMException_1);
+    MutationListener_1 = __importDefault(MutationListener_1);
     /**
      * The MutationObserver interface provides the ability to watch for changes being made to the DOM tree.
      *
@@ -54,3 +59,4 @@ define(["require", "exports", "../exception/DOMException", "./MutationListener"]
     }());
     exports.default = MutationObserver;
 });
+//# sourceMappingURL=MutationObserver.js.map

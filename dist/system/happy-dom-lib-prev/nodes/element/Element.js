@@ -935,3 +935,4 @@ System.register(["../node/Node", "../shadow-root/ShadowRoot", "../../attribute/A
         }
     };
 });
+//# sourceMappingURL=Element.js.map

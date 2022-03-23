@@ -52,3 +52,4 @@ var Plugin = /** @class */ (function () {
     return Plugin;
 }());
 exports.default = Plugin;
+//# sourceMappingURL=Plugin.js.map

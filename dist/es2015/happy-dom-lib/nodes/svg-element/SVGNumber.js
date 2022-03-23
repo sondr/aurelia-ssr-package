@@ -8,3 +8,4 @@ export default class SVGNumber {
         this.value = 0;
     }
 }
+//# sourceMappingURL=SVGNumber.js.map

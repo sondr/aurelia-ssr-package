@@ -57,3 +57,4 @@ define(["require", "exports", "./transformers", "./cleanup", "./reflect", "./pro
         return typeof headers !== 'undefined' ? start(headers) : start();
     }
 });
+//# sourceMappingURL=aurelia-ssr-engine.js.map

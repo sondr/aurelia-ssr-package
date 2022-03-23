@@ -11,3 +11,4 @@ export default class DataTransfer {
         this.types = [];
     }
 }
+//# sourceMappingURL=DataTransfer.js.map

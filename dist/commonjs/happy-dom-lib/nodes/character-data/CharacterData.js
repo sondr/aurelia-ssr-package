@@ -23,13 +23,16 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
     }
     return to.concat(ar || Array.prototype.slice.call(from));
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var Node_1 = require("../node/Node");
-var CharacterDataUtility_1 = require("./CharacterDataUtility");
-var NonDocumentChildNodeUtility_1 = require("../child-node/NonDocumentChildNodeUtility");
-var ChildNodeUtility_1 = require("../child-node/ChildNodeUtility");
-var MutationRecord_1 = require("../../mutation-observer/MutationRecord");
-var MutationTypeEnum_1 = require("../../mutation-observer/MutationTypeEnum");
+var Node_1 = __importDefault(require("../node/Node"));
+var CharacterDataUtility_1 = __importDefault(require("./CharacterDataUtility"));
+var NonDocumentChildNodeUtility_1 = __importDefault(require("../child-node/NonDocumentChildNodeUtility"));
+var ChildNodeUtility_1 = __importDefault(require("../child-node/ChildNodeUtility"));
+var MutationRecord_1 = __importDefault(require("../../mutation-observer/MutationRecord"));
+var MutationTypeEnum_1 = __importDefault(require("../../mutation-observer/MutationTypeEnum"));
 /**
  * Character data base class.
  *
@@ -264,3 +267,4 @@ var CharacterData = /** @class */ (function (_super) {
     return CharacterData;
 }(Node_1.default));
 exports.default = CharacterData;
+//# sourceMappingURL=CharacterData.js.map

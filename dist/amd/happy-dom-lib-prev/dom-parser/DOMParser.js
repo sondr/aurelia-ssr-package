@@ -1,6 +1,15 @@
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 define(["require", "exports", "../xml-parser/XMLParser", "../nodes/node/Node", "../exception/DOMException", "../nodes/html-document/HTMLDocument", "../nodes/xml-document/XMLDocument", "../nodes/svg-document/SVGDocument"], function (require, exports, XMLParser_1, Node_1, DOMException_1, HTMLDocument_1, XMLDocument_1, SVGDocument_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    XMLParser_1 = __importDefault(XMLParser_1);
+    Node_1 = __importDefault(Node_1);
+    DOMException_1 = __importDefault(DOMException_1);
+    HTMLDocument_1 = __importDefault(HTMLDocument_1);
+    XMLDocument_1 = __importDefault(XMLDocument_1);
+    SVGDocument_1 = __importDefault(SVGDocument_1);
     /**
      * DOM parser.
      *
@@ -92,3 +101,4 @@ define(["require", "exports", "../xml-parser/XMLParser", "../nodes/node/Node", "
     }());
     exports.default = DOMParser;
 });
+//# sourceMappingURL=DOMParser.js.map

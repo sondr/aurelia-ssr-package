@@ -38,3 +38,4 @@ export default class MimeTypeArray {
         return '[object MimeTypeArray]';
     }
 }
+//# sourceMappingURL=MimeTypeArray.js.map

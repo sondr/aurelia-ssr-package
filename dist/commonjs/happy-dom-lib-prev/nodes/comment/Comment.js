@@ -23,13 +23,16 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
     }
     return to.concat(ar || Array.prototype.slice.call(from));
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var Node_1 = require("../node/Node");
-var MutationRecord_1 = require("../../mutation-observer/MutationRecord");
-var MutationTypeEnum_1 = require("../../mutation-observer/MutationTypeEnum");
-var CharacterDataUtility_1 = require("../character-data/CharacterDataUtility");
-var NonDocumentChildNodeUtility_1 = require("../child-node/NonDocumentChildNodeUtility");
-var ChildNodeUtility_1 = require("../child-node/ChildNodeUtility");
+var Node_1 = __importDefault(require("../node/Node"));
+var MutationRecord_1 = __importDefault(require("../../mutation-observer/MutationRecord"));
+var MutationTypeEnum_1 = __importDefault(require("../../mutation-observer/MutationTypeEnum"));
+var CharacterDataUtility_1 = __importDefault(require("../character-data/CharacterDataUtility"));
+var NonDocumentChildNodeUtility_1 = __importDefault(require("../child-node/NonDocumentChildNodeUtility"));
+var ChildNodeUtility_1 = __importDefault(require("../child-node/ChildNodeUtility"));
 /**
  * Comment node.
  */
@@ -281,3 +284,4 @@ var Comment = /** @class */ (function (_super) {
     return Comment;
 }(Node_1.default));
 exports.default = Comment;
+//# sourceMappingURL=Comment.js.map

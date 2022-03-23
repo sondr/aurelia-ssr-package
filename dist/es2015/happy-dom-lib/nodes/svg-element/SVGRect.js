@@ -11,3 +11,4 @@ export default class SVGRect {
         this.height = 0;
     }
 }
+//# sourceMappingURL=SVGRect.js.map

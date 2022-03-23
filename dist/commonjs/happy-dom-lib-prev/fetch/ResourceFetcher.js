@@ -35,9 +35,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var RelativeURL_1 = require("../location/RelativeURL");
-var DOMException_1 = require("../exception/DOMException");
+var RelativeURL_1 = __importDefault(require("../location/RelativeURL"));
+var DOMException_1 = __importDefault(require("../exception/DOMException"));
 /**
  * Helper class for performing an asynchonous or synchrounous request to a resource.
  */
@@ -95,3 +98,4 @@ var ResourceFetcher = /** @class */ (function () {
     return ResourceFetcher;
 }());
 exports.default = ResourceFetcher;
+//# sourceMappingURL=ResourceFetcher.js.map

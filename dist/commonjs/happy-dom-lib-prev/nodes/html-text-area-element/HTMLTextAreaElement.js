@@ -14,13 +14,16 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var Event_1 = require("../../event/Event");
-var DOMException_1 = require("../../exception/DOMException");
-var DOMExceptionNameEnum_1 = require("../../exception/DOMExceptionNameEnum");
-var HTMLElement_1 = require("../html-element/HTMLElement");
-var HTMLInputElementSelectionDirectionEnum_1 = require("../html-input-element/HTMLInputElementSelectionDirectionEnum");
-var HTMLInputElementSelectionModeEnum_1 = require("../html-input-element/HTMLInputElementSelectionModeEnum");
+var Event_1 = __importDefault(require("../../event/Event"));
+var DOMException_1 = __importDefault(require("../../exception/DOMException"));
+var DOMExceptionNameEnum_1 = __importDefault(require("../../exception/DOMExceptionNameEnum"));
+var HTMLElement_1 = __importDefault(require("../html-element/HTMLElement"));
+var HTMLInputElementSelectionDirectionEnum_1 = __importDefault(require("../html-input-element/HTMLInputElementSelectionDirectionEnum"));
+var HTMLInputElementSelectionModeEnum_1 = __importDefault(require("../html-input-element/HTMLInputElementSelectionModeEnum"));
 /**
  * HTML Text Area Element.
  *
@@ -533,3 +536,4 @@ var HTMLTextAreaElement = /** @class */ (function (_super) {
     return HTMLTextAreaElement;
 }(HTMLElement_1.default));
 exports.default = HTMLTextAreaElement;
+//# sourceMappingURL=HTMLTextAreaElement.js.map

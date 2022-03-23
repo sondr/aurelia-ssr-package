@@ -7,3 +7,4 @@ var FileReaderReadyStateEnum;
     FileReaderReadyStateEnum[FileReaderReadyStateEnum["done"] = 2] = "done";
 })(FileReaderReadyStateEnum || (FileReaderReadyStateEnum = {}));
 exports.default = FileReaderReadyStateEnum;
+//# sourceMappingURL=FileReaderReadyStateEnum.js.map

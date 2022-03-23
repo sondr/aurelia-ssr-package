@@ -280,3 +280,4 @@ export default class SVGSVGElement extends SVGGraphicsElement {
         return super.cloneNode(deep);
     }
 }
+//# sourceMappingURL=SVGSVGElement.js.map

@@ -218,3 +218,4 @@ export default class XMLParser {
         return name.toLowerCase();
     }
 }
+//# sourceMappingURL=XMLParser.js.map

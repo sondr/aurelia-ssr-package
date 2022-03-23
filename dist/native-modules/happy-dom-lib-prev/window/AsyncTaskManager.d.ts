@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import AsyncTaskTypeEnum from './AsyncTaskTypeEnum';
 /**
  * Handles async tasks.

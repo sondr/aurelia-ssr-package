@@ -1,11 +1,14 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var CSSRule_1 = require("./CSSRule");
-var CSSStyleRule_1 = require("./rules/CSSStyleRule");
-var CSSKeyframeRule_1 = require("./rules/CSSKeyframeRule");
-var CSSKeyframesRule_1 = require("./rules/CSSKeyframesRule");
-var CSSMediaRule_1 = require("./rules/CSSMediaRule");
-var CSSStyleDeclaration_1 = require("./CSSStyleDeclaration");
+var CSSRule_1 = __importDefault(require("./CSSRule"));
+var CSSStyleRule_1 = __importDefault(require("./rules/CSSStyleRule"));
+var CSSKeyframeRule_1 = __importDefault(require("./rules/CSSKeyframeRule"));
+var CSSKeyframesRule_1 = __importDefault(require("./rules/CSSKeyframesRule"));
+var CSSMediaRule_1 = __importDefault(require("./rules/CSSMediaRule"));
+var CSSStyleDeclaration_1 = __importDefault(require("./CSSStyleDeclaration"));
 var COMMENT_REGEXP = /\/\*[^*]*\*\//gm;
 /**
  * CSS parser.
@@ -101,3 +104,4 @@ var CSSParser = /** @class */ (function () {
     return CSSParser;
 }());
 exports.default = CSSParser;
+//# sourceMappingURL=CSSParser.js.map

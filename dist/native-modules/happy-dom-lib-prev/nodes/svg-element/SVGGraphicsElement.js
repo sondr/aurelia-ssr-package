@@ -55,3 +55,4 @@ var SVGGraphicsElement = /** @class */ (function (_super) {
     return SVGGraphicsElement;
 }(SVGElement));
 export default SVGGraphicsElement;
+//# sourceMappingURL=SVGGraphicsElement.js.map

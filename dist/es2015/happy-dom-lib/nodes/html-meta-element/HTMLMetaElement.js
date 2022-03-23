@@ -71,3 +71,4 @@ export default class HTMLMetaElement extends HTMLElement {
         this.setAttributeNS(null, 'scheme', scheme);
     }
 }
+//# sourceMappingURL=HTMLMetaElement.js.map

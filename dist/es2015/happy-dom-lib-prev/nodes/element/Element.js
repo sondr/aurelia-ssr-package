@@ -766,3 +766,4 @@ export default class Element extends Node {
         return name.toLowerCase();
     }
 }
+//# sourceMappingURL=Element.js.map

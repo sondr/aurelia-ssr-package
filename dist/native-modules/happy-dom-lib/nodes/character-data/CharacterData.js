@@ -262,3 +262,4 @@ var CharacterData = /** @class */ (function (_super) {
     return CharacterData;
 }(Node));
 export default CharacterData;
+//# sourceMappingURL=CharacterData.js.map

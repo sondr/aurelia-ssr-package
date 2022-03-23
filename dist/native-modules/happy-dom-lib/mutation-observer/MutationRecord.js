@@ -18,3 +18,4 @@ var MutationRecord = /** @class */ (function () {
     return MutationRecord;
 }());
 export default MutationRecord;
+//# sourceMappingURL=MutationRecord.js.map

@@ -32,3 +32,4 @@ export default class CustomEvent extends Event {
         this.detail = detail;
     }
 }
+//# sourceMappingURL=CustomEvent.js.map

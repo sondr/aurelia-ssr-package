@@ -1,6 +1,9 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var Attr_1 = require("../attribute/Attr");
+var Attr_1 = __importDefault(require("../attribute/Attr"));
 /**
  * CSS Style Declaration.
  */
@@ -6126,3 +6129,4 @@ var CSSStyleDeclaration = /** @class */ (function () {
     return CSSStyleDeclaration;
 }());
 exports.default = CSSStyleDeclaration;
+//# sourceMappingURL=CSSStyleDeclaration.js.map

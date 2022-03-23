@@ -193,3 +193,4 @@ var URLSearchParams = /** @class */ (function () {
     return URLSearchParams;
 }());
 exports.default = URLSearchParams;
+//# sourceMappingURL=URLSearchParams.js.map

@@ -4,3 +4,4 @@ import Document from '../document/Document';
  */
 export default class SVGDocument extends Document {
 }
+//# sourceMappingURL=SVGDocument.js.map

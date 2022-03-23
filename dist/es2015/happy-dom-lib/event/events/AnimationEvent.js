@@ -19,3 +19,4 @@ export default class AnimationEvent extends Event {
         this.pseudoElement = (eventInit === null || eventInit === void 0 ? void 0 : eventInit.pseudoElement) || '';
     }
 }
+//# sourceMappingURL=AnimationEvent.js.map

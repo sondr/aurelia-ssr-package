@@ -54,3 +54,4 @@ define(["require", "exports"], function (require, exports) {
     }());
     exports.default = Plugin;
 });
+//# sourceMappingURL=Plugin.js.map

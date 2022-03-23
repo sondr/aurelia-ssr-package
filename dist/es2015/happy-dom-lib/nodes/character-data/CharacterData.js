@@ -196,3 +196,4 @@ export default class CharacterData extends Node {
         return clone;
     }
 }
+//# sourceMappingURL=CharacterData.js.map

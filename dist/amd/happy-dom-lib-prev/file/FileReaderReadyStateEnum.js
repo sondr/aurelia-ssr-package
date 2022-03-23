@@ -9,3 +9,4 @@ define(["require", "exports"], function (require, exports) {
     })(FileReaderReadyStateEnum || (FileReaderReadyStateEnum = {}));
     exports.default = FileReaderReadyStateEnum;
 });
+//# sourceMappingURL=FileReaderReadyStateEnum.js.map

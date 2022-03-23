@@ -13,9 +13,20 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 define(["require", "exports", "../html-element/HTMLElement", "./ValidityState", "../../exception/DOMException", "../../exception/DOMExceptionNameEnum", "../../event/Event", "./HTMLInputElementValueSanitizer", "./HTMLInputElementSelectionModeEnum", "./HTMLInputElementSelectionDirectionEnum"], function (require, exports, HTMLElement_1, ValidityState_1, DOMException_1, DOMExceptionNameEnum_1, Event_1, HTMLInputElementValueSanitizer_1, HTMLInputElementSelectionModeEnum_1, HTMLInputElementSelectionDirectionEnum_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    HTMLElement_1 = __importDefault(HTMLElement_1);
+    ValidityState_1 = __importDefault(ValidityState_1);
+    DOMException_1 = __importDefault(DOMException_1);
+    DOMExceptionNameEnum_1 = __importDefault(DOMExceptionNameEnum_1);
+    Event_1 = __importDefault(Event_1);
+    HTMLInputElementValueSanitizer_1 = __importDefault(HTMLInputElementValueSanitizer_1);
+    HTMLInputElementSelectionModeEnum_1 = __importDefault(HTMLInputElementSelectionModeEnum_1);
+    HTMLInputElementSelectionDirectionEnum_1 = __importDefault(HTMLInputElementSelectionDirectionEnum_1);
     /**
      * HTML Input Element.
      *
@@ -988,3 +999,4 @@ define(["require", "exports", "../html-element/HTMLElement", "./ValidityState", 
     }(HTMLElement_1.default));
     exports.default = HTMLInputElement;
 });
+//# sourceMappingURL=HTMLInputElement.js.map

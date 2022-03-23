@@ -25,3 +25,4 @@ var SVGDocument = /** @class */ (function (_super) {
     return SVGDocument;
 }(Document));
 export default SVGDocument;
+//# sourceMappingURL=SVGDocument.js.map

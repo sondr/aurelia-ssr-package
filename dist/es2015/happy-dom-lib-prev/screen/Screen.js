@@ -11,3 +11,4 @@ export default class Screen {
         this.pixelDepth = 24;
     }
 }
+//# sourceMappingURL=Screen.js.map

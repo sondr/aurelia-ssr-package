@@ -16,3 +16,4 @@ export default class CSSKeyframeRule extends CSSRule {
         return `${this.keyText} { ${this.style.cssText} }`;
     }
 }
+//# sourceMappingURL=CSSKeyframeRule.js.map

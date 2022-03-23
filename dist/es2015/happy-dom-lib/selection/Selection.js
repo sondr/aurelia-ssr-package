@@ -120,3 +120,4 @@ export default class Selection {
         return '';
     }
 }
+//# sourceMappingURL=Selection.js.map

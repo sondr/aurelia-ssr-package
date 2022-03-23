@@ -1,9 +1,12 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var Node_1 = require("../nodes/node/Node");
-var NodeFilter_1 = require("./NodeFilter");
-var NodeFilterMask_1 = require("./NodeFilterMask");
-var DOMException_1 = require("../exception/DOMException");
+var Node_1 = __importDefault(require("../nodes/node/Node"));
+var NodeFilter_1 = __importDefault(require("./NodeFilter"));
+var NodeFilterMask_1 = __importDefault(require("./NodeFilterMask"));
+var DOMException_1 = __importDefault(require("../exception/DOMException"));
 /**
  * The TreeWalker object represents the nodes of a document subtree and a position within them.
  */
@@ -160,3 +163,4 @@ var TreeWalker = /** @class */ (function () {
     return TreeWalker;
 }());
 exports.default = TreeWalker;
+//# sourceMappingURL=TreeWalker.js.map

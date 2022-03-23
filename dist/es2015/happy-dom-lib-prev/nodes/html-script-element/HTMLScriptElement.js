@@ -204,3 +204,4 @@ export default class HTMLScriptElement extends HTMLElement {
         return super.cloneNode(deep);
     }
 }
+//# sourceMappingURL=HTMLScriptElement.js.map

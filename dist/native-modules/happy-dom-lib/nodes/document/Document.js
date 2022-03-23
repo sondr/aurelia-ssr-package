@@ -805,3 +805,4 @@ var Document = /** @class */ (function (_super) {
     return Document;
 }(Node));
 export default Document;
+//# sourceMappingURL=Document.js.map

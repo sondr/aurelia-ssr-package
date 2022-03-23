@@ -54,3 +54,4 @@ export default class ResourceFetcher {
         return response.getBody();
     }
 }
+//# sourceMappingURL=ResourceFetcher.js.map

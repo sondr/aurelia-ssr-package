@@ -44,3 +44,4 @@ define(["require", "exports"], function (require, exports) {
     }());
     exports.default = MimeTypeArray;
 });
+//# sourceMappingURL=MimeTypeArray.js.map

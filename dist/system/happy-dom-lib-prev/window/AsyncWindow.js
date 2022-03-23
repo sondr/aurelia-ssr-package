@@ -43,3 +43,4 @@ System.register(["./Window"], function (exports_1, context_1) {
         }
     };
 });
+//# sourceMappingURL=AsyncWindow.js.map

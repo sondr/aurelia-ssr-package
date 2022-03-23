@@ -36,3 +36,4 @@ export default class PointerEvent extends MouseEvent {
         }
     }
 }
+//# sourceMappingURL=PointerEvent.js.map

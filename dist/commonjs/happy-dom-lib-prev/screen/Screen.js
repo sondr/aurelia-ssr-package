@@ -15,3 +15,4 @@ var Screen = /** @class */ (function () {
     return Screen;
 }());
 exports.default = Screen;
+//# sourceMappingURL=Screen.js.map

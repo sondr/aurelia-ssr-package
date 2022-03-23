@@ -7,3 +7,4 @@ export default class MutationListener {
         this.callback = null;
     }
 }
+//# sourceMappingURL=MutationListener.js.map

@@ -185,3 +185,4 @@ System.register(["../nodes/node/Node", "./SelectorItem", "../nodes/node/NodeList
         }
     };
 });
+//# sourceMappingURL=QuerySelector.js.map

@@ -11,3 +11,4 @@ export default class AsyncWindow extends Window {
         this.console.warn('⚠ AsyncWindow has been deprecated in Happy DOM. All the functionality of AsyncWindow has been added to Window, so there is no need to use AsyncWindow. AsyncWindow will be removed in the future.');
     }
 }
+//# sourceMappingURL=AsyncWindow.js.map

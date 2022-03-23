@@ -87,3 +87,4 @@ export default class HTMLSlotElement extends HTMLElement {
         return super.cloneNode(deep);
     }
 }
+//# sourceMappingURL=HTMLSlotElement.js.map

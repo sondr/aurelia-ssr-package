@@ -22,9 +22,31 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
     }
     return to.concat(ar || Array.prototype.slice.call(from));
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 define(["require", "exports", "../node/Node", "../shadow-root/ShadowRoot", "../../attribute/Attr", "./NamedNodeMap", "./DOMRect", "./Range", "../../dom-token-list/DOMTokenList", "../../query-selector/QuerySelector", "../../query-selector/SelectorItem", "../../mutation-observer/MutationRecord", "../../mutation-observer/MutationTypeEnum", "../../config/NamespaceURI", "../../xml-parser/XMLParser", "../../xml-serializer/XMLSerializer", "../child-node/ChildNodeUtility", "../parent-node/ParentNodeUtility", "../child-node/NonDocumentChildNodeUtility", "../../exception/DOMException", "./HTMLCollectionFactory"], function (require, exports, Node_1, ShadowRoot_1, Attr_1, NamedNodeMap_1, DOMRect_1, Range_1, DOMTokenList_1, QuerySelector_1, SelectorItem_1, MutationRecord_1, MutationTypeEnum_1, NamespaceURI_1, XMLParser_1, XMLSerializer_1, ChildNodeUtility_1, ParentNodeUtility_1, NonDocumentChildNodeUtility_1, DOMException_1, HTMLCollectionFactory_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    Node_1 = __importDefault(Node_1);
+    ShadowRoot_1 = __importDefault(ShadowRoot_1);
+    Attr_1 = __importDefault(Attr_1);
+    NamedNodeMap_1 = __importDefault(NamedNodeMap_1);
+    DOMRect_1 = __importDefault(DOMRect_1);
+    Range_1 = __importDefault(Range_1);
+    DOMTokenList_1 = __importDefault(DOMTokenList_1);
+    QuerySelector_1 = __importDefault(QuerySelector_1);
+    SelectorItem_1 = __importDefault(SelectorItem_1);
+    MutationRecord_1 = __importDefault(MutationRecord_1);
+    MutationTypeEnum_1 = __importDefault(MutationTypeEnum_1);
+    NamespaceURI_1 = __importDefault(NamespaceURI_1);
+    XMLParser_1 = __importDefault(XMLParser_1);
+    XMLSerializer_1 = __importDefault(XMLSerializer_1);
+    ChildNodeUtility_1 = __importDefault(ChildNodeUtility_1);
+    ParentNodeUtility_1 = __importDefault(ParentNodeUtility_1);
+    NonDocumentChildNodeUtility_1 = __importDefault(NonDocumentChildNodeUtility_1);
+    DOMException_1 = __importDefault(DOMException_1);
+    HTMLCollectionFactory_1 = __importDefault(HTMLCollectionFactory_1);
     /**
      * Element.
      */
@@ -990,3 +1012,4 @@ define(["require", "exports", "../node/Node", "../shadow-root/ShadowRoot", "../.
     }(Node_1.default));
     exports.default = Element;
 });
+//# sourceMappingURL=Element.js.map

@@ -342,3 +342,4 @@ var SVGSVGElement = /** @class */ (function (_super) {
     return SVGSVGElement;
 }(SVGGraphicsElement));
 export default SVGSVGElement;
+//# sourceMappingURL=SVGSVGElement.js.map

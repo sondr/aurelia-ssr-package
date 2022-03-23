@@ -1,6 +1,9 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var SVGRect_1 = require("./SVGRect");
+var SVGRect_1 = __importDefault(require("./SVGRect"));
 /**
  * Rect object.
  *
@@ -14,3 +17,4 @@ var SVGAnimatedRect = /** @class */ (function () {
     return SVGAnimatedRect;
 }());
 exports.default = SVGAnimatedRect;
+//# sourceMappingURL=SVGAnimatedRect.js.map

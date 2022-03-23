@@ -25,3 +25,4 @@ var HTMLDocument = /** @class */ (function (_super) {
     return HTMLDocument;
 }(Document));
 export default HTMLDocument;
+//# sourceMappingURL=HTMLDocument.js.map

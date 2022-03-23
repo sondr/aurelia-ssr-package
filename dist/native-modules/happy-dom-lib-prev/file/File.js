@@ -44,3 +44,4 @@ var File = /** @class */ (function (_super) {
     return File;
 }(Blob));
 export default File;
+//# sourceMappingURL=File.js.map

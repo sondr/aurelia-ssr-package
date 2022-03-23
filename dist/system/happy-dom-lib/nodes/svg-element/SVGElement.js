@@ -136,3 +136,4 @@ System.register(["../../css/CSSStyleDeclaration", "../element/Element"], functio
         }
     };
 });
+//# sourceMappingURL=SVGElement.js.map

@@ -71,3 +71,4 @@ export default class EventTarget {
         this.addEventListener(type.replace('on', ''), listener);
     }
 }
+//# sourceMappingURL=EventTarget.js.map

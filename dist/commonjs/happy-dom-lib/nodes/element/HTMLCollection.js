@@ -34,3 +34,4 @@ var HTMLCollection = /** @class */ (function (_super) {
     return HTMLCollection;
 }(Array));
 exports.default = HTMLCollection;
+//# sourceMappingURL=HTMLCollection.js.map

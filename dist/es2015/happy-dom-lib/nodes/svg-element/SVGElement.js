@@ -85,3 +85,4 @@ export default class SVGElement extends Element {
         }
     }
 }
+//# sourceMappingURL=SVGElement.js.map

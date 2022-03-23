@@ -14,16 +14,19 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var whatwg_mimetype_1 = require("whatwg-mimetype");
-var whatwg_encoding_1 = require("whatwg-encoding");
-var ProgressEvent_1 = require("../event/events/ProgressEvent");
-var DOMException_1 = require("../exception/DOMException");
-var DOMExceptionNameEnum_1 = require("../exception/DOMExceptionNameEnum");
-var FileReaderReadyStateEnum_1 = require("./FileReaderReadyStateEnum");
-var FileReaderFormatEnum_1 = require("./FileReaderFormatEnum");
-var EventTarget_1 = require("../event/EventTarget");
-var FileReaderEventTypeEnum_1 = require("./FileReaderEventTypeEnum");
+var whatwg_mimetype_1 = __importDefault(require("whatwg-mimetype"));
+var whatwg_encoding_1 = __importDefault(require("whatwg-encoding"));
+var ProgressEvent_1 = __importDefault(require("../event/events/ProgressEvent"));
+var DOMException_1 = __importDefault(require("../exception/DOMException"));
+var DOMExceptionNameEnum_1 = __importDefault(require("../exception/DOMExceptionNameEnum"));
+var FileReaderReadyStateEnum_1 = __importDefault(require("./FileReaderReadyStateEnum"));
+var FileReaderFormatEnum_1 = __importDefault(require("./FileReaderFormatEnum"));
+var EventTarget_1 = __importDefault(require("../event/EventTarget"));
+var FileReaderEventTypeEnum_1 = __importDefault(require("./FileReaderEventTypeEnum"));
 /**
  * Reference:
  * https://developer.mozilla.org/sv-SE/docs/Web/API/FileReader.
@@ -169,3 +172,4 @@ var FileReader = /** @class */ (function (_super) {
     return FileReader;
 }(EventTarget_1.default));
 exports.default = FileReader;
+//# sourceMappingURL=FileReader.js.map

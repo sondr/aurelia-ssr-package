@@ -17,3 +17,4 @@ export default class FocusEvent extends UIEvent {
         }
     }
 }
+//# sourceMappingURL=FocusEvent.js.map

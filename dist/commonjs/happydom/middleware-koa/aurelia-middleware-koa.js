@@ -25,3 +25,4 @@ var aureliaKoaMiddleware = function (renderOptions, initializationOptions) {
     };
 };
 exports.aureliaKoaMiddleware = aureliaKoaMiddleware;
+//# sourceMappingURL=aurelia-middleware-koa.js.map

@@ -435,3 +435,4 @@ export default class HTMLTextAreaElement extends HTMLElement {
         return clone;
     }
 }
+//# sourceMappingURL=HTMLTextAreaElement.js.map

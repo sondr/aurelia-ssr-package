@@ -1,6 +1,9 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var DOMException_1 = require("../exception/DOMException");
+var DOMException_1 = __importDefault(require("../exception/DOMException"));
 var ATTRIBUTE_REGEXP = /\[([a-zA-Z0-9-_]+)\]|\[([a-zA-Z0-9-_]+)([~|^$*]{0,1})[ ]*=[ ]*["']{0,1}([^"']+)["']{0,1}\]/g;
 var ATTRIBUTE_NAME_REGEXP = /[^a-zA-Z0-9-_$]/;
 var PSUEDO_REGEXP = /:([a-zA-Z-]+)\(([0-9n+-]+|odd|even)\)|:([a-zA-Z-]+)/g;
@@ -243,3 +246,4 @@ var SelectorItem = /** @class */ (function () {
     return SelectorItem;
 }());
 exports.default = SelectorItem;
+//# sourceMappingURL=SelectorItem.js.map

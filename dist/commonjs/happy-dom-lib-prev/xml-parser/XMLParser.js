@@ -1,9 +1,12 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var SelfClosingElements_1 = require("../config/SelfClosingElements");
-var UnnestableElements_1 = require("../config/UnnestableElements");
+var SelfClosingElements_1 = __importDefault(require("../config/SelfClosingElements"));
+var UnnestableElements_1 = __importDefault(require("../config/UnnestableElements"));
 var he_1 = require("he");
-var NamespaceURI_1 = require("../config/NamespaceURI");
+var NamespaceURI_1 = __importDefault(require("../config/NamespaceURI"));
 var MARKUP_REGEXP = /<(\/?)([a-z][-.0-9_a-z]*)\s*([^>]*?)(\/?)>/gi;
 var COMMENT_REGEXP = /<!--(.*?)-->|<([!?])([^>]*)>/gi;
 var DOCUMENT_TYPE_ATTRIBUTE_REGEXP = /"([^"]+)"/gm;
@@ -218,3 +221,4 @@ var XMLParser = /** @class */ (function () {
     return XMLParser;
 }());
 exports.default = XMLParser;
+//# sourceMappingURL=XMLParser.js.map

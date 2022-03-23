@@ -68,3 +68,4 @@ export default class Navigator {
         return '[object Navigator]';
     }
 }
+//# sourceMappingURL=Navigator.js.map

@@ -308,3 +308,4 @@ var Text = /** @class */ (function (_super) {
     return Text;
 }(Node));
 export default Text;
+//# sourceMappingURL=Text.js.map

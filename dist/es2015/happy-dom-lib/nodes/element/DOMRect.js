@@ -15,3 +15,4 @@ export default class DOMRect {
         this.left = 0;
     }
 }
+//# sourceMappingURL=DOMRect.js.map

@@ -13,9 +13,13 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 define(["require", "exports", "../element/Element"], function (require, exports, Element_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    Element_1 = __importDefault(Element_1);
     /**
      * SVG Element.
      *
@@ -80,3 +84,4 @@ define(["require", "exports", "../element/Element"], function (require, exports,
     }(Element_1.default));
     exports.default = SVGElement;
 });
+//# sourceMappingURL=SVGElement.js.map

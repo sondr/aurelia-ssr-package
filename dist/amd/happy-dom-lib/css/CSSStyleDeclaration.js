@@ -1,6 +1,10 @@
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 define(["require", "exports", "../attribute/Attr"], function (require, exports, Attr_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    Attr_1 = __importDefault(Attr_1);
     /**
      * CSS Style Declaration.
      */
@@ -6127,3 +6131,4 @@ define(["require", "exports", "../attribute/Attr"], function (require, exports, 
     }());
     exports.default = CSSStyleDeclaration;
 });
+//# sourceMappingURL=CSSStyleDeclaration.js.map

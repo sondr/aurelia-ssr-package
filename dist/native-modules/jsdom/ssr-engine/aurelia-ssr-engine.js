@@ -56,3 +56,4 @@ function start(options, requestUrl, headers) {
     return typeof headers !== 'undefined' ? start(headers) : start();
 }
 export { render };
+//# sourceMappingURL=aurelia-ssr-engine.js.map

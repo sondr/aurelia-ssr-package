@@ -1,6 +1,13 @@
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 define(["require", "exports", "../config/SelfClosingElements", "../config/UnnestableElements", "../config/ChildLessElements", "he", "../config/NamespaceURI"], function (require, exports, SelfClosingElements_1, UnnestableElements_1, ChildLessElements_1, he_1, NamespaceURI_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    SelfClosingElements_1 = __importDefault(SelfClosingElements_1);
+    UnnestableElements_1 = __importDefault(UnnestableElements_1);
+    ChildLessElements_1 = __importDefault(ChildLessElements_1);
+    NamespaceURI_1 = __importDefault(NamespaceURI_1);
     var MARKUP_REGEXP = /<(\/?)([a-z][-.0-9_a-z]*)\s*([^>]*?)(\/?)>/gi;
     var COMMENT_REGEXP = /<!--(.*?)-->|<([!?])([^>]*)>/gi;
     var DOCUMENT_TYPE_ATTRIBUTE_REGEXP = /"([^"]+)"/gm;
@@ -224,3 +231,4 @@ define(["require", "exports", "../config/SelfClosingElements", "../config/Unnest
     }());
     exports.default = XMLParser;
 });
+//# sourceMappingURL=XMLParser.js.map

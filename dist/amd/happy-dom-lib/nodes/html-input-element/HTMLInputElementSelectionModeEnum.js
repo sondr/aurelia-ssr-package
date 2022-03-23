@@ -10,3 +10,4 @@ define(["require", "exports"], function (require, exports) {
     })(HTMLInputElementSelectionModeEnum || (HTMLInputElementSelectionModeEnum = {}));
     exports.default = HTMLInputElementSelectionModeEnum;
 });
+//# sourceMappingURL=HTMLInputElementSelectionModeEnum.js.map

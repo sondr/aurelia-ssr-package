@@ -13,9 +13,20 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 define(["require", "exports", "./SVGGraphicsElement", "./SVGRect", "./SVGPoint", "./SVGLength", "./SVGAngle", "./SVGNumber", "./SVGTransform", "./SVGAnimatedRect"], function (require, exports, SVGGraphicsElement_1, SVGRect_1, SVGPoint_1, SVGLength_1, SVGAngle_1, SVGNumber_1, SVGTransform_1, SVGAnimatedRect_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    SVGGraphicsElement_1 = __importDefault(SVGGraphicsElement_1);
+    SVGRect_1 = __importDefault(SVGRect_1);
+    SVGPoint_1 = __importDefault(SVGPoint_1);
+    SVGLength_1 = __importDefault(SVGLength_1);
+    SVGAngle_1 = __importDefault(SVGAngle_1);
+    SVGNumber_1 = __importDefault(SVGNumber_1);
+    SVGTransform_1 = __importDefault(SVGTransform_1);
+    SVGAnimatedRect_1 = __importDefault(SVGAnimatedRect_1);
     /**
      * SVGSVGElement.
      */
@@ -338,3 +349,4 @@ define(["require", "exports", "./SVGGraphicsElement", "./SVGRect", "./SVGPoint",
     }(SVGGraphicsElement_1.default));
     exports.default = SVGSVGElement;
 });
+//# sourceMappingURL=SVGSVGElement.js.map

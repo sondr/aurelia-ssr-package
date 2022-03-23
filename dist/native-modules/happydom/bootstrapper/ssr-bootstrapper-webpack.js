@@ -65,3 +65,4 @@ export default function (configure) {
     };
 }
 ;
+//# sourceMappingURL=ssr-bootstrapper-webpack.js.map

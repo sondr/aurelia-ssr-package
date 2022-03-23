@@ -253,3 +253,4 @@ var HTMLImageElement = /** @class */ (function (_super) {
     return HTMLImageElement;
 }(HTMLElement));
 export default HTMLImageElement;
+//# sourceMappingURL=HTMLImageElement.js.map

@@ -49,9 +49,72 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 define(["require", "exports", "../custom-element/CustomElementRegistry", "../nodes/document/Document", "../nodes/html-document/HTMLDocument", "../nodes/xml-document/XMLDocument", "../nodes/svg-document/SVGDocument", "../nodes/node/Node", "../tree-walker/NodeFilter", "../nodes/text/Text", "../nodes/comment/Comment", "../nodes/shadow-root/ShadowRoot", "../nodes/element/Element", "../nodes/html-template-element/HTMLTemplateElement", "../nodes/html-form-element/HTMLFormElement", "../nodes/html-element/HTMLElement", "../nodes/html-input-element/HTMLInputElement", "../nodes/html-text-area-element/HTMLTextAreaElement", "../nodes/svg-element/SVGSVGElement", "../nodes/svg-element/SVGElement", "../nodes/html-script-element/HTMLScriptElement", "../nodes/html-image-element/HTMLImageElement", "../nodes/document-fragment/DocumentFragment", "../tree-walker/TreeWalker", "../event/Event", "../event/events/CustomEvent", "../event/events/AnimationEvent", "../event/events/KeyboardEvent", "../event/events/ProgressEvent", "../event/EventTarget", "../location/URL", "../location/Location", "../event/NonImplementedEventTypes", "../mutation-observer/MutationObserver", "../config/ElementClass", "../dom-parser/DOMParser", "../xml-serializer/XMLSerializer", "../resize-observer/ResizeObserver", "../css/CSSStyleSheet", "../file/Blob", "../file/File", "../exception/DOMException", "../file/FileReader", "../history/History", "../css/CSSStyleDeclaration", "../event/events/MouseEvent", "../event/events/FocusEvent", "../event/events/WheelEvent", "../event/DataTransfer", "../event/DataTransferItem", "../event/DataTransferItemList", "../event/events/InputEvent", "../event/UIEvent", "../event/events/ErrorEvent", "../screen/Screen", "./AsyncTaskManager", "./AsyncTaskTypeEnum", "../location/RelativeURL", "../storage/Storage", "../nodes/html-link-element/HTMLLinkElement", "../nodes/html-style-element/HTMLStyleElement", "../url-search-params/URLSearchParams"], function (require, exports, CustomElementRegistry_1, Document_1, HTMLDocument_1, XMLDocument_1, SVGDocument_1, Node_1, NodeFilter_1, Text_1, Comment_1, ShadowRoot_1, Element_1, HTMLTemplateElement_1, HTMLFormElement_1, HTMLElement_1, HTMLInputElement_1, HTMLTextAreaElement_1, SVGSVGElement_1, SVGElement_1, HTMLScriptElement_1, HTMLImageElement_1, DocumentFragment_1, TreeWalker_1, Event_1, CustomEvent_1, AnimationEvent_1, KeyboardEvent_1, ProgressEvent_1, EventTarget_1, URL_1, Location_1, NonImplementedEventTypes_1, MutationObserver_1, ElementClass_1, DOMParser_1, XMLSerializer_1, ResizeObserver_1, CSSStyleSheet_1, Blob_1, File_1, DOMException_1, FileReader_1, History_1, CSSStyleDeclaration_1, MouseEvent_1, FocusEvent_1, WheelEvent_1, DataTransfer_1, DataTransferItem_1, DataTransferItemList_1, InputEvent_1, UIEvent_1, ErrorEvent_1, Screen_1, AsyncTaskManager_1, AsyncTaskTypeEnum_1, RelativeURL_1, Storage_1, HTMLLinkElement_1, HTMLStyleElement_1, URLSearchParams_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    CustomElementRegistry_1 = __importDefault(CustomElementRegistry_1);
+    Document_1 = __importDefault(Document_1);
+    HTMLDocument_1 = __importDefault(HTMLDocument_1);
+    XMLDocument_1 = __importDefault(XMLDocument_1);
+    SVGDocument_1 = __importDefault(SVGDocument_1);
+    Node_1 = __importDefault(Node_1);
+    NodeFilter_1 = __importDefault(NodeFilter_1);
+    Text_1 = __importDefault(Text_1);
+    Comment_1 = __importDefault(Comment_1);
+    ShadowRoot_1 = __importDefault(ShadowRoot_1);
+    Element_1 = __importDefault(Element_1);
+    HTMLTemplateElement_1 = __importDefault(HTMLTemplateElement_1);
+    HTMLFormElement_1 = __importDefault(HTMLFormElement_1);
+    HTMLElement_1 = __importDefault(HTMLElement_1);
+    HTMLInputElement_1 = __importDefault(HTMLInputElement_1);
+    HTMLTextAreaElement_1 = __importDefault(HTMLTextAreaElement_1);
+    SVGSVGElement_1 = __importDefault(SVGSVGElement_1);
+    SVGElement_1 = __importDefault(SVGElement_1);
+    HTMLScriptElement_1 = __importDefault(HTMLScriptElement_1);
+    HTMLImageElement_1 = __importDefault(HTMLImageElement_1);
+    DocumentFragment_1 = __importDefault(DocumentFragment_1);
+    TreeWalker_1 = __importDefault(TreeWalker_1);
+    Event_1 = __importDefault(Event_1);
+    CustomEvent_1 = __importDefault(CustomEvent_1);
+    AnimationEvent_1 = __importDefault(AnimationEvent_1);
+    KeyboardEvent_1 = __importDefault(KeyboardEvent_1);
+    ProgressEvent_1 = __importDefault(ProgressEvent_1);
+    EventTarget_1 = __importDefault(EventTarget_1);
+    URL_1 = __importDefault(URL_1);
+    Location_1 = __importDefault(Location_1);
+    NonImplementedEventTypes_1 = __importDefault(NonImplementedEventTypes_1);
+    MutationObserver_1 = __importDefault(MutationObserver_1);
+    ElementClass_1 = __importDefault(ElementClass_1);
+    DOMParser_1 = __importDefault(DOMParser_1);
+    XMLSerializer_1 = __importDefault(XMLSerializer_1);
+    ResizeObserver_1 = __importDefault(ResizeObserver_1);
+    CSSStyleSheet_1 = __importDefault(CSSStyleSheet_1);
+    Blob_1 = __importDefault(Blob_1);
+    File_1 = __importDefault(File_1);
+    DOMException_1 = __importDefault(DOMException_1);
+    FileReader_1 = __importDefault(FileReader_1);
+    History_1 = __importDefault(History_1);
+    CSSStyleDeclaration_1 = __importDefault(CSSStyleDeclaration_1);
+    MouseEvent_1 = __importDefault(MouseEvent_1);
+    FocusEvent_1 = __importDefault(FocusEvent_1);
+    WheelEvent_1 = __importDefault(WheelEvent_1);
+    DataTransfer_1 = __importDefault(DataTransfer_1);
+    DataTransferItem_1 = __importDefault(DataTransferItem_1);
+    DataTransferItemList_1 = __importDefault(DataTransferItemList_1);
+    InputEvent_1 = __importDefault(InputEvent_1);
+    UIEvent_1 = __importDefault(UIEvent_1);
+    ErrorEvent_1 = __importDefault(ErrorEvent_1);
+    Screen_1 = __importDefault(Screen_1);
+    AsyncTaskManager_1 = __importDefault(AsyncTaskManager_1);
+    AsyncTaskTypeEnum_1 = __importDefault(AsyncTaskTypeEnum_1);
+    RelativeURL_1 = __importDefault(RelativeURL_1);
+    Storage_1 = __importDefault(Storage_1);
+    HTMLLinkElement_1 = __importDefault(HTMLLinkElement_1);
+    HTMLStyleElement_1 = __importDefault(HTMLStyleElement_1);
+    URLSearchParams_1 = __importDefault(URLSearchParams_1);
     var FETCH_RESPONSE_TYPE_METHODS = ['blob', 'json', 'text'];
     /**
      * Handles the Window.
@@ -461,3 +524,4 @@ define(["require", "exports", "../custom-element/CustomElementRegistry", "../nod
     }(EventTarget_1.default));
     exports.default = Window;
 });
+//# sourceMappingURL=Window.js.map

@@ -42,3 +42,4 @@ export default class NamedNodeMap {
         return attr;
     }
 }
+//# sourceMappingURL=NamedNodeMap.js.map

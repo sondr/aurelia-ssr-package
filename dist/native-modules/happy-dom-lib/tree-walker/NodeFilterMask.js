@@ -25,3 +25,4 @@ export default {
     /* NOTATION_NODE */
     12: NodeFilter.SHOW_NOTATION
 };
+//# sourceMappingURL=NodeFilterMask.js.map

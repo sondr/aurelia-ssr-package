@@ -575,3 +575,4 @@ export default class Document extends Node {
         return adopted;
     }
 }
+//# sourceMappingURL=Document.js.map

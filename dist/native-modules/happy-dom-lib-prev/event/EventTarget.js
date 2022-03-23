@@ -59,3 +59,4 @@ var EventTarget = /** @class */ (function () {
     return EventTarget;
 }());
 export default EventTarget;
+//# sourceMappingURL=EventTarget.js.map

@@ -45,3 +45,4 @@ export class NodeJsPlatform {
         this.global.removeEventListener(eventName, callback, capture);
     }
 }
+//# sourceMappingURL=nodejs-platform.js.map

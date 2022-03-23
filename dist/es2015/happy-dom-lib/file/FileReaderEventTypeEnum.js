@@ -8,3 +8,4 @@ var FileReaderEventTypeEnum;
     FileReaderEventTypeEnum["progress"] = "progress";
 })(FileReaderEventTypeEnum || (FileReaderEventTypeEnum = {}));
 export default FileReaderEventTypeEnum;
+//# sourceMappingURL=FileReaderEventTypeEnum.js.map

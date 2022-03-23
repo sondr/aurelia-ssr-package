@@ -35,3 +35,4 @@ var ResizeObserver = /** @class */ (function () {
     return ResizeObserver;
 }());
 exports.default = ResizeObserver;
+//# sourceMappingURL=ResizeObserver.js.map

@@ -47,3 +47,4 @@ export default class HTMLUnknownElement extends HTMLElement {
         super._connectToNode(parentNode);
     }
 }
+//# sourceMappingURL=HTMLUnknownElement.js.map

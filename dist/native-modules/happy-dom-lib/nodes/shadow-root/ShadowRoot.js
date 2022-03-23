@@ -101,3 +101,4 @@ var ShadowRoot = /** @class */ (function (_super) {
     return ShadowRoot;
 }(DocumentFragment));
 export default ShadowRoot;
+//# sourceMappingURL=ShadowRoot.js.map

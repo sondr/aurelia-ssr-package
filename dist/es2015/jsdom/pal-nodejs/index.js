@@ -96,3 +96,4 @@ export function reset(window) {
         window.close();
     }
 }
+//# sourceMappingURL=index.js.map

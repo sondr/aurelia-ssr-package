@@ -193,3 +193,4 @@ export default class HTMLImageElement extends HTMLElement {
         return super.cloneNode(deep);
     }
 }
+//# sourceMappingURL=HTMLImageElement.js.map

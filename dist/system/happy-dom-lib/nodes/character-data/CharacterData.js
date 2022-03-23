@@ -285,3 +285,4 @@ System.register(["../node/Node", "./CharacterDataUtility", "../child-node/NonDoc
         }
     };
 });
+//# sourceMappingURL=CharacterData.js.map

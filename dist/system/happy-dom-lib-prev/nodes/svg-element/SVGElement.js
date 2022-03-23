@@ -90,3 +90,4 @@ System.register(["../element/Element"], function (exports_1, context_1) {
         }
     };
 });
+//# sourceMappingURL=SVGElement.js.map

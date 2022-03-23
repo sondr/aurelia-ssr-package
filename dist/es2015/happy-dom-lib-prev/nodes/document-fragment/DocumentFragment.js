@@ -196,3 +196,4 @@ export default class DocumentFragment extends Node {
         return returnValue;
     }
 }
+//# sourceMappingURL=DocumentFragment.js.map

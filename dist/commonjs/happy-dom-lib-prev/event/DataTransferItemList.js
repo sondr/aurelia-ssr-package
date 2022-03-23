@@ -1,6 +1,9 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var DataTransferItem_1 = require("./DataTransferItem");
+var DataTransferItem_1 = __importDefault(require("./DataTransferItem"));
 /**
  *
  */
@@ -33,3 +36,4 @@ var DataTransferItemList = /** @class */ (function () {
     return DataTransferItemList;
 }());
 exports.default = DataTransferItemList;
+//# sourceMappingURL=DataTransferItemList.js.map

@@ -117,3 +117,4 @@ System.register(["../nodes/html-template-element/HTMLTemplateElement", "../nodes
         }
     };
 });
+//# sourceMappingURL=ElementClass.js.map

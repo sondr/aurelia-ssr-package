@@ -30,3 +30,4 @@ define(["require", "exports"], function (require, exports) {
     }());
     exports.default = RelativeURL;
 });
+//# sourceMappingURL=RelativeURL.js.map

@@ -17,3 +17,4 @@ export default class CustomEvent extends Event {
         }
     }
 }
+//# sourceMappingURL=CustomEvent.js.map

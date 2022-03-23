@@ -331,3 +331,4 @@ System.register(["../node/Node", "../../mutation-observer/MutationRecord", "../.
         }
     };
 });
+//# sourceMappingURL=Text.js.map

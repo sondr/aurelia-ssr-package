@@ -59,3 +59,4 @@ var Text = /** @class */ (function (_super) {
     return Text;
 }(CharacterData));
 export default Text;
+//# sourceMappingURL=Text.js.map

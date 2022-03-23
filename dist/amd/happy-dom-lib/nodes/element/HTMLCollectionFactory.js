@@ -33,3 +33,4 @@ define(["require", "exports"], function (require, exports) {
     }());
     exports.default = HTMLCollectionFactory;
 });
+//# sourceMappingURL=HTMLCollectionFactory.js.map

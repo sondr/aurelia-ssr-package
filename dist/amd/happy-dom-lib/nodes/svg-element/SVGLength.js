@@ -36,3 +36,4 @@ define(["require", "exports"], function (require, exports) {
     }());
     exports.default = SVGLength;
 });
+//# sourceMappingURL=SVGLength.js.map

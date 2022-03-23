@@ -72,3 +72,4 @@ System.register(["./SVGElement", "../element/DOMRect", "./DOMMatrix"], function 
         }
     };
 });
+//# sourceMappingURL=SVGGraphicsElement.js.map

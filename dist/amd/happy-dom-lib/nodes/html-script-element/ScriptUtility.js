@@ -34,9 +34,15 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 define(["require", "exports", "../../event/Event", "../../event/events/ErrorEvent", "../../fetch/ResourceFetcher"], function (require, exports, Event_1, ErrorEvent_1, ResourceFetcher_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    Event_1 = __importDefault(Event_1);
+    ErrorEvent_1 = __importDefault(ErrorEvent_1);
+    ResourceFetcher_1 = __importDefault(ResourceFetcher_1);
     /**
      * Helper class for getting the URL relative to a Location object.
      */
@@ -129,3 +135,4 @@ define(["require", "exports", "../../event/Event", "../../event/events/ErrorEven
     }());
     exports.default = ScriptUtility;
 });
+//# sourceMappingURL=ScriptUtility.js.map

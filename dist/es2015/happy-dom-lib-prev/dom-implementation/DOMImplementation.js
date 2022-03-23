@@ -38,3 +38,4 @@ export default class DOMImplementation {
         return documentType;
     }
 }
+//# sourceMappingURL=DOMImplementation.js.map

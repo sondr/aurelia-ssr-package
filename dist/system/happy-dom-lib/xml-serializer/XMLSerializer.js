@@ -100,3 +100,4 @@ System.register(["../nodes/node/Node", "../config/SelfClosingElements", "../conf
         }
     };
 });
+//# sourceMappingURL=XMLSerializer.js.map

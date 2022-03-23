@@ -265,3 +265,4 @@ System.register(["./window/Window", "./event/DataTransfer", "./event/DataTransfe
         }
     };
 });
+//# sourceMappingURL=index.js.map

@@ -34,3 +34,4 @@ System.register(["../ssr-engine/aurelia-ssr-engine"], function (exports_1, conte
         }
     };
 });
+//# sourceMappingURL=aurelia-middleware-koa.js.map

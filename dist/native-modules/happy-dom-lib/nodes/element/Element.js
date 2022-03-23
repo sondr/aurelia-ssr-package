@@ -1005,3 +1005,4 @@ var Element = /** @class */ (function (_super) {
     return Element;
 }(Node));
 export default Element;
+//# sourceMappingURL=Element.js.map

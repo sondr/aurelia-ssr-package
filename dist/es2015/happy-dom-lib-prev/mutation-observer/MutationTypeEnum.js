@@ -5,3 +5,4 @@ var MutationTypeEnum;
     MutationTypeEnum["childList"] = "childList";
 })(MutationTypeEnum || (MutationTypeEnum = {}));
 export default MutationTypeEnum;
+//# sourceMappingURL=MutationTypeEnum.js.map

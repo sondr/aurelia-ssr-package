@@ -13,9 +13,13 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 define(["require", "exports", "../UIEvent"], function (require, exports, UIEvent_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    UIEvent_1 = __importDefault(UIEvent_1);
     /**
      *
      */
@@ -46,3 +50,4 @@ define(["require", "exports", "../UIEvent"], function (require, exports, UIEvent
     }(UIEvent_1.default));
     exports.default = InputEvent;
 });
+//# sourceMappingURL=InputEvent.js.map

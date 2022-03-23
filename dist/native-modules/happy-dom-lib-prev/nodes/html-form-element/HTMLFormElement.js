@@ -263,3 +263,4 @@ var HTMLFormElement = /** @class */ (function (_super) {
     return HTMLFormElement;
 }(HTMLElement));
 export default HTMLFormElement;
+//# sourceMappingURL=HTMLFormElement.js.map

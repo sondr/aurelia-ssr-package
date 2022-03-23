@@ -1,6 +1,11 @@
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 define(["require", "exports", "./MimeTypeArray", "./PluginArray"], function (require, exports, MimeTypeArray_1, PluginArray_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    MimeTypeArray_1 = __importDefault(MimeTypeArray_1);
+    PluginArray_1 = __importDefault(PluginArray_1);
     /**
      * Browser Navigator API.
      *
@@ -72,3 +77,4 @@ define(["require", "exports", "./MimeTypeArray", "./PluginArray"], function (req
     }());
     exports.default = Navigator;
 });
+//# sourceMappingURL=Navigator.js.map

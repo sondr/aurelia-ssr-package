@@ -31,3 +31,4 @@ var DataTransferItemList = /** @class */ (function () {
     return DataTransferItemList;
 }());
 export default DataTransferItemList;
+//# sourceMappingURL=DataTransferItemList.js.map

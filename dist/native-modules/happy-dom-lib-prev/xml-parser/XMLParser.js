@@ -216,3 +216,4 @@ var XMLParser = /** @class */ (function () {
     return XMLParser;
 }());
 export default XMLParser;
+//# sourceMappingURL=XMLParser.js.map

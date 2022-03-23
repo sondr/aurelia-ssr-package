@@ -34,9 +34,15 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 define(["require", "exports", "../exception/DOMException", "../exception/DOMExceptionNameEnum", "./CSSParser"], function (require, exports, DOMException_1, DOMExceptionNameEnum_1, CSSParser_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    DOMException_1 = __importDefault(DOMException_1);
+    DOMExceptionNameEnum_1 = __importDefault(DOMExceptionNameEnum_1);
+    CSSParser_1 = __importDefault(CSSParser_1);
     /**
      * Attr node interface.
      *
@@ -139,3 +145,4 @@ define(["require", "exports", "../exception/DOMException", "../exception/DOMExce
     }());
     exports.default = CSSStyleSheet;
 });
+//# sourceMappingURL=CSSStyleSheet.js.map

@@ -22,3 +22,4 @@ define(["require", "exports"], function (require, exports) {
     }());
     exports.default = MutationRecord;
 });
+//# sourceMappingURL=MutationRecord.js.map

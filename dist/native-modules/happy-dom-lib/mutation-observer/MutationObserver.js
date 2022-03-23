@@ -52,3 +52,4 @@ var MutationObserver = /** @class */ (function () {
     return MutationObserver;
 }());
 export default MutationObserver;
+//# sourceMappingURL=MutationObserver.js.map

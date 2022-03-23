@@ -22,3 +22,4 @@ export default class RelativeURL {
         return url;
     }
 }
+//# sourceMappingURL=RelativeURL.js.map

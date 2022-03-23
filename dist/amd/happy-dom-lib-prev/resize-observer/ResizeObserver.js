@@ -37,3 +37,4 @@ define(["require", "exports"], function (require, exports) {
     }());
     exports.default = ResizeObserver;
 });
+//# sourceMappingURL=ResizeObserver.js.map

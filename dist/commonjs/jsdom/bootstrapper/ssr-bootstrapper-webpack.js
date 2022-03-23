@@ -59,3 +59,4 @@ function default_1(configure) {
 }
 exports.default = default_1;
 ;
+//# sourceMappingURL=ssr-bootstrapper-webpack.js.map

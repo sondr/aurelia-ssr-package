@@ -1,6 +1,10 @@
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 define(["require", "exports", "./SVGRect"], function (require, exports, SVGRect_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    SVGRect_1 = __importDefault(SVGRect_1);
     /**
      * Rect object.
      *
@@ -15,3 +19,4 @@ define(["require", "exports", "./SVGRect"], function (require, exports, SVGRect_
     }());
     exports.default = SVGAnimatedRect;
 });
+//# sourceMappingURL=SVGAnimatedRect.js.map

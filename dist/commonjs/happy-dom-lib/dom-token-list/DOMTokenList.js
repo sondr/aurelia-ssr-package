@@ -1,6 +1,9 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var DOMException_1 = require("../exception/DOMException");
+var DOMException_1 = __importDefault(require("../exception/DOMException"));
 /**
  * DOM Token List.
  *
@@ -199,3 +202,4 @@ var DOMTokenList = /** @class */ (function () {
     return DOMTokenList;
 }());
 exports.default = DOMTokenList;
+//# sourceMappingURL=DOMTokenList.js.map

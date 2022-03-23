@@ -33,3 +33,4 @@ var ResizeObserver = /** @class */ (function () {
     return ResizeObserver;
 }());
 export default ResizeObserver;
+//# sourceMappingURL=ResizeObserver.js.map

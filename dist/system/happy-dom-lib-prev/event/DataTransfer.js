@@ -26,3 +26,4 @@ System.register(["./DataTransferItemList"], function (exports_1, context_1) {
         }
     };
 });
+//# sourceMappingURL=DataTransfer.js.map

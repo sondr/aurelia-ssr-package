@@ -341,3 +341,4 @@ System.register(["../element/Element", "../../css/CSSStyleDeclaration", "../../e
         }
     };
 });
+//# sourceMappingURL=HTMLElement.js.map

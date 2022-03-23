@@ -1,6 +1,9 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var DOMException_1 = require("../exception/DOMException");
+var DOMException_1 = __importDefault(require("../exception/DOMException"));
 /**
  * Custom elements registry.
  */
@@ -80,3 +83,4 @@ var CustomElementRegistry = /** @class */ (function () {
     return CustomElementRegistry;
 }());
 exports.default = CustomElementRegistry;
+//# sourceMappingURL=CustomElementRegistry.js.map

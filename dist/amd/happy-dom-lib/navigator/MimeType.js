@@ -31,3 +31,4 @@ define(["require", "exports"], function (require, exports) {
     }());
     exports.default = MimeType;
 });
+//# sourceMappingURL=MimeType.js.map

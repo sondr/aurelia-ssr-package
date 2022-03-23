@@ -55,3 +55,4 @@ var Location = /** @class */ (function (_super) {
     return Location;
 }(URL));
 export default Location;
+//# sourceMappingURL=Location.js.map

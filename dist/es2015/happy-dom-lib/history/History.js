@@ -77,3 +77,4 @@ export default class History {
         // Do nothing.
     }
 }
+//# sourceMappingURL=History.js.map

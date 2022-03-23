@@ -46,3 +46,4 @@ var WheelEvent = /** @class */ (function (_super) {
     return WheelEvent;
 }(UIEvent));
 export default WheelEvent;
+//# sourceMappingURL=WheelEvent.js.map

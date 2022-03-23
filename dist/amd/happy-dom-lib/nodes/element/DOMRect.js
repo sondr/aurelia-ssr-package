@@ -21,3 +21,4 @@ define(["require", "exports"], function (require, exports) {
     }());
     exports.default = DOMRect;
 });
+//# sourceMappingURL=DOMRect.js.map

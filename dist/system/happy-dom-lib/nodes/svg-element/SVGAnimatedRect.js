@@ -25,3 +25,4 @@ System.register(["./SVGRect"], function (exports_1, context_1) {
         }
     };
 });
+//# sourceMappingURL=SVGAnimatedRect.js.map

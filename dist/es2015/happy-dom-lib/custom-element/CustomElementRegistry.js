@@ -75,3 +75,4 @@ export default class CustomElementRegistry {
         });
     }
 }
+//# sourceMappingURL=CustomElementRegistry.js.map

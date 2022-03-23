@@ -106,3 +106,4 @@ export default class Blob {
         return '[object Blob]';
     }
 }
+//# sourceMappingURL=Blob.js.map

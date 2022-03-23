@@ -789,3 +789,4 @@ System.register(["../custom-element/CustomElementRegistry", "../nodes/document/D
         }
     };
 });
+//# sourceMappingURL=Window.js.map

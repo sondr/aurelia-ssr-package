@@ -14,8 +14,11 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var Blob_1 = require("./Blob");
+var Blob_1 = __importDefault(require("./Blob"));
 /**
  * Reference:
  * https://developer.mozilla.org/en-US/docs/Web/API/File.
@@ -46,3 +49,4 @@ var File = /** @class */ (function (_super) {
     return File;
 }(Blob_1.default));
 exports.default = File;
+//# sourceMappingURL=File.js.map

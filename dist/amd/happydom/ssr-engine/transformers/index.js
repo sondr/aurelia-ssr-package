@@ -26,3 +26,4 @@ define(["require", "exports"], function (require, exports) {
     }
     exports.transform = transform;
 });
+//# sourceMappingURL=index.js.map

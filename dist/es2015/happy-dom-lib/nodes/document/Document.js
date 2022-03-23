@@ -678,3 +678,4 @@ export default class Document extends Node {
         return returnValue;
     }
 }
+//# sourceMappingURL=Document.js.map

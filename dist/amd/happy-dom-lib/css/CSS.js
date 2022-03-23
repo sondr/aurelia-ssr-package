@@ -1,6 +1,12 @@
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 define(["require", "exports", "./CSSUnitValue", "./CSSUnits", "css.escape"], function (require, exports, CSSUnitValue_1, CSSUnits_1, css_escape_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    CSSUnitValue_1 = __importDefault(CSSUnitValue_1);
+    CSSUnits_1 = __importDefault(CSSUnits_1);
+    css_escape_1 = __importDefault(css_escape_1);
     /**
      * The CSS interface holds useful CSS-related methods.
      *
@@ -46,3 +52,4 @@ define(["require", "exports", "./CSSUnitValue", "./CSSUnits", "css.escape"], fun
     }());
     exports.default = CSS;
 });
+//# sourceMappingURL=CSS.js.map

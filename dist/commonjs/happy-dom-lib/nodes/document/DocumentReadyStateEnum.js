@@ -7,3 +7,4 @@ var DocumentReadyStateEnum;
     DocumentReadyStateEnum["complete"] = "complete";
 })(DocumentReadyStateEnum || (DocumentReadyStateEnum = {}));
 exports.default = DocumentReadyStateEnum;
+//# sourceMappingURL=DocumentReadyStateEnum.js.map

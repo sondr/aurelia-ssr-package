@@ -17,3 +17,4 @@ define(["require", "exports"], function (require, exports) {
     }());
     exports.default = Screen;
 });
+//# sourceMappingURL=Screen.js.map

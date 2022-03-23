@@ -6115,3 +6115,4 @@ var CSSStyleDeclaration = /** @class */ (function () {
     return CSSStyleDeclaration;
 }());
 export default CSSStyleDeclaration;
+//# sourceMappingURL=CSSStyleDeclaration.js.map

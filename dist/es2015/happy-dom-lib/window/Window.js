@@ -541,3 +541,4 @@ export default class Window extends EventTarget {
         });
     }
 }
+//# sourceMappingURL=Window.js.map

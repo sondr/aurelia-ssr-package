@@ -7,7 +7,7 @@ import HistoryScrollRestorationEnum from './HistoryScrollRestorationEnum';
  */
 export default class History {
     readonly length = 0;
-    readonly state: null;
+    readonly state: any;
     private _scrollRestoration;
     /**
      * Returns scroll restoration.

@@ -10,3 +10,4 @@ export default class SVGAnimatedRect {
         this.animVal = new SVGRect();
     }
 }
+//# sourceMappingURL=SVGAnimatedRect.js.map

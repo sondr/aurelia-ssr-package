@@ -38,3 +38,4 @@ var AnimationEvent = /** @class */ (function (_super) {
     return AnimationEvent;
 }(Event));
 export default AnimationEvent;
+//# sourceMappingURL=AnimationEvent.js.map

@@ -37,3 +37,4 @@ KeyboardEvent.DOM_KEY_LOCATION_STANDARD = 0;
 KeyboardEvent.DOM_KEY_LOCATION_LEFT = 1;
 KeyboardEvent.DOM_KEY_LOCATION_RIGHT = 2;
 KeyboardEvent.DOM_KEY_LOCATION_NUMPAD = 3;
+//# sourceMappingURL=KeyboardEvent.js.map

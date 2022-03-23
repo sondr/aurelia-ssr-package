@@ -1,6 +1,9 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var CSSUnits_1 = require("./CSSUnits");
+var CSSUnits_1 = __importDefault(require("./CSSUnits"));
 /**
  * CSS unit value.
  */
@@ -26,3 +29,4 @@ var CSSUnitValue = /** @class */ (function () {
     return CSSUnitValue;
 }());
 exports.default = CSSUnitValue;
+//# sourceMappingURL=CSSUnitValue.js.map

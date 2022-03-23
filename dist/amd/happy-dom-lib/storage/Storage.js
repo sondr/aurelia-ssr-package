@@ -66,3 +66,4 @@ define(["require", "exports"], function (require, exports) {
     }());
     exports.default = Storage;
 });
+//# sourceMappingURL=Storage.js.map

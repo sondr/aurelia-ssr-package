@@ -39,3 +39,4 @@ define(["require", "exports"], function (require, exports) {
     }());
     exports.default = DataTransferItem;
 });
+//# sourceMappingURL=DataTransferItem.js.map

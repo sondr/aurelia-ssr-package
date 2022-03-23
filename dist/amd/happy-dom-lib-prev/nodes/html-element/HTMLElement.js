@@ -13,9 +13,15 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 define(["require", "exports", "../element/Element", "../../event/Event", "../../css/CSSStyleDeclaration"], function (require, exports, Element_1, Event_1, CSSStyleDeclaration_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    Element_1 = __importDefault(Element_1);
+    Event_1 = __importDefault(Event_1);
+    CSSStyleDeclaration_1 = __importDefault(CSSStyleDeclaration_1);
     /**
      * HTML Element.
      *
@@ -295,3 +301,4 @@ define(["require", "exports", "../element/Element", "../../event/Event", "../../
     }(Element_1.default));
     exports.default = HTMLElement;
 });
+//# sourceMappingURL=HTMLElement.js.map

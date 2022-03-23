@@ -13,9 +13,17 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 define(["require", "exports", "../../css/CSSStyleSheet", "../../fetch/ResourceFetcher", "../html-element/HTMLElement", "../../event/Event", "../../event/events/ErrorEvent"], function (require, exports, CSSStyleSheet_1, ResourceFetcher_1, HTMLElement_1, Event_1, ErrorEvent_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    CSSStyleSheet_1 = __importDefault(CSSStyleSheet_1);
+    ResourceFetcher_1 = __importDefault(ResourceFetcher_1);
+    HTMLElement_1 = __importDefault(HTMLElement_1);
+    Event_1 = __importDefault(Event_1);
+    ErrorEvent_1 = __importDefault(ErrorEvent_1);
     /**
      * HTML Link Element.
      *
@@ -307,3 +315,4 @@ define(["require", "exports", "../../css/CSSStyleSheet", "../../fetch/ResourceFe
     }(HTMLElement_1.default));
     exports.default = HTMLLinkElement;
 });
+//# sourceMappingURL=HTMLLinkElement.js.map

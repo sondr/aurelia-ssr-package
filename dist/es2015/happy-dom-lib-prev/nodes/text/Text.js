@@ -234,3 +234,4 @@ export default class Text extends Node {
         return text.join('');
     }
 }
+//# sourceMappingURL=Text.js.map

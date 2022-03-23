@@ -14,8 +14,11 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var HTMLImageElement_1 = require("./HTMLImageElement");
+var HTMLImageElement_1 = __importDefault(require("./HTMLImageElement"));
 /**
  * Image as constructor.
  *
@@ -45,3 +48,4 @@ var Image = /** @class */ (function (_super) {
     return Image;
 }(HTMLImageElement_1.default));
 exports.default = Image;
+//# sourceMappingURL=Image.js.map

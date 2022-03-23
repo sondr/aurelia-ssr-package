@@ -58,3 +58,4 @@ define(["require", "exports"], function (require, exports) {
     }());
     exports.NodeJsPlatform = NodeJsPlatform;
 });
+//# sourceMappingURL=nodejs-platform.js.map

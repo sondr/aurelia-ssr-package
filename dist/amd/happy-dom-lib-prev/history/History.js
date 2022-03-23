@@ -1,6 +1,10 @@
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 define(["require", "exports", "./HistoryScrollRestorationEnum"], function (require, exports, HistoryScrollRestorationEnum_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    HistoryScrollRestorationEnum_1 = __importDefault(HistoryScrollRestorationEnum_1);
     /**
      * History API.
      *
@@ -86,3 +90,4 @@ define(["require", "exports", "./HistoryScrollRestorationEnum"], function (requi
     }());
     exports.default = History;
 });
+//# sourceMappingURL=History.js.map

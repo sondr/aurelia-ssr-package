@@ -55,3 +55,4 @@ var CustomEvent = /** @class */ (function (_super) {
     return CustomEvent;
 }(Event));
 export default CustomEvent;
+//# sourceMappingURL=CustomEvent.js.map

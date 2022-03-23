@@ -294,3 +294,4 @@ var HTMLElement = /** @class */ (function (_super) {
     return HTMLElement;
 }(Element));
 export default HTMLElement;
+//# sourceMappingURL=HTMLElement.js.map

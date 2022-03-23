@@ -35,3 +35,4 @@ export default class Comment extends CharacterData {
         return super.cloneNode(deep);
     }
 }
+//# sourceMappingURL=Comment.js.map

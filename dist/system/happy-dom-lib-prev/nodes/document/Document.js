@@ -727,3 +727,4 @@ System.register(["../html-element/HTMLElement", "../text/Text", "../comment/Comm
         }
     };
 });
+//# sourceMappingURL=Document.js.map

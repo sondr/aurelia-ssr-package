@@ -41,3 +41,4 @@ export default class DocumentType extends Node {
         return clone;
     }
 }
+//# sourceMappingURL=DocumentType.js.map

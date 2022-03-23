@@ -14,3 +14,4 @@ define(["require", "exports"], function (require, exports) {
     }());
     exports.NodeJsFeature = NodeJsFeature;
 });
+//# sourceMappingURL=nodejs-feature.js.map

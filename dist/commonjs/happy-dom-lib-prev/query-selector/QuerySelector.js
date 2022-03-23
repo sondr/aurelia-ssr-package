@@ -1,8 +1,11 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var Node_1 = require("../nodes/node/Node");
-var SelectorItem_1 = require("./SelectorItem");
-var NodeListFactory_1 = require("../nodes/node/NodeListFactory");
+var Node_1 = __importDefault(require("../nodes/node/Node"));
+var SelectorItem_1 = __importDefault(require("./SelectorItem"));
+var NodeListFactory_1 = __importDefault(require("../nodes/node/NodeListFactory"));
 var SELECTOR_PART_REGEXP = /(\[[^\]]+\]|[a-zA-Z0-9-_.#"*:()\]]+)|([ ,>]+)/g;
 // The above one seem to work fine and is faster, but this one can be useful if more rules need to be added as it is more "correct".
 // Const SELECTOR_PART_REGEXP = /([a-zA-Z0-9-$.]+|\[[a-zA-Z0-9-]+\]|\[[a-zA-Z0-9$-~|^$*]+[ ]*=[ ]*"[^"]+"\])|([ ,]+)/g;
@@ -170,3 +173,4 @@ var QuerySelector = /** @class */ (function () {
     return QuerySelector;
 }());
 exports.default = QuerySelector;
+//# sourceMappingURL=QuerySelector.js.map

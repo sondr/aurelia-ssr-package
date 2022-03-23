@@ -57,3 +57,4 @@ export default class ClassList {
         return list.includes(className);
     }
 }
+//# sourceMappingURL=ClassList.js.map

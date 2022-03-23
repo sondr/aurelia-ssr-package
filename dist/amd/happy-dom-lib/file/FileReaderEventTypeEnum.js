@@ -12,3 +12,4 @@ define(["require", "exports"], function (require, exports) {
     })(FileReaderEventTypeEnum || (FileReaderEventTypeEnum = {}));
     exports.default = FileReaderEventTypeEnum;
 });
+//# sourceMappingURL=FileReaderEventTypeEnum.js.map

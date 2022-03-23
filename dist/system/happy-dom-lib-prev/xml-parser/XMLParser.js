@@ -235,3 +235,4 @@ System.register(["../config/SelfClosingElements", "../config/UnnestableElements"
         }
     };
 });
+//# sourceMappingURL=XMLParser.js.map

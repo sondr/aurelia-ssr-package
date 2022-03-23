@@ -25,3 +25,4 @@ export default class NodeListFactory {
         return nodes[index] || null;
     }
 }
+//# sourceMappingURL=NodeListFactory.js.map

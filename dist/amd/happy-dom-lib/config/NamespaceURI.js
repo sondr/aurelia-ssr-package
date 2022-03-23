@@ -7,3 +7,4 @@ define(["require", "exports"], function (require, exports) {
         mathML: 'http://www.w3.org/1998/Math/MathML'
     };
 });
+//# sourceMappingURL=NamespaceURI.js.map

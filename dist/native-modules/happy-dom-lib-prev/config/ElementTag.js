@@ -28,3 +28,4 @@ export default {
     stop: SVGElement,
     use: SVGElement
 };
+//# sourceMappingURL=ElementTag.js.map

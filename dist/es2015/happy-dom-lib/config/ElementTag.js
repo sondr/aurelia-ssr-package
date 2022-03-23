@@ -141,3 +141,4 @@ export default {
     VIDEO: HTMLElement,
     WBR: HTMLElement
 };
+//# sourceMappingURL=ElementTag.js.map

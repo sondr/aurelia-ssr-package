@@ -9,3 +9,4 @@ define(["require", "exports"], function (require, exports) {
     })(MutationTypeEnum || (MutationTypeEnum = {}));
     exports.default = MutationTypeEnum;
 });
+//# sourceMappingURL=MutationTypeEnum.js.map

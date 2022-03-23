@@ -92,3 +92,4 @@ System.register(["../exception/DOMException"], function (exports_1, context_1) {
         }
     };
 });
+//# sourceMappingURL=CustomElementRegistry.js.map

@@ -288,3 +288,4 @@ export default class SelectorItem {
         return attribute && attribute.value === value;
     }
 }
+//# sourceMappingURL=SelectorItem.js.map

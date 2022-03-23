@@ -1,6 +1,10 @@
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 define(["require", "exports", "../exception/DOMException"], function (require, exports, DOMException_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    DOMException_1 = __importDefault(DOMException_1);
     var ATTRIBUTE_REGEXP = /\[([a-zA-Z0-9-_]+)\]|\[([a-zA-Z0-9-_]+)([~|^$*]{0,1})[ ]*=[ ]*["']{0,1}([^"']+)["']{0,1}\]/g;
     var ATTRIBUTE_NAME_REGEXP = /[^a-zA-Z0-9-_$]/;
     var PSUEDO_REGEXP = /:([a-zA-Z-]+)\(([0-9n+-]+|odd|even)\)|:([a-zA-Z-]+)/g;
@@ -244,3 +248,4 @@ define(["require", "exports", "../exception/DOMException"], function (require, e
     }());
     exports.default = SelectorItem;
 });
+//# sourceMappingURL=SelectorItem.js.map

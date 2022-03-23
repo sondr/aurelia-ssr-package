@@ -26,3 +26,4 @@ var RelativeURL = /** @class */ (function () {
     return RelativeURL;
 }());
 export default RelativeURL;
+//# sourceMappingURL=RelativeURL.js.map

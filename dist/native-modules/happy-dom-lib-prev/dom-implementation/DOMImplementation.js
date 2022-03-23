@@ -40,3 +40,4 @@ var DOMImplementation = /** @class */ (function () {
     return DOMImplementation;
 }());
 export default DOMImplementation;
+//# sourceMappingURL=DOMImplementation.js.map

@@ -1,6 +1,10 @@
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 define(["require", "exports", "../element/Element"], function (require, exports, Element_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    Element_1 = __importDefault(Element_1);
     /**
      * Non Document Child node utility.
      */
@@ -37,3 +41,4 @@ define(["require", "exports", "../element/Element"], function (require, exports,
     }());
     exports.default = NonDocumentChildNodeUtility;
 });
+//# sourceMappingURL=NonDocumentChildNodeUtility.js.map

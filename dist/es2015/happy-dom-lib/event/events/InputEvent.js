@@ -23,3 +23,4 @@ export default class InputEvent extends UIEvent {
         }
     }
 }
+//# sourceMappingURL=InputEvent.js.map

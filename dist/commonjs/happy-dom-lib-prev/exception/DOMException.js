@@ -40,3 +40,4 @@ var DOMException = /** @class */ (function (_super) {
     return DOMException;
 }(Error));
 exports.default = DOMException;
+//# sourceMappingURL=DOMException.js.map

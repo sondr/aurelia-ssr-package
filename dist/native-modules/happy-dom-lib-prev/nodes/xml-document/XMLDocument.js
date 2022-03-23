@@ -25,3 +25,4 @@ var XMLDocument = /** @class */ (function (_super) {
     return XMLDocument;
 }(Document));
 export default XMLDocument;
+//# sourceMappingURL=XMLDocument.js.map

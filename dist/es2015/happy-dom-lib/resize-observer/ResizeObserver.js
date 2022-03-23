@@ -29,3 +29,4 @@ export default class ResizeObserver {
         // TODO: Not implemented
     }
 }
+//# sourceMappingURL=ResizeObserver.js.map

@@ -52,3 +52,4 @@ define(["require", "exports"], function (require, exports) {
     }());
     exports.default = Attr;
 });
+//# sourceMappingURL=Attr.js.map

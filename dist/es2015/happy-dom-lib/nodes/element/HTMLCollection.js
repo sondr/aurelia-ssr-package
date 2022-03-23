@@ -11,3 +11,4 @@ export default class HTMLCollection extends Array {
         return index >= 0 && this[index] ? this[index] : null;
     }
 }
+//# sourceMappingURL=HTMLCollection.js.map

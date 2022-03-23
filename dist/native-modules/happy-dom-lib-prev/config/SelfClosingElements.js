@@ -25,3 +25,4 @@ export default [
     'stop',
     'use'
 ];
+//# sourceMappingURL=SelfClosingElements.js.map

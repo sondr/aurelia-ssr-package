@@ -13,9 +13,18 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 define(["require", "exports", "../../event/Event", "../../exception/DOMException", "../../exception/DOMExceptionNameEnum", "../html-element/HTMLElement", "../html-input-element/HTMLInputElementSelectionDirectionEnum", "../html-input-element/HTMLInputElementSelectionModeEnum"], function (require, exports, Event_1, DOMException_1, DOMExceptionNameEnum_1, HTMLElement_1, HTMLInputElementSelectionDirectionEnum_1, HTMLInputElementSelectionModeEnum_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    Event_1 = __importDefault(Event_1);
+    DOMException_1 = __importDefault(DOMException_1);
+    DOMExceptionNameEnum_1 = __importDefault(DOMExceptionNameEnum_1);
+    HTMLElement_1 = __importDefault(HTMLElement_1);
+    HTMLInputElementSelectionDirectionEnum_1 = __importDefault(HTMLInputElementSelectionDirectionEnum_1);
+    HTMLInputElementSelectionModeEnum_1 = __importDefault(HTMLInputElementSelectionModeEnum_1);
     /**
      * HTML Text Area Element.
      *
@@ -529,3 +538,4 @@ define(["require", "exports", "../../event/Event", "../../exception/DOMException
     }(HTMLElement_1.default));
     exports.default = HTMLTextAreaElement;
 });
+//# sourceMappingURL=HTMLTextAreaElement.js.map

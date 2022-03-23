@@ -18,3 +18,4 @@ export default class DOMException extends Error {
         }
     }
 }
+//# sourceMappingURL=DOMException.js.map

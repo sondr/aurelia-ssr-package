@@ -875,3 +875,4 @@ export default class Element extends Node {
         }
     }
 }
+//# sourceMappingURL=Element.js.map

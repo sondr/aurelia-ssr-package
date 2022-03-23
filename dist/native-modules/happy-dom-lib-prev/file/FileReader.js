@@ -167,3 +167,4 @@ var FileReader = /** @class */ (function (_super) {
     return FileReader;
 }(EventTarget));
 export default FileReader;
+//# sourceMappingURL=FileReader.js.map

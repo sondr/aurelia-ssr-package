@@ -43,3 +43,4 @@ var StorageEvent = /** @class */ (function (_super) {
     return StorageEvent;
 }(Event));
 export default StorageEvent;
+//# sourceMappingURL=StorageEvent.js.map

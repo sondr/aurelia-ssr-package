@@ -824,3 +824,4 @@ export default class HTMLInputElement extends HTMLElement {
             this.type === 'password');
     }
 }
+//# sourceMappingURL=HTMLInputElement.js.map

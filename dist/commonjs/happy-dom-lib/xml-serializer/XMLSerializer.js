@@ -1,8 +1,11 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var Node_1 = require("../nodes/node/Node");
-var SelfClosingElements_1 = require("../config/SelfClosingElements");
-var UnclosedElements_1 = require("../config/UnclosedElements");
+var Node_1 = __importDefault(require("../nodes/node/Node"));
+var SelfClosingElements_1 = __importDefault(require("../config/SelfClosingElements"));
+var UnclosedElements_1 = __importDefault(require("../config/UnclosedElements"));
 var he_1 = require("he");
 /**
  * Utility for converting an element to string.
@@ -83,3 +86,4 @@ var XMLSerializer = /** @class */ (function () {
     return XMLSerializer;
 }());
 exports.default = XMLSerializer;
+//# sourceMappingURL=XMLSerializer.js.map

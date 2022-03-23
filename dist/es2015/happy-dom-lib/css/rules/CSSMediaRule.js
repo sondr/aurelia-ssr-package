@@ -31,3 +31,4 @@ export default class CSSMediaRule extends CSSRule {
         return this.media.mediaText;
     }
 }
+//# sourceMappingURL=CSSMediaRule.js.map

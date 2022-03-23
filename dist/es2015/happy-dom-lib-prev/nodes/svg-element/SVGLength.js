@@ -30,3 +30,4 @@ SVGLength.SVG_LENGTHTYPE_MM = 7;
 SVGLength.SVG_LENGTHTYPE_IN = 8;
 SVGLength.SVG_LENGTHTYPE_PT = 9;
 SVGLength.SVG_LENGTHTYPE_PC = 10;
+//# sourceMappingURL=SVGLength.js.map

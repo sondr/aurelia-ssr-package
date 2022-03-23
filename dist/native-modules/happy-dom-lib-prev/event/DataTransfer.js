@@ -13,3 +13,4 @@ var DataTransfer = /** @class */ (function () {
     return DataTransfer;
 }());
 export default DataTransfer;
+//# sourceMappingURL=DataTransfer.js.map

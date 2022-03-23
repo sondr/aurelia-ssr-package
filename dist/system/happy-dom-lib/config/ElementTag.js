@@ -180,3 +180,4 @@ System.register(["../nodes/html-element/HTMLElement", "../nodes/html-template-el
         }
     };
 });
+//# sourceMappingURL=ElementTag.js.map

@@ -28,3 +28,4 @@ var SVGAngle = /** @class */ (function () {
     return SVGAngle;
 }());
 exports.default = SVGAngle;
+//# sourceMappingURL=SVGAngle.js.map

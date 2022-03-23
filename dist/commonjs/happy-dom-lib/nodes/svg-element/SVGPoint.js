@@ -13,3 +13,4 @@ var SVGPoint = /** @class */ (function () {
     return SVGPoint;
 }());
 exports.default = SVGPoint;
+//# sourceMappingURL=SVGPoint.js.map

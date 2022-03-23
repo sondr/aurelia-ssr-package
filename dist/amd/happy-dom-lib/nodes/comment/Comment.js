@@ -13,9 +13,14 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 define(["require", "exports", "../node/Node", "../character-data/CharacterData"], function (require, exports, Node_1, CharacterData_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    Node_1 = __importDefault(Node_1);
+    CharacterData_1 = __importDefault(CharacterData_1);
     /**
      * Comment node.
      */
@@ -61,3 +66,4 @@ define(["require", "exports", "../node/Node", "../character-data/CharacterData"]
     }(CharacterData_1.default));
     exports.default = Comment;
 });
+//# sourceMappingURL=Comment.js.map

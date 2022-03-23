@@ -18,3 +18,4 @@ exports.default = {
     SHOW_DOCUMENT_FRAGMENT: 1024,
     SHOW_NOTATION: 2048
 };
+//# sourceMappingURL=NodeFilter.js.map

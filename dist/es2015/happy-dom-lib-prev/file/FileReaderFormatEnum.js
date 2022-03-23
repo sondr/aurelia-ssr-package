@@ -6,3 +6,4 @@ var FileReaderFormatEnum;
     FileReaderFormatEnum["text"] = "text";
 })(FileReaderFormatEnum || (FileReaderFormatEnum = {}));
 export default FileReaderFormatEnum;
+//# sourceMappingURL=FileReaderFormatEnum.js.map

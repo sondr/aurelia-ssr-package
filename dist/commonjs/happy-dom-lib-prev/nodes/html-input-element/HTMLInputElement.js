@@ -14,15 +14,18 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var HTMLElement_1 = require("../html-element/HTMLElement");
-var ValidityState_1 = require("./ValidityState");
-var DOMException_1 = require("../../exception/DOMException");
-var DOMExceptionNameEnum_1 = require("../../exception/DOMExceptionNameEnum");
-var Event_1 = require("../../event/Event");
-var HTMLInputElementValueSanitizer_1 = require("./HTMLInputElementValueSanitizer");
-var HTMLInputElementSelectionModeEnum_1 = require("./HTMLInputElementSelectionModeEnum");
-var HTMLInputElementSelectionDirectionEnum_1 = require("./HTMLInputElementSelectionDirectionEnum");
+var HTMLElement_1 = __importDefault(require("../html-element/HTMLElement"));
+var ValidityState_1 = __importDefault(require("./ValidityState"));
+var DOMException_1 = __importDefault(require("../../exception/DOMException"));
+var DOMExceptionNameEnum_1 = __importDefault(require("../../exception/DOMExceptionNameEnum"));
+var Event_1 = __importDefault(require("../../event/Event"));
+var HTMLInputElementValueSanitizer_1 = __importDefault(require("./HTMLInputElementValueSanitizer"));
+var HTMLInputElementSelectionModeEnum_1 = __importDefault(require("./HTMLInputElementSelectionModeEnum"));
+var HTMLInputElementSelectionDirectionEnum_1 = __importDefault(require("./HTMLInputElementSelectionDirectionEnum"));
 /**
  * HTML Input Element.
  *
@@ -994,3 +997,4 @@ var HTMLInputElement = /** @class */ (function (_super) {
     return HTMLInputElement;
 }(HTMLElement_1.default));
 exports.default = HTMLInputElement;
+//# sourceMappingURL=HTMLInputElement.js.map

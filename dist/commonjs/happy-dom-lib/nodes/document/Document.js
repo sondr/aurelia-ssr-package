@@ -23,28 +23,31 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
     }
     return to.concat(ar || Array.prototype.slice.call(from));
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var HTMLUnknownElement_1 = require("../html-unknown-element/HTMLUnknownElement");
-var Text_1 = require("../text/Text");
-var Comment_1 = require("../comment/Comment");
-var Node_1 = require("../node/Node");
-var TreeWalker_1 = require("../../tree-walker/TreeWalker");
-var DocumentFragment_1 = require("../document-fragment/DocumentFragment");
-var XMLParser_1 = require("../../xml-parser/XMLParser");
-var Event_1 = require("../../event/Event");
-var DOMImplementation_1 = require("../../dom-implementation/DOMImplementation");
-var ElementTag_1 = require("../../config/ElementTag");
-var Attr_1 = require("../../attribute/Attr");
-var NamespaceURI_1 = require("../../config/NamespaceURI");
-var DocumentType_1 = require("../document-type/DocumentType");
-var ParentNodeUtility_1 = require("../parent-node/ParentNodeUtility");
-var QuerySelector_1 = require("../../query-selector/QuerySelector");
-var DOMException_1 = require("../../exception/DOMException");
-var CookieUtility_1 = require("../../cookie/CookieUtility");
-var HTMLCollectionFactory_1 = require("../element/HTMLCollectionFactory");
-var DocumentReadyStateEnum_1 = require("./DocumentReadyStateEnum");
-var DocumentReadyStateManager_1 = require("./DocumentReadyStateManager");
-var Selection_1 = require("../../selection/Selection");
+var HTMLUnknownElement_1 = __importDefault(require("../html-unknown-element/HTMLUnknownElement"));
+var Text_1 = __importDefault(require("../text/Text"));
+var Comment_1 = __importDefault(require("../comment/Comment"));
+var Node_1 = __importDefault(require("../node/Node"));
+var TreeWalker_1 = __importDefault(require("../../tree-walker/TreeWalker"));
+var DocumentFragment_1 = __importDefault(require("../document-fragment/DocumentFragment"));
+var XMLParser_1 = __importDefault(require("../../xml-parser/XMLParser"));
+var Event_1 = __importDefault(require("../../event/Event"));
+var DOMImplementation_1 = __importDefault(require("../../dom-implementation/DOMImplementation"));
+var ElementTag_1 = __importDefault(require("../../config/ElementTag"));
+var Attr_1 = __importDefault(require("../../attribute/Attr"));
+var NamespaceURI_1 = __importDefault(require("../../config/NamespaceURI"));
+var DocumentType_1 = __importDefault(require("../document-type/DocumentType"));
+var ParentNodeUtility_1 = __importDefault(require("../parent-node/ParentNodeUtility"));
+var QuerySelector_1 = __importDefault(require("../../query-selector/QuerySelector"));
+var DOMException_1 = __importDefault(require("../../exception/DOMException"));
+var CookieUtility_1 = __importDefault(require("../../cookie/CookieUtility"));
+var HTMLCollectionFactory_1 = __importDefault(require("../element/HTMLCollectionFactory"));
+var DocumentReadyStateEnum_1 = __importDefault(require("./DocumentReadyStateEnum"));
+var DocumentReadyStateManager_1 = __importDefault(require("./DocumentReadyStateManager"));
+var Selection_1 = __importDefault(require("../../selection/Selection"));
 /**
  * Document.
  */
@@ -807,3 +810,4 @@ var Document = /** @class */ (function (_super) {
     return Document;
 }(Node_1.default));
 exports.default = Document;
+//# sourceMappingURL=Document.js.map

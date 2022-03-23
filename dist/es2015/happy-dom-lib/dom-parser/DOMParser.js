@@ -87,3 +87,4 @@ export default class DOMParser {
     }
 }
 DOMParser._ownerDocument = null;
+//# sourceMappingURL=DOMParser.js.map

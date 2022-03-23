@@ -1,6 +1,10 @@
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 define(["require", "exports", "./NodeFilter"], function (require, exports, NodeFilter_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    NodeFilter_1 = __importDefault(NodeFilter_1);
     exports.default = {
         /* ELEMENT_NODE */
         1: NodeFilter_1.default.SHOW_ELEMENT,
@@ -28,3 +32,4 @@ define(["require", "exports", "./NodeFilter"], function (require, exports, NodeF
         12: NodeFilter_1.default.SHOW_NOTATION
     };
 });
+//# sourceMappingURL=NodeFilterMask.js.map

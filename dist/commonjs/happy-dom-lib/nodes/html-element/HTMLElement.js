@@ -14,12 +14,15 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var Element_1 = require("../element/Element");
-var CSSStyleDeclaration_1 = require("../../css/CSSStyleDeclaration");
-var FocusEvent_1 = require("../../event/events/FocusEvent");
-var PointerEvent_1 = require("../../event/events/PointerEvent");
-var Node_1 = require("../node/Node");
+var Element_1 = __importDefault(require("../element/Element"));
+var CSSStyleDeclaration_1 = __importDefault(require("../../css/CSSStyleDeclaration"));
+var FocusEvent_1 = __importDefault(require("../../event/events/FocusEvent"));
+var PointerEvent_1 = __importDefault(require("../../event/events/PointerEvent"));
+var Node_1 = __importDefault(require("../node/Node"));
 /**
  * HTML Element.
  *
@@ -322,3 +325,4 @@ var HTMLElement = /** @class */ (function (_super) {
     return HTMLElement;
 }(Element_1.default));
 exports.default = HTMLElement;
+//# sourceMappingURL=HTMLElement.js.map

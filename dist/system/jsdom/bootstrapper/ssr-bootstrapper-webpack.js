@@ -74,3 +74,4 @@ System.register(["aurelia-framework", "aurelia-loader-webpack", "aurelia-binding
         }
     };
 });
+//# sourceMappingURL=ssr-bootstrapper-webpack.js.map

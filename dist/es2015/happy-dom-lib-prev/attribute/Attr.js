@@ -38,3 +38,4 @@ export default class Attr {
         return this.name ? this.name.split(':')[0] : null;
     }
 }
+//# sourceMappingURL=Attr.js.map

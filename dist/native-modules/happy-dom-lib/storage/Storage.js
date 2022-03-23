@@ -62,3 +62,4 @@ var Storage = /** @class */ (function () {
     return Storage;
 }());
 export default Storage;
+//# sourceMappingURL=Storage.js.map

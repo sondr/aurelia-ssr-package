@@ -54,3 +54,4 @@ System.register(["../Event"], function (exports_1, context_1) {
         }
     };
 });
+//# sourceMappingURL=ProgressEvent.js.map

@@ -197,3 +197,4 @@ var DOMTokenList = /** @class */ (function () {
     return DOMTokenList;
 }());
 export default DOMTokenList;
+//# sourceMappingURL=DOMTokenList.js.map

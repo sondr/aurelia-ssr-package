@@ -59,3 +59,4 @@ var Comment = /** @class */ (function (_super) {
     return Comment;
 }(CharacterData));
 export default Comment;
+//# sourceMappingURL=Comment.js.map

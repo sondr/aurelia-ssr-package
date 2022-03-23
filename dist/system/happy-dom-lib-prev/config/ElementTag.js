@@ -59,3 +59,4 @@ System.register(["../nodes/html-template-element/HTMLTemplateElement", "../nodes
         }
     };
 });
+//# sourceMappingURL=ElementTag.js.map

@@ -66,3 +66,4 @@ define(["require", "exports"], function (require, exports) {
     }());
     exports.default = Event;
 });
+//# sourceMappingURL=Event.js.map

@@ -70,3 +70,4 @@ export default class ShadowRoot extends DocumentFragment {
         return clone;
     }
 }
+//# sourceMappingURL=ShadowRoot.js.map

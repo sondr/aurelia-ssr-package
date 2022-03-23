@@ -1,7 +1,10 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var DocumentFragment_1 = require("../document-fragment/DocumentFragment");
-var DOMRect_1 = require("./DOMRect");
+var DocumentFragment_1 = __importDefault(require("../document-fragment/DocumentFragment"));
+var DOMRect_1 = __importDefault(require("./DOMRect"));
 /**
  * Range object.
  *
@@ -234,3 +237,4 @@ var Range = /** @class */ (function () {
     return Range;
 }());
 exports.default = Range;
+//# sourceMappingURL=Range.js.map

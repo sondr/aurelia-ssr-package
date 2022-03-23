@@ -21,3 +21,4 @@ export let aureliaKoaMiddleware = (renderOptions, initializationOptions) => {
         });
     };
 };
+//# sourceMappingURL=aurelia-middleware-koa.js.map

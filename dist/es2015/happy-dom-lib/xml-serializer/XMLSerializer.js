@@ -73,3 +73,4 @@ export default class XMLSerializer {
         return attributeString;
     }
 }
+//# sourceMappingURL=XMLSerializer.js.map

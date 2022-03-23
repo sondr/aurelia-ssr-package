@@ -13,9 +13,15 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 define(["require", "exports", "../document-fragment/DocumentFragment", "../../xml-parser/XMLParser", "../../xml-serializer/XMLSerializer"], function (require, exports, DocumentFragment_1, XMLParser_1, XMLSerializer_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    DocumentFragment_1 = __importDefault(DocumentFragment_1);
+    XMLParser_1 = __importDefault(XMLParser_1);
+    XMLSerializer_1 = __importDefault(XMLSerializer_1);
     /**
      * ShadowRoot.
      */
@@ -102,3 +108,4 @@ define(["require", "exports", "../document-fragment/DocumentFragment", "../../xm
     }(DocumentFragment_1.default));
     exports.default = ShadowRoot;
 });
+//# sourceMappingURL=ShadowRoot.js.map

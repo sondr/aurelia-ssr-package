@@ -14,3 +14,4 @@ export default function (html, transformerCtx, options) {
     return html;
 }
 ;
+//# sourceMappingURL=ssr-attributes.js.map

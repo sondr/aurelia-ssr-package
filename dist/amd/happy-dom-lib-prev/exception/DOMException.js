@@ -42,3 +42,4 @@ define(["require", "exports"], function (require, exports) {
     }(Error));
     exports.default = DOMException;
 });
+//# sourceMappingURL=DOMException.js.map

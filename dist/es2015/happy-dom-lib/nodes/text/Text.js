@@ -35,3 +35,4 @@ export default class Text extends CharacterData {
         return super.cloneNode(deep);
     }
 }
+//# sourceMappingURL=Text.js.map

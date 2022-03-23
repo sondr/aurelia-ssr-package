@@ -46,3 +46,4 @@ define(["require", "exports"], function (require, exports) {
     }());
     exports.default = SVGTransform;
 });
+//# sourceMappingURL=SVGTransform.js.map

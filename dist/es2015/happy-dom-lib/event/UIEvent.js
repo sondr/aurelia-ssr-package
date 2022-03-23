@@ -58,3 +58,4 @@ UIEvent.NONE = 0;
 UIEvent.CAPTURING_PHASE = 1;
 UIEvent.AT_TARGET = 2;
 UIEvent.BUBBLING_PHASE = 3;
+//# sourceMappingURL=UIEvent.js.map

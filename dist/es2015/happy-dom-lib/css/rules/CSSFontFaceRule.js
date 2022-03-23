@@ -8,3 +8,4 @@ export default class CSSFontFaceRule extends CSSRule {
         this.type = CSSRule.FONT_FACE_RULE;
     }
 }
+//# sourceMappingURL=CSSFontFaceRule.js.map

@@ -19,3 +19,4 @@ define(["require", "exports", "./utils"], function (require, exports, utils_1) {
     exports.default = default_1;
     ;
 });
+//# sourceMappingURL=template.js.map

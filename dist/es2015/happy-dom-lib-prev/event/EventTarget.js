@@ -56,3 +56,4 @@ export default class EventTarget {
         return !(event.cancelable && event.defaultPrevented);
     }
 }
+//# sourceMappingURL=EventTarget.js.map

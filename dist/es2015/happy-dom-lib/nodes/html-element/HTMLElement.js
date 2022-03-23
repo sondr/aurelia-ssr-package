@@ -264,3 +264,4 @@ export default class HTMLElement extends Element {
         return clone;
     }
 }
+//# sourceMappingURL=HTMLElement.js.map

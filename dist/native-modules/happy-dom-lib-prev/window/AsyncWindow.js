@@ -30,3 +30,4 @@ var AsyncWindow = /** @class */ (function (_super) {
     return AsyncWindow;
 }(Window));
 export default AsyncWindow;
+//# sourceMappingURL=AsyncWindow.js.map

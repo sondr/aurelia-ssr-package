@@ -1,6 +1,10 @@
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 define(["require", "exports", "../nodes/document-type/DocumentType"], function (require, exports, DocumentType_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    DocumentType_1 = __importDefault(DocumentType_1);
     /**
      * The DOMImplementation interface represents an object providing methods which are not dependent on any particular document. Such an object is returned by the.
      */
@@ -43,3 +47,4 @@ define(["require", "exports", "../nodes/document-type/DocumentType"], function (
     }());
     exports.default = DOMImplementation;
 });
+//# sourceMappingURL=DOMImplementation.js.map

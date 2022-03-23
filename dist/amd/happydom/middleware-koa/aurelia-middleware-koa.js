@@ -26,3 +26,4 @@ define(["require", "exports", "../ssr-engine/aurelia-ssr-engine"], function (req
     };
     exports.aureliaKoaMiddleware = aureliaKoaMiddleware;
 });
+//# sourceMappingURL=aurelia-middleware-koa.js.map

@@ -56,3 +56,4 @@ var PointerEvent = /** @class */ (function (_super) {
     return PointerEvent;
 }(MouseEvent));
 export default PointerEvent;
+//# sourceMappingURL=PointerEvent.js.map

@@ -618,3 +618,4 @@ var Window = /** @class */ (function (_super) {
     return Window;
 }(EventTarget));
 export default Window;
+//# sourceMappingURL=Window.js.map

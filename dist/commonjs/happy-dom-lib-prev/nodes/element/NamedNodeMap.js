@@ -46,3 +46,4 @@ var NamedNodeMap = /** @class */ (function () {
     return NamedNodeMap;
 }());
 exports.default = NamedNodeMap;
+//# sourceMappingURL=NamedNodeMap.js.map

@@ -181,3 +181,4 @@ export default class DOMTokenList {
         this.length = list.length;
     }
 }
+//# sourceMappingURL=DOMTokenList.js.map

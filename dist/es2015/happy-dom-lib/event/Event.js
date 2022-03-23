@@ -57,3 +57,4 @@ export default class Event {
         this._propagationStopped = true;
     }
 }
+//# sourceMappingURL=Event.js.map

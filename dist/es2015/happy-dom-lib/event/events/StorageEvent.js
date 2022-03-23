@@ -23,3 +23,4 @@ export default class StorageEvent extends Event {
         }
     }
 }
+//# sourceMappingURL=StorageEvent.js.map

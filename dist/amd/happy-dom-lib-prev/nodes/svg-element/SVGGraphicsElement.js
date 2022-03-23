@@ -13,9 +13,15 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 define(["require", "exports", "./SVGElement", "../element/DOMRect", "./DOMMatrix"], function (require, exports, SVGElement_1, DOMRect_1, DOMMatrix_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    SVGElement_1 = __importDefault(SVGElement_1);
+    DOMRect_1 = __importDefault(DOMRect_1);
+    DOMMatrix_1 = __importDefault(DOMMatrix_1);
     /**
      * SVG Graphics Element.
      *
@@ -56,3 +62,4 @@ define(["require", "exports", "./SVGElement", "../element/DOMRect", "./DOMMatrix
     }(SVGElement_1.default));
     exports.default = SVGGraphicsElement;
 });
+//# sourceMappingURL=SVGGraphicsElement.js.map

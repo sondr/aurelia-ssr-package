@@ -78,3 +78,4 @@ var CustomElementRegistry = /** @class */ (function () {
     return CustomElementRegistry;
 }());
 export default CustomElementRegistry;
+//# sourceMappingURL=CustomElementRegistry.js.map

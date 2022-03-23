@@ -68,3 +68,4 @@ System.register(["./URL"], function (exports_1, context_1) {
         }
     };
 });
+//# sourceMappingURL=Location.js.map

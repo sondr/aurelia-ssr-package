@@ -7,9 +7,15 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
     }
     return to.concat(ar || Array.prototype.slice.call(from));
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 define(["require", "exports", "../../query-selector/QuerySelector", "../../xml-parser/XMLParser", "../element/HTMLCollectionFactory"], function (require, exports, QuerySelector_1, XMLParser_1, HTMLCollectionFactory_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    QuerySelector_1 = __importDefault(QuerySelector_1);
+    XMLParser_1 = __importDefault(XMLParser_1);
+    HTMLCollectionFactory_1 = __importDefault(HTMLCollectionFactory_1);
     /**
      * Parent node utility.
      */
@@ -185,3 +191,4 @@ define(["require", "exports", "../../query-selector/QuerySelector", "../../xml-p
     }());
     exports.default = ParentNodeUtility;
 });
+//# sourceMappingURL=ParentNodeUtility.js.map

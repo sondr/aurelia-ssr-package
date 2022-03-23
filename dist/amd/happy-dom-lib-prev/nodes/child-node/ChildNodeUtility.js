@@ -1,6 +1,10 @@
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 define(["require", "exports", "../../xml-parser/XMLParser"], function (require, exports, XMLParser_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    XMLParser_1 = __importDefault(XMLParser_1);
     /**
      * Child node utility.
      */
@@ -118,3 +122,4 @@ define(["require", "exports", "../../xml-parser/XMLParser"], function (require, 
     }());
     exports.default = ChildNodeUtility;
 });
+//# sourceMappingURL=ChildNodeUtility.js.map

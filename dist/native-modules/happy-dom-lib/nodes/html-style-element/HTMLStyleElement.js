@@ -115,3 +115,4 @@ var HTMLStyleElement = /** @class */ (function (_super) {
     return HTMLStyleElement;
 }(HTMLElement));
 export default HTMLStyleElement;
+//# sourceMappingURL=HTMLStyleElement.js.map

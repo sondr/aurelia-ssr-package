@@ -29,3 +29,4 @@ var MimeType = /** @class */ (function () {
     return MimeType;
 }());
 exports.default = MimeType;
+//# sourceMappingURL=MimeType.js.map

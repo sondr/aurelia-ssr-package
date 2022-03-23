@@ -14,10 +14,13 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var CSSRule_1 = require("../CSSRule");
-var CSSStyleDeclaration_1 = require("../CSSStyleDeclaration");
-var CSSKeyframeRule_1 = require("./CSSKeyframeRule");
+var CSSRule_1 = __importDefault(require("../CSSRule"));
+var CSSStyleDeclaration_1 = __importDefault(require("../CSSStyleDeclaration"));
+var CSSKeyframeRule_1 = __importDefault(require("./CSSKeyframeRule"));
 var CSS_RULE_REGEXP = /([^{]+){([^}]+)}/;
 /**
  * CSSRule interface.
@@ -81,3 +84,4 @@ var CSSKeyframesRule = /** @class */ (function (_super) {
     return CSSKeyframesRule;
 }(CSSRule_1.default));
 exports.default = CSSKeyframesRule;
+//# sourceMappingURL=CSSKeyframesRule.js.map

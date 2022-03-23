@@ -106,3 +106,4 @@ var URL = /** @class */ (function () {
     return URL;
 }());
 exports.default = URL;
+//# sourceMappingURL=URL.js.map

@@ -17,7 +17,7 @@ export default class HTMLInputElement extends HTMLElement implements IHTMLInputE
     formAction: string;
     formMethod: string;
     formNoValidate: boolean;
-    _value: null;
+    _value: any;
     _height: number;
     _width: number;
     defaultChecked: boolean;

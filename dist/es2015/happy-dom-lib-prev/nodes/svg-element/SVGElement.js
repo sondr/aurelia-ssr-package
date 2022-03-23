@@ -43,3 +43,4 @@ export default class SVGElement extends Element {
         return dataset;
     }
 }
+//# sourceMappingURL=SVGElement.js.map

@@ -14,15 +14,18 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var SVGGraphicsElement_1 = require("./SVGGraphicsElement");
-var SVGRect_1 = require("./SVGRect");
-var SVGPoint_1 = require("./SVGPoint");
-var SVGLength_1 = require("./SVGLength");
-var SVGAngle_1 = require("./SVGAngle");
-var SVGNumber_1 = require("./SVGNumber");
-var SVGTransform_1 = require("./SVGTransform");
-var SVGAnimatedRect_1 = require("./SVGAnimatedRect");
+var SVGGraphicsElement_1 = __importDefault(require("./SVGGraphicsElement"));
+var SVGRect_1 = __importDefault(require("./SVGRect"));
+var SVGPoint_1 = __importDefault(require("./SVGPoint"));
+var SVGLength_1 = __importDefault(require("./SVGLength"));
+var SVGAngle_1 = __importDefault(require("./SVGAngle"));
+var SVGNumber_1 = __importDefault(require("./SVGNumber"));
+var SVGTransform_1 = __importDefault(require("./SVGTransform"));
+var SVGAnimatedRect_1 = __importDefault(require("./SVGAnimatedRect"));
 /**
  * SVGSVGElement.
  */
@@ -344,3 +347,4 @@ var SVGSVGElement = /** @class */ (function (_super) {
     return SVGSVGElement;
 }(SVGGraphicsElement_1.default));
 exports.default = SVGSVGElement;
+//# sourceMappingURL=SVGSVGElement.js.map

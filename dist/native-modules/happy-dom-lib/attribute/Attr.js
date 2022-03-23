@@ -48,3 +48,4 @@ var Attr = /** @class */ (function () {
     return Attr;
 }());
 export default Attr;
+//# sourceMappingURL=Attr.js.map

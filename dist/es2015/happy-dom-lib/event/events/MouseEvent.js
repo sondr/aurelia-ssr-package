@@ -43,3 +43,4 @@ export default class MouseEvent extends UIEvent {
         }
     }
 }
+//# sourceMappingURL=MouseEvent.js.map

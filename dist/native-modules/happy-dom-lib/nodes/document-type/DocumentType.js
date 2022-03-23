@@ -65,3 +65,4 @@ var DocumentType = /** @class */ (function (_super) {
     return DocumentType;
 }(Node));
 export default DocumentType;
+//# sourceMappingURL=DocumentType.js.map

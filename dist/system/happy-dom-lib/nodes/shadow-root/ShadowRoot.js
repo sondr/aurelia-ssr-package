@@ -118,3 +118,4 @@ System.register(["../document-fragment/DocumentFragment", "../../xml-parser/XMLP
         }
     };
 });
+//# sourceMappingURL=ShadowRoot.js.map

@@ -197,3 +197,4 @@ export default class HTMLFormElement extends HTMLElement {
         return super.cloneNode(deep);
     }
 }
+//# sourceMappingURL=HTMLFormElement.js.map

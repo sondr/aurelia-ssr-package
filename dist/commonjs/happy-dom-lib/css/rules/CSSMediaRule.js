@@ -14,9 +14,12 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var CSSRule_1 = require("../CSSRule");
-var MediaList_1 = require("../MediaList");
+var CSSRule_1 = __importDefault(require("../CSSRule"));
+var MediaList_1 = __importDefault(require("../MediaList"));
 /**
  * CSSRule interface.
  */
@@ -61,3 +64,4 @@ var CSSMediaRule = /** @class */ (function (_super) {
     return CSSMediaRule;
 }(CSSRule_1.default));
 exports.default = CSSMediaRule;
+//# sourceMappingURL=CSSMediaRule.js.map

@@ -25,3 +25,4 @@ export default class MimeType {
         return '[object MimeType]';
     }
 }
+//# sourceMappingURL=MimeType.js.map

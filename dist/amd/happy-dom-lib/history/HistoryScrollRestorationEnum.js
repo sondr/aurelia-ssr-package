@@ -8,3 +8,4 @@ define(["require", "exports"], function (require, exports) {
     })(HistoryScrollRestorationEnum || (HistoryScrollRestorationEnum = {}));
     exports.default = HistoryScrollRestorationEnum;
 });
+//# sourceMappingURL=HistoryScrollRestorationEnum.js.map

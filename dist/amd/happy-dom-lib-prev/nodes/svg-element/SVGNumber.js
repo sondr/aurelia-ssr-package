@@ -14,3 +14,4 @@ define(["require", "exports"], function (require, exports) {
     }());
     exports.default = SVGNumber;
 });
+//# sourceMappingURL=SVGNumber.js.map

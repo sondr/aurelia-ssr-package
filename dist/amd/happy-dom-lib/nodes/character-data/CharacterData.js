@@ -22,9 +22,18 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
     }
     return to.concat(ar || Array.prototype.slice.call(from));
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 define(["require", "exports", "../node/Node", "./CharacterDataUtility", "../child-node/NonDocumentChildNodeUtility", "../child-node/ChildNodeUtility", "../../mutation-observer/MutationRecord", "../../mutation-observer/MutationTypeEnum"], function (require, exports, Node_1, CharacterDataUtility_1, NonDocumentChildNodeUtility_1, ChildNodeUtility_1, MutationRecord_1, MutationTypeEnum_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    Node_1 = __importDefault(Node_1);
+    CharacterDataUtility_1 = __importDefault(CharacterDataUtility_1);
+    NonDocumentChildNodeUtility_1 = __importDefault(NonDocumentChildNodeUtility_1);
+    ChildNodeUtility_1 = __importDefault(ChildNodeUtility_1);
+    MutationRecord_1 = __importDefault(MutationRecord_1);
+    MutationTypeEnum_1 = __importDefault(MutationTypeEnum_1);
     /**
      * Character data base class.
      *
@@ -260,3 +269,4 @@ define(["require", "exports", "../node/Node", "./CharacterDataUtility", "../chil
     }(Node_1.default));
     exports.default = CharacterData;
 });
+//# sourceMappingURL=CharacterData.js.map

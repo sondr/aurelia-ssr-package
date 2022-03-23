@@ -6,3 +6,4 @@ var DOMExceptionNameEnum;
     DOMExceptionNameEnum["hierarchyRequestError"] = "HierarchyRequestError";
 })(DOMExceptionNameEnum || (DOMExceptionNameEnum = {}));
 export default DOMExceptionNameEnum;
+//# sourceMappingURL=DOMExceptionNameEnum.js.map

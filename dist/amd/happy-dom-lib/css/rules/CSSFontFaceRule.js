@@ -13,9 +13,13 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 define(["require", "exports", "../CSSRule"], function (require, exports, CSSRule_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    CSSRule_1 = __importDefault(CSSRule_1);
     /**
      * CSSRule interface.
      */
@@ -30,3 +34,4 @@ define(["require", "exports", "../CSSRule"], function (require, exports, CSSRule
     }(CSSRule_1.default));
     exports.default = CSSFontFaceRule;
 });
+//# sourceMappingURL=CSSFontFaceRule.js.map

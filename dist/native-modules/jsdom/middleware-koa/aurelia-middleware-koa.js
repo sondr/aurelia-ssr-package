@@ -21,3 +21,4 @@ export var aureliaKoaMiddleware = function (renderOptions, initializationOptions
         });
     };
 };
+//# sourceMappingURL=aurelia-middleware-koa.js.map

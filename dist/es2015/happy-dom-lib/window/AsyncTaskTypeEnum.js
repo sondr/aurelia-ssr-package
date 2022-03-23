@@ -4,3 +4,4 @@ var AsyncTaskTypeEnum;
     AsyncTaskTypeEnum["fetch"] = "fetch";
 })(AsyncTaskTypeEnum || (AsyncTaskTypeEnum = {}));
 export default AsyncTaskTypeEnum;
+//# sourceMappingURL=AsyncTaskTypeEnum.js.map

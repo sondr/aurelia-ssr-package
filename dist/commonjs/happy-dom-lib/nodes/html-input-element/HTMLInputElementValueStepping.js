@@ -1,6 +1,9 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var DOMException_1 = require("../../exception/DOMException");
+var DOMException_1 = __importDefault(require("../../exception/DOMException"));
 /**
  * HTML input element value stepping.
  */
@@ -35,3 +38,4 @@ var HTMLInputElementValueStepping = /** @class */ (function () {
     return HTMLInputElementValueStepping;
 }());
 exports.default = HTMLInputElementValueStepping;
+//# sourceMappingURL=HTMLInputElementValueStepping.js.map

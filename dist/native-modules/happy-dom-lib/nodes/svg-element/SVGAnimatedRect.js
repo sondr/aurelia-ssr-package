@@ -12,3 +12,4 @@ var SVGAnimatedRect = /** @class */ (function () {
     return SVGAnimatedRect;
 }());
 export default SVGAnimatedRect;
+//# sourceMappingURL=SVGAnimatedRect.js.map

@@ -40,3 +40,4 @@ SVGTransform.SVG_TRANSFORM_SCALE = 3;
 SVGTransform.SVG_TRANSFORM_ROTATE = 4;
 SVGTransform.SVG_TRANSFORM_SKEWX = 5;
 SVGTransform.SVG_TRANSFORM_SKEWY = 6;
+//# sourceMappingURL=SVGTransform.js.map

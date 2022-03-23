@@ -24,3 +24,4 @@ SVGAngle.SVG_ANGLETYPE_UNSPECIFIED = 'unspecified';
 SVGAngle.SVG_ANGLETYPE_DEG = '0deg';
 SVGAngle.SVG_ANGLETYPE_RAD = '0rad';
 SVGAngle.SVG_ANGLETYPE_GRAD = '0grad';
+//# sourceMappingURL=SVGAngle.js.map

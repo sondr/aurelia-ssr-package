@@ -5,3 +5,4 @@ var HTMLInputElementSelectionDirectionEnum;
     HTMLInputElementSelectionDirectionEnum["backward"] = "backward";
 })(HTMLInputElementSelectionDirectionEnum || (HTMLInputElementSelectionDirectionEnum = {}));
 export default HTMLInputElementSelectionDirectionEnum;
+//# sourceMappingURL=HTMLInputElementSelectionDirectionEnum.js.map

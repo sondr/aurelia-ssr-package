@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import CustomElementRegistry from '../custom-element/CustomElementRegistry';
 import Document from '../nodes/document/Document';
 import HTMLDocument from '../nodes/html-document/HTMLDocument';

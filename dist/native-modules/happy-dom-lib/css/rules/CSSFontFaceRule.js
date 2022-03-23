@@ -27,3 +27,4 @@ var CSSFontFaceRule = /** @class */ (function (_super) {
     return CSSFontFaceRule;
 }(CSSRule));
 export default CSSFontFaceRule;
+//# sourceMappingURL=CSSFontFaceRule.js.map

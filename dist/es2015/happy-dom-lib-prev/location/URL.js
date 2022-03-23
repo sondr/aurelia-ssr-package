@@ -90,3 +90,4 @@ export default class URL {
         return this.hostname + this.port;
     }
 }
+//# sourceMappingURL=URL.js.map

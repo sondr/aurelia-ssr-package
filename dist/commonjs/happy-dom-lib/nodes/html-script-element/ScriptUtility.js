@@ -35,10 +35,13 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var Event_1 = require("../../event/Event");
-var ErrorEvent_1 = require("../../event/events/ErrorEvent");
-var ResourceFetcher_1 = require("../../fetch/ResourceFetcher");
+var Event_1 = __importDefault(require("../../event/Event"));
+var ErrorEvent_1 = __importDefault(require("../../event/events/ErrorEvent"));
+var ResourceFetcher_1 = __importDefault(require("../../fetch/ResourceFetcher"));
 /**
  * Helper class for getting the URL relative to a Location object.
  */
@@ -130,3 +133,4 @@ var ScriptUtility = /** @class */ (function () {
     return ScriptUtility;
 }());
 exports.default = ScriptUtility;
+//# sourceMappingURL=ScriptUtility.js.map

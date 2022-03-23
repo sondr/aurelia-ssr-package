@@ -38,3 +38,4 @@ System.register(["../document/Document"], function (exports_1, context_1) {
         }
     };
 });
+//# sourceMappingURL=XMLDocument.js.map

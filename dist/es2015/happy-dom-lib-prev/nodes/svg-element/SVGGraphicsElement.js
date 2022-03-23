@@ -36,3 +36,4 @@ export default class SVGGraphicsElement extends SVGElement {
         return new DOMMatrix();
     }
 }
+//# sourceMappingURL=SVGGraphicsElement.js.map

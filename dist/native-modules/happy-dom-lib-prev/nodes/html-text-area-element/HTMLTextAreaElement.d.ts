@@ -11,9 +11,9 @@ import IHTMLTextAreaElement from './IHTMLTextAreaElement';
  */
 export default class HTMLTextAreaElement extends HTMLElement implements IHTMLTextAreaElement {
     readonly type = "textarea";
-    _value: null;
-    _selectionStart: null;
-    _selectionEnd: null;
+    _value: any;
+    _selectionStart: any;
+    _selectionEnd: any;
     _selectionDirection: HTMLInputElementSelectionDirectionEnum;
     defaultValue: string;
     /**

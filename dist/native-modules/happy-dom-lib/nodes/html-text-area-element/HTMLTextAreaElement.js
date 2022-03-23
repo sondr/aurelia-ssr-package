@@ -531,3 +531,4 @@ var HTMLTextAreaElement = /** @class */ (function (_super) {
     return HTMLTextAreaElement;
 }(HTMLElement));
 export default HTMLTextAreaElement;
+//# sourceMappingURL=HTMLTextAreaElement.js.map

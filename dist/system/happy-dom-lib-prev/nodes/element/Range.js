@@ -247,3 +247,4 @@ System.register(["../document-fragment/DocumentFragment", "./DOMRect"], function
         }
     };
 });
+//# sourceMappingURL=Range.js.map

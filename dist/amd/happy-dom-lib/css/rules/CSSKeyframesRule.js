@@ -13,9 +13,15 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 define(["require", "exports", "../CSSRule", "../CSSStyleDeclaration", "./CSSKeyframeRule"], function (require, exports, CSSRule_1, CSSStyleDeclaration_1, CSSKeyframeRule_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    CSSRule_1 = __importDefault(CSSRule_1);
+    CSSStyleDeclaration_1 = __importDefault(CSSStyleDeclaration_1);
+    CSSKeyframeRule_1 = __importDefault(CSSKeyframeRule_1);
     var CSS_RULE_REGEXP = /([^{]+){([^}]+)}/;
     /**
      * CSSRule interface.
@@ -80,3 +86,4 @@ define(["require", "exports", "../CSSRule", "../CSSStyleDeclaration", "./CSSKeyf
     }(CSSRule_1.default));
     exports.default = CSSKeyframesRule;
 });
+//# sourceMappingURL=CSSKeyframesRule.js.map

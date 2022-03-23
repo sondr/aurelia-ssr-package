@@ -4,3 +4,4 @@ import Document from '../document/Document';
  */
 export default class XMLDocument extends Document {
 }
+//# sourceMappingURL=XMLDocument.js.map

@@ -14,8 +14,11 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var Window_1 = require("./Window");
+var Window_1 = __importDefault(require("./Window"));
 /**
  * The async Window makes it possible to wait for asyncrounous tasks to complete by calling the method whenAsyncComplete(). It also adds support for the method fetch().
  */
@@ -32,3 +35,4 @@ var AsyncWindow = /** @class */ (function (_super) {
     return AsyncWindow;
 }(Window_1.default));
 exports.default = AsyncWindow;
+//# sourceMappingURL=AsyncWindow.js.map

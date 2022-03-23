@@ -11,3 +11,4 @@ export default class NodeList extends Array {
         return index >= 0 && this[index] ? this[index] : null;
     }
 }
+//# sourceMappingURL=NodeList.js.map

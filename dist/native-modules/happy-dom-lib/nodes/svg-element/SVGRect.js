@@ -13,3 +13,4 @@ var SVGRect = /** @class */ (function () {
     return SVGRect;
 }());
 export default SVGRect;
+//# sourceMappingURL=SVGRect.js.map

@@ -16,3 +16,4 @@ export default class MutationRecord {
         this.oldValue = null;
     }
 }
+//# sourceMappingURL=MutationRecord.js.map

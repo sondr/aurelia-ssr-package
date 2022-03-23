@@ -29,3 +29,4 @@ var HTMLCollectionFactory = /** @class */ (function () {
     return HTMLCollectionFactory;
 }());
 export default HTMLCollectionFactory;
+//# sourceMappingURL=HTMLCollectionFactory.js.map

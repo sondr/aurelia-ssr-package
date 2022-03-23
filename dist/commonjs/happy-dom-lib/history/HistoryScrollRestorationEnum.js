@@ -6,3 +6,4 @@ var HistoryScrollRestorationEnum;
     HistoryScrollRestorationEnum["manual"] = "manual";
 })(HistoryScrollRestorationEnum || (HistoryScrollRestorationEnum = {}));
 exports.default = HistoryScrollRestorationEnum;
+//# sourceMappingURL=HistoryScrollRestorationEnum.js.map

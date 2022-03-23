@@ -78,3 +78,4 @@ System.register(["../node/Node"], function (exports_1, context_1) {
         }
     };
 });
+//# sourceMappingURL=DocumentType.js.map

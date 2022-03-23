@@ -18,3 +18,4 @@ export default class CSSStyleRule extends CSSRule {
         return `${this.selectorText} { ${this.style.cssText} }`;
     }
 }
+//# sourceMappingURL=CSSStyleRule.js.map

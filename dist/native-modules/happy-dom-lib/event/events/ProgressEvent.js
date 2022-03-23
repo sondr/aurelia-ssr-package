@@ -41,3 +41,4 @@ var ProgressEvent = /** @class */ (function (_super) {
     return ProgressEvent;
 }(Event));
 export default ProgressEvent;
+//# sourceMappingURL=ProgressEvent.js.map

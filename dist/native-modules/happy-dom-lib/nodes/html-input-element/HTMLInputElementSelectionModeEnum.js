@@ -6,3 +6,4 @@ var HTMLInputElementSelectionModeEnum;
     HTMLInputElementSelectionModeEnum["end"] = "end";
 })(HTMLInputElementSelectionModeEnum || (HTMLInputElementSelectionModeEnum = {}));
 export default HTMLInputElementSelectionModeEnum;
+//# sourceMappingURL=HTMLInputElementSelectionModeEnum.js.map

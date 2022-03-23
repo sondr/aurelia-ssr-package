@@ -13,9 +13,13 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 define(["require", "exports", "../node/Node"], function (require, exports, Node_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    Node_1 = __importDefault(Node_1);
     /**
      * DocumentType.
      */
@@ -68,3 +72,4 @@ define(["require", "exports", "../node/Node"], function (require, exports, Node_
     }(Node_1.default));
     exports.default = DocumentType;
 });
+//# sourceMappingURL=DocumentType.js.map

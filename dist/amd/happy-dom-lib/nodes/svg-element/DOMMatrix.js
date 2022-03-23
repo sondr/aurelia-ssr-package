@@ -17,3 +17,4 @@ define(["require", "exports"], function (require, exports) {
     }());
     exports.default = DOMMatrix;
 });
+//# sourceMappingURL=DOMMatrix.js.map

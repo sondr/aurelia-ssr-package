@@ -43,3 +43,4 @@ var Image = /** @class */ (function (_super) {
     return Image;
 }(HTMLImageElement));
 export default Image;
+//# sourceMappingURL=Image.js.map

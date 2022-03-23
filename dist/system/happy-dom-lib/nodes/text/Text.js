@@ -74,3 +74,4 @@ System.register(["../node/Node", "../character-data/CharacterData"], function (e
         }
     };
 });
+//# sourceMappingURL=Text.js.map

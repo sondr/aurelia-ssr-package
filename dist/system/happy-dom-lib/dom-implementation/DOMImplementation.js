@@ -53,3 +53,4 @@ System.register(["../nodes/document-type/DocumentType"], function (exports_1, co
         }
     };
 });
+//# sourceMappingURL=DOMImplementation.js.map

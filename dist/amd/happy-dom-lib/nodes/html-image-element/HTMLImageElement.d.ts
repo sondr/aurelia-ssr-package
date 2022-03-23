@@ -11,7 +11,7 @@ export default class HTMLImageElement extends HTMLElement implements IHTMLImageE
     readonly complete = false;
     readonly naturalHeight = 0;
     readonly naturalWidth = 0;
-    crossOrigin: null;
+    crossOrigin: any;
     decoding: string;
     loading: string;
     readonly x = 0;

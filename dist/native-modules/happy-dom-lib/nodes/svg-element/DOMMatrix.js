@@ -13,3 +13,4 @@ var DOMMatrix = /** @class */ (function () {
     return DOMMatrix;
 }());
 export default DOMMatrix;
+//# sourceMappingURL=DOMMatrix.js.map

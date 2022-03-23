@@ -9,3 +9,4 @@ Object.getPropertyDescriptor = function (subject, name) {
     }
     return pd;
 };
+//# sourceMappingURL=property-descriptor.js.map

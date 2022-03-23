@@ -13,9 +13,14 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 define(["require", "exports", "../html-element/HTMLElement", "./ScriptUtility"], function (require, exports, HTMLElement_1, ScriptUtility_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    HTMLElement_1 = __importDefault(HTMLElement_1);
+    ScriptUtility_1 = __importDefault(ScriptUtility_1);
     /**
      * HTML Script Element.
      *
@@ -231,3 +236,4 @@ define(["require", "exports", "../html-element/HTMLElement", "./ScriptUtility"],
     }(HTMLElement_1.default));
     exports.default = HTMLScriptElement;
 });
+//# sourceMappingURL=HTMLScriptElement.js.map

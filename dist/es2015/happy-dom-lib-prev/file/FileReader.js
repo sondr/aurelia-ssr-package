@@ -145,3 +145,4 @@ export default class FileReader extends EventTarget {
     }
 }
 FileReader._ownerDocument = null;
+//# sourceMappingURL=FileReader.js.map

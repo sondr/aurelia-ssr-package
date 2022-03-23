@@ -1,32 +1,38 @@
 {
   "compilerOptions": {
-    "module": "amd",
-    "moduleResolution": "node",
-    "target": "es5",
-    "lib": [
-      "es2017",
-      "dom"
-    ],
-    "outDir": "dist/amd",
-    "noImplicitAny": true,
-    "allowUnreachableCode": false,
-    "allowUnusedLabels": false,
-    "noUnusedLocals": true,
-    "noUnusedParameters": false,
-    "noImplicitReturns": true,
-    "strictNullChecks": true,
-    "declaration": true,
-    "forceConsistentCasingInFileNames": true,
-    "experimentalDecorators": true,
-    "noEmitHelpers": false,
-    "stripInternal": true,
-    "skipLibCheck": true
+    "outDir": "dist",
+		"rootDir": "src",
+		"tsBuildInfoFile": "tmp/.tsbuildinfo",
+		"target": "es5",
+		"declaration": true,
+		"module": "CommonJS",
+		"moduleResolution": "node",
+		"esModuleInterop": true,
+		"experimentalDecorators": true,
+		"allowSyntheticDefaultImports": true,
+		"resolveJsonModule": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"removeComments": false,
+		"preserveConstEnums": true,
+		"sourceMap": true,
+		"skipLibCheck": true,
+		"baseUrl": ".",
+		"composite": true,
+		"incremental": true,
+		"types": [
+			"node"
+		],
+		"lib": [
+      "DOM",
+			"es2015",
+			"es2016",
+			"es2017"
+		]
   },
-  "exclude": [
-    ".vscode",
-    "dist",
-    "doc",
-    "node_modules",
-    "test"
+  "include": [
+    "@types/node",
+    "src",
+    "src/**/*.json"
   ]
 }

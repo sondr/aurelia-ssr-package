@@ -85,3 +85,4 @@ System.register(["./MimeTypeArray", "./PluginArray"], function (exports_1, conte
         }
     };
 });
+//# sourceMappingURL=Navigator.js.map

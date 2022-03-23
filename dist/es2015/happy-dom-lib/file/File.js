@@ -25,3 +25,4 @@ export default class File extends Blob {
         this.lastModified = options && options.lastModified ? options.lastModified : Date.now();
     }
 }
+//# sourceMappingURL=File.js.map

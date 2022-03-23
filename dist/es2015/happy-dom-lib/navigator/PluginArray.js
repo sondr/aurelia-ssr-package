@@ -47,3 +47,4 @@ export default class PluginArray {
         return '[object PluginArray]';
     }
 }
+//# sourceMappingURL=PluginArray.js.map

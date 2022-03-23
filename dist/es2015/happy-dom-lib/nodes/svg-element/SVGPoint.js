@@ -9,3 +9,4 @@ export default class SVGPoint {
         this.y = 0;
     }
 }
+//# sourceMappingURL=SVGPoint.js.map

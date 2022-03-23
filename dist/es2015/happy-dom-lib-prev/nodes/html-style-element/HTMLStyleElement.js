@@ -74,3 +74,4 @@ export default class HTMLStyleElement extends HTMLElement {
         }
     }
 }
+//# sourceMappingURL=HTMLStyleElement.js.map

@@ -196,3 +196,4 @@ System.register(["whatwg-mimetype", "whatwg-encoding", "../event/events/Progress
         }
     };
 });
+//# sourceMappingURL=FileReader.js.map

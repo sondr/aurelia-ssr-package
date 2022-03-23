@@ -206,3 +206,4 @@ export default class Range {
         return false;
     }
 }
+//# sourceMappingURL=Range.js.map

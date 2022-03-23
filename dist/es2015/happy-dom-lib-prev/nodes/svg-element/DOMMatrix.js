@@ -11,3 +11,4 @@ export default class DOMMatrix {
         this.isIdentity = false;
     }
 }
+//# sourceMappingURL=DOMMatrix.js.map

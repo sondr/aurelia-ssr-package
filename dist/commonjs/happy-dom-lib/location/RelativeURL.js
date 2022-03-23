@@ -28,3 +28,4 @@ var RelativeURL = /** @class */ (function () {
     return RelativeURL;
 }());
 exports.default = RelativeURL;
+//# sourceMappingURL=RelativeURL.js.map

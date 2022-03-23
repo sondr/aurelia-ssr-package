@@ -106,3 +106,4 @@ function reset(window) {
     }
 }
 exports.reset = reset;
+//# sourceMappingURL=index.js.map

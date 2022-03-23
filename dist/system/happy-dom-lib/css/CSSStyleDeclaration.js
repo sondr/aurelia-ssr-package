@@ -6137,3 +6137,4 @@ System.register(["../attribute/Attr"], function (exports_1, context_1) {
         }
     };
 });
+//# sourceMappingURL=CSSStyleDeclaration.js.map

@@ -13,9 +13,17 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 define(["require", "exports", "../../event/EventTarget", "../../mutation-observer/MutationRecord", "../../mutation-observer/MutationTypeEnum", "../../exception/DOMException", "./NodeListFactory"], function (require, exports, EventTarget_1, MutationRecord_1, MutationTypeEnum_1, DOMException_1, NodeListFactory_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    EventTarget_1 = __importDefault(EventTarget_1);
+    MutationRecord_1 = __importDefault(MutationRecord_1);
+    MutationTypeEnum_1 = __importDefault(MutationTypeEnum_1);
+    DOMException_1 = __importDefault(DOMException_1);
+    NodeListFactory_1 = __importDefault(NodeListFactory_1);
     /**
      * Node.
      */
@@ -476,3 +484,4 @@ define(["require", "exports", "../../event/EventTarget", "../../mutation-observe
     }(EventTarget_1.default));
     exports.default = Node;
 });
+//# sourceMappingURL=Node.js.map

@@ -81,3 +81,4 @@ var XMLSerializer = /** @class */ (function () {
     return XMLSerializer;
 }());
 export default XMLSerializer;
+//# sourceMappingURL=XMLSerializer.js.map

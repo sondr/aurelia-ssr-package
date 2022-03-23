@@ -20,3 +20,4 @@ export function transform(transformerCtx, options) {
     }
     return html;
 }
+//# sourceMappingURL=index.js.map

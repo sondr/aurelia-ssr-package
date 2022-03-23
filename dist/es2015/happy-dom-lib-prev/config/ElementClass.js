@@ -84,3 +84,4 @@ export default {
     SVGSVGElement: SVGSVGElement,
     SVGElement: SVGElement
 };
+//# sourceMappingURL=ElementClass.js.map

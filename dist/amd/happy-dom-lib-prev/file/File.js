@@ -13,9 +13,13 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 define(["require", "exports", "./Blob"], function (require, exports, Blob_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    Blob_1 = __importDefault(Blob_1);
     /**
      * Reference:
      * https://developer.mozilla.org/en-US/docs/Web/API/File.
@@ -47,3 +51,4 @@ define(["require", "exports", "./Blob"], function (require, exports, Blob_1) {
     }(Blob_1.default));
     exports.default = File;
 });
+//# sourceMappingURL=File.js.map

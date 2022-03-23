@@ -121,3 +121,4 @@ var SVGElement = /** @class */ (function (_super) {
     return SVGElement;
 }(Element));
 export default SVGElement;
+//# sourceMappingURL=SVGElement.js.map

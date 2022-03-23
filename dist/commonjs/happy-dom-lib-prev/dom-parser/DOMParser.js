@@ -1,11 +1,14 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var XMLParser_1 = require("../xml-parser/XMLParser");
-var Node_1 = require("../nodes/node/Node");
-var DOMException_1 = require("../exception/DOMException");
-var HTMLDocument_1 = require("../nodes/html-document/HTMLDocument");
-var XMLDocument_1 = require("../nodes/xml-document/XMLDocument");
-var SVGDocument_1 = require("../nodes/svg-document/SVGDocument");
+var XMLParser_1 = __importDefault(require("../xml-parser/XMLParser"));
+var Node_1 = __importDefault(require("../nodes/node/Node"));
+var DOMException_1 = __importDefault(require("../exception/DOMException"));
+var HTMLDocument_1 = __importDefault(require("../nodes/html-document/HTMLDocument"));
+var XMLDocument_1 = __importDefault(require("../nodes/xml-document/XMLDocument"));
+var SVGDocument_1 = __importDefault(require("../nodes/svg-document/SVGDocument"));
 /**
  * DOM parser.
  *
@@ -96,3 +99,4 @@ var DOMParser = /** @class */ (function () {
     return DOMParser;
 }());
 exports.default = DOMParser;
+//# sourceMappingURL=DOMParser.js.map

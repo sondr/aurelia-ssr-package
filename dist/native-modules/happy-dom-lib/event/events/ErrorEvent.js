@@ -45,3 +45,4 @@ var ErrorEvent = /** @class */ (function (_super) {
     return ErrorEvent;
 }(UIEvent));
 export default ErrorEvent;
+//# sourceMappingURL=ErrorEvent.js.map

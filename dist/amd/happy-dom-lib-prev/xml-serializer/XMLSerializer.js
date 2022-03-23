@@ -1,6 +1,12 @@
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 define(["require", "exports", "../nodes/node/Node", "../config/SelfClosingElements", "../config/UnclosedElements", "he"], function (require, exports, Node_1, SelfClosingElements_1, UnclosedElements_1, he_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
+    Node_1 = __importDefault(Node_1);
+    SelfClosingElements_1 = __importDefault(SelfClosingElements_1);
+    UnclosedElements_1 = __importDefault(UnclosedElements_1);
     /**
      * Utility for converting an element to string.
      *
@@ -74,3 +80,4 @@ define(["require", "exports", "../nodes/node/Node", "../config/SelfClosingElemen
     }());
     exports.default = XMLSerializer;
 });
+//# sourceMappingURL=XMLSerializer.js.map

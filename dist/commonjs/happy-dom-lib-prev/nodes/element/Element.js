@@ -23,26 +23,29 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
     }
     return to.concat(ar || Array.prototype.slice.call(from));
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var Node_1 = require("../node/Node");
-var ShadowRoot_1 = require("../shadow-root/ShadowRoot");
-var Attr_1 = require("../../attribute/Attr");
-var NamedNodeMap_1 = require("./NamedNodeMap");
-var DOMRect_1 = require("./DOMRect");
-var Range_1 = require("./Range");
-var ClassList_1 = require("./ClassList");
-var QuerySelector_1 = require("../../query-selector/QuerySelector");
-var SelectorItem_1 = require("../../query-selector/SelectorItem");
-var MutationRecord_1 = require("../../mutation-observer/MutationRecord");
-var MutationTypeEnum_1 = require("../../mutation-observer/MutationTypeEnum");
-var NamespaceURI_1 = require("../../config/NamespaceURI");
-var XMLParser_1 = require("../../xml-parser/XMLParser");
-var XMLSerializer_1 = require("../../xml-serializer/XMLSerializer");
-var ChildNodeUtility_1 = require("../child-node/ChildNodeUtility");
-var ParentNodeUtility_1 = require("../parent-node/ParentNodeUtility");
-var NonDocumentChildNodeUtility_1 = require("../child-node/NonDocumentChildNodeUtility");
-var DOMException_1 = require("../../exception/DOMException");
-var HTMLCollectionFactory_1 = require("./HTMLCollectionFactory");
+var Node_1 = __importDefault(require("../node/Node"));
+var ShadowRoot_1 = __importDefault(require("../shadow-root/ShadowRoot"));
+var Attr_1 = __importDefault(require("../../attribute/Attr"));
+var NamedNodeMap_1 = __importDefault(require("./NamedNodeMap"));
+var DOMRect_1 = __importDefault(require("./DOMRect"));
+var Range_1 = __importDefault(require("./Range"));
+var ClassList_1 = __importDefault(require("./ClassList"));
+var QuerySelector_1 = __importDefault(require("../../query-selector/QuerySelector"));
+var SelectorItem_1 = __importDefault(require("../../query-selector/SelectorItem"));
+var MutationRecord_1 = __importDefault(require("../../mutation-observer/MutationRecord"));
+var MutationTypeEnum_1 = __importDefault(require("../../mutation-observer/MutationTypeEnum"));
+var NamespaceURI_1 = __importDefault(require("../../config/NamespaceURI"));
+var XMLParser_1 = __importDefault(require("../../xml-parser/XMLParser"));
+var XMLSerializer_1 = __importDefault(require("../../xml-serializer/XMLSerializer"));
+var ChildNodeUtility_1 = __importDefault(require("../child-node/ChildNodeUtility"));
+var ParentNodeUtility_1 = __importDefault(require("../parent-node/ParentNodeUtility"));
+var NonDocumentChildNodeUtility_1 = __importDefault(require("../child-node/NonDocumentChildNodeUtility"));
+var DOMException_1 = __importDefault(require("../../exception/DOMException"));
+var HTMLCollectionFactory_1 = __importDefault(require("./HTMLCollectionFactory"));
 /**
  * Element.
  */
@@ -888,3 +891,4 @@ var Element = /** @class */ (function (_super) {
     return Element;
 }(Node_1.default));
 exports.default = Element;
+//# sourceMappingURL=Element.js.map

@@ -56,3 +56,4 @@ System.register(["../UIEvent"], function (exports_1, context_1) {
         }
     };
 });
+//# sourceMappingURL=WheelEvent.js.map

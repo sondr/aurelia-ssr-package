@@ -23,11 +23,14 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
     }
     return to.concat(ar || Array.prototype.slice.call(from));
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var Node_1 = require("../node/Node");
-var QuerySelector_1 = require("../../query-selector/QuerySelector");
-var ParentNodeUtility_1 = require("../parent-node/ParentNodeUtility");
-var HTMLCollectionFactory_1 = require("../element/HTMLCollectionFactory");
+var Node_1 = __importDefault(require("../node/Node"));
+var QuerySelector_1 = __importDefault(require("../../query-selector/QuerySelector"));
+var ParentNodeUtility_1 = __importDefault(require("../parent-node/ParentNodeUtility"));
+var HTMLCollectionFactory_1 = __importDefault(require("../element/HTMLCollectionFactory"));
 /**
  * DocumentFragment.
  */
@@ -262,3 +265,4 @@ var DocumentFragment = /** @class */ (function (_super) {
     return DocumentFragment;
 }(Node_1.default));
 exports.default = DocumentFragment;
+//# sourceMappingURL=DocumentFragment.js.map

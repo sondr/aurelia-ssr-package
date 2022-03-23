@@ -47,3 +47,4 @@ export default class MediaQueryList extends EventTarget {
         this.removeEventListener('change', callback);
     }
 }
+//# sourceMappingURL=MediaQueryList.js.map

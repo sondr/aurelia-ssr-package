@@ -14,12 +14,15 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var CSSStyleSheet_1 = require("../../css/CSSStyleSheet");
-var ResourceFetcher_1 = require("../../fetch/ResourceFetcher");
-var HTMLElement_1 = require("../html-element/HTMLElement");
-var Event_1 = require("../../event/Event");
-var ErrorEvent_1 = require("../../event/events/ErrorEvent");
+var CSSStyleSheet_1 = __importDefault(require("../../css/CSSStyleSheet"));
+var ResourceFetcher_1 = __importDefault(require("../../fetch/ResourceFetcher"));
+var HTMLElement_1 = __importDefault(require("../html-element/HTMLElement"));
+var Event_1 = __importDefault(require("../../event/Event"));
+var ErrorEvent_1 = __importDefault(require("../../event/events/ErrorEvent"));
 /**
  * HTML Link Element.
  *
@@ -310,3 +313,4 @@ var HTMLLinkElement = /** @class */ (function (_super) {
     return HTMLLinkElement;
 }(HTMLElement_1.default));
 exports.default = HTMLLinkElement;
+//# sourceMappingURL=HTMLLinkElement.js.map

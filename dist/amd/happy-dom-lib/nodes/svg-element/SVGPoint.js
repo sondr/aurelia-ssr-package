@@ -15,3 +15,4 @@ define(["require", "exports"], function (require, exports) {
     }());
     exports.default = SVGPoint;
 });
+//# sourceMappingURL=SVGPoint.js.map

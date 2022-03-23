@@ -40,3 +40,4 @@ var MimeTypeArray = /** @class */ (function () {
     return MimeTypeArray;
 }());
 export default MimeTypeArray;
+//# sourceMappingURL=MimeTypeArray.js.map

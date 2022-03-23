@@ -250,3 +250,4 @@ export default class HTMLLinkElement extends HTMLElement {
         return replacedAttribute;
     }
 }
+//# sourceMappingURL=HTMLLinkElement.js.map

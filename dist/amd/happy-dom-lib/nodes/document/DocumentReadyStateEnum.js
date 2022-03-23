@@ -9,3 +9,4 @@ define(["require", "exports"], function (require, exports) {
     })(DocumentReadyStateEnum || (DocumentReadyStateEnum = {}));
     exports.default = DocumentReadyStateEnum;
 });
+//# sourceMappingURL=DocumentReadyStateEnum.js.map

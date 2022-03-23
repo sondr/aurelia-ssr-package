@@ -33,3 +33,4 @@ export default class DataTransferItem {
         return this._item;
     }
 }
+//# sourceMappingURL=DataTransferItem.js.map

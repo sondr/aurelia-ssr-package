@@ -37,3 +37,4 @@ export default class Location extends URL {
         // Do nothing
     }
 }
+//# sourceMappingURL=Location.js.map

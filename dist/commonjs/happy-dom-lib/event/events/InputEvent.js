@@ -14,8 +14,11 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var UIEvent_1 = require("../UIEvent");
+var UIEvent_1 = __importDefault(require("../UIEvent"));
 /**
  *
  */
@@ -45,3 +48,4 @@ var InputEvent = /** @class */ (function (_super) {
     return InputEvent;
 }(UIEvent_1.default));
 exports.default = InputEvent;
+//# sourceMappingURL=InputEvent.js.map

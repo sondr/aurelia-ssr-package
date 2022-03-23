@@ -38,3 +38,4 @@ export default class CSS {
         return CSSEscape(value);
     }
 }
+//# sourceMappingURL=CSS.js.map

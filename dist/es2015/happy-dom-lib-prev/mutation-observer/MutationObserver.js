@@ -50,3 +50,4 @@ export default class MutationObserver {
         return [];
     }
 }
+//# sourceMappingURL=MutationObserver.js.map

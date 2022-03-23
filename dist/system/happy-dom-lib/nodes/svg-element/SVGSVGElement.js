@@ -369,3 +369,4 @@ System.register(["./SVGGraphicsElement", "./SVGRect", "./SVGPoint", "./SVGLength
         }
     };
 });
+//# sourceMappingURL=SVGSVGElement.js.map

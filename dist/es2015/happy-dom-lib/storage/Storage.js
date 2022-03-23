@@ -56,3 +56,4 @@ export default class Storage {
         this._store = {};
     }
 }
+//# sourceMappingURL=Storage.js.map

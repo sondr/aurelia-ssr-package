@@ -56,3 +56,4 @@ export default class CharacterDataUtility {
         return characterData.data.substring(offset, offset + count);
     }
 }
+//# sourceMappingURL=CharacterDataUtility.js.map

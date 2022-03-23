@@ -14,8 +14,11 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var URL_1 = require("./URL");
+var URL_1 = __importDefault(require("./URL"));
 /**
  *
  */
@@ -57,3 +60,4 @@ var Location = /** @class */ (function (_super) {
     return Location;
 }(URL_1.default));
 exports.default = Location;
+//# sourceMappingURL=Location.js.map

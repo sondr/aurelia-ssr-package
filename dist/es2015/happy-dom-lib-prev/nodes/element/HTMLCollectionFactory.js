@@ -25,3 +25,4 @@ export default class HTMLCollectionFactory {
         return nodes[index] || null;
     }
 }
+//# sourceMappingURL=HTMLCollectionFactory.js.map

@@ -195,3 +195,4 @@ define(["require", "exports"], function (require, exports) {
     }());
     exports.default = URLSearchParams;
 });
+//# sourceMappingURL=URLSearchParams.js.map

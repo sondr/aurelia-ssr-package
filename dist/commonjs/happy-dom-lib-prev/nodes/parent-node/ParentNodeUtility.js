@@ -8,10 +8,13 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
     }
     return to.concat(ar || Array.prototype.slice.call(from));
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-var QuerySelector_1 = require("../../query-selector/QuerySelector");
-var XMLParser_1 = require("../../xml-parser/XMLParser");
-var HTMLCollectionFactory_1 = require("../element/HTMLCollectionFactory");
+var QuerySelector_1 = __importDefault(require("../../query-selector/QuerySelector"));
+var XMLParser_1 = __importDefault(require("../../xml-parser/XMLParser"));
+var HTMLCollectionFactory_1 = __importDefault(require("../element/HTMLCollectionFactory"));
 /**
  * Parent node utility.
  */
@@ -186,3 +189,4 @@ var ParentNodeUtility = /** @class */ (function () {
     return ParentNodeUtility;
 }());
 exports.default = ParentNodeUtility;
+//# sourceMappingURL=ParentNodeUtility.js.map

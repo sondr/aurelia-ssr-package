@@ -119,3 +119,4 @@ System.register(["aurelia-pal", "./nodejs-pal-builder"], function (exports_1, co
         }
     };
 });
+//# sourceMappingURL=index.js.map
