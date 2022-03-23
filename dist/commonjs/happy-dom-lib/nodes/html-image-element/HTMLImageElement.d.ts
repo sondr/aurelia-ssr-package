@@ -7,6 +7,7 @@ import IHTMLImageElement from './IHTMLImageElement';
  * https://developer.mozilla.org/en-US/docs/Web/API/HTMLImageElement.
  */
 export default class HTMLImageElement extends HTMLElement implements IHTMLImageElement {
+    readonly tagName: string;
     readonly complete = false;
     readonly naturalHeight = 0;
     readonly naturalWidth = 0;
@@ -38,13 +39,13 @@ export default class HTMLImageElement extends HTMLElement implements IHTMLImageE
      *
      * @returns Height.
      */
-    get height(): string;
+    get height(): number;
     /**
      * Sets height.
      *
      * @param height Height.
      */
-    set height(height: string);
+    set height(height: number);
     /**
      * Returns is map.
      *
@@ -122,13 +123,13 @@ export default class HTMLImageElement extends HTMLElement implements IHTMLImageE
      *
      * @returns Width.
      */
-    get width(): string;
+    get width(): number;
     /**
      * Sets width.
      *
      * @param width Width.
      */
-    set width(width: string);
+    set width(width: number);
     /**
      * The decode() method of the HTMLImageElement interface returns a Promise that resolves when the image is decoded and it is safe to append the image to the DOM.
      *

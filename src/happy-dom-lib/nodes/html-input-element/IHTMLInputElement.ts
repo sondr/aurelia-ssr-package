@@ -11,6 +11,7 @@ import ValidityState from './ValidityState';
  * https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement.
  */
 export default interface IHTMLInputElement extends IHTMLElement {
+	readonly form: IHTMLFormElement;
 	formAction: string;
 	formMethod: string;
 	formNoValidate: boolean;
@@ -35,7 +36,6 @@ export default interface IHTMLInputElement extends IHTMLElement {
 	allowdirs: string;
 	autocomplete: string;
 	src: string;
-	defaultvalue: string;
 	readOnly: boolean;
 	disabled: boolean;
 	autofocus: boolean;
@@ -47,7 +47,6 @@ export default interface IHTMLInputElement extends IHTMLElement {
 	selectionStart: number;
 	selectionEnd: number;
 	selectionDirection: string;
-	form: IHTMLFormElement;
 	validity: ValidityState;
 	validationMessage: string;
 	willValidate: boolean;
@@ -84,6 +83,20 @@ export default interface IHTMLInputElement extends IHTMLElement {
 	 * @returns "true" if the field is valid.
 	 */
 	checkValidity(): boolean;
+
+	/**
+	 * Steps up.
+	 *
+	 * @param [increment] Increment.
+	 */
+	stepUp(increment?: number): void;
+
+	/**
+	 * Steps up.
+	 *
+	 * @param [increment] Increment.
+	 */
+	stepDown(increment?: number): void;
 
 	/**
 	 * Clones a node.

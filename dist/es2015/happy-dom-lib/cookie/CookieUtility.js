@@ -12,10 +12,7 @@ export default class CookieUtility {
      */
     static getCookieString(location, cookies, newCookie) {
         const newCookieParts = newCookie.split(';');
-        const [newCookieName, newCookieValue] = newCookieParts
-            .shift()
-            .trim()
-            .split('=');
+        const [newCookieName, newCookieValue] = newCookieParts.shift().trim().split('=');
         let isExpired = false;
         for (const part of newCookieParts) {
             const [key, value] = part.trim().split('=');

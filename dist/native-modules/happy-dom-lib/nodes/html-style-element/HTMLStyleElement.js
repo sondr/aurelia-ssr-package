@@ -24,7 +24,9 @@ import HTMLElement from '../html-element/HTMLElement';
 var HTMLStyleElement = /** @class */ (function (_super) {
     __extends(HTMLStyleElement, _super);
     function HTMLStyleElement() {
-        return _super !== null && _super.apply(this, arguments) || this;
+        var _this = _super !== null && _super.apply(this, arguments) || this;
+        _this._styleSheet = null;
+        return _this;
     }
     Object.defineProperty(HTMLStyleElement.prototype, "sheet", {
         /**
@@ -33,12 +35,14 @@ var HTMLStyleElement = /** @class */ (function (_super) {
          * @returns CSS style sheet.
          */
         get: function () {
-            if (!this._isConnected) {
+            if (!this.isConnected) {
                 return null;
             }
-            var styleSheet = new CSSStyleSheet();
-            styleSheet.replaceSync(this.innerText);
-            return styleSheet;
+            if (!this._styleSheet) {
+                this._styleSheet = new CSSStyleSheet();
+                this._styleSheet.replaceSync(this.innerText);
+            }
+            return this._styleSheet;
         },
         enumerable: false,
         configurable: true

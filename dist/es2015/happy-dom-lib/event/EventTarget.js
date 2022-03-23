@@ -25,7 +25,7 @@ export default class EventTarget {
         if (this._listeners[type]) {
             const index = this._listeners[type].indexOf(listener);
             if (index !== -1) {
-                this._listeners[type].splice(index);
+                this._listeners[type].splice(index, 1);
             }
         }
     }
@@ -40,13 +40,17 @@ export default class EventTarget {
             event.target = this;
         }
         event.currentTarget = this;
+        const onEventName = 'on' + event.type.toLowerCase();
+        if (typeof this[onEventName] === 'function') {
+            this[onEventName].call(this, event);
+        }
         if (this._listeners[event.type]) {
             for (const listener of this._listeners[event.type]) {
                 if (listener.handleEvent) {
                     listener.handleEvent(event);
                 }
                 else {
-                    listener(event);
+                    listener.call(this, event);
                 }
                 if (event._immediatePropagationStopped) {
                     return !(event.cancelable && event.defaultPrevented);
@@ -54,5 +58,16 @@ export default class EventTarget {
             }
         }
         return !(event.cancelable && event.defaultPrevented);
+    }
+    /**
+     * Adds an event listener.
+     *
+     * This is only supported by IE8- and Opera, but for some reason React uses it and calls it, so therefore we will keep support for it until they stop using it.
+     *
+     * @param type Event type.
+     * @param listener Listener.
+     */
+    attachEvent(type, listener) {
+        this.addEventListener(type.replace('on', ''), listener);
     }
 }

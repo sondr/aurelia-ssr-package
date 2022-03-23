@@ -1,21 +1,20 @@
 import Node from '../nodes/node/Node';
 import SelfClosingElements from '../config/SelfClosingElements';
 import UnclosedElements from '../config/UnclosedElements';
-import { encode } from 'he';
+import { escape } from 'he';
 /**
  * Utility for converting an element to string.
- *
- * @class QuerySelector
  */
 export default class XMLSerializer {
     /**
      * Renders an element as HTML.
      *
-     * @param element Element to render.
-     * @param root
+     * @param root Root element.
+     * @param [options] Options.
+     * @param [options.includeShadowRoots] Set to "true" to include shadow roots.
      * @returns Result.
      */
-    serializeToString(root) {
+    serializeToString(root, options) {
         switch (root.nodeType) {
             case Node.ELEMENT_NODE:
                 const element = root;
@@ -28,14 +27,21 @@ export default class XMLSerializer {
                 }
                 let innerHTML = '';
                 for (const node of root.childNodes) {
-                    innerHTML += this.serializeToString(node);
+                    innerHTML += this.serializeToString(node, options);
+                }
+                if ((options === null || options === void 0 ? void 0 : options.includeShadowRoots) && element.shadowRoot) {
+                    innerHTML += `<template shadowroot="${element.shadowRoot.mode}">`;
+                    for (const node of element.shadowRoot.childNodes) {
+                        innerHTML += this.serializeToString(node, options);
+                    }
+                    innerHTML += '</template>';
                 }
                 return `<${tagName}${this._getAttributes(element)}>${innerHTML}</${tagName}>`;
             case Node.DOCUMENT_FRAGMENT_NODE:
             case Node.DOCUMENT_NODE:
                 let html = '';
                 for (const node of root.childNodes) {
-                    html += this.serializeToString(node);
+                    html += this.serializeToString(node, options);
                 }
                 return html;
             case Node.COMMENT_NODE:
@@ -61,7 +67,7 @@ export default class XMLSerializer {
         let attributeString = '';
         for (const attribute of Object.values(element._attributes)) {
             if (attribute.value !== null) {
-                attributeString += ' ' + attribute.name + '="' + encode(attribute.value) + '"';
+                attributeString += ' ' + attribute.name + '="' + escape(attribute.value) + '"';
             }
         }
         return attributeString;

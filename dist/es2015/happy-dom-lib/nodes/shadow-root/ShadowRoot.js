@@ -38,6 +38,18 @@ export default class ShadowRoot extends DocumentFragment {
         }
     }
     /**
+     * Returns active element.
+     *
+     * @returns Active element.
+     */
+    get activeElement() {
+        const activeElement = this.ownerDocument['_activeElement'];
+        if (activeElement && activeElement.getRootNode() === this) {
+            return activeElement;
+        }
+        return null;
+    }
+    /**
      * Converts to string.
      *
      * @returns String.

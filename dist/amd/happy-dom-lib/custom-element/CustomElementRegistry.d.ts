@@ -10,7 +10,9 @@ export default class CustomElementRegistry {
             extends: string;
         };
     };
-    private _callbacks;
+    _callbacks: {
+        [k: string]: (() => void)[];
+    };
     /**
      * Defines a custom element class.
      *

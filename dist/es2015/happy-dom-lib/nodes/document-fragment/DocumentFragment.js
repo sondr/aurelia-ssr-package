@@ -10,6 +10,7 @@ export default class DocumentFragment extends Node {
         super(...arguments);
         this.nodeType = Node.DOCUMENT_FRAGMENT_NODE;
         this.children = HTMLCollectionFactory.create();
+        this._rootNode = this;
     }
     /**
      * Last element child.
@@ -58,7 +59,9 @@ export default class DocumentFragment extends Node {
         for (const child of this.childNodes.slice()) {
             this.removeChild(child);
         }
-        this.appendChild(this.ownerDocument.createTextNode(textContent));
+        if (textContent) {
+            this.appendChild(this.ownerDocument.createTextNode(textContent));
+        }
     }
     /**
      * Inserts a set of Node objects or DOMString objects after the last child of the ParentNode. DOMString objects are inserted as equivalent Text nodes.

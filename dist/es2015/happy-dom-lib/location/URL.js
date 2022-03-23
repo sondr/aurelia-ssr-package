@@ -24,6 +24,39 @@ export default class URL {
     }
     /**
      * Returns the entire URL as a string.
+     *
+     * @returns Href.
+     */
+    get href() {
+        const credentials = this.username ? `${this.username}:${this.password}@` : '';
+        return this.protocol + '//' + credentials + this.host + this.pathname + this.search + this.hash;
+    }
+    /**
+     * Sets the href.
+     *
+     * @param url URL.
+     */
+    set href(url) {
+        this.parse(url);
+    }
+    /**
+     * Returns the origin.
+     *
+     * @returns HREF.
+     */
+    get origin() {
+        return this.protocol + '//' + this.host;
+    }
+    /**
+     * Returns the entire URL as a string.
+     *
+     * @returns Host.
+     */
+    get host() {
+        return this.hostname + this.port;
+    }
+    /**
+     * Returns the entire URL as a string.
      */
     toString() {
         return this.href;
@@ -55,38 +88,5 @@ export default class URL {
                 this.hash = pathMatch[3] || '';
             }
         }
-    }
-    /**
-     * Returns the entire URL as a string.
-     *
-     * @returns Href.
-     */
-    get href() {
-        const credentials = this.username ? `${this.username}:${this.password}@` : '';
-        return this.protocol + '//' + credentials + this.host + this.pathname + this.search + this.hash;
-    }
-    /**
-     * Sets the href.
-     *
-     * @param url URL.
-     */
-    set href(url) {
-        this.parse(url);
-    }
-    /**
-     * Returns the origin.
-     *
-     * @returns HREF.
-     */
-    get origin() {
-        return this.protocol + '//' + this.host;
-    }
-    /**
-     * Returns the entire URL as a string.
-     *
-     * @returns Host.
-     */
-    get host() {
-        return this.hostname + this.port;
     }
 }

@@ -51,6 +51,7 @@ System.register(["../node/Node", "../../query-selector/QuerySelector", "../paren
                     var _this = _super !== null && _super.apply(this, arguments) || this;
                     _this.nodeType = Node_1.default.DOCUMENT_FRAGMENT_NODE;
                     _this.children = HTMLCollectionFactory_1.default.create();
+                    _this._rootNode = _this;
                     return _this;
                 }
                 Object.defineProperty(DocumentFragment.prototype, "childElementCount", {
@@ -115,7 +116,9 @@ System.register(["../node/Node", "../../query-selector/QuerySelector", "../paren
                             var child = _a[_i];
                             this.removeChild(child);
                         }
-                        this.appendChild(this.ownerDocument.createTextNode(textContent));
+                        if (textContent) {
+                            this.appendChild(this.ownerDocument.createTextNode(textContent));
+                        }
                     },
                     enumerable: false,
                     configurable: true

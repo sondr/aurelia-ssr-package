@@ -49,7 +49,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-define(["require", "exports", "../custom-element/CustomElementRegistry", "../nodes/document/Document", "../nodes/html-document/HTMLDocument", "../nodes/xml-document/XMLDocument", "../nodes/svg-document/SVGDocument", "../nodes/node/Node", "../tree-walker/NodeFilter", "../nodes/text/Text", "../nodes/comment/Comment", "../nodes/shadow-root/ShadowRoot", "../nodes/element/Element", "../nodes/html-template-element/HTMLTemplateElement", "../nodes/html-form-element/HTMLFormElement", "../nodes/html-element/HTMLElement", "../nodes/html-input-element/HTMLInputElement", "../nodes/html-text-area-element/HTMLTextAreaElement", "../nodes/svg-element/SVGSVGElement", "../nodes/svg-element/SVGElement", "../nodes/html-script-element/HTMLScriptElement", "../nodes/html-image-element/HTMLImageElement", "../nodes/document-fragment/DocumentFragment", "../tree-walker/TreeWalker", "../event/Event", "../event/events/CustomEvent", "../event/events/AnimationEvent", "../event/events/KeyboardEvent", "../event/events/ProgressEvent", "../event/EventTarget", "../location/URL", "../location/Location", "../event/NonImplementedEventTypes", "../mutation-observer/MutationObserver", "../config/ElementClass", "../dom-parser/DOMParser", "../xml-serializer/XMLSerializer", "../resize-observer/ResizeObserver", "../css/CSSStyleSheet", "../file/Blob", "../file/File", "../exception/DOMException", "../file/FileReader", "../history/History", "../css/CSSStyleDeclaration", "../event/events/MouseEvent", "../event/events/FocusEvent", "../event/events/WheelEvent", "../event/DataTransfer", "../event/DataTransferItem", "../event/DataTransferItemList", "../event/events/InputEvent", "../event/UIEvent", "../event/events/ErrorEvent", "../screen/Screen", "./AsyncTaskManager", "./AsyncTaskTypeEnum", "../location/RelativeURL", "../storage/Storage", "../nodes/html-link-element/HTMLLinkElement", "../nodes/html-style-element/HTMLStyleElement", "../url-search-params/URLSearchParams"], function (require, exports, CustomElementRegistry_1, Document_1, HTMLDocument_1, XMLDocument_1, SVGDocument_1, Node_1, NodeFilter_1, Text_1, Comment_1, ShadowRoot_1, Element_1, HTMLTemplateElement_1, HTMLFormElement_1, HTMLElement_1, HTMLInputElement_1, HTMLTextAreaElement_1, SVGSVGElement_1, SVGElement_1, HTMLScriptElement_1, HTMLImageElement_1, DocumentFragment_1, TreeWalker_1, Event_1, CustomEvent_1, AnimationEvent_1, KeyboardEvent_1, ProgressEvent_1, EventTarget_1, URL_1, Location_1, NonImplementedEventTypes_1, MutationObserver_1, ElementClass_1, DOMParser_1, XMLSerializer_1, ResizeObserver_1, CSSStyleSheet_1, Blob_1, File_1, DOMException_1, FileReader_1, History_1, CSSStyleDeclaration_1, MouseEvent_1, FocusEvent_1, WheelEvent_1, DataTransfer_1, DataTransferItem_1, DataTransferItemList_1, InputEvent_1, UIEvent_1, ErrorEvent_1, Screen_1, AsyncTaskManager_1, AsyncTaskTypeEnum_1, RelativeURL_1, Storage_1, HTMLLinkElement_1, HTMLStyleElement_1, URLSearchParams_1) {
+define(["require", "exports", "../custom-element/CustomElementRegistry", "../nodes/document/Document", "../nodes/html-document/HTMLDocument", "../nodes/xml-document/XMLDocument", "../nodes/svg-document/SVGDocument", "../nodes/node/Node", "../tree-walker/NodeFilter", "../nodes/text/Text", "../nodes/comment/Comment", "../nodes/shadow-root/ShadowRoot", "../nodes/element/Element", "../nodes/html-template-element/HTMLTemplateElement", "../nodes/html-form-element/HTMLFormElement", "../nodes/html-element/HTMLElement", "../nodes/html-unknown-element/HTMLUnknownElement", "../nodes/html-input-element/HTMLInputElement", "../nodes/html-text-area-element/HTMLTextAreaElement", "../nodes/html-link-element/HTMLLinkElement", "../nodes/html-style-element/HTMLStyleElement", "../nodes/html-slot-element/HTMLSlotElement", "../nodes/html-label-element/HTMLLabelElement", "../nodes/html-meta-element/HTMLMetaElement", "../nodes/svg-element/SVGSVGElement", "../nodes/svg-element/SVGElement", "../nodes/html-script-element/HTMLScriptElement", "../nodes/html-image-element/HTMLImageElement", "../nodes/html-image-element/Image", "../nodes/document-fragment/DocumentFragment", "../nodes/character-data/CharacterData", "../tree-walker/TreeWalker", "../event/Event", "../event/events/CustomEvent", "../event/events/AnimationEvent", "../event/events/KeyboardEvent", "../event/events/ProgressEvent", "../event/EventTarget", "../location/URL", "../location/Location", "../event/NonImplementedEventTypes", "../mutation-observer/MutationObserver", "../config/NonImplemenetedElementClasses", "../dom-parser/DOMParser", "../xml-serializer/XMLSerializer", "../resize-observer/ResizeObserver", "../file/Blob", "../file/File", "../exception/DOMException", "../file/FileReader", "../history/History", "../css/CSSStyleSheet", "../css/CSSStyleDeclaration", "../css/CSS", "../css/CSSUnitValue", "../event/events/MouseEvent", "../event/events/PointerEvent", "../event/events/FocusEvent", "../event/events/WheelEvent", "../event/DataTransfer", "../event/DataTransferItem", "../event/DataTransferItemList", "../event/events/InputEvent", "../event/UIEvent", "../event/events/ErrorEvent", "../event/events/StorageEvent", "../screen/Screen", "./AsyncTaskManager", "./AsyncTaskTypeEnum", "../location/RelativeURL", "../storage/Storage", "../url-search-params/URLSearchParams", "../nodes/element/HTMLCollection", "../nodes/node/NodeList", "../match-media/MediaQueryList", "../selection/Selection", "perf_hooks", "../navigator/Navigator", "../navigator/MimeType", "../navigator/MimeTypeArray", "../navigator/Plugin", "../navigator/PluginArray"], function (require, exports, CustomElementRegistry_1, Document_1, HTMLDocument_1, XMLDocument_1, SVGDocument_1, Node_1, NodeFilter_1, Text_1, Comment_1, ShadowRoot_1, Element_1, HTMLTemplateElement_1, HTMLFormElement_1, HTMLElement_1, HTMLUnknownElement_1, HTMLInputElement_1, HTMLTextAreaElement_1, HTMLLinkElement_1, HTMLStyleElement_1, HTMLSlotElement_1, HTMLLabelElement_1, HTMLMetaElement_1, SVGSVGElement_1, SVGElement_1, HTMLScriptElement_1, HTMLImageElement_1, Image_1, DocumentFragment_1, CharacterData_1, TreeWalker_1, Event_1, CustomEvent_1, AnimationEvent_1, KeyboardEvent_1, ProgressEvent_1, EventTarget_1, URL_1, Location_1, NonImplementedEventTypes_1, MutationObserver_1, NonImplemenetedElementClasses_1, DOMParser_1, XMLSerializer_1, ResizeObserver_1, Blob_1, File_1, DOMException_1, FileReader_1, History_1, CSSStyleSheet_1, CSSStyleDeclaration_1, CSS_1, CSSUnitValue_1, MouseEvent_1, PointerEvent_1, FocusEvent_1, WheelEvent_1, DataTransfer_1, DataTransferItem_1, DataTransferItemList_1, InputEvent_1, UIEvent_1, ErrorEvent_1, StorageEvent_1, Screen_1, AsyncTaskManager_1, AsyncTaskTypeEnum_1, RelativeURL_1, Storage_1, URLSearchParams_1, HTMLCollection_1, NodeList_1, MediaQueryList_1, Selection_1, PerfHooks, Navigator_1, MimeType_1, MimeTypeArray_1, Plugin_1, PluginArray_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var FETCH_RESPONSE_TYPE_METHODS = ['blob', 'json', 'text'];
@@ -81,14 +81,19 @@ define(["require", "exports", "../custom-element/CustomElementRegistry", "../nod
             // Global classes
             _this.Node = Node_1.default;
             _this.HTMLElement = HTMLElement_1.default;
+            _this.HTMLUnknownElement = HTMLUnknownElement_1.default;
             _this.HTMLTemplateElement = HTMLTemplateElement_1.default;
             _this.HTMLFormElement = HTMLFormElement_1.default;
             _this.HTMLInputElement = HTMLInputElement_1.default;
             _this.HTMLTextAreaElement = HTMLTextAreaElement_1.default;
             _this.HTMLImageElement = HTMLImageElement_1.default;
+            _this.Image = Image_1.default;
             _this.HTMLScriptElement = HTMLScriptElement_1.default;
             _this.HTMLLinkElement = HTMLLinkElement_1.default;
             _this.HTMLStyleElement = HTMLStyleElement_1.default;
+            _this.HTMLLabelElement = HTMLLabelElement_1.default;
+            _this.HTMLSlotElement = HTMLSlotElement_1.default;
+            _this.HTMLMetaElement = HTMLMetaElement_1.default;
             _this.SVGSVGElement = SVGSVGElement_1.default;
             _this.SVGElement = SVGElement_1.default;
             _this.Text = Text_1.default;
@@ -96,6 +101,7 @@ define(["require", "exports", "../custom-element/CustomElementRegistry", "../nod
             _this.ShadowRoot = ShadowRoot_1.default;
             _this.Element = Element_1.default;
             _this.DocumentFragment = DocumentFragment_1.default;
+            _this.CharacterData = CharacterData_1.default;
             _this.NodeFilter = NodeFilter_1.default;
             _this.TreeWalker = TreeWalker_1.default;
             _this.DOMParser = DOMParser_1.default;
@@ -110,10 +116,12 @@ define(["require", "exports", "../custom-element/CustomElementRegistry", "../nod
             _this.AnimationEvent = AnimationEvent_1.default;
             _this.KeyboardEvent = KeyboardEvent_1.default;
             _this.MouseEvent = MouseEvent_1.default;
+            _this.PointerEvent = PointerEvent_1.default;
             _this.FocusEvent = FocusEvent_1.default;
             _this.WheelEvent = WheelEvent_1.default;
             _this.InputEvent = InputEvent_1.default;
             _this.ErrorEvent = ErrorEvent_1.default;
+            _this.StorageEvent = StorageEvent_1.default;
             _this.ProgressEvent = ProgressEvent_1.default;
             _this.EventTarget = EventTarget_1.default;
             _this.DataTransfer = DataTransfer_1.default;
@@ -135,23 +143,36 @@ define(["require", "exports", "../custom-element/CustomElementRegistry", "../nod
             _this.Screen = Screen_1.default;
             _this.Storage = Storage_1.default;
             _this.URLSearchParams = URLSearchParams_1.default;
+            _this.HTMLCollection = HTMLCollection_1.default;
+            _this.NodeList = NodeList_1.default;
+            _this.MediaQueryList = MediaQueryList_1.default;
+            _this.CSSUnitValue = CSSUnitValue_1.default;
+            _this.Selection = Selection_1.default;
+            _this.Navigator = Navigator_1.default;
+            _this.MimeType = MimeType_1.default;
+            _this.MimeTypeArray = MimeTypeArray_1.default;
+            _this.Plugin = Plugin_1.default;
+            _this.PluginArray = PluginArray_1.default;
             // Events
             _this.onload = null;
             _this.onerror = null;
             _this.customElements = new CustomElementRegistry_1.default();
             _this.location = new Location_1.default();
             _this.history = new History_1.default();
-            _this.navigator = { userAgent: 'happy-dom' };
+            _this.navigator = new Navigator_1.default();
             _this.console = global ? global.console : null;
             _this.self = _this;
             _this.top = _this;
             _this.parent = _this;
             _this.window = _this;
+            _this.globalThis = _this;
             _this.screen = new Screen_1.default();
             _this.innerWidth = 1024;
             _this.innerHeight = 768;
+            _this.devicePixelRatio = 1;
             _this.sessionStorage = new Storage_1.default();
             _this.localStorage = new Storage_1.default();
+            _this.performance = PerfHooks.performance;
             // Node.js Globals
             _this.Array = global ? global.Array : null;
             _this.ArrayBuffer = global ? global.ArrayBuffer : null;
@@ -163,7 +184,6 @@ define(["require", "exports", "../custom-element/CustomElementRegistry", "../nod
             _this.EvalError = global ? global.EvalError : null;
             _this.Float32Array = global ? global.Float32Array : null;
             _this.Float64Array = global ? global.Float64Array : null;
-            _this.Function = global ? global.Function : null;
             _this.GLOBAL = null;
             _this.Infinity = global ? global.Infinity : null;
             _this.Int16Array = global ? global.Int16Array : null;
@@ -174,7 +194,6 @@ define(["require", "exports", "../custom-element/CustomElementRegistry", "../nod
             _this.Map = global ? global.Map : null;
             _this.Math = global ? global.Math : null;
             _this.NaN = global ? global.NaN : null;
-            _this.Object = global ? global.Object : null;
             _this.Number = global ? global.Number : null;
             _this.Promise = global ? global.Promise : null;
             _this.RangeError = global ? global.RangeError : null;
@@ -214,6 +233,9 @@ define(["require", "exports", "../custom-element/CustomElementRegistry", "../nod
             _this.v8debug = null;
             _this.AbortController = global ? global.AbortController : null;
             _this.AbortSignal = global ? global.AbortSignal : null;
+            // Private properties
+            _this._objectClass = null;
+            _this._functionClass = null;
             _this.document = new HTMLDocument_1.default();
             _this.document.defaultView = _this;
             _this.document._readyStateManager.whenComplete().then(function () {
@@ -221,31 +243,81 @@ define(["require", "exports", "../custom-element/CustomElementRegistry", "../nod
             });
             DOMParser_1.default._ownerDocument = DOMParser_1.default._ownerDocument || _this.document;
             FileReader_1.default._ownerDocument = FileReader_1.default._ownerDocument || _this.document;
+            Image_1.default.ownerDocument = Image_1.default.ownerDocument || _this.document;
             for (var _i = 0, NonImplementedEventTypes_2 = NonImplementedEventTypes_1.default; _i < NonImplementedEventTypes_2.length; _i++) {
                 var eventType = NonImplementedEventTypes_2[_i];
                 if (!_this[eventType]) {
                     _this[eventType] = Event_1.default;
                 }
             }
-            for (var _a = 0, _b = Object.keys(ElementClass_1.default); _a < _b.length; _a++) {
-                var className = _b[_a];
+            for (var _a = 0, NonImplemenetedElementClasses_2 = NonImplemenetedElementClasses_1.default; _a < NonImplemenetedElementClasses_2.length; _a++) {
+                var className = NonImplemenetedElementClasses_2[_a];
                 if (!_this[className]) {
-                    _this[className] = ElementClass_1.default[className];
+                    _this[className] = HTMLElement_1.default;
                 }
             }
             // Binds all methods to "this", so that it will use the correct context when called globally.
-            for (var _c = 0, _d = Object.keys(Window.prototype); _c < _d.length; _c++) {
-                var key = _d[_c];
+            for (var _b = 0, _c = Object.keys(Window.prototype); _b < _c.length; _b++) {
+                var key = _c[_b];
                 if (typeof _this[key] === 'function') {
                     _this[key] = _this[key].bind(_this);
                 }
             }
             return _this;
         }
+        Object.defineProperty(Window.prototype, "Object", {
+            /**
+             * Returns Object class.
+             *
+             * @returns Object class.
+             */
+            get: function () {
+                if (this._objectClass) {
+                    return this._objectClass;
+                }
+                // When inside a VM global.Object is not the same as ({}).constructor
+                // We will therefore run the code inside the VM to get the real constructor
+                this._objectClass = this.eval('({}).constructor');
+                return this._objectClass;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(Window.prototype, "Function", {
+            /**
+             * Returns Function class.
+             *
+             * @returns Function class.
+             */
+            get: function () {
+                if (this._functionClass) {
+                    return this._functionClass;
+                }
+                // When inside a VM global.Function is not the same as (() => {}).constructor
+                // We will therefore run the code inside the VM to get the real constructor
+                this._functionClass = this.eval('(() => {}).constructor');
+                return this._functionClass;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        Object.defineProperty(Window.prototype, "CSS", {
+            /**
+             * The CSS interface holds useful CSS-related methods.
+             *
+             * @returns CSS interface.
+             */
+            get: function () {
+                return new CSS_1.default();
+            },
+            enumerable: false,
+            configurable: true
+        });
         /**
          * Evaluates code.
          *
          * @param code Code.
+         * @returns Result.
          */
         Window.prototype.eval = function (code) {
             var vmExists = false;
@@ -259,12 +331,10 @@ define(["require", "exports", "../custom-element/CustomElementRegistry", "../nod
             if (vmExists) {
                 vm = require('vm');
             }
-            if (global && vm && vm.isContext(this)) {
-                vm.runInContext(code, this);
+            if (vm && vm.isContext(this)) {
+                return vm.runInContext(code, this);
             }
-            else if (global && global.eval) {
-                global.eval(code);
-            }
+            return global.eval(code);
         };
         /**
          * Returns an object containing the values of all CSS properties of an element.
@@ -316,6 +386,17 @@ define(["require", "exports", "../custom-element/CustomElementRegistry", "../nod
          */
         Window.prototype.scrollTo = function (x, y) {
             this.scroll(x, y);
+        };
+        /**
+         * Returns a new MediaQueryList object that can then be used to determine if the document matches the media query string.
+         *
+         * @param mediaQueryString A string specifying the media query to parse into a MediaQueryList.
+         * @returns A new MediaQueryList.
+         */
+        Window.prototype.matchMedia = function (mediaQueryString) {
+            var mediaQueryList = new MediaQueryList_1.default();
+            mediaQueryList._media = mediaQueryString;
+            return mediaQueryList;
         };
         /**
          * Sets a timer which executes a function once the timer expires.

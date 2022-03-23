@@ -9,6 +9,18 @@ export default class CSSStyleDeclaration {
     private _attributes;
     private _computedStyleElement;
     /**
+     * Constructor.
+     *
+     * @param [attributes] Attributes.
+     * @param [computedStyleElement] Computed style element.
+     * @param computedStyleElement.isConnected
+     */
+    constructor(attributes?: {
+        [k: string]: Attr;
+    }, computedStyleElement?: {
+        isConnected: boolean;
+    });
+    /**
      *
      */
     get alignContent(): string;
@@ -2972,18 +2984,6 @@ export default class CSSStyleDeclaration {
      * @param cssText CSS text.
      */
     set cssText(cssText: string);
-    /**
-     * Constructor.
-     *
-     * @param [attributes] Attributes.
-     * @param [computedStyleElement] Computed style element.
-     * @param computedStyleElement.isConnected
-     */
-    constructor(attributes?: {
-        [k: string]: Attr;
-    }, computedStyleElement?: {
-        isConnected: boolean;
-    });
     /**
      * Returns item.
      *

@@ -36,6 +36,24 @@ var CustomEvent = /** @class */ (function (_super) {
         }
         return _this;
     }
+    /**
+     * Init event.
+     *
+     * @deprecated
+     * @param type Type.
+     * @param [bubbles=false] "true" if it bubbles.
+     * @param [cancelable=false] "true" if it cancelable.
+     * @param [detail=null] Custom event detail.
+     */
+    CustomEvent.prototype.initCustomEvent = function (type, bubbles, cancelable, detail) {
+        if (bubbles === void 0) { bubbles = false; }
+        if (cancelable === void 0) { cancelable = false; }
+        if (detail === void 0) { detail = null; }
+        this.type = type;
+        this.bubbles = bubbles;
+        this.cancelable = cancelable;
+        this.detail = detail;
+    };
     return CustomEvent;
 }(Event_1.default));
 exports.default = CustomEvent;

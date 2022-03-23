@@ -17,10 +17,7 @@ define(["require", "exports"], function (require, exports) {
          */
         CookieUtility.getCookieString = function (location, cookies, newCookie) {
             var newCookieParts = newCookie.split(';');
-            var _a = newCookieParts
-                .shift()
-                .trim()
-                .split('='), newCookieName = _a[0], newCookieValue = _a[1];
+            var _a = newCookieParts.shift().trim().split('='), newCookieName = _a[0], newCookieValue = _a[1];
             var isExpired = false;
             for (var _i = 0, newCookieParts_1 = newCookieParts; _i < newCookieParts_1.length; _i++) {
                 var part = newCookieParts_1[_i];

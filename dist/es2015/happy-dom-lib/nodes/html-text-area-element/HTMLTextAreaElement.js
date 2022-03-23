@@ -327,7 +327,7 @@ export default class HTMLTextAreaElement extends HTMLElement {
     get form() {
         let parent = this.parentNode;
         while (parent && parent.tagName !== 'FORM') {
-            parent = this.parentNode;
+            parent = parent.parentNode;
         }
         return parent;
     }

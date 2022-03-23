@@ -1,4 +1,4 @@
-System.register(["../element/Element"], function (exports_1, context_1) {
+System.register(["../../css/CSSStyleDeclaration", "../element/Element"], function (exports_1, context_1) {
     "use strict";
     var __extends = (this && this.__extends) || (function () {
         var extendStatics = function (d, b) {
@@ -15,10 +15,13 @@ System.register(["../element/Element"], function (exports_1, context_1) {
             d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
         };
     })();
-    var Element_1, SVGElement;
+    var CSSStyleDeclaration_1, Element_1, SVGElement;
     var __moduleName = context_1 && context_1.id;
     return {
         setters: [
+            function (CSSStyleDeclaration_1_1) {
+                CSSStyleDeclaration_1 = CSSStyleDeclaration_1_1;
+            },
             function (Element_1_1) {
                 Element_1 = Element_1_1;
             }
@@ -33,7 +36,9 @@ System.register(["../element/Element"], function (exports_1, context_1) {
             SVGElement = /** @class */ (function (_super) {
                 __extends(SVGElement, _super);
                 function SVGElement() {
-                    return _super !== null && _super.apply(this, arguments) || this;
+                    var _this = _super !== null && _super.apply(this, arguments) || this;
+                    _this._style = null;
+                    return _this;
                 }
                 Object.defineProperty(SVGElement.prototype, "viewportElement", {
                     /**
@@ -84,6 +89,47 @@ System.register(["../element/Element"], function (exports_1, context_1) {
                     enumerable: false,
                     configurable: true
                 });
+                Object.defineProperty(SVGElement.prototype, "style", {
+                    /**
+                     * Returns style.
+                     *
+                     * @returns Style.
+                     */
+                    get: function () {
+                        if (!this._style) {
+                            this._style = new CSSStyleDeclaration_1.default(this._attributes);
+                        }
+                        return this._style;
+                    },
+                    enumerable: false,
+                    configurable: true
+                });
+                /**
+                 * The setAttributeNode() method adds a new Attr node to the specified element.
+                 *
+                 * @override
+                 * @param attribute Attribute.
+                 * @returns Replaced attribute.
+                 */
+                SVGElement.prototype.setAttributeNode = function (attribute) {
+                    var replacedAttribute = _super.prototype.setAttributeNode.call(this, attribute);
+                    if (attribute.name === 'style' && this._style) {
+                        this._style.cssText = attribute.value;
+                    }
+                    return replacedAttribute;
+                };
+                /**
+                 * Removes an Attr node.
+                 *
+                 * @override
+                 * @param attribute Attribute.
+                 */
+                SVGElement.prototype.removeAttributeNode = function (attribute) {
+                    _super.prototype.removeAttributeNode.call(this, attribute);
+                    if (attribute.name === 'style' && this._style) {
+                        this._style.cssText = '';
+                    }
+                };
                 return SVGElement;
             }(Element_1.default));
             exports_1("default", SVGElement);

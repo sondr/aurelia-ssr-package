@@ -18,16 +18,6 @@ export default class URL {
     constructor(url?: string);
     /**
      * Returns the entire URL as a string.
-     */
-    toString(): string;
-    /**
-     * Parses an URL.
-     *
-     * @param url URL.
-     */
-    protected parse(url: string): void;
-    /**
-     * Returns the entire URL as a string.
      *
      * @returns Href.
      */
@@ -50,4 +40,14 @@ export default class URL {
      * @returns Host.
      */
     get host(): string;
+    /**
+     * Returns the entire URL as a string.
+     */
+    toString(): string;
+    /**
+     * Parses an URL.
+     *
+     * @param url URL.
+     */
+    protected parse(url: string): void;
 }

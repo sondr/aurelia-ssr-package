@@ -45,7 +45,6 @@ System.register(["../attribute/Attr"], function (exports_1, context_1) {
                     this.length = index;
                 }
                 Object.defineProperty(CSSStyleDeclaration.prototype, "alignContent", {
-                    /* eslint-disable require-jsdoc */
                     /**
                      *
                      */
@@ -5950,7 +5949,6 @@ System.register(["../attribute/Attr"], function (exports_1, context_1) {
                     configurable: true
                 });
                 Object.defineProperty(CSSStyleDeclaration.prototype, "cssText", {
-                    /* eslint-enable require-jsdoc */
                     /**
                      * Returns the style decleration as a CSS text.
                      *
@@ -5984,7 +5982,12 @@ System.register(["../attribute/Attr"], function (exports_1, context_1) {
                                 var part = parts_2[_i];
                                 if (part) {
                                     var _a = part.trim().split(':'), name_2 = _a[0], value = _a[1];
-                                    newStyle.push("".concat(name_2, ": ").concat(value.trim(), ";"));
+                                    if (value) {
+                                        newStyle.push("".concat(name_2, ": ").concat(value.trim(), ";"));
+                                    }
+                                    else {
+                                        newStyle.push(name_2);
+                                    }
                                     this[index] = name_2;
                                     index++;
                                 }
@@ -6010,7 +6013,7 @@ System.register(["../attribute/Attr"], function (exports_1, context_1) {
                  * @returns Item.
                  */
                 CSSStyleDeclaration.prototype.item = function (index) {
-                    return this[String(index)] || '';
+                    return this[index] || '';
                 };
                 /**
                  * Set a property.
@@ -6043,8 +6046,11 @@ System.register(["../attribute/Attr"], function (exports_1, context_1) {
                                     newStyle.push("".concat(name_3, ": ").concat(value, ";"));
                                     isExisting = true;
                                 }
-                                else {
+                                else if (existingValue) {
                                     newStyle.push("".concat(name_3, ": ").concat(existingValue.trim(), ";"));
+                                }
+                                else {
+                                    newStyle.push("".concat(name_3, ";"));
                                 }
                                 this[index] = name_3;
                                 index++;
@@ -6115,6 +6121,9 @@ System.register(["../attribute/Attr"], function (exports_1, context_1) {
                             if (part) {
                                 var _a = part.trim().split(':'), name_5 = _a[0], value = _a[1];
                                 if (name_5 === propertyName) {
+                                    if (!value) {
+                                        return '';
+                                    }
                                     return value.trim();
                                 }
                             }

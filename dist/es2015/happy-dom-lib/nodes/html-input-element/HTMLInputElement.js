@@ -6,6 +6,7 @@ import Event from '../../event/Event';
 import HTMLInputElementValueSanitizer from './HTMLInputElementValueSanitizer';
 import HTMLInputElementSelectionModeEnum from './HTMLInputElementSelectionModeEnum';
 import HTMLInputElementSelectionDirectionEnum from './HTMLInputElementSelectionDirectionEnum';
+import HTMLInputElementValueStepping from './HTMLInputElementValueStepping';
 /**
  * HTML Input Element.
  *
@@ -30,8 +31,6 @@ export default class HTMLInputElement extends HTMLElement {
         this.defaultChecked = false;
         // Type specific: file
         this.files = [];
-        // Not categorized
-        this.defaultValue = '';
         // Type specific: text/password/search/tel/url/week/month
         this._selectionStart = null;
         this._selectionEnd = null;
@@ -340,20 +339,20 @@ export default class HTMLInputElement extends HTMLElement {
         this.setAttributeNS(null, 'src', src);
     }
     /**
-     * Returns defaultvalue.
+     * Returns defaultValue.
      *
      * @returns Defaultvalue.
      */
-    get defaultvalue() {
+    get defaultValue() {
         return this.getAttributeNS(null, 'defaultvalue') || '';
     }
     /**
-     * Sets defaultvalue.
+     * Sets defaultValue.
      *
-     * @param defaultvalue Defaultvalue.
+     * @param defaultValue Defaultvalue.
      */
-    set defaultvalue(defaultvalue) {
-        this.setAttributeNS(null, 'defaultvalue', defaultvalue);
+    set defaultValue(defaultValue) {
+        this.setAttributeNS(null, 'defaultvalue', defaultValue);
     }
     /**
      * Returns read only.
@@ -688,6 +687,18 @@ export default class HTMLInputElement extends HTMLElement {
         return this.value ? parseFloat(this.value) : NaN;
     }
     /**
+     * Selects the text.
+     */
+    select() {
+        if (!this._isSelectionSupported()) {
+            return null;
+        }
+        this._selectionStart = 0;
+        this._selectionEnd = this.value.length;
+        this._selectionDirection = HTMLInputElementSelectionDirectionEnum.none;
+        this.dispatchEvent(new Event('select', { bubbles: true, cancelable: true }));
+    }
+    /**
      * Set selection range.
      *
      * @param start Start.
@@ -771,6 +782,28 @@ export default class HTMLInputElement extends HTMLElement {
      */
     checkValidity() {
         return true;
+    }
+    /**
+     * Steps up.
+     *
+     * @param [increment] Increment.
+     */
+    stepUp(increment) {
+        const newValue = HTMLInputElementValueStepping.step(this.type, this.value, 1, increment);
+        if (newValue !== null) {
+            this.value = newValue;
+        }
+    }
+    /**
+     * Steps down.
+     *
+     * @param [increment] Increment.
+     */
+    stepDown(increment) {
+        const newValue = HTMLInputElementValueStepping.step(this.type, this.value, -1, increment);
+        if (newValue !== null) {
+            this.value = newValue;
+        }
     }
     /**
      * Clones a node.

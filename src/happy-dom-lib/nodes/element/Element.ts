@@ -4,7 +4,8 @@ import Attr from '../../attribute/Attr';
 import NamedNodeMap from './NamedNodeMap';
 import DOMRect from './DOMRect';
 import Range from './Range';
-import ClassList from './ClassList';
+import DOMTokenList from '../../dom-token-list/DOMTokenList';
+import IDOMTokenList from '../../dom-token-list/IDOMTokenList';
 import QuerySelector from '../../query-selector/QuerySelector';
 import SelectorItem from '../../query-selector/SelectorItem';
 import MutationRecord from '../../mutation-observer/MutationRecord';
@@ -37,12 +38,29 @@ export default class Element extends Node implements IElement {
 	public tagName: string = null;
 	public nodeType = Node.ELEMENT_NODE;
 	public shadowRoot: IShadowRoot = null;
-	public readonly classList = new ClassList(this);
+
 	public scrollTop = 0;
 	public scrollLeft = 0;
 	public children: IHTMLCollection<IElement> = HTMLCollectionFactory.create();
-	public _attributes: { [k: string]: Attr } = {};
 	public readonly namespaceURI: string = null;
+
+	// Used for being able to access closed shadow roots
+	public _shadowRoot: IShadowRoot = null;
+	public _attributes: { [k: string]: Attr } = {};
+
+	private _classList: DOMTokenList = null;
+
+	/**
+	 * Returns class list.
+	 *
+	 * @returns Class list.
+	 */
+	public get classList(): IDOMTokenList {
+		if (!this._classList) {
+			this._classList = new DOMTokenList(this, 'class');
+		}
+		return <IDOMTokenList>this._classList;
+	}
 
 	/**
 	 * Returns ID.
@@ -95,7 +113,7 @@ export default class Element extends Node implements IElement {
 	 * @returns Local name.
 	 */
 	public get localName(): string {
-		return this.tagName.toLowerCase();
+		return this.tagName ? this.tagName.toLowerCase() : 'unknown';
 	}
 
 	/**
@@ -140,7 +158,9 @@ export default class Element extends Node implements IElement {
 		for (const child of this.childNodes.slice()) {
 			this.removeChild(child);
 		}
-		this.appendChild(this.ownerDocument.createTextNode(textContent));
+		if (textContent) {
+			this.appendChild(this.ownerDocument.createTextNode(textContent));
+		}
 	}
 
 	/**
@@ -195,7 +215,7 @@ export default class Element extends Node implements IElement {
 	 *
 	 * @returns Attributes.
 	 */
-	public get attributes(): NamedNodeMap {
+	 public get attributes(): NamedNodeMap {
 		const nodemap = new NamedNodeMap(this);
 		// Object.assign(nodemap, this._attributes);
 		// Array.prototype.push.apply(nodemap, Object.values(this._attributes));
@@ -203,6 +223,12 @@ export default class Element extends Node implements IElement {
 
 		return nodemap;
 	}
+	// public get attributes(): { [k: string]: Attr | number } {
+	// 	const attributes = Object.values(this._attributes);
+	// 	return Object.assign({}, this._attributes, attributes, {
+	// 		length: attributes.length
+	// 	});
+	// }
 
 	/**
 	 * First element child.
@@ -232,6 +258,24 @@ export default class Element extends Node implements IElement {
 	}
 
 	/**
+	 * Returns slot.
+	 *
+	 * @returns Slot.
+	 */
+	public get slot(): string {
+		return this.getAttributeNS(null, 'slot') || '';
+	}
+
+	/**
+	 * Returns slot.
+	 *
+	 * @param slot Slot.
+	 */
+	public set slot(title: string) {
+		this.setAttributeNS(null, 'slot', title);
+	}
+
+	/**
 	 * Attribute changed callback.
 	 *
 	 * @param name Name.
@@ -239,6 +283,26 @@ export default class Element extends Node implements IElement {
 	 * @param newValue New value.
 	 */
 	public attributeChangedCallback?(name: string, oldValue: string, newValue: string): void;
+
+	/**
+	 * Returns inner HTML and optionally the content of shadow roots.
+	 *
+	 * This is a feature implemented in Chromium, but not supported by Mozilla yet.
+	 *
+	 * @see https://web.dev/declarative-shadow-dom/
+	 * @see https://chromestatus.com/feature/5191745052606464
+	 * @param [options] Options.
+	 * @param [options.includeShadowRoots] Set to "true" to include shadow roots.
+	 * @returns HTML.
+	 */
+	public getInnerHTML(options?: { includeShadowRoots?: boolean }): string {
+		const xmlSerializer = new XMLSerializer();
+		let xml = '';
+		for (const node of this.childNodes) {
+			xml += xmlSerializer.serializeToString(node, options);
+		}
+		return xml;
+	}
 
 	/**
 	 * Clones a node.
@@ -457,6 +521,9 @@ export default class Element extends Node implements IElement {
 	 * @param text String to insert.
 	 */
 	public insertAdjacentText(position: TInsertAdjacentPositions, text: string): void {
+		if (!text) {
+			return;
+		}
 		const textNode = <IText>this.ownerDocument.createTextNode(text);
 		this.insertAdjacentElement(position, textNode);
 	}
@@ -594,15 +661,21 @@ export default class Element extends Node implements IElement {
 	 * @returns Shadow root.
 	 */
 	public attachShadow(shadowRootInit: { mode: string }): IShadowRoot {
-		if (this.shadowRoot) {
+		if (this._shadowRoot) {
 			throw new DOMException('Shadow root has already been attached.');
 		}
-		(<IShadowRoot>this.shadowRoot) = new ShadowRoot();
-		(<IDocument>this.shadowRoot.ownerDocument) = this.ownerDocument;
-		(<Element>this.shadowRoot.host) = this;
-		(<string>this.shadowRoot.mode) = shadowRootInit.mode;
-		this.shadowRoot.isConnected = this.isConnected;
-		return this.shadowRoot;
+
+		(<IShadowRoot>this._shadowRoot) = new ShadowRoot();
+		(<IDocument>this._shadowRoot.ownerDocument) = this.ownerDocument;
+		(<Element>this._shadowRoot.host) = this;
+		(<string>this._shadowRoot.mode) = shadowRootInit.mode;
+		(<ShadowRoot>this._shadowRoot)._connectToNode(this);
+
+		if (this._shadowRoot.mode === 'open') {
+			(<IShadowRoot>this.shadowRoot) = this._shadowRoot;
+		}
+
+		return this._shadowRoot;
 	}
 
 	/**
@@ -639,7 +712,46 @@ export default class Element extends Node implements IElement {
 	 * @returns "true" if matching.
 	 */
 	public matches(selector: string): boolean {
-		return new SelectorItem(selector).match(this);
+		for (const part of selector.split(',')) {
+			if (new SelectorItem(part.trim()).match(this)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Traverses the Element and its parents (heading toward the document root) until it finds a node that matches the provided selector string.
+	 *
+	 * @param selector Selector.
+	 * @returns Closest matching element.
+	 */
+	public closest(selector: string): IElement {
+		let rootElement: IElement = this.ownerDocument.documentElement;
+		if (!this.isConnected) {
+			rootElement = this;
+			while (rootElement.parentNode) {
+				rootElement = <IElement>rootElement.parentNode;
+			}
+		}
+		const elements = rootElement.querySelectorAll(selector);
+
+		// eslint-disable-next-line
+		let parent: IElement = this;
+		while (parent) {
+			if (elements.includes(parent)) {
+				return parent;
+			}
+			parent = parent.parentElement;
+		}
+
+		// QuerySelectorAll() will not match the element it is looking in when searched for
+		// Therefore we need to check if it matches the root
+		if (rootElement.matches(selector)) {
+			return rootElement;
+		}
+
+		return null;
 	}
 
 	/**
@@ -710,6 +822,8 @@ export default class Element extends Node implements IElement {
 
 		this._attributes[name] = attribute;
 
+		this._updateDomListIndices();
+
 		if (
 			this.attributeChangedCallback &&
 			(<typeof Element>this.constructor)._observedAttributes &&
@@ -726,6 +840,7 @@ export default class Element extends Node implements IElement {
 					(!observer.options.attributeFilter || observer.options.attributeFilter.includes(name))
 				) {
 					const record = new MutationRecord();
+					record.target = this;
 					record.type = MutationTypeEnum.attributes;
 					record.attributeName = name;
 					record.oldValue = observer.options.attributeOldValue ? oldValue : null;
@@ -783,6 +898,8 @@ export default class Element extends Node implements IElement {
 	public removeAttributeNode(attribute: Attr): void {
 		delete this._attributes[attribute.name];
 
+		this._updateDomListIndices();
+
 		if (
 			this.attributeChangedCallback &&
 			(<typeof Element>this.constructor)._observedAttributes &&
@@ -800,6 +917,7 @@ export default class Element extends Node implements IElement {
 						observer.options.attributeFilter.includes(attribute.name))
 				) {
 					const record = new MutationRecord();
+					record.target = this;
 					record.type = MutationTypeEnum.attributes;
 					record.attributeName = attribute.name;
 					record.oldValue = observer.options.attributeOldValue ? attribute.value : null;
@@ -873,5 +991,14 @@ export default class Element extends Node implements IElement {
 			return name;
 		}
 		return name.toLowerCase();
+	}
+
+	/**
+	 * Updates DOM list indices.
+	 */
+	protected _updateDomListIndices(): void {
+		if (this._classList) {
+			this._classList._updateIndices();
+		}
 	}
 }

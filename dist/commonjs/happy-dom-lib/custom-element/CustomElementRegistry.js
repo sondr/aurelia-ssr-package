@@ -18,13 +18,13 @@ var CustomElementRegistry = /** @class */ (function () {
      * @param options.extends
      */
     CustomElementRegistry.prototype.define = function (tagName, elementClass, options) {
-        var name = tagName.toLowerCase();
-        if (!name.includes('-')) {
+        var upperTagName = tagName.toUpperCase();
+        if (!upperTagName.includes('-')) {
             throw new DOMException_1.default("Failed to execute 'define' on 'CustomElementRegistry': \"" +
-                name +
+                tagName +
                 '" is not a valid custom element name.');
         }
-        this._registry[name] = {
+        this._registry[upperTagName] = {
             elementClass: elementClass,
             extends: options && options.extends ? options.extends.toLowerCase() : null
         };
@@ -32,12 +32,13 @@ var CustomElementRegistry = /** @class */ (function () {
         if (elementClass.prototype.attributeChangedCallback) {
             elementClass._observedAttributes = elementClass.observedAttributes;
         }
-        if (this._callbacks[name]) {
-            for (var _i = 0, _a = this._callbacks[name]; _i < _a.length; _i++) {
-                var callback = _a[_i];
+        if (this._callbacks[upperTagName]) {
+            var callbacks = this._callbacks[upperTagName];
+            delete this._callbacks[upperTagName];
+            for (var _i = 0, callbacks_1 = callbacks; _i < callbacks_1.length; _i++) {
+                var callback = callbacks_1[_i];
                 callback();
             }
-            delete this._callbacks[name];
         }
     };
     /**
@@ -47,8 +48,8 @@ var CustomElementRegistry = /** @class */ (function () {
      * @param HTMLElement Class defined.
      */
     CustomElementRegistry.prototype.get = function (tagName) {
-        var name = tagName.toLowerCase();
-        return this._registry[name] ? this._registry[name].elementClass : undefined;
+        var upperTagName = tagName.toUpperCase();
+        return this._registry[upperTagName] ? this._registry[upperTagName].elementClass : undefined;
     };
     /**
      * Upgrades a custom element directly, even before it is connected to its shadow root.
@@ -68,13 +69,13 @@ var CustomElementRegistry = /** @class */ (function () {
      */
     CustomElementRegistry.prototype.whenDefined = function (tagName) {
         var _this = this;
-        var name = tagName.toLowerCase();
-        if (this.get(name)) {
+        var upperTagName = tagName.toUpperCase();
+        if (this.get(upperTagName)) {
             return Promise.resolve();
         }
         return new Promise(function (resolve) {
-            _this._callbacks[name] = _this._callbacks[name] || [];
-            _this._callbacks[name].push(resolve);
+            _this._callbacks[upperTagName] = _this._callbacks[upperTagName] || [];
+            _this._callbacks[upperTagName].push(resolve);
         });
     };
     return CustomElementRegistry;

@@ -63,6 +63,22 @@ var ShadowRoot = /** @class */ (function (_super) {
         enumerable: false,
         configurable: true
     });
+    Object.defineProperty(ShadowRoot.prototype, "activeElement", {
+        /**
+         * Returns active element.
+         *
+         * @returns Active element.
+         */
+        get: function () {
+            var activeElement = this.ownerDocument['_activeElement'];
+            if (activeElement && activeElement.getRootNode() === this) {
+                return activeElement;
+            }
+            return null;
+        },
+        enumerable: false,
+        configurable: true
+    });
     /**
      * Converts to string.
      *

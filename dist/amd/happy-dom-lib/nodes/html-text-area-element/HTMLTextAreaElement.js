@@ -406,7 +406,7 @@ define(["require", "exports", "../../event/Event", "../../exception/DOMException
             get: function () {
                 var parent = this.parentNode;
                 while (parent && parent.tagName !== 'FORM') {
-                    parent = this.parentNode;
+                    parent = parent.parentNode;
                 }
                 return parent;
             },

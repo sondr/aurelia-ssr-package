@@ -10,6 +10,7 @@ import HTMLInputElementSelectionDirectionEnum from './HTMLInputElementSelectionD
 import IHTMLInputElement from './IHTMLInputElement';
 import IHTMLFormElement from '../html-form-element/IHTMLFormElement';
 import IHTMLElement from '../html-element/IHTMLElement';
+import HTMLInputElementValueStepping from './HTMLInputElementValueStepping';
 
 /**
  * HTML Input Element.
@@ -36,9 +37,6 @@ export default class HTMLInputElement extends HTMLElement implements IHTMLInputE
 
 	// Type specific: file
 	public files: File[] = [];
-
-	// Not categorized
-	public defaultValue = '';
 
 	// Type specific: text/password/search/tel/url/week/month
 	private _selectionStart = null;
@@ -384,21 +382,21 @@ export default class HTMLInputElement extends HTMLElement implements IHTMLInputE
 	}
 
 	/**
-	 * Returns defaultvalue.
+	 * Returns defaultValue.
 	 *
 	 * @returns Defaultvalue.
 	 */
-	public get defaultvalue(): string {
+	public get defaultValue(): string {
 		return this.getAttributeNS(null, 'defaultvalue') || '';
 	}
 
 	/**
-	 * Sets defaultvalue.
+	 * Sets defaultValue.
 	 *
-	 * @param defaultvalue Defaultvalue.
+	 * @param defaultValue Defaultvalue.
 	 */
-	public set defaultvalue(defaultvalue: string) {
-		this.setAttributeNS(null, 'defaultvalue', defaultvalue);
+	public set defaultValue(defaultValue: string) {
+		this.setAttributeNS(null, 'defaultvalue', defaultValue);
 	}
 
 	/**
@@ -781,6 +779,21 @@ export default class HTMLInputElement extends HTMLElement implements IHTMLInputE
 	}
 
 	/**
+	 * Selects the text.
+	 */
+	public select(): void {
+		if (!this._isSelectionSupported()) {
+			return null;
+		}
+
+		this._selectionStart = 0;
+		this._selectionEnd = this.value.length;
+		this._selectionDirection = HTMLInputElementSelectionDirectionEnum.none;
+
+		this.dispatchEvent(new Event('select', { bubbles: true, cancelable: true }));
+	}
+
+	/**
 	 * Set selection range.
 	 *
 	 * @param start Start.
@@ -889,6 +902,30 @@ export default class HTMLInputElement extends HTMLElement implements IHTMLInputE
 	 */
 	public checkValidity(): boolean {
 		return true;
+	}
+
+	/**
+	 * Steps up.
+	 *
+	 * @param [increment] Increment.
+	 */
+	public stepUp(increment?: number): void {
+		const newValue = HTMLInputElementValueStepping.step(this.type, this.value, 1, increment);
+		if (newValue !== null) {
+			this.value = newValue;
+		}
+	}
+
+	/**
+	 * Steps down.
+	 *
+	 * @param [increment] Increment.
+	 */
+	public stepDown(increment?: number): void {
+		const newValue = HTMLInputElementValueStepping.step(this.type, this.value, -1, increment);
+		if (newValue !== null) {
+			this.value = newValue;
+		}
 	}
 
 	/**

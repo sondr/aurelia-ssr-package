@@ -12,13 +12,21 @@ import Element from '../nodes/element/Element';
 import HTMLTemplateElement from '../nodes/html-template-element/HTMLTemplateElement';
 import HTMLFormElement from '../nodes/html-form-element/HTMLFormElement';
 import HTMLElement from '../nodes/html-element/HTMLElement';
+import HTMLUnknownElement from '../nodes/html-unknown-element/HTMLUnknownElement';
 import HTMLInputElement from '../nodes/html-input-element/HTMLInputElement';
 import HTMLTextAreaElement from '../nodes/html-text-area-element/HTMLTextAreaElement';
+import HTMLLinkElement from '../nodes/html-link-element/HTMLLinkElement';
+import HTMLStyleElement from '../nodes/html-style-element/HTMLStyleElement';
+import HTMLSlotElement from '../nodes/html-slot-element/HTMLSlotElement';
+import HTMLLabelElement from '../nodes/html-label-element/HTMLLabelElement';
+import HTMLMetaElement from '../nodes/html-meta-element/HTMLMetaElement';
 import SVGSVGElement from '../nodes/svg-element/SVGSVGElement';
 import SVGElement from '../nodes/svg-element/SVGElement';
 import HTMLScriptElement from '../nodes/html-script-element/HTMLScriptElement';
 import HTMLImageElement from '../nodes/html-image-element/HTMLImageElement';
+import Image from '../nodes/html-image-element/Image';
 import DocumentFragment from '../nodes/document-fragment/DocumentFragment';
+import CharacterData from '../nodes/character-data/CharacterData';
 import TreeWalker from '../tree-walker/TreeWalker';
 import Event from '../event/Event';
 import CustomEvent from '../event/events/CustomEvent';
@@ -30,18 +38,21 @@ import URL from '../location/URL';
 import Location from '../location/Location';
 import NonImplementedEventTypes from '../event/NonImplementedEventTypes';
 import MutationObserver from '../mutation-observer/MutationObserver';
-import ElementClass from '../config/ElementClass';
+import NonImplemenetedElementClasses from '../config/NonImplemenetedElementClasses';
 import DOMParser from '../dom-parser/DOMParser';
 import XMLSerializer from '../xml-serializer/XMLSerializer';
 import ResizeObserver from '../resize-observer/ResizeObserver';
-import CSSStyleSheet from '../css/CSSStyleSheet';
 import Blob from '../file/Blob';
 import File from '../file/File';
 import DOMException from '../exception/DOMException';
 import FileReader from '../file/FileReader';
 import History from '../history/History';
+import CSSStyleSheet from '../css/CSSStyleSheet';
 import CSSStyleDeclaration from '../css/CSSStyleDeclaration';
+import CSS from '../css/CSS';
+import CSSUnitValue from '../css/CSSUnitValue';
 import MouseEvent from '../event/events/MouseEvent';
+import PointerEvent from '../event/events/PointerEvent';
 import FocusEvent from '../event/events/FocusEvent';
 import WheelEvent from '../event/events/WheelEvent';
 import DataTransfer from '../event/DataTransfer';
@@ -50,17 +61,26 @@ import DataTransferItemList from '../event/DataTransferItemList';
 import InputEvent from '../event/events/InputEvent';
 import UIEvent from '../event/UIEvent';
 import ErrorEvent from '../event/events/ErrorEvent';
+import StorageEvent from '../event/events/StorageEvent';
 import Screen from '../screen/Screen';
 import AsyncTaskManager from './AsyncTaskManager';
 import IResponse from './IResponse';
 import AsyncTaskTypeEnum from './AsyncTaskTypeEnum';
 import RelativeURL from '../location/RelativeURL';
 import Storage from '../storage/Storage';
-import HTMLLinkElement from '../nodes/html-link-element/HTMLLinkElement';
-import HTMLStyleElement from '../nodes/html-style-element/HTMLStyleElement';
 import IFetchOptions from './IFetchOptions';
 import IWindow from './IWindow';
 import URLSearchParams from '../url-search-params/URLSearchParams';
+import HTMLCollection from '../nodes/element/HTMLCollection';
+import NodeList from '../nodes/node/NodeList';
+import MediaQueryList from '../match-media/MediaQueryList';
+import Selection from '../selection/Selection';
+import * as PerfHooks from 'perf_hooks';
+import Navigator from '../navigator/Navigator';
+import MimeType from '../navigator/MimeType';
+import MimeTypeArray from '../navigator/MimeTypeArray';
+import Plugin from '../navigator/Plugin';
+import PluginArray from '../navigator/PluginArray';
 
 const FETCH_RESPONSE_TYPE_METHODS = ['blob', 'json', 'text'];
 
@@ -82,14 +102,19 @@ export default class Window extends EventTarget implements IWindow, NodeJS.Globa
 	// Global classes
 	public readonly Node = Node;
 	public readonly HTMLElement = HTMLElement;
+	public readonly HTMLUnknownElement = HTMLUnknownElement;
 	public readonly HTMLTemplateElement = HTMLTemplateElement;
 	public readonly HTMLFormElement = HTMLFormElement;
 	public readonly HTMLInputElement = HTMLInputElement;
 	public readonly HTMLTextAreaElement = HTMLTextAreaElement;
 	public readonly HTMLImageElement = HTMLImageElement;
+	public readonly Image = Image;
 	public readonly HTMLScriptElement = HTMLScriptElement;
 	public readonly HTMLLinkElement = HTMLLinkElement;
 	public readonly HTMLStyleElement = HTMLStyleElement;
+	public readonly HTMLLabelElement = HTMLLabelElement;
+	public readonly HTMLSlotElement = HTMLSlotElement;
+	public readonly HTMLMetaElement = HTMLMetaElement;
 	public readonly SVGSVGElement = SVGSVGElement;
 	public readonly SVGElement = SVGElement;
 	public readonly Text = Text;
@@ -97,6 +122,7 @@ export default class Window extends EventTarget implements IWindow, NodeJS.Globa
 	public readonly ShadowRoot = ShadowRoot;
 	public readonly Element = Element;
 	public readonly DocumentFragment = DocumentFragment;
+	public readonly CharacterData = CharacterData;
 	public readonly NodeFilter = NodeFilter;
 	public readonly TreeWalker = TreeWalker;
 	public readonly DOMParser = DOMParser;
@@ -111,10 +137,12 @@ export default class Window extends EventTarget implements IWindow, NodeJS.Globa
 	public readonly AnimationEvent = AnimationEvent;
 	public readonly KeyboardEvent = KeyboardEvent;
 	public readonly MouseEvent = MouseEvent;
+	public readonly PointerEvent = PointerEvent;
 	public readonly FocusEvent = FocusEvent;
 	public readonly WheelEvent = WheelEvent;
 	public readonly InputEvent = InputEvent;
 	public readonly ErrorEvent = ErrorEvent;
+	public readonly StorageEvent = StorageEvent;
 	public readonly ProgressEvent = ProgressEvent;
 	public readonly EventTarget = EventTarget;
 	public readonly DataTransfer = DataTransfer;
@@ -136,6 +164,16 @@ export default class Window extends EventTarget implements IWindow, NodeJS.Globa
 	public readonly Screen = Screen;
 	public readonly Storage = Storage;
 	public readonly URLSearchParams = URLSearchParams;
+	public readonly HTMLCollection = HTMLCollection;
+	public readonly NodeList = NodeList;
+	public readonly MediaQueryList = MediaQueryList;
+	public readonly CSSUnitValue = CSSUnitValue;
+	public readonly Selection = Selection;
+	public readonly Navigator = Navigator;
+	public readonly MimeType = MimeType;
+	public readonly MimeTypeArray = MimeTypeArray;
+	public readonly Plugin = Plugin;
+	public readonly PluginArray = PluginArray;
 
 	// Events
 	public onload: (event: Event) => void = null;
@@ -146,17 +184,20 @@ export default class Window extends EventTarget implements IWindow, NodeJS.Globa
 	public readonly customElements: CustomElementRegistry = new CustomElementRegistry();
 	public readonly location = new Location();
 	public readonly history = new History();
-	public readonly navigator = { userAgent: 'happy-dom' };
+	public readonly navigator = new Navigator();
 	public readonly console = global ? global.console : null;
 	public readonly self = this;
 	public readonly top = this;
 	public readonly parent = this;
 	public readonly window = this;
+	public readonly globalThis = this;
 	public readonly screen = new Screen();
 	public readonly innerWidth = 1024;
 	public readonly innerHeight = 768;
+	public readonly devicePixelRatio = 1;
 	public readonly sessionStorage = new Storage();
 	public readonly localStorage = new Storage();
+	public readonly performance = PerfHooks.performance;
 
 	// Node.js Globals
 	public Array = global ? global.Array : null;
@@ -169,7 +210,6 @@ export default class Window extends EventTarget implements IWindow, NodeJS.Globa
 	public EvalError = global ? global.EvalError : null;
 	public Float32Array = global ? global.Float32Array : null;
 	public Float64Array = global ? global.Float64Array : null;
-	public Function = global ? global.Function : null;
 	public GLOBAL = null;
 	public Infinity = global ? global.Infinity : null;
 	public Int16Array = global ? global.Int16Array : null;
@@ -180,7 +220,6 @@ export default class Window extends EventTarget implements IWindow, NodeJS.Globa
 	public Map = global ? global.Map : null;
 	public Math = global ? global.Math : null;
 	public NaN = global ? global.NaN : null;
-	public Object = global ? global.Object : null;
 	public Number = global ? global.Number : null;
 	public Promise = global ? global.Promise : null;
 	public RangeError = global ? global.RangeError : null;
@@ -221,6 +260,10 @@ export default class Window extends EventTarget implements IWindow, NodeJS.Globa
 	public AbortController = global ? global.AbortController : null;
 	public AbortSignal = global ? global.AbortSignal : null;
 
+	// Private properties
+	private _objectClass: typeof globalThis.Object = null;
+	private _functionClass: typeof globalThis.Function = null;
+
 	/**
 	 * Constructor.
 	 */
@@ -235,6 +278,7 @@ export default class Window extends EventTarget implements IWindow, NodeJS.Globa
 
 		DOMParser._ownerDocument = DOMParser._ownerDocument || this.document;
 		FileReader._ownerDocument = FileReader._ownerDocument || this.document;
+		Image.ownerDocument = Image.ownerDocument || this.document;
 
 		for (const eventType of NonImplementedEventTypes) {
 			if (!this[eventType]) {
@@ -242,9 +286,9 @@ export default class Window extends EventTarget implements IWindow, NodeJS.Globa
 			}
 		}
 
-		for (const className of Object.keys(ElementClass)) {
+		for (const className of NonImplemenetedElementClasses) {
 			if (!this[className]) {
-				this[className] = ElementClass[className];
+				this[className] = HTMLElement;
 			}
 		}
 
@@ -257,11 +301,51 @@ export default class Window extends EventTarget implements IWindow, NodeJS.Globa
 	}
 
 	/**
+	 * Returns Object class.
+	 *
+	 * @returns Object class.
+	 */
+	public get Object(): typeof globalThis.Object {
+		if (this._objectClass) {
+			return this._objectClass;
+		}
+		// When inside a VM global.Object is not the same as ({}).constructor
+		// We will therefore run the code inside the VM to get the real constructor
+		this._objectClass = <typeof globalThis.Object>this.eval('({}).constructor');
+		return this._objectClass;
+	}
+
+	/**
+	 * Returns Function class.
+	 *
+	 * @returns Function class.
+	 */
+	public get Function(): typeof globalThis.Function {
+		if (this._functionClass) {
+			return this._functionClass;
+		}
+		// When inside a VM global.Function is not the same as (() => {}).constructor
+		// We will therefore run the code inside the VM to get the real constructor
+		this._functionClass = <typeof globalThis.Function>this.eval('(() => {}).constructor');
+		return this._functionClass;
+	}
+
+	/**
+	 * The CSS interface holds useful CSS-related methods.
+	 *
+	 * @returns CSS interface.
+	 */
+	public get CSS(): CSS {
+		return new CSS();
+	}
+
+	/**
 	 * Evaluates code.
 	 *
 	 * @param code Code.
+	 * @returns Result.
 	 */
-	public eval(code: string): void {
+	public eval(code: string): unknown {
 		let vmExists = false;
 		let vm = null;
 
@@ -275,11 +359,11 @@ export default class Window extends EventTarget implements IWindow, NodeJS.Globa
 			vm = require('vm');
 		}
 
-		if (global && vm && vm.isContext(this)) {
-			vm.runInContext(code, this);
-		} else if (global && global.eval) {
-			global.eval(code);
+		if (vm && vm.isContext(this)) {
+			return vm.runInContext(code, this);
 		}
+
+		return global.eval(code);
 	}
 
 	/**
@@ -334,6 +418,18 @@ export default class Window extends EventTarget implements IWindow, NodeJS.Globa
 		y?: number
 	): void {
 		this.scroll(x, y);
+	}
+
+	/**
+	 * Returns a new MediaQueryList object that can then be used to determine if the document matches the media query string.
+	 *
+	 * @param mediaQueryString A string specifying the media query to parse into a MediaQueryList.
+	 * @returns A new MediaQueryList.
+	 */
+	public matchMedia(mediaQueryString: string): MediaQueryList {
+		const mediaQueryList = new MediaQueryList();
+		mediaQueryList._media = mediaQueryString;
+		return mediaQueryList;
 	}
 
 	/**
@@ -433,7 +529,7 @@ export default class Window extends EventTarget implements IWindow, NodeJS.Globa
 			this.happyDOM.asyncTaskManager.startTask(AsyncTaskTypeEnum.fetch);
 
 			fetch(RelativeURL.getAbsoluteURL(this.location, url), options)
-				.then(response => {
+				.then((response) => {
 					if (this.happyDOM.asyncTaskManager.getRunningCount(AsyncTaskTypeEnum.fetch) === 0) {
 						reject(new Error('Failed to complete fetch request. Task was canceled.'));
 					} else {
@@ -445,7 +541,7 @@ export default class Window extends EventTarget implements IWindow, NodeJS.Globa
 
 									asyncMethod
 										.call(response)
-										.then(response => {
+										.then((response) => {
 											if (
 												this.happyDOM.asyncTaskManager.getRunningCount(AsyncTaskTypeEnum.fetch) ===
 												0
@@ -456,7 +552,7 @@ export default class Window extends EventTarget implements IWindow, NodeJS.Globa
 												this.happyDOM.asyncTaskManager.endTask(AsyncTaskTypeEnum.fetch);
 											}
 										})
-										.catch(error => {
+										.catch((error) => {
 											reject(error);
 											this.happyDOM.asyncTaskManager.endTask(AsyncTaskTypeEnum.fetch, error);
 										});
@@ -468,7 +564,7 @@ export default class Window extends EventTarget implements IWindow, NodeJS.Globa
 						this.happyDOM.asyncTaskManager.endTask(AsyncTaskTypeEnum.fetch);
 					}
 				})
-				.catch(error => {
+				.catch((error) => {
 					reject(error);
 					this.happyDOM.asyncTaskManager.endTask(AsyncTaskTypeEnum.fetch, error);
 				});

@@ -8,6 +8,7 @@ import IHTMLStyleElement from './IHTMLStyleElement';
  * https://developer.mozilla.org/en-US/docs/Web/API/HTMLStyleElement.
  */
 export default class HTMLStyleElement extends HTMLElement implements IHTMLStyleElement {
+    private _styleSheet;
     /**
      * Returns CSS style sheet.
      *

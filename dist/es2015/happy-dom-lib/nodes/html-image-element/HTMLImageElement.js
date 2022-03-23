@@ -8,6 +8,7 @@ import HTMLElement from '../html-element/HTMLElement';
 export default class HTMLImageElement extends HTMLElement {
     constructor() {
         super(...arguments);
+        this.tagName = 'IMG';
         this.complete = false;
         this.naturalHeight = 0;
         this.naturalWidth = 0;
@@ -47,7 +48,8 @@ export default class HTMLImageElement extends HTMLElement {
      * @returns Height.
      */
     get height() {
-        return this.getAttributeNS(null, 'height') || '';
+        const height = this.getAttributeNS(null, 'height');
+        return height !== null ? Number(height) : 0;
     }
     /**
      * Sets height.
@@ -55,7 +57,7 @@ export default class HTMLImageElement extends HTMLElement {
      * @param height Height.
      */
     set height(height) {
-        this.setAttributeNS(null, 'height', height);
+        this.setAttributeNS(null, 'height', String(height));
     }
     /**
      * Returns is map.
@@ -164,7 +166,8 @@ export default class HTMLImageElement extends HTMLElement {
      * @returns Width.
      */
     get width() {
-        return this.getAttributeNS(null, 'width') || '';
+        const width = this.getAttributeNS(null, 'width');
+        return width !== null ? Number(width) : 0;
     }
     /**
      * Sets width.
@@ -172,7 +175,7 @@ export default class HTMLImageElement extends HTMLElement {
      * @param width Width.
      */
     set width(width) {
-        this.setAttributeNS(null, 'width', width);
+        this.setAttributeNS(null, 'width', String(width));
     }
     /**
      * The decode() method of the HTMLImageElement interface returns a Promise that resolves when the image is decoded and it is safe to append the image to the DOM.

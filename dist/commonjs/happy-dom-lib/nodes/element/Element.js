@@ -30,7 +30,7 @@ var Attr_1 = require("../../attribute/Attr");
 var NamedNodeMap_1 = require("./NamedNodeMap");
 var DOMRect_1 = require("./DOMRect");
 var Range_1 = require("./Range");
-var ClassList_1 = require("./ClassList");
+var DOMTokenList_1 = require("../../dom-token-list/DOMTokenList");
 var QuerySelector_1 = require("../../query-selector/QuerySelector");
 var SelectorItem_1 = require("../../query-selector/SelectorItem");
 var MutationRecord_1 = require("../../mutation-observer/MutationRecord");
@@ -53,14 +53,31 @@ var Element = /** @class */ (function (_super) {
         _this.tagName = null;
         _this.nodeType = Node_1.default.ELEMENT_NODE;
         _this.shadowRoot = null;
-        _this.classList = new ClassList_1.default(_this);
         _this.scrollTop = 0;
         _this.scrollLeft = 0;
         _this.children = HTMLCollectionFactory_1.default.create();
-        _this._attributes = {};
         _this.namespaceURI = null;
+        // Used for being able to access closed shadow roots
+        _this._shadowRoot = null;
+        _this._attributes = {};
+        _this._classList = null;
         return _this;
     }
+    Object.defineProperty(Element.prototype, "classList", {
+        /**
+         * Returns class list.
+         *
+         * @returns Class list.
+         */
+        get: function () {
+            if (!this._classList) {
+                this._classList = new DOMTokenList_1.default(this, 'class');
+            }
+            return this._classList;
+        },
+        enumerable: false,
+        configurable: true
+    });
     Object.defineProperty(Element.prototype, "id", {
         /**
          * Returns ID.
@@ -120,7 +137,7 @@ var Element = /** @class */ (function (_super) {
          * @returns Local name.
          */
         get: function () {
-            return this.tagName.toLowerCase();
+            return this.tagName ? this.tagName.toLowerCase() : 'unknown';
         },
         enumerable: false,
         configurable: true
@@ -175,7 +192,9 @@ var Element = /** @class */ (function (_super) {
                 var child = _a[_i];
                 this.removeChild(child);
             }
-            this.appendChild(this.ownerDocument.createTextNode(textContent));
+            if (textContent) {
+                this.appendChild(this.ownerDocument.createTextNode(textContent));
+            }
         },
         enumerable: false,
         configurable: true
@@ -250,6 +269,12 @@ var Element = /** @class */ (function (_super) {
         configurable: true
     });
     Object.defineProperty(Element.prototype, "firstElementChild", {
+        // public get attributes(): { [k: string]: Attr | number } {
+        // 	const attributes = Object.values(this._attributes);
+        // 	return Object.assign({}, this._attributes, attributes, {
+        // 		length: attributes.length
+        // 	});
+        // }
         /**
          * First element child.
          *
@@ -285,6 +310,46 @@ var Element = /** @class */ (function (_super) {
         enumerable: false,
         configurable: true
     });
+    Object.defineProperty(Element.prototype, "slot", {
+        /**
+         * Returns slot.
+         *
+         * @returns Slot.
+         */
+        get: function () {
+            return this.getAttributeNS(null, 'slot') || '';
+        },
+        /**
+         * Returns slot.
+         *
+         * @param slot Slot.
+         */
+        set: function (title) {
+            this.setAttributeNS(null, 'slot', title);
+        },
+        enumerable: false,
+        configurable: true
+    });
+    /**
+     * Returns inner HTML and optionally the content of shadow roots.
+     *
+     * This is a feature implemented in Chromium, but not supported by Mozilla yet.
+     *
+     * @see https://web.dev/declarative-shadow-dom/
+     * @see https://chromestatus.com/feature/5191745052606464
+     * @param [options] Options.
+     * @param [options.includeShadowRoots] Set to "true" to include shadow roots.
+     * @returns HTML.
+     */
+    Element.prototype.getInnerHTML = function (options) {
+        var xmlSerializer = new XMLSerializer_1.default();
+        var xml = '';
+        for (var _i = 0, _a = this.childNodes; _i < _a.length; _i++) {
+            var node = _a[_i];
+            xml += xmlSerializer.serializeToString(node, options);
+        }
+        return xml;
+    };
     /**
      * Clones a node.
      *
@@ -507,6 +572,9 @@ var Element = /** @class */ (function (_super) {
      * @param text String to insert.
      */
     Element.prototype.insertAdjacentText = function (position, text) {
+        if (!text) {
+            return;
+        }
         var textNode = this.ownerDocument.createTextNode(text);
         this.insertAdjacentElement(position, textNode);
     };
@@ -635,15 +703,18 @@ var Element = /** @class */ (function (_super) {
      * @returns Shadow root.
      */
     Element.prototype.attachShadow = function (shadowRootInit) {
-        if (this.shadowRoot) {
+        if (this._shadowRoot) {
             throw new DOMException_1.default('Shadow root has already been attached.');
         }
-        this.shadowRoot = new ShadowRoot_1.default();
-        this.shadowRoot.ownerDocument = this.ownerDocument;
-        this.shadowRoot.host = this;
-        this.shadowRoot.mode = shadowRootInit.mode;
-        this.shadowRoot.isConnected = this.isConnected;
-        return this.shadowRoot;
+        this._shadowRoot = new ShadowRoot_1.default();
+        this._shadowRoot.ownerDocument = this.ownerDocument;
+        this._shadowRoot.host = this;
+        this._shadowRoot.mode = shadowRootInit.mode;
+        this._shadowRoot._connectToNode(this);
+        if (this._shadowRoot.mode === 'open') {
+            this.shadowRoot = this._shadowRoot;
+        }
+        return this._shadowRoot;
     };
     /**
      * Converts to string.
@@ -676,7 +747,43 @@ var Element = /** @class */ (function (_super) {
      * @returns "true" if matching.
      */
     Element.prototype.matches = function (selector) {
-        return new SelectorItem_1.default(selector).match(this);
+        for (var _i = 0, _a = selector.split(','); _i < _a.length; _i++) {
+            var part = _a[_i];
+            if (new SelectorItem_1.default(part.trim()).match(this)) {
+                return true;
+            }
+        }
+        return false;
+    };
+    /**
+     * Traverses the Element and its parents (heading toward the document root) until it finds a node that matches the provided selector string.
+     *
+     * @param selector Selector.
+     * @returns Closest matching element.
+     */
+    Element.prototype.closest = function (selector) {
+        var rootElement = this.ownerDocument.documentElement;
+        if (!this.isConnected) {
+            rootElement = this;
+            while (rootElement.parentNode) {
+                rootElement = rootElement.parentNode;
+            }
+        }
+        var elements = rootElement.querySelectorAll(selector);
+        // eslint-disable-next-line
+        var parent = this;
+        while (parent) {
+            if (elements.includes(parent)) {
+                return parent;
+            }
+            parent = parent.parentElement;
+        }
+        // QuerySelectorAll() will not match the element it is looking in when searched for
+        // Therefore we need to check if it matches the root
+        if (rootElement.matches(selector)) {
+            return rootElement;
+        }
+        return null;
     };
     /**
      * Query CSS selector to find matching nodes.
@@ -738,6 +845,7 @@ var Element = /** @class */ (function (_super) {
         attribute.ownerElement = this;
         attribute.ownerDocument = this.ownerDocument;
         this._attributes[name] = attribute;
+        this._updateDomListIndices();
         if (this.attributeChangedCallback &&
             this.constructor._observedAttributes &&
             this.constructor._observedAttributes.includes(name)) {
@@ -750,6 +858,7 @@ var Element = /** @class */ (function (_super) {
                 if (observer.options.attributes &&
                     (!observer.options.attributeFilter || observer.options.attributeFilter.includes(name))) {
                     var record = new MutationRecord_1.default();
+                    record.target = this;
                     record.type = MutationTypeEnum_1.default.attributes;
                     record.attributeName = name;
                     record.oldValue = observer.options.attributeOldValue ? oldValue : null;
@@ -802,6 +911,7 @@ var Element = /** @class */ (function (_super) {
      */
     Element.prototype.removeAttributeNode = function (attribute) {
         delete this._attributes[attribute.name];
+        this._updateDomListIndices();
         if (this.attributeChangedCallback &&
             this.constructor._observedAttributes &&
             this.constructor._observedAttributes.includes(attribute.name)) {
@@ -815,6 +925,7 @@ var Element = /** @class */ (function (_super) {
                     (!observer.options.attributeFilter ||
                         observer.options.attributeFilter.includes(attribute.name))) {
                     var record = new MutationRecord_1.default();
+                    record.target = this;
                     record.type = MutationTypeEnum_1.default.attributes;
                     record.attributeName = attribute.name;
                     record.oldValue = observer.options.attributeOldValue ? attribute.value : null;
@@ -884,6 +995,14 @@ var Element = /** @class */ (function (_super) {
             return name;
         }
         return name.toLowerCase();
+    };
+    /**
+     * Updates DOM list indices.
+     */
+    Element.prototype._updateDomListIndices = function () {
+        if (this._classList) {
+            this._classList._updateIndices();
+        }
     };
     return Element;
 }(Node_1.default));

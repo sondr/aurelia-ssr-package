@@ -29,50 +29,13 @@ define(["require", "exports", "../../event/EventTarget", "../../mutation-observe
             _this.ownerDocument = null;
             _this.parentNode = null;
             _this.childNodes = NodeListFactory_1.default.create();
-            // Protected properties
-            _this._isConnected = false;
+            _this.isConnected = false;
+            _this._rootNode = null;
             // Custom Properties (not part of HTML standard)
             _this._observers = [];
             _this.ownerDocument = _this.constructor.ownerDocument;
             return _this;
         }
-        Object.defineProperty(Node.prototype, "isConnected", {
-            /**
-             * Returns "true" if connected to DOM.
-             *
-             * @returns "true" if connected.
-             */
-            get: function () {
-                return this._isConnected;
-            },
-            /**
-             * Sets the connected state.
-             *
-             * @param isConnected "true" if connected.
-             */
-            set: function (isConnected) {
-                if (this._isConnected !== isConnected) {
-                    this._isConnected = isConnected;
-                    if (isConnected && this.connectedCallback) {
-                        this.connectedCallback();
-                    }
-                    else if (!isConnected && this.disconnectedCallback) {
-                        this.disconnectedCallback();
-                    }
-                    for (var _i = 0, _a = this.childNodes; _i < _a.length; _i++) {
-                        var child = _a[_i];
-                        child.isConnected = isConnected;
-                    }
-                    // eslint-disable-next-line
-                    if (this.shadowRoot) {
-                        // eslint-disable-next-line
-                        this.shadowRoot.isConnected = isConnected;
-                    }
-                }
-            },
-            enumerable: false,
-            configurable: true
-        });
         Object.defineProperty(Node.prototype, "textContent", {
             /**
              * Get text value of children.
@@ -101,6 +64,12 @@ define(["require", "exports", "../../event/EventTarget", "../../mutation-observe
              */
             get: function () {
                 return null;
+            },
+            /**
+             * Sets node value.
+             */
+            set: function (_nodeValue) {
+                // Do nothing
             },
             enumerable: false,
             configurable: true
@@ -192,7 +161,7 @@ define(["require", "exports", "../../event/EventTarget", "../../mutation-observe
             get: function () {
                 var parent = this.parentNode;
                 while (parent && parent.nodeType !== Node.ELEMENT_NODE) {
-                    parent = this.parentNode;
+                    parent = parent.parentNode;
                 }
                 return parent;
             },
@@ -208,6 +177,21 @@ define(["require", "exports", "../../event/EventTarget", "../../mutation-observe
             return this.childNodes.length > 0;
         };
         /**
+         * Returns "true" if this node contains the other node.
+         *
+         * @param otherNode Node to test with.
+         * @returns "true" if this node contains the other node.
+         */
+        Node.prototype.contains = function (otherNode) {
+            for (var _i = 0, _a = this.childNodes; _i < _a.length; _i++) {
+                var childNode = _a[_i];
+                if (childNode === otherNode || childNode.contains(otherNode)) {
+                    return true;
+                }
+            }
+            return false;
+        };
+        /**
          * Returns closest root node (Document or ShadowRoot).
          *
          * @param options Options.
@@ -215,20 +199,13 @@ define(["require", "exports", "../../event/EventTarget", "../../mutation-observe
          * @returns Node.
          */
         Node.prototype.getRootNode = function (options) {
-            // eslint-disable-next-line
-            var parent = this;
-            while (!!parent) {
-                if (!parent.parentNode) {
-                    if (!(options === null || options === void 0 ? void 0 : options.composed) || !parent.host) {
-                        return parent;
-                    }
-                    parent = parent.host;
-                }
-                else {
-                    parent = parent.parentNode;
-                }
+            if (!this.isConnected) {
+                return this;
             }
-            return null;
+            if (this._rootNode && !(options === null || options === void 0 ? void 0 : options.composed)) {
+                return this._rootNode;
+            }
+            return this.ownerDocument;
         };
         /**
          * Clones a node.
@@ -239,9 +216,12 @@ define(["require", "exports", "../../event/EventTarget", "../../mutation-observe
         Node.prototype.cloneNode = function (deep) {
             if (deep === void 0) { deep = false; }
             var clone = new this.constructor();
-            for (var _i = 0, _a = clone.childNodes.slice(); _i < _a.length; _i++) {
-                var node = _a[_i];
-                node.parentNode.removeChild(node);
+            // Document has childNodes directly when it is created
+            if (clone.childNodes.length) {
+                for (var _i = 0, _a = clone.childNodes.slice(); _i < _a.length; _i++) {
+                    var node = _a[_i];
+                    node.parentNode.removeChild(node);
+                }
             }
             if (deep) {
                 for (var _b = 0, _c = this.childNodes; _b < _c.length; _b++) {
@@ -281,11 +261,11 @@ define(["require", "exports", "../../event/EventTarget", "../../mutation-observe
                 }
             }
             this.childNodes.push(node);
-            node.parentNode = this;
-            node.isConnected = this.isConnected;
+            node._connectToNode(this);
             // MutationObserver
             if (this._observers.length > 0) {
                 var record = new MutationRecord_1.default();
+                record.target = this;
                 record.type = MutationTypeEnum_1.default.childList;
                 record.addedNodes = [node];
                 for (var _b = 0, _c = this._observers; _b < _c.length; _b++) {
@@ -312,11 +292,11 @@ define(["require", "exports", "../../event/EventTarget", "../../mutation-observe
                 throw new DOMException_1.default('Failed to remove node. Node is not child of parent.');
             }
             this.childNodes.splice(index, 1);
-            node.parentNode = null;
-            node.isConnected = false;
+            node._connectToNode(null);
             // MutationObserver
             if (this._observers.length > 0) {
                 var record = new MutationRecord_1.default();
+                record.target = this;
                 record.type = MutationTypeEnum_1.default.childList;
                 record.removedNodes = [node];
                 for (var _i = 0, _a = this._observers; _i < _a.length; _i++) {
@@ -364,11 +344,11 @@ define(["require", "exports", "../../event/EventTarget", "../../mutation-observe
                 }
             }
             this.childNodes.splice(index, 0, newNode);
-            newNode.parentNode = this;
-            newNode.isConnected = this.isConnected;
+            newNode._connectToNode(this);
             // MutationObserver
             if (this._observers.length > 0) {
                 var record = new MutationRecord_1.default();
+                record.target = this;
                 record.type = MutationTypeEnum_1.default.childList;
                 record.addedNodes = [newNode];
                 for (var _b = 0, _c = this._observers; _b < _c.length; _b++) {
@@ -399,13 +379,16 @@ define(["require", "exports", "../../event/EventTarget", "../../mutation-observe
          * @override
          */
         Node.prototype.dispatchEvent = function (event) {
-            var onEventName = 'on' + event.type.toLowerCase();
-            if (typeof this[onEventName] === 'function') {
-                this[onEventName].call(this, event);
-            }
             var returnValue = _super.prototype.dispatchEvent.call(this, event);
-            if (event.bubbles && this.parentNode !== null && !event._propagationStopped) {
-                return this.parentNode.dispatchEvent(event);
+            if (event.bubbles && !event._propagationStopped) {
+                if (this.parentNode) {
+                    return this.parentNode.dispatchEvent(event);
+                }
+                // eslint-disable-next-line
+                if (event.composed && this.host) {
+                    // eslint-disable-next-line
+                    return this.host.dispatchEvent(event);
+                }
             }
             return returnValue;
         };
@@ -447,6 +430,37 @@ define(["require", "exports", "../../event/EventTarget", "../../mutation-observe
                 for (var _i = 0, _a = this.childNodes; _i < _a.length; _i++) {
                     var node = _a[_i];
                     node._unobserve(listener);
+                }
+            }
+        };
+        /**
+         * Connects this element to another element.
+         *
+         * @param parentNode Parent node.
+         */
+        Node.prototype._connectToNode = function (parentNode) {
+            if (parentNode === void 0) { parentNode = null; }
+            var isConnected = !!parentNode && parentNode.isConnected;
+            if (this.nodeType !== Node.DOCUMENT_FRAGMENT_NODE) {
+                this.parentNode = parentNode;
+                this._rootNode = isConnected && parentNode ? parentNode._rootNode : null;
+            }
+            if (this.isConnected !== isConnected) {
+                this.isConnected = isConnected;
+                if (isConnected && this.connectedCallback) {
+                    this.connectedCallback();
+                }
+                else if (!isConnected && this.disconnectedCallback) {
+                    this.disconnectedCallback();
+                }
+                for (var _i = 0, _a = this.childNodes; _i < _a.length; _i++) {
+                    var child = _a[_i];
+                    child._connectToNode(this);
+                }
+                // eslint-disable-next-line
+                if (this._shadowRoot) {
+                    // eslint-disable-next-line
+                    this._shadowRoot._connectToNode(this);
                 }
             }
         };

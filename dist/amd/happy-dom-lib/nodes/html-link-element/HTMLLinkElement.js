@@ -13,7 +13,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-define(["require", "exports", "../../css/CSSStyleSheet", "../../fetch/ResourceFetcher", "../html-element/HTMLElement", "../../event/Event", "../../event/events/ErrorEvent"], function (require, exports, CSSStyleSheet_1, ResourceFetcher_1, HTMLElement_1, Event_1, ErrorEvent_1) {
+define(["require", "exports", "../../css/CSSStyleSheet", "../../fetch/ResourceFetcher", "../html-element/HTMLElement", "../../event/Event", "../../event/events/ErrorEvent", "../../dom-token-list/DOMTokenList"], function (require, exports, CSSStyleSheet_1, ResourceFetcher_1, HTMLElement_1, Event_1, ErrorEvent_1, DOMTokenList_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     /**
@@ -30,72 +30,20 @@ define(["require", "exports", "../../css/CSSStyleSheet", "../../fetch/ResourceFe
             _this.onload = null;
             _this.sheet = null;
             _this._evaluateCSS = true;
+            _this._relList = null;
             return _this;
         }
-        Object.defineProperty(HTMLLinkElement.prototype, "isConnected", {
+        Object.defineProperty(HTMLLinkElement.prototype, "relList", {
             /**
-             * Returns "true" if connected to DOM.
+             * Returns rel list.
              *
-             * @returns "true" if connected.
+             * @returns Rel list.
              */
             get: function () {
-                return this._isConnected;
-            },
-            /**
-             * Sets the connected state.
-             *
-             * @param isConnected "true" if connected.
-             */
-            set: function (isConnected) {
-                var _this = this;
-                if (this._isConnected !== isConnected) {
-                    this._isConnected = isConnected;
-                    for (var _i = 0, _a = this.childNodes; _i < _a.length; _i++) {
-                        var child = _a[_i];
-                        child.isConnected = isConnected;
-                    }
-                    // eslint-disable-next-line
-                    if (this.shadowRoot) {
-                        // eslint-disable-next-line
-                        this.shadowRoot.isConnected = isConnected;
-                    }
-                    if (isConnected && this._evaluateCSS) {
-                        var href = this.getAttributeNS(null, 'href');
-                        var rel = this.getAttributeNS(null, 'rel');
-                        if (href !== null && rel && rel.toLowerCase() === 'stylesheet') {
-                            this.ownerDocument._readyStateManager.startTask();
-                            ResourceFetcher_1.default.fetch({ window: this.ownerDocument.defaultView, url: href })
-                                .then(function (code) {
-                                var styleSheet = new CSSStyleSheet_1.default();
-                                styleSheet.replaceSync(code);
-                                _this.sheet = styleSheet;
-                                _this.dispatchEvent(new Event_1.default('load'));
-                                _this.ownerDocument._readyStateManager.endTask();
-                            })
-                                .catch(function (error) {
-                                _this.dispatchEvent(new ErrorEvent_1.default('error', {
-                                    message: error.message,
-                                    error: error
-                                }));
-                                _this.ownerDocument.defaultView.dispatchEvent(new ErrorEvent_1.default('error', {
-                                    message: error.message,
-                                    error: error
-                                }));
-                                _this.ownerDocument._readyStateManager.endTask();
-                                if (!_this._listeners['error'] &&
-                                    !_this.ownerDocument.defaultView._listeners['error']) {
-                                    _this.ownerDocument.defaultView.console.error(error);
-                                }
-                            });
-                        }
-                    }
-                    if (isConnected && this.connectedCallback) {
-                        this.connectedCallback();
-                    }
-                    else if (!isConnected && this.disconnectedCallback) {
-                        this.disconnectedCallback();
-                    }
+                if (!this._relList) {
+                    this._relList = new DOMTokenList_1.default(this, 'rel');
                 }
+                return this._relList;
             },
             enumerable: false,
             configurable: true
@@ -302,6 +250,54 @@ define(["require", "exports", "../../css/CSSStyleSheet", "../../fetch/ResourceFe
                 });
             }
             return replacedAttribute;
+        };
+        /**
+         * @override
+         */
+        HTMLLinkElement.prototype._connectToNode = function (parentNode) {
+            var _this = this;
+            if (parentNode === void 0) { parentNode = null; }
+            var isConnected = this.isConnected;
+            var isParentConnected = parentNode ? parentNode.isConnected : false;
+            _super.prototype._connectToNode.call(this, parentNode);
+            if (isConnected !== isParentConnected && this._evaluateCSS) {
+                var href = this.getAttributeNS(null, 'href');
+                var rel = this.getAttributeNS(null, 'rel');
+                if (href !== null && rel && rel.toLowerCase() === 'stylesheet') {
+                    this.ownerDocument._readyStateManager.startTask();
+                    ResourceFetcher_1.default.fetch({ window: this.ownerDocument.defaultView, url: href })
+                        .then(function (code) {
+                        var styleSheet = new CSSStyleSheet_1.default();
+                        styleSheet.replaceSync(code);
+                        _this.sheet = styleSheet;
+                        _this.dispatchEvent(new Event_1.default('load'));
+                        _this.ownerDocument._readyStateManager.endTask();
+                    })
+                        .catch(function (error) {
+                        _this.dispatchEvent(new ErrorEvent_1.default('error', {
+                            message: error.message,
+                            error: error
+                        }));
+                        _this.ownerDocument.defaultView.dispatchEvent(new ErrorEvent_1.default('error', {
+                            message: error.message,
+                            error: error
+                        }));
+                        _this.ownerDocument._readyStateManager.endTask();
+                        if (!_this._listeners['error'] && !_this.ownerDocument.defaultView._listeners['error']) {
+                            _this.ownerDocument.defaultView.console.error(error);
+                        }
+                    });
+                }
+            }
+        };
+        /**
+         * Updates DOM list indices.
+         */
+        HTMLLinkElement.prototype._updateDomListIndices = function () {
+            _super.prototype._updateDomListIndices.call(this);
+            if (this._relList) {
+                this._relList._updateIndices();
+            }
         };
         return HTMLLinkElement;
     }(HTMLElement_1.default));

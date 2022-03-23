@@ -162,7 +162,7 @@ export default class URLSearchParams {
      * Returns a string containing a query string suitable for use in a URL.
      */
     toString() {
-        return this._params.map(param => param.join('=')).join('&');
+        return this._params.map((param) => param.join('=')).join('&');
     }
     /**
      * Returns an iterator.

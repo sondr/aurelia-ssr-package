@@ -3,7 +3,7 @@ import Attr from '../../attribute/Attr';
 import NamedNodeMap from './NamedNodeMap';
 import DOMRect from './DOMRect';
 import Range from './Range';
-import ClassList from './ClassList';
+import IDOMTokenList from '../../dom-token-list/IDOMTokenList';
 import IElement from './IElement';
 import IShadowRoot from '../shadow-root/IShadowRoot';
 import INode from '../node/INode';
@@ -19,14 +19,21 @@ export default class Element extends Node implements IElement {
     tagName: string;
     nodeType: number;
     shadowRoot: IShadowRoot;
-    readonly classList: ClassList;
     scrollTop: number;
     scrollLeft: number;
     children: IHTMLCollection<IElement>;
+    readonly namespaceURI: string;
+    _shadowRoot: IShadowRoot;
     _attributes: {
         [k: string]: Attr;
     };
-    readonly namespaceURI: string;
+    private _classList;
+    /**
+     * Returns class list.
+     *
+     * @returns Class list.
+     */
+    get classList(): IDOMTokenList;
     /**
      * Returns ID.
      *
@@ -136,6 +143,18 @@ export default class Element extends Node implements IElement {
      */
     get childElementCount(): number;
     /**
+     * Returns slot.
+     *
+     * @returns Slot.
+     */
+    get slot(): string;
+    /**
+     * Returns slot.
+     *
+     * @param slot Slot.
+     */
+    set slot(title: string);
+    /**
      * Attribute changed callback.
      *
      * @param name Name.
@@ -143,6 +162,20 @@ export default class Element extends Node implements IElement {
      * @param newValue New value.
      */
     attributeChangedCallback?(name: string, oldValue: string, newValue: string): void;
+    /**
+     * Returns inner HTML and optionally the content of shadow roots.
+     *
+     * This is a feature implemented in Chromium, but not supported by Mozilla yet.
+     *
+     * @see https://web.dev/declarative-shadow-dom/
+     * @see https://chromestatus.com/feature/5191745052606464
+     * @param [options] Options.
+     * @param [options.includeShadowRoots] Set to "true" to include shadow roots.
+     * @returns HTML.
+     */
+    getInnerHTML(options?: {
+        includeShadowRoots?: boolean;
+    }): string;
     /**
      * Clones a node.
      *
@@ -342,6 +375,13 @@ export default class Element extends Node implements IElement {
      */
     matches(selector: string): boolean;
     /**
+     * Traverses the Element and its parents (heading toward the document root) until it finds a node that matches the provided selector string.
+     *
+     * @param selector Selector.
+     * @returns Closest matching element.
+     */
+    closest(selector: string): IElement;
+    /**
      * Query CSS selector to find matching nodes.
      *
      * @param selector CSS selector.
@@ -447,4 +487,8 @@ export default class Element extends Node implements IElement {
      * @returns Attribute name based on namespace.
      */
     protected _getAttributeName(name: any): string;
+    /**
+     * Updates DOM list indices.
+     */
+    protected _updateDomListIndices(): void;
 }

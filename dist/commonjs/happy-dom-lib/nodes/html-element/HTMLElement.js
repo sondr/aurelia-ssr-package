@@ -16,8 +16,10 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var Element_1 = require("../element/Element");
-var Event_1 = require("../../event/Event");
 var CSSStyleDeclaration_1 = require("../../css/CSSStyleDeclaration");
+var FocusEvent_1 = require("../../event/events/FocusEvent");
+var PointerEvent_1 = require("../../event/events/PointerEvent");
+var Node_1 = require("../node/Node");
 /**
  * HTML Element.
  *
@@ -69,20 +71,33 @@ var HTMLElement = /** @class */ (function (_super) {
     });
     Object.defineProperty(HTMLElement.prototype, "innerText", {
         /**
-         * Returns inner text.
+         * Returns inner text, which is the rendered appearance of text.
          *
-         * @returns Text.
+         * @returns Inner text.
          */
         get: function () {
-            return this.textContent;
+            var result = '';
+            for (var _i = 0, _a = this.childNodes; _i < _a.length; _i++) {
+                var childNode = _a[_i];
+                if (childNode instanceof HTMLElement) {
+                    if (childNode.tagName !== 'SCRIPT' && childNode.tagName !== 'STYLE') {
+                        result += childNode.innerText;
+                    }
+                }
+                else if (childNode.nodeType === Node_1.default.ELEMENT_NODE ||
+                    childNode.nodeType === Node_1.default.TEXT_NODE) {
+                    result += childNode.textContent;
+                }
+            }
+            return result;
         },
         /**
-         * Sets inner text.
+         * Sets the inner text, which is the rendered appearance of text.
          *
-         * @param text Text.
+         * @param innerText Inner text.
          */
-        set: function (text) {
-            this.textContent = text;
+        set: function (innerText) {
+            this.textContent = innerText;
         },
         enumerable: false,
         configurable: true
@@ -210,7 +225,7 @@ var HTMLElement = /** @class */ (function (_super) {
      * Triggers a click event.
      */
     HTMLElement.prototype.click = function () {
-        var event = new Event_1.default('click', {
+        var event = new PointerEvent_1.default('click', {
             bubbles: true,
             composed: true
         });
@@ -222,9 +237,13 @@ var HTMLElement = /** @class */ (function (_super) {
      * Triggers a blur event.
      */
     HTMLElement.prototype.blur = function () {
+        if (this.ownerDocument['_activeElement'] !== this || !this.isConnected) {
+            return;
+        }
+        this.ownerDocument['_activeElement'] = null;
         for (var _i = 0, _a = ['blur', 'focusout']; _i < _a.length; _i++) {
             var eventType = _a[_i];
-            var event_1 = new Event_1.default(eventType, {
+            var event_1 = new FocusEvent_1.default(eventType, {
                 bubbles: true,
                 composed: true
             });
@@ -237,9 +256,16 @@ var HTMLElement = /** @class */ (function (_super) {
      * Triggers a focus event.
      */
     HTMLElement.prototype.focus = function () {
+        if (this.ownerDocument['_activeElement'] === this || !this.isConnected) {
+            return;
+        }
+        if (this.ownerDocument['_activeElement'] !== null) {
+            this.ownerDocument['_activeElement'].blur();
+        }
+        this.ownerDocument['_activeElement'] = this;
         for (var _i = 0, _a = ['focus', 'focusin']; _i < _a.length; _i++) {
             var eventType = _a[_i];
-            var event_2 = new Event_1.default(eventType, {
+            var event_2 = new FocusEvent_1.default(eventType, {
                 bubbles: true,
                 composed: true
             });

@@ -9,6 +9,7 @@ import IHTMLCollection from '../element/IHTMLCollection';
 export default class DocumentFragment extends Node implements IDocumentFragment {
     nodeType: number;
     readonly children: IHTMLCollection<IElement>;
+    _rootNode: INode;
     /**
      * Last element child.
      *

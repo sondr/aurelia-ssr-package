@@ -28,7 +28,7 @@ export default class MutationObserver {
         }
         options = Object.assign({}, options, {
             attributeFilter: options.attributeFilter
-                ? options.attributeFilter.map(name => name.toLowerCase())
+                ? options.attributeFilter.map((name) => name.toLowerCase())
                 : null
         });
         this.target = target;

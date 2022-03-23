@@ -1,5 +1,6 @@
 import SelfClosingElements from '../config/SelfClosingElements';
 import UnnestableElements from '../config/UnnestableElements';
+import ChildLessElements from '../config/ChildLessElements';
 import { decode } from 'he';
 import NamespaceURI from '../config/NamespaceURI';
 const MARKUP_REGEXP = /<(\/?)([a-z][-.0-9_a-z]*)\s*([^>]*?)(\/?)>/gi;
@@ -71,6 +72,17 @@ export default class XMLParser {
                     parent.appendChild(newElement);
                 }
                 lastTextIndex = markupRegexp.lastIndex;
+                // Tags which contain non-parsed content
+                // For example: <script> JavaScript should not be parsed
+                if (ChildLessElements.includes(tagName)) {
+                    let childLessMatch = null;
+                    while ((childLessMatch = markupRegexp.exec(data))) {
+                        if (childLessMatch[2] === match[2] && childLessMatch[1]) {
+                            markupRegexp.lastIndex -= childLessMatch[0].length;
+                            break;
+                        }
+                    }
+                }
             }
             else {
                 stack.pop();
@@ -82,7 +94,7 @@ export default class XMLParser {
         // Text after last element
         if ((!match && data.length > 0) || (match && lastTextIndex !== match.index)) {
             const text = data.substring(lastTextIndex);
-            this.appendTextAndCommentNodes(document, root, text);
+            this.appendTextAndCommentNodes(document, parent || root, text);
         }
         return root;
     }
@@ -122,7 +134,7 @@ export default class XMLParser {
         let lastIndex = 0;
         let match;
         while ((match = commentRegExp.exec(text))) {
-            if (match.index > 0) {
+            if (match.index > 0 && lastIndex !== match.index) {
                 const textNode = document.createTextNode(text.substring(lastIndex, match.index));
                 nodes.push(textNode);
             }
@@ -185,10 +197,7 @@ export default class XMLParser {
                 }
             }
             // Attributes with no value
-            for (const name of attributes
-                .replace(ATTRIBUTE_REGEXP, '')
-                .trim()
-                .split(' ')) {
+            for (const name of attributes.replace(ATTRIBUTE_REGEXP, '').trim().split(' ')) {
                 if (name) {
                     element.setAttributeNS(null, this._getAttributeName(namespaceURI, name), '');
                 }

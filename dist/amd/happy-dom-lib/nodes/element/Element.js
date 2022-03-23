@@ -22,7 +22,7 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
     }
     return to.concat(ar || Array.prototype.slice.call(from));
 };
-define(["require", "exports", "../node/Node", "../shadow-root/ShadowRoot", "../../attribute/Attr", "./NamedNodeMap", "./DOMRect", "./Range", "./ClassList", "../../query-selector/QuerySelector", "../../query-selector/SelectorItem", "../../mutation-observer/MutationRecord", "../../mutation-observer/MutationTypeEnum", "../../config/NamespaceURI", "../../xml-parser/XMLParser", "../../xml-serializer/XMLSerializer", "../child-node/ChildNodeUtility", "../parent-node/ParentNodeUtility", "../child-node/NonDocumentChildNodeUtility", "../../exception/DOMException", "./HTMLCollectionFactory"], function (require, exports, Node_1, ShadowRoot_1, Attr_1, NamedNodeMap_1, DOMRect_1, Range_1, ClassList_1, QuerySelector_1, SelectorItem_1, MutationRecord_1, MutationTypeEnum_1, NamespaceURI_1, XMLParser_1, XMLSerializer_1, ChildNodeUtility_1, ParentNodeUtility_1, NonDocumentChildNodeUtility_1, DOMException_1, HTMLCollectionFactory_1) {
+define(["require", "exports", "../node/Node", "../shadow-root/ShadowRoot", "../../attribute/Attr", "./NamedNodeMap", "./DOMRect", "./Range", "../../dom-token-list/DOMTokenList", "../../query-selector/QuerySelector", "../../query-selector/SelectorItem", "../../mutation-observer/MutationRecord", "../../mutation-observer/MutationTypeEnum", "../../config/NamespaceURI", "../../xml-parser/XMLParser", "../../xml-serializer/XMLSerializer", "../child-node/ChildNodeUtility", "../parent-node/ParentNodeUtility", "../child-node/NonDocumentChildNodeUtility", "../../exception/DOMException", "./HTMLCollectionFactory"], function (require, exports, Node_1, ShadowRoot_1, Attr_1, NamedNodeMap_1, DOMRect_1, Range_1, DOMTokenList_1, QuerySelector_1, SelectorItem_1, MutationRecord_1, MutationTypeEnum_1, NamespaceURI_1, XMLParser_1, XMLSerializer_1, ChildNodeUtility_1, ParentNodeUtility_1, NonDocumentChildNodeUtility_1, DOMException_1, HTMLCollectionFactory_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     /**
@@ -35,14 +35,31 @@ define(["require", "exports", "../node/Node", "../shadow-root/ShadowRoot", "../.
             _this.tagName = null;
             _this.nodeType = Node_1.default.ELEMENT_NODE;
             _this.shadowRoot = null;
-            _this.classList = new ClassList_1.default(_this);
             _this.scrollTop = 0;
             _this.scrollLeft = 0;
             _this.children = HTMLCollectionFactory_1.default.create();
-            _this._attributes = {};
             _this.namespaceURI = null;
+            // Used for being able to access closed shadow roots
+            _this._shadowRoot = null;
+            _this._attributes = {};
+            _this._classList = null;
             return _this;
         }
+        Object.defineProperty(Element.prototype, "classList", {
+            /**
+             * Returns class list.
+             *
+             * @returns Class list.
+             */
+            get: function () {
+                if (!this._classList) {
+                    this._classList = new DOMTokenList_1.default(this, 'class');
+                }
+                return this._classList;
+            },
+            enumerable: false,
+            configurable: true
+        });
         Object.defineProperty(Element.prototype, "id", {
             /**
              * Returns ID.
@@ -102,7 +119,7 @@ define(["require", "exports", "../node/Node", "../shadow-root/ShadowRoot", "../.
              * @returns Local name.
              */
             get: function () {
-                return this.tagName.toLowerCase();
+                return this.tagName ? this.tagName.toLowerCase() : 'unknown';
             },
             enumerable: false,
             configurable: true
@@ -157,7 +174,9 @@ define(["require", "exports", "../node/Node", "../shadow-root/ShadowRoot", "../.
                     var child = _a[_i];
                     this.removeChild(child);
                 }
-                this.appendChild(this.ownerDocument.createTextNode(textContent));
+                if (textContent) {
+                    this.appendChild(this.ownerDocument.createTextNode(textContent));
+                }
             },
             enumerable: false,
             configurable: true
@@ -232,6 +251,12 @@ define(["require", "exports", "../node/Node", "../shadow-root/ShadowRoot", "../.
             configurable: true
         });
         Object.defineProperty(Element.prototype, "firstElementChild", {
+            // public get attributes(): { [k: string]: Attr | number } {
+            // 	const attributes = Object.values(this._attributes);
+            // 	return Object.assign({}, this._attributes, attributes, {
+            // 		length: attributes.length
+            // 	});
+            // }
             /**
              * First element child.
              *
@@ -267,6 +292,46 @@ define(["require", "exports", "../node/Node", "../shadow-root/ShadowRoot", "../.
             enumerable: false,
             configurable: true
         });
+        Object.defineProperty(Element.prototype, "slot", {
+            /**
+             * Returns slot.
+             *
+             * @returns Slot.
+             */
+            get: function () {
+                return this.getAttributeNS(null, 'slot') || '';
+            },
+            /**
+             * Returns slot.
+             *
+             * @param slot Slot.
+             */
+            set: function (title) {
+                this.setAttributeNS(null, 'slot', title);
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * Returns inner HTML and optionally the content of shadow roots.
+         *
+         * This is a feature implemented in Chromium, but not supported by Mozilla yet.
+         *
+         * @see https://web.dev/declarative-shadow-dom/
+         * @see https://chromestatus.com/feature/5191745052606464
+         * @param [options] Options.
+         * @param [options.includeShadowRoots] Set to "true" to include shadow roots.
+         * @returns HTML.
+         */
+        Element.prototype.getInnerHTML = function (options) {
+            var xmlSerializer = new XMLSerializer_1.default();
+            var xml = '';
+            for (var _i = 0, _a = this.childNodes; _i < _a.length; _i++) {
+                var node = _a[_i];
+                xml += xmlSerializer.serializeToString(node, options);
+            }
+            return xml;
+        };
         /**
          * Clones a node.
          *
@@ -489,6 +554,9 @@ define(["require", "exports", "../node/Node", "../shadow-root/ShadowRoot", "../.
          * @param text String to insert.
          */
         Element.prototype.insertAdjacentText = function (position, text) {
+            if (!text) {
+                return;
+            }
             var textNode = this.ownerDocument.createTextNode(text);
             this.insertAdjacentElement(position, textNode);
         };
@@ -617,15 +685,18 @@ define(["require", "exports", "../node/Node", "../shadow-root/ShadowRoot", "../.
          * @returns Shadow root.
          */
         Element.prototype.attachShadow = function (shadowRootInit) {
-            if (this.shadowRoot) {
+            if (this._shadowRoot) {
                 throw new DOMException_1.default('Shadow root has already been attached.');
             }
-            this.shadowRoot = new ShadowRoot_1.default();
-            this.shadowRoot.ownerDocument = this.ownerDocument;
-            this.shadowRoot.host = this;
-            this.shadowRoot.mode = shadowRootInit.mode;
-            this.shadowRoot.isConnected = this.isConnected;
-            return this.shadowRoot;
+            this._shadowRoot = new ShadowRoot_1.default();
+            this._shadowRoot.ownerDocument = this.ownerDocument;
+            this._shadowRoot.host = this;
+            this._shadowRoot.mode = shadowRootInit.mode;
+            this._shadowRoot._connectToNode(this);
+            if (this._shadowRoot.mode === 'open') {
+                this.shadowRoot = this._shadowRoot;
+            }
+            return this._shadowRoot;
         };
         /**
          * Converts to string.
@@ -658,7 +729,43 @@ define(["require", "exports", "../node/Node", "../shadow-root/ShadowRoot", "../.
          * @returns "true" if matching.
          */
         Element.prototype.matches = function (selector) {
-            return new SelectorItem_1.default(selector).match(this);
+            for (var _i = 0, _a = selector.split(','); _i < _a.length; _i++) {
+                var part = _a[_i];
+                if (new SelectorItem_1.default(part.trim()).match(this)) {
+                    return true;
+                }
+            }
+            return false;
+        };
+        /**
+         * Traverses the Element and its parents (heading toward the document root) until it finds a node that matches the provided selector string.
+         *
+         * @param selector Selector.
+         * @returns Closest matching element.
+         */
+        Element.prototype.closest = function (selector) {
+            var rootElement = this.ownerDocument.documentElement;
+            if (!this.isConnected) {
+                rootElement = this;
+                while (rootElement.parentNode) {
+                    rootElement = rootElement.parentNode;
+                }
+            }
+            var elements = rootElement.querySelectorAll(selector);
+            // eslint-disable-next-line
+            var parent = this;
+            while (parent) {
+                if (elements.includes(parent)) {
+                    return parent;
+                }
+                parent = parent.parentElement;
+            }
+            // QuerySelectorAll() will not match the element it is looking in when searched for
+            // Therefore we need to check if it matches the root
+            if (rootElement.matches(selector)) {
+                return rootElement;
+            }
+            return null;
         };
         /**
          * Query CSS selector to find matching nodes.
@@ -720,6 +827,7 @@ define(["require", "exports", "../node/Node", "../shadow-root/ShadowRoot", "../.
             attribute.ownerElement = this;
             attribute.ownerDocument = this.ownerDocument;
             this._attributes[name] = attribute;
+            this._updateDomListIndices();
             if (this.attributeChangedCallback &&
                 this.constructor._observedAttributes &&
                 this.constructor._observedAttributes.includes(name)) {
@@ -732,6 +840,7 @@ define(["require", "exports", "../node/Node", "../shadow-root/ShadowRoot", "../.
                     if (observer.options.attributes &&
                         (!observer.options.attributeFilter || observer.options.attributeFilter.includes(name))) {
                         var record = new MutationRecord_1.default();
+                        record.target = this;
                         record.type = MutationTypeEnum_1.default.attributes;
                         record.attributeName = name;
                         record.oldValue = observer.options.attributeOldValue ? oldValue : null;
@@ -784,6 +893,7 @@ define(["require", "exports", "../node/Node", "../shadow-root/ShadowRoot", "../.
          */
         Element.prototype.removeAttributeNode = function (attribute) {
             delete this._attributes[attribute.name];
+            this._updateDomListIndices();
             if (this.attributeChangedCallback &&
                 this.constructor._observedAttributes &&
                 this.constructor._observedAttributes.includes(attribute.name)) {
@@ -797,6 +907,7 @@ define(["require", "exports", "../node/Node", "../shadow-root/ShadowRoot", "../.
                         (!observer.options.attributeFilter ||
                             observer.options.attributeFilter.includes(attribute.name))) {
                         var record = new MutationRecord_1.default();
+                        record.target = this;
                         record.type = MutationTypeEnum_1.default.attributes;
                         record.attributeName = attribute.name;
                         record.oldValue = observer.options.attributeOldValue ? attribute.value : null;
@@ -866,6 +977,14 @@ define(["require", "exports", "../node/Node", "../shadow-root/ShadowRoot", "../.
                 return name;
             }
             return name.toLowerCase();
+        };
+        /**
+         * Updates DOM list indices.
+         */
+        Element.prototype._updateDomListIndices = function () {
+            if (this._classList) {
+                this._classList._updateIndices();
+            }
         };
         return Element;
     }(Node_1.default));

@@ -4,7 +4,7 @@ import Attr from '../../attribute/Attr';
 import NamedNodeMap from './NamedNodeMap';
 import DOMRect from './DOMRect';
 import Range from './Range';
-import ClassList from './ClassList';
+import DOMTokenList from '../../dom-token-list/DOMTokenList';
 import QuerySelector from '../../query-selector/QuerySelector';
 import SelectorItem from '../../query-selector/SelectorItem';
 import MutationRecord from '../../mutation-observer/MutationRecord';
@@ -26,12 +26,25 @@ export default class Element extends Node {
         this.tagName = null;
         this.nodeType = Node.ELEMENT_NODE;
         this.shadowRoot = null;
-        this.classList = new ClassList(this);
         this.scrollTop = 0;
         this.scrollLeft = 0;
         this.children = HTMLCollectionFactory.create();
-        this._attributes = {};
         this.namespaceURI = null;
+        // Used for being able to access closed shadow roots
+        this._shadowRoot = null;
+        this._attributes = {};
+        this._classList = null;
+    }
+    /**
+     * Returns class list.
+     *
+     * @returns Class list.
+     */
+    get classList() {
+        if (!this._classList) {
+            this._classList = new DOMTokenList(this, 'class');
+        }
+        return this._classList;
     }
     /**
      * Returns ID.
@@ -79,7 +92,7 @@ export default class Element extends Node {
      * @returns Local name.
      */
     get localName() {
-        return this.tagName.toLowerCase();
+        return this.tagName ? this.tagName.toLowerCase() : 'unknown';
     }
     /**
      * Previous element sibling.
@@ -120,7 +133,9 @@ export default class Element extends Node {
         for (const child of this.childNodes.slice()) {
             this.removeChild(child);
         }
-        this.appendChild(this.ownerDocument.createTextNode(textContent));
+        if (textContent) {
+            this.appendChild(this.ownerDocument.createTextNode(textContent));
+        }
     }
     /**
      * Returns inner HTML.
@@ -176,6 +191,12 @@ export default class Element extends Node {
         // Object.assign(nodemap, this._attributes);
         return nodemap;
     }
+    // public get attributes(): { [k: string]: Attr | number } {
+    // 	const attributes = Object.values(this._attributes);
+    // 	return Object.assign({}, this._attributes, attributes, {
+    // 		length: attributes.length
+    // 	});
+    // }
     /**
      * First element child.
      *
@@ -199,6 +220,41 @@ export default class Element extends Node {
      */
     get childElementCount() {
         return this.children.length;
+    }
+    /**
+     * Returns slot.
+     *
+     * @returns Slot.
+     */
+    get slot() {
+        return this.getAttributeNS(null, 'slot') || '';
+    }
+    /**
+     * Returns slot.
+     *
+     * @param slot Slot.
+     */
+    set slot(title) {
+        this.setAttributeNS(null, 'slot', title);
+    }
+    /**
+     * Returns inner HTML and optionally the content of shadow roots.
+     *
+     * This is a feature implemented in Chromium, but not supported by Mozilla yet.
+     *
+     * @see https://web.dev/declarative-shadow-dom/
+     * @see https://chromestatus.com/feature/5191745052606464
+     * @param [options] Options.
+     * @param [options.includeShadowRoots] Set to "true" to include shadow roots.
+     * @returns HTML.
+     */
+    getInnerHTML(options) {
+        const xmlSerializer = new XMLSerializer();
+        let xml = '';
+        for (const node of this.childNodes) {
+            xml += xmlSerializer.serializeToString(node, options);
+        }
+        return xml;
     }
     /**
      * Clones a node.
@@ -393,6 +449,9 @@ export default class Element extends Node {
      * @param text String to insert.
      */
     insertAdjacentText(position, text) {
+        if (!text) {
+            return;
+        }
         const textNode = this.ownerDocument.createTextNode(text);
         this.insertAdjacentElement(position, textNode);
     }
@@ -519,15 +578,18 @@ export default class Element extends Node {
      * @returns Shadow root.
      */
     attachShadow(shadowRootInit) {
-        if (this.shadowRoot) {
+        if (this._shadowRoot) {
             throw new DOMException('Shadow root has already been attached.');
         }
-        this.shadowRoot = new ShadowRoot();
-        this.shadowRoot.ownerDocument = this.ownerDocument;
-        this.shadowRoot.host = this;
-        this.shadowRoot.mode = shadowRootInit.mode;
-        this.shadowRoot.isConnected = this.isConnected;
-        return this.shadowRoot;
+        this._shadowRoot = new ShadowRoot();
+        this._shadowRoot.ownerDocument = this.ownerDocument;
+        this._shadowRoot.host = this;
+        this._shadowRoot.mode = shadowRootInit.mode;
+        this._shadowRoot._connectToNode(this);
+        if (this._shadowRoot.mode === 'open') {
+            this.shadowRoot = this._shadowRoot;
+        }
+        return this._shadowRoot;
     }
     /**
      * Converts to string.
@@ -560,7 +622,42 @@ export default class Element extends Node {
      * @returns "true" if matching.
      */
     matches(selector) {
-        return new SelectorItem(selector).match(this);
+        for (const part of selector.split(',')) {
+            if (new SelectorItem(part.trim()).match(this)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    /**
+     * Traverses the Element and its parents (heading toward the document root) until it finds a node that matches the provided selector string.
+     *
+     * @param selector Selector.
+     * @returns Closest matching element.
+     */
+    closest(selector) {
+        let rootElement = this.ownerDocument.documentElement;
+        if (!this.isConnected) {
+            rootElement = this;
+            while (rootElement.parentNode) {
+                rootElement = rootElement.parentNode;
+            }
+        }
+        const elements = rootElement.querySelectorAll(selector);
+        // eslint-disable-next-line
+        let parent = this;
+        while (parent) {
+            if (elements.includes(parent)) {
+                return parent;
+            }
+            parent = parent.parentElement;
+        }
+        // QuerySelectorAll() will not match the element it is looking in when searched for
+        // Therefore we need to check if it matches the root
+        if (rootElement.matches(selector)) {
+            return rootElement;
+        }
+        return null;
     }
     /**
      * Query CSS selector to find matching nodes.
@@ -622,6 +719,7 @@ export default class Element extends Node {
         attribute.ownerElement = this;
         attribute.ownerDocument = this.ownerDocument;
         this._attributes[name] = attribute;
+        this._updateDomListIndices();
         if (this.attributeChangedCallback &&
             this.constructor._observedAttributes &&
             this.constructor._observedAttributes.includes(name)) {
@@ -633,6 +731,7 @@ export default class Element extends Node {
                 if (observer.options.attributes &&
                     (!observer.options.attributeFilter || observer.options.attributeFilter.includes(name))) {
                     const record = new MutationRecord();
+                    record.target = this;
                     record.type = MutationTypeEnum.attributes;
                     record.attributeName = name;
                     record.oldValue = observer.options.attributeOldValue ? oldValue : null;
@@ -684,6 +783,7 @@ export default class Element extends Node {
      */
     removeAttributeNode(attribute) {
         delete this._attributes[attribute.name];
+        this._updateDomListIndices();
         if (this.attributeChangedCallback &&
             this.constructor._observedAttributes &&
             this.constructor._observedAttributes.includes(attribute.name)) {
@@ -696,6 +796,7 @@ export default class Element extends Node {
                     (!observer.options.attributeFilter ||
                         observer.options.attributeFilter.includes(attribute.name))) {
                     const record = new MutationRecord();
+                    record.target = this;
                     record.type = MutationTypeEnum.attributes;
                     record.attributeName = attribute.name;
                     record.oldValue = observer.options.attributeOldValue ? attribute.value : null;
@@ -764,5 +865,13 @@ export default class Element extends Node {
             return name;
         }
         return name.toLowerCase();
+    }
+    /**
+     * Updates DOM list indices.
+     */
+    _updateDomListIndices() {
+        if (this._classList) {
+            this._classList._updateIndices();
+        }
     }
 }

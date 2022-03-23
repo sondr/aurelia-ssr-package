@@ -42,55 +42,6 @@ System.register(["../html-element/HTMLElement", "./ScriptUtility"], function (ex
                     _this._evaluateScript = true;
                     return _this;
                 }
-                Object.defineProperty(HTMLScriptElement.prototype, "isConnected", {
-                    /**
-                     * Returns "true" if connected to DOM.
-                     *
-                     * @returns "true" if connected.
-                     */
-                    get: function () {
-                        return this._isConnected;
-                    },
-                    /**
-                     * Sets the connected state.
-                     *
-                     * @param isConnected "true" if connected.
-                     */
-                    set: function (isConnected) {
-                        if (this._isConnected !== isConnected) {
-                            this._isConnected = isConnected;
-                            for (var _i = 0, _a = this.childNodes; _i < _a.length; _i++) {
-                                var child = _a[_i];
-                                child.isConnected = isConnected;
-                            }
-                            // eslint-disable-next-line
-                            if (this.shadowRoot) {
-                                // eslint-disable-next-line
-                                this.shadowRoot.isConnected = isConnected;
-                            }
-                            if (isConnected && this._evaluateScript) {
-                                var src = this.getAttributeNS(null, 'src');
-                                if (src !== null) {
-                                    ScriptUtility_1.default.loadExternalScript(this);
-                                }
-                                else {
-                                    var textContent = this.textContent;
-                                    if (textContent) {
-                                        this.ownerDocument.defaultView.eval(textContent);
-                                    }
-                                }
-                            }
-                            if (isConnected && this.connectedCallback) {
-                                this.connectedCallback();
-                            }
-                            else if (!isConnected && this.disconnectedCallback) {
-                                this.disconnectedCallback();
-                            }
-                        }
-                    },
-                    enumerable: false,
-                    configurable: true
-                });
                 Object.defineProperty(HTMLScriptElement.prototype, "type", {
                     /**
                      * Returns type.
@@ -265,6 +216,27 @@ System.register(["../html-element/HTMLElement", "./ScriptUtility"], function (ex
                 HTMLScriptElement.prototype.cloneNode = function (deep) {
                     if (deep === void 0) { deep = false; }
                     return _super.prototype.cloneNode.call(this, deep);
+                };
+                /**
+                 * @override
+                 */
+                HTMLScriptElement.prototype._connectToNode = function (parentNode) {
+                    if (parentNode === void 0) { parentNode = null; }
+                    var isConnected = this.isConnected;
+                    var isParentConnected = parentNode ? parentNode.isConnected : false;
+                    _super.prototype._connectToNode.call(this, parentNode);
+                    if (isConnected !== isParentConnected && this._evaluateScript) {
+                        var src = this.getAttributeNS(null, 'src');
+                        if (src !== null) {
+                            ScriptUtility_1.default.loadExternalScript(this);
+                        }
+                        else {
+                            var textContent = this.textContent;
+                            if (textContent) {
+                                this.ownerDocument.defaultView.eval(textContent);
+                            }
+                        }
+                    }
                 };
                 return HTMLScriptElement;
             }(HTMLElement_1.default));

@@ -1,6 +1,6 @@
 import Element from '../nodes/element/Element';
 /**
- *
+ * Selector item.
  */
 export default class SelectorItem {
     isAll: boolean;
@@ -26,6 +26,14 @@ export default class SelectorItem {
      */
     match(element: Element): boolean;
     /**
+     * Matches a psuedo selector.
+     *
+     * @param element Element.
+     * @param selector Selector.
+     * @returns True if it is a match.
+     */
+    private matchesPsuedo;
+    /**
      * Matches a nth-child selector.
      *
      * @param element Element.
@@ -35,13 +43,29 @@ export default class SelectorItem {
      */
     private matchesNthChild;
     /**
-     * Matches a psuedo selector.
+     * Matches a psuedo selector expression.
      *
      * @param element Element.
      * @param psuedo Psuedo name.
      * @returns True if it is a match.
      */
-    private matchesPsuedo;
+    private matchesPsuedoExpression;
+    /**
+     * Matches attribute.
+     *
+     * @param element Element.
+     * @param selector Selector.
+     * @returns True if it is a match.
+     */
+    private matchesAttribute;
+    /**
+     * Matches class.
+     *
+     * @param element Element.
+     * @param selector Selector.
+     * @returns True if it is a match.
+     */
+    private matchesClass;
     /**
      * Matches attribute name only.
      *
@@ -50,7 +74,7 @@ export default class SelectorItem {
      * @returns True if it is a match.
      */
     private matchesAttributeName;
-    /**
+    /** .
      *
      * Matches attribute name and value.
      *
@@ -59,6 +83,13 @@ export default class SelectorItem {
      * @param attributeValue Attribute value.
      * @param [matchType] Match type.
      * @returns True if it is a match.
+     */
+    /**
+     *
+     * @param element
+     * @param attributeName
+     * @param attributeValue
+     * @param matchType
      */
     private matchesAttributeNameAndValue;
 }

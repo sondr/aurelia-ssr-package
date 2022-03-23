@@ -20,24 +20,13 @@ export default class Node extends EventTarget implements INode {
     readonly parentNode: INode;
     readonly nodeType: number;
     readonly childNodes: INodeList<INode>;
-    protected _isConnected: boolean;
+    readonly isConnected: boolean;
+    _rootNode: INode;
     protected _observers: MutationObserverListener[];
     /**
      * Constructor.
      */
     constructor();
-    /**
-     * Returns "true" if connected to DOM.
-     *
-     * @returns "true" if connected.
-     */
-    get isConnected(): boolean;
-    /**
-     * Sets the connected state.
-     *
-     * @param isConnected "true" if connected.
-     */
-    set isConnected(isConnected: boolean);
     /**
      * Get text value of children.
      *
@@ -56,6 +45,10 @@ export default class Node extends EventTarget implements INode {
      * @returns Node value.
      */
     get nodeValue(): string;
+    /**
+     * Sets node value.
+     */
+    set nodeValue(_nodeValue: string);
     /**
      * Node name.
      *
@@ -106,6 +99,13 @@ export default class Node extends EventTarget implements INode {
      * @returns "true" if the node has child nodes.
      */
     hasChildNodes(): boolean;
+    /**
+     * Returns "true" if this node contains the other node.
+     *
+     * @param otherNode Node to test with.
+     * @returns "true" if this node contains the other node.
+     */
+    contains(otherNode: INode): boolean;
     /**
      * Returns closest root node (Document or ShadowRoot).
      *
@@ -177,4 +177,10 @@ export default class Node extends EventTarget implements INode {
      * @param listener Listener.
      */
     _unobserve(listener: MutationObserverListener): void;
+    /**
+     * Connects this element to another element.
+     *
+     * @param parentNode Parent node.
+     */
+    _connectToNode(parentNode?: INode): void;
 }

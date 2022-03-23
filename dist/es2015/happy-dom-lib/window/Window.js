@@ -21,13 +21,21 @@ import Element from '../nodes/element/Element';
 import HTMLTemplateElement from '../nodes/html-template-element/HTMLTemplateElement';
 import HTMLFormElement from '../nodes/html-form-element/HTMLFormElement';
 import HTMLElement from '../nodes/html-element/HTMLElement';
+import HTMLUnknownElement from '../nodes/html-unknown-element/HTMLUnknownElement';
 import HTMLInputElement from '../nodes/html-input-element/HTMLInputElement';
 import HTMLTextAreaElement from '../nodes/html-text-area-element/HTMLTextAreaElement';
+import HTMLLinkElement from '../nodes/html-link-element/HTMLLinkElement';
+import HTMLStyleElement from '../nodes/html-style-element/HTMLStyleElement';
+import HTMLSlotElement from '../nodes/html-slot-element/HTMLSlotElement';
+import HTMLLabelElement from '../nodes/html-label-element/HTMLLabelElement';
+import HTMLMetaElement from '../nodes/html-meta-element/HTMLMetaElement';
 import SVGSVGElement from '../nodes/svg-element/SVGSVGElement';
 import SVGElement from '../nodes/svg-element/SVGElement';
 import HTMLScriptElement from '../nodes/html-script-element/HTMLScriptElement';
 import HTMLImageElement from '../nodes/html-image-element/HTMLImageElement';
+import Image from '../nodes/html-image-element/Image';
 import DocumentFragment from '../nodes/document-fragment/DocumentFragment';
+import CharacterData from '../nodes/character-data/CharacterData';
 import TreeWalker from '../tree-walker/TreeWalker';
 import Event from '../event/Event';
 import CustomEvent from '../event/events/CustomEvent';
@@ -39,18 +47,21 @@ import URL from '../location/URL';
 import Location from '../location/Location';
 import NonImplementedEventTypes from '../event/NonImplementedEventTypes';
 import MutationObserver from '../mutation-observer/MutationObserver';
-import ElementClass from '../config/ElementClass';
+import NonImplemenetedElementClasses from '../config/NonImplemenetedElementClasses';
 import DOMParser from '../dom-parser/DOMParser';
 import XMLSerializer from '../xml-serializer/XMLSerializer';
 import ResizeObserver from '../resize-observer/ResizeObserver';
-import CSSStyleSheet from '../css/CSSStyleSheet';
 import Blob from '../file/Blob';
 import File from '../file/File';
 import DOMException from '../exception/DOMException';
 import FileReader from '../file/FileReader';
 import History from '../history/History';
+import CSSStyleSheet from '../css/CSSStyleSheet';
 import CSSStyleDeclaration from '../css/CSSStyleDeclaration';
+import CSS from '../css/CSS';
+import CSSUnitValue from '../css/CSSUnitValue';
 import MouseEvent from '../event/events/MouseEvent';
+import PointerEvent from '../event/events/PointerEvent';
 import FocusEvent from '../event/events/FocusEvent';
 import WheelEvent from '../event/events/WheelEvent';
 import DataTransfer from '../event/DataTransfer';
@@ -59,14 +70,23 @@ import DataTransferItemList from '../event/DataTransferItemList';
 import InputEvent from '../event/events/InputEvent';
 import UIEvent from '../event/UIEvent';
 import ErrorEvent from '../event/events/ErrorEvent';
+import StorageEvent from '../event/events/StorageEvent';
 import Screen from '../screen/Screen';
 import AsyncTaskManager from './AsyncTaskManager';
 import AsyncTaskTypeEnum from './AsyncTaskTypeEnum';
 import RelativeURL from '../location/RelativeURL';
 import Storage from '../storage/Storage';
-import HTMLLinkElement from '../nodes/html-link-element/HTMLLinkElement';
-import HTMLStyleElement from '../nodes/html-style-element/HTMLStyleElement';
 import URLSearchParams from '../url-search-params/URLSearchParams';
+import HTMLCollection from '../nodes/element/HTMLCollection';
+import NodeList from '../nodes/node/NodeList';
+import MediaQueryList from '../match-media/MediaQueryList';
+import Selection from '../selection/Selection';
+import * as PerfHooks from 'perf_hooks';
+import Navigator from '../navigator/Navigator';
+import MimeType from '../navigator/MimeType';
+import MimeTypeArray from '../navigator/MimeTypeArray';
+import Plugin from '../navigator/Plugin';
+import PluginArray from '../navigator/PluginArray';
 const FETCH_RESPONSE_TYPE_METHODS = ['blob', 'json', 'text'];
 /**
  * Handles the Window.
@@ -90,14 +110,19 @@ export default class Window extends EventTarget {
         // Global classes
         this.Node = Node;
         this.HTMLElement = HTMLElement;
+        this.HTMLUnknownElement = HTMLUnknownElement;
         this.HTMLTemplateElement = HTMLTemplateElement;
         this.HTMLFormElement = HTMLFormElement;
         this.HTMLInputElement = HTMLInputElement;
         this.HTMLTextAreaElement = HTMLTextAreaElement;
         this.HTMLImageElement = HTMLImageElement;
+        this.Image = Image;
         this.HTMLScriptElement = HTMLScriptElement;
         this.HTMLLinkElement = HTMLLinkElement;
         this.HTMLStyleElement = HTMLStyleElement;
+        this.HTMLLabelElement = HTMLLabelElement;
+        this.HTMLSlotElement = HTMLSlotElement;
+        this.HTMLMetaElement = HTMLMetaElement;
         this.SVGSVGElement = SVGSVGElement;
         this.SVGElement = SVGElement;
         this.Text = Text;
@@ -105,6 +130,7 @@ export default class Window extends EventTarget {
         this.ShadowRoot = ShadowRoot;
         this.Element = Element;
         this.DocumentFragment = DocumentFragment;
+        this.CharacterData = CharacterData;
         this.NodeFilter = NodeFilter;
         this.TreeWalker = TreeWalker;
         this.DOMParser = DOMParser;
@@ -119,10 +145,12 @@ export default class Window extends EventTarget {
         this.AnimationEvent = AnimationEvent;
         this.KeyboardEvent = KeyboardEvent;
         this.MouseEvent = MouseEvent;
+        this.PointerEvent = PointerEvent;
         this.FocusEvent = FocusEvent;
         this.WheelEvent = WheelEvent;
         this.InputEvent = InputEvent;
         this.ErrorEvent = ErrorEvent;
+        this.StorageEvent = StorageEvent;
         this.ProgressEvent = ProgressEvent;
         this.EventTarget = EventTarget;
         this.DataTransfer = DataTransfer;
@@ -144,23 +172,36 @@ export default class Window extends EventTarget {
         this.Screen = Screen;
         this.Storage = Storage;
         this.URLSearchParams = URLSearchParams;
+        this.HTMLCollection = HTMLCollection;
+        this.NodeList = NodeList;
+        this.MediaQueryList = MediaQueryList;
+        this.CSSUnitValue = CSSUnitValue;
+        this.Selection = Selection;
+        this.Navigator = Navigator;
+        this.MimeType = MimeType;
+        this.MimeTypeArray = MimeTypeArray;
+        this.Plugin = Plugin;
+        this.PluginArray = PluginArray;
         // Events
         this.onload = null;
         this.onerror = null;
         this.customElements = new CustomElementRegistry();
         this.location = new Location();
         this.history = new History();
-        this.navigator = { userAgent: 'happy-dom' };
+        this.navigator = new Navigator();
         this.console = global ? global.console : null;
         this.self = this;
         this.top = this;
         this.parent = this;
         this.window = this;
+        this.globalThis = this;
         this.screen = new Screen();
         this.innerWidth = 1024;
         this.innerHeight = 768;
+        this.devicePixelRatio = 1;
         this.sessionStorage = new Storage();
         this.localStorage = new Storage();
+        this.performance = PerfHooks.performance;
         // Node.js Globals
         this.Array = global ? global.Array : null;
         this.ArrayBuffer = global ? global.ArrayBuffer : null;
@@ -172,7 +213,6 @@ export default class Window extends EventTarget {
         this.EvalError = global ? global.EvalError : null;
         this.Float32Array = global ? global.Float32Array : null;
         this.Float64Array = global ? global.Float64Array : null;
-        this.Function = global ? global.Function : null;
         this.GLOBAL = null;
         this.Infinity = global ? global.Infinity : null;
         this.Int16Array = global ? global.Int16Array : null;
@@ -183,7 +223,6 @@ export default class Window extends EventTarget {
         this.Map = global ? global.Map : null;
         this.Math = global ? global.Math : null;
         this.NaN = global ? global.NaN : null;
-        this.Object = global ? global.Object : null;
         this.Number = global ? global.Number : null;
         this.Promise = global ? global.Promise : null;
         this.RangeError = global ? global.RangeError : null;
@@ -223,6 +262,9 @@ export default class Window extends EventTarget {
         this.v8debug = null;
         this.AbortController = global ? global.AbortController : null;
         this.AbortSignal = global ? global.AbortSignal : null;
+        // Private properties
+        this._objectClass = null;
+        this._functionClass = null;
         this.document = new HTMLDocument();
         this.document.defaultView = this;
         this.document._readyStateManager.whenComplete().then(() => {
@@ -230,14 +272,15 @@ export default class Window extends EventTarget {
         });
         DOMParser._ownerDocument = DOMParser._ownerDocument || this.document;
         FileReader._ownerDocument = FileReader._ownerDocument || this.document;
+        Image.ownerDocument = Image.ownerDocument || this.document;
         for (const eventType of NonImplementedEventTypes) {
             if (!this[eventType]) {
                 this[eventType] = Event;
             }
         }
-        for (const className of Object.keys(ElementClass)) {
+        for (const className of NonImplemenetedElementClasses) {
             if (!this[className]) {
-                this[className] = ElementClass[className];
+                this[className] = HTMLElement;
             }
         }
         // Binds all methods to "this", so that it will use the correct context when called globally.
@@ -248,9 +291,46 @@ export default class Window extends EventTarget {
         }
     }
     /**
+     * Returns Object class.
+     *
+     * @returns Object class.
+     */
+    get Object() {
+        if (this._objectClass) {
+            return this._objectClass;
+        }
+        // When inside a VM global.Object is not the same as ({}).constructor
+        // We will therefore run the code inside the VM to get the real constructor
+        this._objectClass = this.eval('({}).constructor');
+        return this._objectClass;
+    }
+    /**
+     * Returns Function class.
+     *
+     * @returns Function class.
+     */
+    get Function() {
+        if (this._functionClass) {
+            return this._functionClass;
+        }
+        // When inside a VM global.Function is not the same as (() => {}).constructor
+        // We will therefore run the code inside the VM to get the real constructor
+        this._functionClass = this.eval('(() => {}).constructor');
+        return this._functionClass;
+    }
+    /**
+     * The CSS interface holds useful CSS-related methods.
+     *
+     * @returns CSS interface.
+     */
+    get CSS() {
+        return new CSS();
+    }
+    /**
      * Evaluates code.
      *
      * @param code Code.
+     * @returns Result.
      */
     eval(code) {
         let vmExists = false;
@@ -264,12 +344,10 @@ export default class Window extends EventTarget {
         if (vmExists) {
             vm = require('vm');
         }
-        if (global && vm && vm.isContext(this)) {
-            vm.runInContext(code, this);
+        if (vm && vm.isContext(this)) {
+            return vm.runInContext(code, this);
         }
-        else if (global && global.eval) {
-            global.eval(code);
-        }
+        return global.eval(code);
     }
     /**
      * Returns an object containing the values of all CSS properties of an element.
@@ -320,6 +398,17 @@ export default class Window extends EventTarget {
      */
     scrollTo(x, y) {
         this.scroll(x, y);
+    }
+    /**
+     * Returns a new MediaQueryList object that can then be used to determine if the document matches the media query string.
+     *
+     * @param mediaQueryString A string specifying the media query to parse into a MediaQueryList.
+     * @returns A new MediaQueryList.
+     */
+    matchMedia(mediaQueryString) {
+        const mediaQueryList = new MediaQueryList();
+        mediaQueryList._media = mediaQueryString;
+        return mediaQueryList;
     }
     /**
      * Sets a timer which executes a function once the timer expires.
@@ -411,7 +500,7 @@ export default class Window extends EventTarget {
                 }
                 this.happyDOM.asyncTaskManager.startTask(AsyncTaskTypeEnum.fetch);
                 fetch(RelativeURL.getAbsoluteURL(this.location, url), options)
-                    .then(response => {
+                    .then((response) => {
                     if (this.happyDOM.asyncTaskManager.getRunningCount(AsyncTaskTypeEnum.fetch) === 0) {
                         reject(new Error('Failed to complete fetch request. Task was canceled.'));
                     }
@@ -423,7 +512,7 @@ export default class Window extends EventTarget {
                                     this.happyDOM.asyncTaskManager.startTask(AsyncTaskTypeEnum.fetch);
                                     asyncMethod
                                         .call(response)
-                                        .then(response => {
+                                        .then((response) => {
                                         if (this.happyDOM.asyncTaskManager.getRunningCount(AsyncTaskTypeEnum.fetch) ===
                                             0) {
                                             reject(new Error('Failed to complete fetch request. Task was canceled.'));
@@ -433,7 +522,7 @@ export default class Window extends EventTarget {
                                             this.happyDOM.asyncTaskManager.endTask(AsyncTaskTypeEnum.fetch);
                                         }
                                     })
-                                        .catch(error => {
+                                        .catch((error) => {
                                         reject(error);
                                         this.happyDOM.asyncTaskManager.endTask(AsyncTaskTypeEnum.fetch, error);
                                     });
@@ -444,7 +533,7 @@ export default class Window extends EventTarget {
                         this.happyDOM.asyncTaskManager.endTask(AsyncTaskTypeEnum.fetch);
                     }
                 })
-                    .catch(error => {
+                    .catch((error) => {
                     reject(error);
                     this.happyDOM.asyncTaskManager.endTask(AsyncTaskTypeEnum.fetch, error);
                 });

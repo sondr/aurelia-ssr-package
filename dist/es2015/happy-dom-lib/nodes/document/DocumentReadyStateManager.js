@@ -21,7 +21,7 @@ export default class DocumentReadyStateManager {
      * @returns Promise.
      */
     whenComplete() {
-        return new Promise(resolve => {
+        return new Promise((resolve) => {
             if (this.isComplete) {
                 resolve();
             }

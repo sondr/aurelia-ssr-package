@@ -35,6 +35,7 @@ var DocumentFragment = /** @class */ (function (_super) {
         var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.nodeType = Node.DOCUMENT_FRAGMENT_NODE;
         _this.children = HTMLCollectionFactory.create();
+        _this._rootNode = _this;
         return _this;
     }
     Object.defineProperty(DocumentFragment.prototype, "childElementCount", {
@@ -99,7 +100,9 @@ var DocumentFragment = /** @class */ (function (_super) {
                 var child = _a[_i];
                 this.removeChild(child);
             }
-            this.appendChild(this.ownerDocument.createTextNode(textContent));
+            if (textContent) {
+                this.appendChild(this.ownerDocument.createTextNode(textContent));
+            }
         },
         enumerable: false,
         configurable: true

@@ -4,6 +4,8 @@ import HTMLElement from '../html-element/HTMLElement';
 import IHTMLLinkElement from './IHTMLLinkElement';
 import Event from '../../event/Event';
 import ErrorEvent from '../../event/events/ErrorEvent';
+import INode from '../../nodes/node/INode';
+import IDOMTokenList from '../../dom-token-list/IDOMTokenList';
 /**
  * HTML Link Element.
  *
@@ -15,18 +17,13 @@ export default class HTMLLinkElement extends HTMLElement implements IHTMLLinkEle
     onload: (event: Event) => void;
     readonly sheet: CSSStyleSheet;
     _evaluateCSS: boolean;
+    private _relList;
     /**
-     * Returns "true" if connected to DOM.
+     * Returns rel list.
      *
-     * @returns "true" if connected.
+     * @returns Rel list.
      */
-    get isConnected(): boolean;
-    /**
-     * Sets the connected state.
-     *
-     * @param isConnected "true" if connected.
-     */
-    set isConnected(isConnected: boolean);
+    get relList(): IDOMTokenList;
     /**
      * Returns as.
      *
@@ -131,4 +128,12 @@ export default class HTMLLinkElement extends HTMLElement implements IHTMLLinkEle
      * @returns Replaced attribute.
      */
     setAttributeNode(attribute: Attr): Attr;
+    /**
+     * @override
+     */
+    _connectToNode(parentNode?: INode): void;
+    /**
+     * Updates DOM list indices.
+     */
+    protected _updateDomListIndices(): void;
 }

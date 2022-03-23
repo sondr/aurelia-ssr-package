@@ -37,7 +37,6 @@ define(["require", "exports", "../attribute/Attr"], function (require, exports, 
             this.length = index;
         }
         Object.defineProperty(CSSStyleDeclaration.prototype, "alignContent", {
-            /* eslint-disable require-jsdoc */
             /**
              *
              */
@@ -5942,7 +5941,6 @@ define(["require", "exports", "../attribute/Attr"], function (require, exports, 
             configurable: true
         });
         Object.defineProperty(CSSStyleDeclaration.prototype, "cssText", {
-            /* eslint-enable require-jsdoc */
             /**
              * Returns the style decleration as a CSS text.
              *
@@ -5976,7 +5974,12 @@ define(["require", "exports", "../attribute/Attr"], function (require, exports, 
                         var part = parts_2[_i];
                         if (part) {
                             var _a = part.trim().split(':'), name_2 = _a[0], value = _a[1];
-                            newStyle.push("".concat(name_2, ": ").concat(value.trim(), ";"));
+                            if (value) {
+                                newStyle.push("".concat(name_2, ": ").concat(value.trim(), ";"));
+                            }
+                            else {
+                                newStyle.push(name_2);
+                            }
                             this[index] = name_2;
                             index++;
                         }
@@ -6002,7 +6005,7 @@ define(["require", "exports", "../attribute/Attr"], function (require, exports, 
          * @returns Item.
          */
         CSSStyleDeclaration.prototype.item = function (index) {
-            return this[String(index)] || '';
+            return this[index] || '';
         };
         /**
          * Set a property.
@@ -6035,8 +6038,11 @@ define(["require", "exports", "../attribute/Attr"], function (require, exports, 
                             newStyle.push("".concat(name_3, ": ").concat(value, ";"));
                             isExisting = true;
                         }
-                        else {
+                        else if (existingValue) {
                             newStyle.push("".concat(name_3, ": ").concat(existingValue.trim(), ";"));
+                        }
+                        else {
+                            newStyle.push("".concat(name_3, ";"));
                         }
                         this[index] = name_3;
                         index++;
@@ -6107,6 +6113,9 @@ define(["require", "exports", "../attribute/Attr"], function (require, exports, 
                     if (part) {
                         var _a = part.trim().split(':'), name_5 = _a[0], value = _a[1];
                         if (name_5 === propertyName) {
+                            if (!value) {
+                                return '';
+                            }
                             return value.trim();
                         }
                     }

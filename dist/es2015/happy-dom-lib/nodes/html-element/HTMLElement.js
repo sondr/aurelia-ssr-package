@@ -1,6 +1,8 @@
 import Element from '../element/Element';
-import Event from '../../event/Event';
 import CSSStyleDeclaration from '../../css/CSSStyleDeclaration';
+import FocusEvent from '../../event/events/FocusEvent';
+import PointerEvent from '../../event/events/PointerEvent';
+import Node from '../node/Node';
 /**
  * HTML Element.
  *
@@ -45,20 +47,32 @@ export default class HTMLElement extends Element {
         }
     }
     /**
-     * Returns inner text.
+     * Returns inner text, which is the rendered appearance of text.
      *
-     * @returns Text.
+     * @returns Inner text.
      */
     get innerText() {
-        return this.textContent;
+        let result = '';
+        for (const childNode of this.childNodes) {
+            if (childNode instanceof HTMLElement) {
+                if (childNode.tagName !== 'SCRIPT' && childNode.tagName !== 'STYLE') {
+                    result += childNode.innerText;
+                }
+            }
+            else if (childNode.nodeType === Node.ELEMENT_NODE ||
+                childNode.nodeType === Node.TEXT_NODE) {
+                result += childNode.textContent;
+            }
+        }
+        return result;
     }
     /**
-     * Sets inner text.
+     * Sets the inner text, which is the rendered appearance of text.
      *
-     * @param text Text.
+     * @param innerText Inner text.
      */
-    set innerText(text) {
-        this.textContent = text;
+    set innerText(innerText) {
+        this.textContent = innerText;
     }
     /**
      * Returns style.
@@ -158,7 +172,7 @@ export default class HTMLElement extends Element {
      * Triggers a click event.
      */
     click() {
-        const event = new Event('click', {
+        const event = new PointerEvent('click', {
             bubbles: true,
             composed: true
         });
@@ -170,8 +184,12 @@ export default class HTMLElement extends Element {
      * Triggers a blur event.
      */
     blur() {
+        if (this.ownerDocument['_activeElement'] !== this || !this.isConnected) {
+            return;
+        }
+        this.ownerDocument['_activeElement'] = null;
         for (const eventType of ['blur', 'focusout']) {
-            const event = new Event(eventType, {
+            const event = new FocusEvent(eventType, {
                 bubbles: true,
                 composed: true
             });
@@ -184,8 +202,15 @@ export default class HTMLElement extends Element {
      * Triggers a focus event.
      */
     focus() {
+        if (this.ownerDocument['_activeElement'] === this || !this.isConnected) {
+            return;
+        }
+        if (this.ownerDocument['_activeElement'] !== null) {
+            this.ownerDocument['_activeElement'].blur();
+        }
+        this.ownerDocument['_activeElement'] = this;
         for (const eventType of ['focus', 'focusin']) {
-            const event = new Event(eventType, {
+            const event = new FocusEvent(eventType, {
                 bubbles: true,
                 composed: true
             });

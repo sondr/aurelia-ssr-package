@@ -33,17 +33,17 @@ export default class HTMLElement extends Element implements IHTMLElement {
      */
     set tabIndex(tabIndex: number);
     /**
-     * Returns inner text.
+     * Returns inner text, which is the rendered appearance of text.
      *
-     * @returns Text.
+     * @returns Inner text.
      */
     get innerText(): string;
     /**
-     * Sets inner text.
+     * Sets the inner text, which is the rendered appearance of text.
      *
-     * @param text Text.
+     * @param innerText Inner text.
      */
-    set innerText(text: string);
+    set innerText(innerText: string);
     /**
      * Returns style.
      *

@@ -1,4 +1,4 @@
-System.register(["../html-element/HTMLElement", "./ValidityState", "../../exception/DOMException", "../../exception/DOMExceptionNameEnum", "../../event/Event", "./HTMLInputElementValueSanitizer", "./HTMLInputElementSelectionModeEnum", "./HTMLInputElementSelectionDirectionEnum"], function (exports_1, context_1) {
+System.register(["../html-element/HTMLElement", "./ValidityState", "../../exception/DOMException", "../../exception/DOMExceptionNameEnum", "../../event/Event", "./HTMLInputElementValueSanitizer", "./HTMLInputElementSelectionModeEnum", "./HTMLInputElementSelectionDirectionEnum", "./HTMLInputElementValueStepping"], function (exports_1, context_1) {
     "use strict";
     var __extends = (this && this.__extends) || (function () {
         var extendStatics = function (d, b) {
@@ -15,7 +15,7 @@ System.register(["../html-element/HTMLElement", "./ValidityState", "../../except
             d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
         };
     })();
-    var HTMLElement_1, ValidityState_1, DOMException_1, DOMExceptionNameEnum_1, Event_1, HTMLInputElementValueSanitizer_1, HTMLInputElementSelectionModeEnum_1, HTMLInputElementSelectionDirectionEnum_1, HTMLInputElement;
+    var HTMLElement_1, ValidityState_1, DOMException_1, DOMExceptionNameEnum_1, Event_1, HTMLInputElementValueSanitizer_1, HTMLInputElementSelectionModeEnum_1, HTMLInputElementSelectionDirectionEnum_1, HTMLInputElementValueStepping_1, HTMLInputElement;
     var __moduleName = context_1 && context_1.id;
     return {
         setters: [
@@ -42,6 +42,9 @@ System.register(["../html-element/HTMLElement", "./ValidityState", "../../except
             },
             function (HTMLInputElementSelectionDirectionEnum_1_1) {
                 HTMLInputElementSelectionDirectionEnum_1 = HTMLInputElementSelectionDirectionEnum_1_1;
+            },
+            function (HTMLInputElementValueStepping_1_1) {
+                HTMLInputElementValueStepping_1 = HTMLInputElementValueStepping_1_1;
             }
         ],
         execute: function () {
@@ -70,8 +73,6 @@ System.register(["../html-element/HTMLElement", "./ValidityState", "../../except
                     _this.defaultChecked = false;
                     // Type specific: file
                     _this.files = [];
-                    // Not categorized
-                    _this.defaultValue = '';
                     // Type specific: text/password/search/tel/url/week/month
                     _this._selectionStart = null;
                     _this._selectionEnd = null;
@@ -452,9 +453,9 @@ System.register(["../html-element/HTMLElement", "./ValidityState", "../../except
                     enumerable: false,
                     configurable: true
                 });
-                Object.defineProperty(HTMLInputElement.prototype, "defaultvalue", {
+                Object.defineProperty(HTMLInputElement.prototype, "defaultValue", {
                     /**
-                     * Returns defaultvalue.
+                     * Returns defaultValue.
                      *
                      * @returns Defaultvalue.
                      */
@@ -462,12 +463,12 @@ System.register(["../html-element/HTMLElement", "./ValidityState", "../../except
                         return this.getAttributeNS(null, 'defaultvalue') || '';
                     },
                     /**
-                     * Sets defaultvalue.
+                     * Sets defaultValue.
                      *
-                     * @param defaultvalue Defaultvalue.
+                     * @param defaultValue Defaultvalue.
                      */
-                    set: function (defaultvalue) {
-                        this.setAttributeNS(null, 'defaultvalue', defaultvalue);
+                    set: function (defaultValue) {
+                        this.setAttributeNS(null, 'defaultvalue', defaultValue);
                     },
                     enumerable: false,
                     configurable: true
@@ -873,6 +874,18 @@ System.register(["../html-element/HTMLElement", "./ValidityState", "../../except
                     configurable: true
                 });
                 /**
+                 * Selects the text.
+                 */
+                HTMLInputElement.prototype.select = function () {
+                    if (!this._isSelectionSupported()) {
+                        return null;
+                    }
+                    this._selectionStart = 0;
+                    this._selectionEnd = this.value.length;
+                    this._selectionDirection = HTMLInputElementSelectionDirectionEnum_1.default.none;
+                    this.dispatchEvent(new Event_1.default('select', { bubbles: true, cancelable: true }));
+                };
+                /**
                  * Set selection range.
                  *
                  * @param start Start.
@@ -960,6 +973,28 @@ System.register(["../html-element/HTMLElement", "./ValidityState", "../../except
                  */
                 HTMLInputElement.prototype.checkValidity = function () {
                     return true;
+                };
+                /**
+                 * Steps up.
+                 *
+                 * @param [increment] Increment.
+                 */
+                HTMLInputElement.prototype.stepUp = function (increment) {
+                    var newValue = HTMLInputElementValueStepping_1.default.step(this.type, this.value, 1, increment);
+                    if (newValue !== null) {
+                        this.value = newValue;
+                    }
+                };
+                /**
+                 * Steps down.
+                 *
+                 * @param [increment] Increment.
+                 */
+                HTMLInputElement.prototype.stepDown = function (increment) {
+                    var newValue = HTMLInputElementValueStepping_1.default.step(this.type, this.value, -1, increment);
+                    if (newValue !== null) {
+                        this.value = newValue;
+                    }
                 };
                 /**
                  * Clones a node.

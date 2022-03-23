@@ -63,13 +63,21 @@ import Element from '../nodes/element/Element';
 import HTMLTemplateElement from '../nodes/html-template-element/HTMLTemplateElement';
 import HTMLFormElement from '../nodes/html-form-element/HTMLFormElement';
 import HTMLElement from '../nodes/html-element/HTMLElement';
+import HTMLUnknownElement from '../nodes/html-unknown-element/HTMLUnknownElement';
 import HTMLInputElement from '../nodes/html-input-element/HTMLInputElement';
 import HTMLTextAreaElement from '../nodes/html-text-area-element/HTMLTextAreaElement';
+import HTMLLinkElement from '../nodes/html-link-element/HTMLLinkElement';
+import HTMLStyleElement from '../nodes/html-style-element/HTMLStyleElement';
+import HTMLSlotElement from '../nodes/html-slot-element/HTMLSlotElement';
+import HTMLLabelElement from '../nodes/html-label-element/HTMLLabelElement';
+import HTMLMetaElement from '../nodes/html-meta-element/HTMLMetaElement';
 import SVGSVGElement from '../nodes/svg-element/SVGSVGElement';
 import SVGElement from '../nodes/svg-element/SVGElement';
 import HTMLScriptElement from '../nodes/html-script-element/HTMLScriptElement';
 import HTMLImageElement from '../nodes/html-image-element/HTMLImageElement';
+import Image from '../nodes/html-image-element/Image';
 import DocumentFragment from '../nodes/document-fragment/DocumentFragment';
+import CharacterData from '../nodes/character-data/CharacterData';
 import TreeWalker from '../tree-walker/TreeWalker';
 import Event from '../event/Event';
 import CustomEvent from '../event/events/CustomEvent';
@@ -81,18 +89,21 @@ import URL from '../location/URL';
 import Location from '../location/Location';
 import NonImplementedEventTypes from '../event/NonImplementedEventTypes';
 import MutationObserver from '../mutation-observer/MutationObserver';
-import ElementClass from '../config/ElementClass';
+import NonImplemenetedElementClasses from '../config/NonImplemenetedElementClasses';
 import DOMParser from '../dom-parser/DOMParser';
 import XMLSerializer from '../xml-serializer/XMLSerializer';
 import ResizeObserver from '../resize-observer/ResizeObserver';
-import CSSStyleSheet from '../css/CSSStyleSheet';
 import Blob from '../file/Blob';
 import File from '../file/File';
 import DOMException from '../exception/DOMException';
 import FileReader from '../file/FileReader';
 import History from '../history/History';
+import CSSStyleSheet from '../css/CSSStyleSheet';
 import CSSStyleDeclaration from '../css/CSSStyleDeclaration';
+import CSS from '../css/CSS';
+import CSSUnitValue from '../css/CSSUnitValue';
 import MouseEvent from '../event/events/MouseEvent';
+import PointerEvent from '../event/events/PointerEvent';
 import FocusEvent from '../event/events/FocusEvent';
 import WheelEvent from '../event/events/WheelEvent';
 import DataTransfer from '../event/DataTransfer';
@@ -101,14 +112,23 @@ import DataTransferItemList from '../event/DataTransferItemList';
 import InputEvent from '../event/events/InputEvent';
 import UIEvent from '../event/UIEvent';
 import ErrorEvent from '../event/events/ErrorEvent';
+import StorageEvent from '../event/events/StorageEvent';
 import Screen from '../screen/Screen';
 import AsyncTaskManager from './AsyncTaskManager';
 import AsyncTaskTypeEnum from './AsyncTaskTypeEnum';
 import RelativeURL from '../location/RelativeURL';
 import Storage from '../storage/Storage';
-import HTMLLinkElement from '../nodes/html-link-element/HTMLLinkElement';
-import HTMLStyleElement from '../nodes/html-style-element/HTMLStyleElement';
 import URLSearchParams from '../url-search-params/URLSearchParams';
+import HTMLCollection from '../nodes/element/HTMLCollection';
+import NodeList from '../nodes/node/NodeList';
+import MediaQueryList from '../match-media/MediaQueryList';
+import Selection from '../selection/Selection';
+import * as PerfHooks from 'perf_hooks';
+import Navigator from '../navigator/Navigator';
+import MimeType from '../navigator/MimeType';
+import MimeTypeArray from '../navigator/MimeTypeArray';
+import Plugin from '../navigator/Plugin';
+import PluginArray from '../navigator/PluginArray';
 var FETCH_RESPONSE_TYPE_METHODS = ['blob', 'json', 'text'];
 /**
  * Handles the Window.
@@ -138,14 +158,19 @@ var Window = /** @class */ (function (_super) {
         // Global classes
         _this.Node = Node;
         _this.HTMLElement = HTMLElement;
+        _this.HTMLUnknownElement = HTMLUnknownElement;
         _this.HTMLTemplateElement = HTMLTemplateElement;
         _this.HTMLFormElement = HTMLFormElement;
         _this.HTMLInputElement = HTMLInputElement;
         _this.HTMLTextAreaElement = HTMLTextAreaElement;
         _this.HTMLImageElement = HTMLImageElement;
+        _this.Image = Image;
         _this.HTMLScriptElement = HTMLScriptElement;
         _this.HTMLLinkElement = HTMLLinkElement;
         _this.HTMLStyleElement = HTMLStyleElement;
+        _this.HTMLLabelElement = HTMLLabelElement;
+        _this.HTMLSlotElement = HTMLSlotElement;
+        _this.HTMLMetaElement = HTMLMetaElement;
         _this.SVGSVGElement = SVGSVGElement;
         _this.SVGElement = SVGElement;
         _this.Text = Text;
@@ -153,6 +178,7 @@ var Window = /** @class */ (function (_super) {
         _this.ShadowRoot = ShadowRoot;
         _this.Element = Element;
         _this.DocumentFragment = DocumentFragment;
+        _this.CharacterData = CharacterData;
         _this.NodeFilter = NodeFilter;
         _this.TreeWalker = TreeWalker;
         _this.DOMParser = DOMParser;
@@ -167,10 +193,12 @@ var Window = /** @class */ (function (_super) {
         _this.AnimationEvent = AnimationEvent;
         _this.KeyboardEvent = KeyboardEvent;
         _this.MouseEvent = MouseEvent;
+        _this.PointerEvent = PointerEvent;
         _this.FocusEvent = FocusEvent;
         _this.WheelEvent = WheelEvent;
         _this.InputEvent = InputEvent;
         _this.ErrorEvent = ErrorEvent;
+        _this.StorageEvent = StorageEvent;
         _this.ProgressEvent = ProgressEvent;
         _this.EventTarget = EventTarget;
         _this.DataTransfer = DataTransfer;
@@ -192,23 +220,36 @@ var Window = /** @class */ (function (_super) {
         _this.Screen = Screen;
         _this.Storage = Storage;
         _this.URLSearchParams = URLSearchParams;
+        _this.HTMLCollection = HTMLCollection;
+        _this.NodeList = NodeList;
+        _this.MediaQueryList = MediaQueryList;
+        _this.CSSUnitValue = CSSUnitValue;
+        _this.Selection = Selection;
+        _this.Navigator = Navigator;
+        _this.MimeType = MimeType;
+        _this.MimeTypeArray = MimeTypeArray;
+        _this.Plugin = Plugin;
+        _this.PluginArray = PluginArray;
         // Events
         _this.onload = null;
         _this.onerror = null;
         _this.customElements = new CustomElementRegistry();
         _this.location = new Location();
         _this.history = new History();
-        _this.navigator = { userAgent: 'happy-dom' };
+        _this.navigator = new Navigator();
         _this.console = global ? global.console : null;
         _this.self = _this;
         _this.top = _this;
         _this.parent = _this;
         _this.window = _this;
+        _this.globalThis = _this;
         _this.screen = new Screen();
         _this.innerWidth = 1024;
         _this.innerHeight = 768;
+        _this.devicePixelRatio = 1;
         _this.sessionStorage = new Storage();
         _this.localStorage = new Storage();
+        _this.performance = PerfHooks.performance;
         // Node.js Globals
         _this.Array = global ? global.Array : null;
         _this.ArrayBuffer = global ? global.ArrayBuffer : null;
@@ -220,7 +261,6 @@ var Window = /** @class */ (function (_super) {
         _this.EvalError = global ? global.EvalError : null;
         _this.Float32Array = global ? global.Float32Array : null;
         _this.Float64Array = global ? global.Float64Array : null;
-        _this.Function = global ? global.Function : null;
         _this.GLOBAL = null;
         _this.Infinity = global ? global.Infinity : null;
         _this.Int16Array = global ? global.Int16Array : null;
@@ -231,7 +271,6 @@ var Window = /** @class */ (function (_super) {
         _this.Map = global ? global.Map : null;
         _this.Math = global ? global.Math : null;
         _this.NaN = global ? global.NaN : null;
-        _this.Object = global ? global.Object : null;
         _this.Number = global ? global.Number : null;
         _this.Promise = global ? global.Promise : null;
         _this.RangeError = global ? global.RangeError : null;
@@ -271,6 +310,9 @@ var Window = /** @class */ (function (_super) {
         _this.v8debug = null;
         _this.AbortController = global ? global.AbortController : null;
         _this.AbortSignal = global ? global.AbortSignal : null;
+        // Private properties
+        _this._objectClass = null;
+        _this._functionClass = null;
         _this.document = new HTMLDocument();
         _this.document.defaultView = _this;
         _this.document._readyStateManager.whenComplete().then(function () {
@@ -278,31 +320,81 @@ var Window = /** @class */ (function (_super) {
         });
         DOMParser._ownerDocument = DOMParser._ownerDocument || _this.document;
         FileReader._ownerDocument = FileReader._ownerDocument || _this.document;
+        Image.ownerDocument = Image.ownerDocument || _this.document;
         for (var _i = 0, NonImplementedEventTypes_1 = NonImplementedEventTypes; _i < NonImplementedEventTypes_1.length; _i++) {
             var eventType = NonImplementedEventTypes_1[_i];
             if (!_this[eventType]) {
                 _this[eventType] = Event;
             }
         }
-        for (var _a = 0, _b = Object.keys(ElementClass); _a < _b.length; _a++) {
-            var className = _b[_a];
+        for (var _a = 0, NonImplemenetedElementClasses_1 = NonImplemenetedElementClasses; _a < NonImplemenetedElementClasses_1.length; _a++) {
+            var className = NonImplemenetedElementClasses_1[_a];
             if (!_this[className]) {
-                _this[className] = ElementClass[className];
+                _this[className] = HTMLElement;
             }
         }
         // Binds all methods to "this", so that it will use the correct context when called globally.
-        for (var _c = 0, _d = Object.keys(Window.prototype); _c < _d.length; _c++) {
-            var key = _d[_c];
+        for (var _b = 0, _c = Object.keys(Window.prototype); _b < _c.length; _b++) {
+            var key = _c[_b];
             if (typeof _this[key] === 'function') {
                 _this[key] = _this[key].bind(_this);
             }
         }
         return _this;
     }
+    Object.defineProperty(Window.prototype, "Object", {
+        /**
+         * Returns Object class.
+         *
+         * @returns Object class.
+         */
+        get: function () {
+            if (this._objectClass) {
+                return this._objectClass;
+            }
+            // When inside a VM global.Object is not the same as ({}).constructor
+            // We will therefore run the code inside the VM to get the real constructor
+            this._objectClass = this.eval('({}).constructor');
+            return this._objectClass;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Window.prototype, "Function", {
+        /**
+         * Returns Function class.
+         *
+         * @returns Function class.
+         */
+        get: function () {
+            if (this._functionClass) {
+                return this._functionClass;
+            }
+            // When inside a VM global.Function is not the same as (() => {}).constructor
+            // We will therefore run the code inside the VM to get the real constructor
+            this._functionClass = this.eval('(() => {}).constructor');
+            return this._functionClass;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Window.prototype, "CSS", {
+        /**
+         * The CSS interface holds useful CSS-related methods.
+         *
+         * @returns CSS interface.
+         */
+        get: function () {
+            return new CSS();
+        },
+        enumerable: false,
+        configurable: true
+    });
     /**
      * Evaluates code.
      *
      * @param code Code.
+     * @returns Result.
      */
     Window.prototype.eval = function (code) {
         var vmExists = false;
@@ -316,12 +408,10 @@ var Window = /** @class */ (function (_super) {
         if (vmExists) {
             vm = require('vm');
         }
-        if (global && vm && vm.isContext(this)) {
-            vm.runInContext(code, this);
+        if (vm && vm.isContext(this)) {
+            return vm.runInContext(code, this);
         }
-        else if (global && global.eval) {
-            global.eval(code);
-        }
+        return global.eval(code);
     };
     /**
      * Returns an object containing the values of all CSS properties of an element.
@@ -373,6 +463,17 @@ var Window = /** @class */ (function (_super) {
      */
     Window.prototype.scrollTo = function (x, y) {
         this.scroll(x, y);
+    };
+    /**
+     * Returns a new MediaQueryList object that can then be used to determine if the document matches the media query string.
+     *
+     * @param mediaQueryString A string specifying the media query to parse into a MediaQueryList.
+     * @returns A new MediaQueryList.
+     */
+    Window.prototype.matchMedia = function (mediaQueryString) {
+        var mediaQueryList = new MediaQueryList();
+        mediaQueryList._media = mediaQueryString;
+        return mediaQueryList;
     };
     /**
      * Sets a timer which executes a function once the timer expires.

@@ -13,7 +13,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-define(["require", "exports", "../html-element/HTMLElement", "./ValidityState", "../../exception/DOMException", "../../exception/DOMExceptionNameEnum", "../../event/Event", "./HTMLInputElementValueSanitizer", "./HTMLInputElementSelectionModeEnum", "./HTMLInputElementSelectionDirectionEnum"], function (require, exports, HTMLElement_1, ValidityState_1, DOMException_1, DOMExceptionNameEnum_1, Event_1, HTMLInputElementValueSanitizer_1, HTMLInputElementSelectionModeEnum_1, HTMLInputElementSelectionDirectionEnum_1) {
+define(["require", "exports", "../html-element/HTMLElement", "./ValidityState", "../../exception/DOMException", "../../exception/DOMExceptionNameEnum", "../../event/Event", "./HTMLInputElementValueSanitizer", "./HTMLInputElementSelectionModeEnum", "./HTMLInputElementSelectionDirectionEnum", "./HTMLInputElementValueStepping"], function (require, exports, HTMLElement_1, ValidityState_1, DOMException_1, DOMExceptionNameEnum_1, Event_1, HTMLInputElementValueSanitizer_1, HTMLInputElementSelectionModeEnum_1, HTMLInputElementSelectionDirectionEnum_1, HTMLInputElementValueStepping_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     /**
@@ -41,8 +41,6 @@ define(["require", "exports", "../html-element/HTMLElement", "./ValidityState", 
             _this.defaultChecked = false;
             // Type specific: file
             _this.files = [];
-            // Not categorized
-            _this.defaultValue = '';
             // Type specific: text/password/search/tel/url/week/month
             _this._selectionStart = null;
             _this._selectionEnd = null;
@@ -423,9 +421,9 @@ define(["require", "exports", "../html-element/HTMLElement", "./ValidityState", 
             enumerable: false,
             configurable: true
         });
-        Object.defineProperty(HTMLInputElement.prototype, "defaultvalue", {
+        Object.defineProperty(HTMLInputElement.prototype, "defaultValue", {
             /**
-             * Returns defaultvalue.
+             * Returns defaultValue.
              *
              * @returns Defaultvalue.
              */
@@ -433,12 +431,12 @@ define(["require", "exports", "../html-element/HTMLElement", "./ValidityState", 
                 return this.getAttributeNS(null, 'defaultvalue') || '';
             },
             /**
-             * Sets defaultvalue.
+             * Sets defaultValue.
              *
-             * @param defaultvalue Defaultvalue.
+             * @param defaultValue Defaultvalue.
              */
-            set: function (defaultvalue) {
-                this.setAttributeNS(null, 'defaultvalue', defaultvalue);
+            set: function (defaultValue) {
+                this.setAttributeNS(null, 'defaultvalue', defaultValue);
             },
             enumerable: false,
             configurable: true
@@ -844,6 +842,18 @@ define(["require", "exports", "../html-element/HTMLElement", "./ValidityState", 
             configurable: true
         });
         /**
+         * Selects the text.
+         */
+        HTMLInputElement.prototype.select = function () {
+            if (!this._isSelectionSupported()) {
+                return null;
+            }
+            this._selectionStart = 0;
+            this._selectionEnd = this.value.length;
+            this._selectionDirection = HTMLInputElementSelectionDirectionEnum_1.default.none;
+            this.dispatchEvent(new Event_1.default('select', { bubbles: true, cancelable: true }));
+        };
+        /**
          * Set selection range.
          *
          * @param start Start.
@@ -931,6 +941,28 @@ define(["require", "exports", "../html-element/HTMLElement", "./ValidityState", 
          */
         HTMLInputElement.prototype.checkValidity = function () {
             return true;
+        };
+        /**
+         * Steps up.
+         *
+         * @param [increment] Increment.
+         */
+        HTMLInputElement.prototype.stepUp = function (increment) {
+            var newValue = HTMLInputElementValueStepping_1.default.step(this.type, this.value, 1, increment);
+            if (newValue !== null) {
+                this.value = newValue;
+            }
+        };
+        /**
+         * Steps down.
+         *
+         * @param [increment] Increment.
+         */
+        HTMLInputElement.prototype.stepDown = function (increment) {
+            var newValue = HTMLInputElementValueStepping_1.default.step(this.type, this.value, -1, increment);
+            if (newValue !== null) {
+                this.value = newValue;
+            }
         };
         /**
          * Clones a node.

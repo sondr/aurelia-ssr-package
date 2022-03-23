@@ -15,43 +15,11 @@ export default class Node extends EventTarget {
         this.ownerDocument = null;
         this.parentNode = null;
         this.childNodes = NodeListFactory.create();
-        // Protected properties
-        this._isConnected = false;
+        this.isConnected = false;
+        this._rootNode = null;
         // Custom Properties (not part of HTML standard)
         this._observers = [];
         this.ownerDocument = this.constructor.ownerDocument;
-    }
-    /**
-     * Returns "true" if connected to DOM.
-     *
-     * @returns "true" if connected.
-     */
-    get isConnected() {
-        return this._isConnected;
-    }
-    /**
-     * Sets the connected state.
-     *
-     * @param isConnected "true" if connected.
-     */
-    set isConnected(isConnected) {
-        if (this._isConnected !== isConnected) {
-            this._isConnected = isConnected;
-            if (isConnected && this.connectedCallback) {
-                this.connectedCallback();
-            }
-            else if (!isConnected && this.disconnectedCallback) {
-                this.disconnectedCallback();
-            }
-            for (const child of this.childNodes) {
-                child.isConnected = isConnected;
-            }
-            // eslint-disable-next-line
-            if (this.shadowRoot) {
-                // eslint-disable-next-line
-                this.shadowRoot.isConnected = isConnected;
-            }
-        }
     }
     /**
      * Get text value of children.
@@ -76,6 +44,12 @@ export default class Node extends EventTarget {
      */
     get nodeValue() {
         return null;
+    }
+    /**
+     * Sets node value.
+     */
+    set nodeValue(_nodeValue) {
+        // Do nothing
     }
     /**
      * Node name.
@@ -143,7 +117,7 @@ export default class Node extends EventTarget {
     get parentElement() {
         let parent = this.parentNode;
         while (parent && parent.nodeType !== Node.ELEMENT_NODE) {
-            parent = this.parentNode;
+            parent = parent.parentNode;
         }
         return parent;
     }
@@ -156,6 +130,20 @@ export default class Node extends EventTarget {
         return this.childNodes.length > 0;
     }
     /**
+     * Returns "true" if this node contains the other node.
+     *
+     * @param otherNode Node to test with.
+     * @returns "true" if this node contains the other node.
+     */
+    contains(otherNode) {
+        for (const childNode of this.childNodes) {
+            if (childNode === otherNode || childNode.contains(otherNode)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    /**
      * Returns closest root node (Document or ShadowRoot).
      *
      * @param options Options.
@@ -163,20 +151,13 @@ export default class Node extends EventTarget {
      * @returns Node.
      */
     getRootNode(options) {
-        // eslint-disable-next-line
-        let parent = this;
-        while (!!parent) {
-            if (!parent.parentNode) {
-                if (!(options === null || options === void 0 ? void 0 : options.composed) || !parent.host) {
-                    return parent;
-                }
-                parent = parent.host;
-            }
-            else {
-                parent = parent.parentNode;
-            }
+        if (!this.isConnected) {
+            return this;
         }
-        return null;
+        if (this._rootNode && !(options === null || options === void 0 ? void 0 : options.composed)) {
+            return this._rootNode;
+        }
+        return this.ownerDocument;
     }
     /**
      * Clones a node.
@@ -186,8 +167,11 @@ export default class Node extends EventTarget {
      */
     cloneNode(deep = false) {
         const clone = new this.constructor();
-        for (const node of clone.childNodes.slice()) {
-            node.parentNode.removeChild(node);
+        // Document has childNodes directly when it is created
+        if (clone.childNodes.length) {
+            for (const node of clone.childNodes.slice()) {
+                node.parentNode.removeChild(node);
+            }
         }
         if (deep) {
             for (const childNode of this.childNodes) {
@@ -225,11 +209,11 @@ export default class Node extends EventTarget {
             }
         }
         this.childNodes.push(node);
-        node.parentNode = this;
-        node.isConnected = this.isConnected;
+        node._connectToNode(this);
         // MutationObserver
         if (this._observers.length > 0) {
             const record = new MutationRecord();
+            record.target = this;
             record.type = MutationTypeEnum.childList;
             record.addedNodes = [node];
             for (const observer of this._observers) {
@@ -255,11 +239,11 @@ export default class Node extends EventTarget {
             throw new DOMException('Failed to remove node. Node is not child of parent.');
         }
         this.childNodes.splice(index, 1);
-        node.parentNode = null;
-        node.isConnected = false;
+        node._connectToNode(null);
         // MutationObserver
         if (this._observers.length > 0) {
             const record = new MutationRecord();
+            record.target = this;
             record.type = MutationTypeEnum.childList;
             record.removedNodes = [node];
             for (const observer of this._observers) {
@@ -305,11 +289,11 @@ export default class Node extends EventTarget {
             }
         }
         this.childNodes.splice(index, 0, newNode);
-        newNode.parentNode = this;
-        newNode.isConnected = this.isConnected;
+        newNode._connectToNode(this);
         // MutationObserver
         if (this._observers.length > 0) {
             const record = new MutationRecord();
+            record.target = this;
             record.type = MutationTypeEnum.childList;
             record.addedNodes = [newNode];
             for (const observer of this._observers) {
@@ -339,13 +323,16 @@ export default class Node extends EventTarget {
      * @override
      */
     dispatchEvent(event) {
-        const onEventName = 'on' + event.type.toLowerCase();
-        if (typeof this[onEventName] === 'function') {
-            this[onEventName].call(this, event);
-        }
         const returnValue = super.dispatchEvent(event);
-        if (event.bubbles && this.parentNode !== null && !event._propagationStopped) {
-            return this.parentNode.dispatchEvent(event);
+        if (event.bubbles && !event._propagationStopped) {
+            if (this.parentNode) {
+                return this.parentNode.dispatchEvent(event);
+            }
+            // eslint-disable-next-line
+            if (event.composed && this.host) {
+                // eslint-disable-next-line
+                return this.host.dispatchEvent(event);
+            }
         }
         return returnValue;
     }
@@ -385,6 +372,35 @@ export default class Node extends EventTarget {
         if (listener.options.subtree) {
             for (const node of this.childNodes) {
                 node._unobserve(listener);
+            }
+        }
+    }
+    /**
+     * Connects this element to another element.
+     *
+     * @param parentNode Parent node.
+     */
+    _connectToNode(parentNode = null) {
+        const isConnected = !!parentNode && parentNode.isConnected;
+        if (this.nodeType !== Node.DOCUMENT_FRAGMENT_NODE) {
+            this.parentNode = parentNode;
+            this._rootNode = isConnected && parentNode ? parentNode._rootNode : null;
+        }
+        if (this.isConnected !== isConnected) {
+            this.isConnected = isConnected;
+            if (isConnected && this.connectedCallback) {
+                this.connectedCallback();
+            }
+            else if (!isConnected && this.disconnectedCallback) {
+                this.disconnectedCallback();
+            }
+            for (const child of this.childNodes) {
+                child._connectToNode(this);
+            }
+            // eslint-disable-next-line
+            if (this._shadowRoot) {
+                // eslint-disable-next-line
+                this._shadowRoot._connectToNode(this);
             }
         }
     }

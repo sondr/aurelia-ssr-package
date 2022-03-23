@@ -1,4 +1,4 @@
-System.register(["../element/Element", "../../event/Event", "../../css/CSSStyleDeclaration"], function (exports_1, context_1) {
+System.register(["../element/Element", "../../css/CSSStyleDeclaration", "../../event/events/FocusEvent", "../../event/events/PointerEvent", "../node/Node"], function (exports_1, context_1) {
     "use strict";
     var __extends = (this && this.__extends) || (function () {
         var extendStatics = function (d, b) {
@@ -15,18 +15,24 @@ System.register(["../element/Element", "../../event/Event", "../../css/CSSStyleD
             d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
         };
     })();
-    var Element_1, Event_1, CSSStyleDeclaration_1, HTMLElement;
+    var Element_1, CSSStyleDeclaration_1, FocusEvent_1, PointerEvent_1, Node_1, HTMLElement;
     var __moduleName = context_1 && context_1.id;
     return {
         setters: [
             function (Element_1_1) {
                 Element_1 = Element_1_1;
             },
-            function (Event_1_1) {
-                Event_1 = Event_1_1;
-            },
             function (CSSStyleDeclaration_1_1) {
                 CSSStyleDeclaration_1 = CSSStyleDeclaration_1_1;
+            },
+            function (FocusEvent_1_1) {
+                FocusEvent_1 = FocusEvent_1_1;
+            },
+            function (PointerEvent_1_1) {
+                PointerEvent_1 = PointerEvent_1_1;
+            },
+            function (Node_1_1) {
+                Node_1 = Node_1_1;
             }
         ],
         execute: function () {
@@ -81,20 +87,33 @@ System.register(["../element/Element", "../../event/Event", "../../css/CSSStyleD
                 });
                 Object.defineProperty(HTMLElement.prototype, "innerText", {
                     /**
-                     * Returns inner text.
+                     * Returns inner text, which is the rendered appearance of text.
                      *
-                     * @returns Text.
+                     * @returns Inner text.
                      */
                     get: function () {
-                        return this.textContent;
+                        var result = '';
+                        for (var _i = 0, _a = this.childNodes; _i < _a.length; _i++) {
+                            var childNode = _a[_i];
+                            if (childNode instanceof HTMLElement) {
+                                if (childNode.tagName !== 'SCRIPT' && childNode.tagName !== 'STYLE') {
+                                    result += childNode.innerText;
+                                }
+                            }
+                            else if (childNode.nodeType === Node_1.default.ELEMENT_NODE ||
+                                childNode.nodeType === Node_1.default.TEXT_NODE) {
+                                result += childNode.textContent;
+                            }
+                        }
+                        return result;
                     },
                     /**
-                     * Sets inner text.
+                     * Sets the inner text, which is the rendered appearance of text.
                      *
-                     * @param text Text.
+                     * @param innerText Inner text.
                      */
-                    set: function (text) {
-                        this.textContent = text;
+                    set: function (innerText) {
+                        this.textContent = innerText;
                     },
                     enumerable: false,
                     configurable: true
@@ -222,7 +241,7 @@ System.register(["../element/Element", "../../event/Event", "../../css/CSSStyleD
                  * Triggers a click event.
                  */
                 HTMLElement.prototype.click = function () {
-                    var event = new Event_1.default('click', {
+                    var event = new PointerEvent_1.default('click', {
                         bubbles: true,
                         composed: true
                     });
@@ -234,9 +253,13 @@ System.register(["../element/Element", "../../event/Event", "../../css/CSSStyleD
                  * Triggers a blur event.
                  */
                 HTMLElement.prototype.blur = function () {
+                    if (this.ownerDocument['_activeElement'] !== this || !this.isConnected) {
+                        return;
+                    }
+                    this.ownerDocument['_activeElement'] = null;
                     for (var _i = 0, _a = ['blur', 'focusout']; _i < _a.length; _i++) {
                         var eventType = _a[_i];
-                        var event_1 = new Event_1.default(eventType, {
+                        var event_1 = new FocusEvent_1.default(eventType, {
                             bubbles: true,
                             composed: true
                         });
@@ -249,9 +272,16 @@ System.register(["../element/Element", "../../event/Event", "../../css/CSSStyleD
                  * Triggers a focus event.
                  */
                 HTMLElement.prototype.focus = function () {
+                    if (this.ownerDocument['_activeElement'] === this || !this.isConnected) {
+                        return;
+                    }
+                    if (this.ownerDocument['_activeElement'] !== null) {
+                        this.ownerDocument['_activeElement'].blur();
+                    }
+                    this.ownerDocument['_activeElement'] = this;
                     for (var _i = 0, _a = ['focus', 'focusin']; _i < _a.length; _i++) {
                         var eventType = _a[_i];
-                        var event_2 = new Event_1.default(eventType, {
+                        var event_2 = new FocusEvent_1.default(eventType, {
                             bubbles: true,
                             composed: true
                         });

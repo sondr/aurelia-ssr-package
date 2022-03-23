@@ -1,4 +1,4 @@
-System.register(["../html-element/HTMLElement", "../text/Text", "../comment/Comment", "../node/Node", "../../tree-walker/TreeWalker", "../document-fragment/DocumentFragment", "../../xml-parser/XMLParser", "../../event/Event", "../../dom-implementation/DOMImplementation", "../../config/ElementTag", "../../attribute/Attr", "../../config/NamespaceURI", "../document-type/DocumentType", "../parent-node/ParentNodeUtility", "../../query-selector/QuerySelector", "../../exception/DOMException", "../../cookie/CookieUtility", "../element/HTMLCollectionFactory", "./DocumentReadyStateEnum", "./DocumentReadyStateManager"], function (exports_1, context_1) {
+System.register(["../html-unknown-element/HTMLUnknownElement", "../text/Text", "../comment/Comment", "../node/Node", "../../tree-walker/TreeWalker", "../document-fragment/DocumentFragment", "../../xml-parser/XMLParser", "../../event/Event", "../../dom-implementation/DOMImplementation", "../../config/ElementTag", "../../attribute/Attr", "../../config/NamespaceURI", "../document-type/DocumentType", "../parent-node/ParentNodeUtility", "../../query-selector/QuerySelector", "../../exception/DOMException", "../../cookie/CookieUtility", "../element/HTMLCollectionFactory", "./DocumentReadyStateEnum", "./DocumentReadyStateManager", "../../selection/Selection"], function (exports_1, context_1) {
     "use strict";
     var __extends = (this && this.__extends) || (function () {
         var extendStatics = function (d, b) {
@@ -24,12 +24,12 @@ System.register(["../html-element/HTMLElement", "../text/Text", "../comment/Comm
         }
         return to.concat(ar || Array.prototype.slice.call(from));
     };
-    var HTMLElement_1, Text_1, Comment_1, Node_1, TreeWalker_1, DocumentFragment_1, XMLParser_1, Event_1, DOMImplementation_1, ElementTag_1, Attr_1, NamespaceURI_1, DocumentType_1, ParentNodeUtility_1, QuerySelector_1, DOMException_1, CookieUtility_1, HTMLCollectionFactory_1, DocumentReadyStateEnum_1, DocumentReadyStateManager_1, Document;
+    var HTMLUnknownElement_1, Text_1, Comment_1, Node_1, TreeWalker_1, DocumentFragment_1, XMLParser_1, Event_1, DOMImplementation_1, ElementTag_1, Attr_1, NamespaceURI_1, DocumentType_1, ParentNodeUtility_1, QuerySelector_1, DOMException_1, CookieUtility_1, HTMLCollectionFactory_1, DocumentReadyStateEnum_1, DocumentReadyStateManager_1, Selection_1, Document;
     var __moduleName = context_1 && context_1.id;
     return {
         setters: [
-            function (HTMLElement_1_1) {
-                HTMLElement_1 = HTMLElement_1_1;
+            function (HTMLUnknownElement_1_1) {
+                HTMLUnknownElement_1 = HTMLUnknownElement_1_1;
             },
             function (Text_1_1) {
                 Text_1 = Text_1_1;
@@ -87,6 +87,9 @@ System.register(["../html-element/HTMLElement", "../text/Text", "../comment/Comm
             },
             function (DocumentReadyStateManager_1_1) {
                 DocumentReadyStateManager_1 = DocumentReadyStateManager_1_1;
+            },
+            function (Selection_1_1) {
+                Selection_1 = Selection_1_1;
             }
         ],
         execute: function () {
@@ -105,8 +108,9 @@ System.register(["../html-element/HTMLElement", "../text/Text", "../comment/Comm
                     _this.adoptedStyleSheets = [];
                     _this.children = HTMLCollectionFactory_1.default.create();
                     _this.readyState = DocumentReadyStateEnum_1.default.interactive;
+                    _this.isConnected = true;
                     _this._readyStateManager = null;
-                    _this._isConnected = true;
+                    _this._activeElement = null;
                     _this._isFirstWrite = true;
                     _this._isFirstWriteAfterOpen = false;
                     _this._defaultView = null;
@@ -123,6 +127,33 @@ System.register(["../html-element/HTMLElement", "../text/Text", "../comment/Comm
                     documentElement.appendChild(bodyElement);
                     return _this;
                 }
+                Object.defineProperty(Document.prototype, "charset", {
+                    /**
+                     * Returns character set.
+                     *
+                     * @deprecated
+                     * @returns Character set.
+                     */
+                    get: function () {
+                        return this.characterSet;
+                    },
+                    enumerable: false,
+                    configurable: true
+                });
+                Object.defineProperty(Document.prototype, "characterSet", {
+                    /**
+                     * Returns character set.
+                     *
+                     * @returns Character set.
+                     */
+                    get: function () {
+                        var _a;
+                        var charset = (_a = this.querySelector('meta[charset]')) === null || _a === void 0 ? void 0 : _a.getAttributeNS(null, 'charset');
+                        return charset ? charset : 'UTF-8';
+                    },
+                    enumerable: false,
+                    configurable: true
+                });
                 Object.defineProperty(Document.prototype, "defaultView", {
                     /**
                      * Returns default view.
@@ -292,6 +323,54 @@ System.register(["../html-element/HTMLElement", "../text/Text", "../comment/Comm
                     enumerable: false,
                     configurable: true
                 });
+                Object.defineProperty(Document.prototype, "activeElement", {
+                    /**
+                     * Returns active element.
+                     *
+                     * @returns Active element.
+                     */
+                    get: function () {
+                        return this._activeElement || this.body || this.documentElement || null;
+                    },
+                    enumerable: false,
+                    configurable: true
+                });
+                Object.defineProperty(Document.prototype, "scrollingElement", {
+                    /**
+                     * Returns scrolling element.
+                     *
+                     * @returns Scrolling element.
+                     */
+                    get: function () {
+                        return this.documentElement;
+                    },
+                    enumerable: false,
+                    configurable: true
+                });
+                Object.defineProperty(Document.prototype, "location", {
+                    /**
+                     * Returns location.
+                     *
+                     * @returns Location.
+                     */
+                    get: function () {
+                        return this._defaultView.location;
+                    },
+                    enumerable: false,
+                    configurable: true
+                });
+                Object.defineProperty(Document.prototype, "scripts", {
+                    /**
+                     * Returns scripts.
+                     *
+                     * @returns Scripts.
+                     */
+                    get: function () {
+                        return this.getElementsByTagName('script');
+                    },
+                    enumerable: false,
+                    configurable: true
+                });
                 /**
                  * Inserts a set of Node objects or DOMString objects after the last child of the ParentNode. DOMString objects are inserted as equivalent Text nodes.
                  *
@@ -382,6 +461,29 @@ System.register(["../html-element/HTMLElement", "../text/Text", "../comment/Comm
                  */
                 Document.prototype.getElementById = function (id) {
                     return ParentNodeUtility_1.default.getElementById(this, id);
+                };
+                /**
+                 * Returns an element by Name.
+                 *
+                 * @returns Matching element.
+                 * @param name
+                 */
+                Document.prototype.getElementsByName = function (name) {
+                    var _getElementsByName = function (_parentNode, _name) {
+                        var matches = HTMLCollectionFactory_1.default.create();
+                        for (var _i = 0, _a = _parentNode.children; _i < _a.length; _i++) {
+                            var child = _a[_i];
+                            if ((child.getAttributeNS(null, 'name') || '') === _name) {
+                                matches.push(child);
+                            }
+                            for (var _b = 0, _c = _getElementsByName(child, _name); _b < _c.length; _b++) {
+                                var match = _c[_b];
+                                matches.push(match);
+                            }
+                        }
+                        return matches;
+                    };
+                    return _getElementsByName(this, name);
                 };
                 /**
                  * Clones a node.
@@ -575,45 +677,45 @@ System.register(["../html-element/HTMLElement", "../text/Text", "../comment/Comm
                  * Closes the document.
                  */
                 Document.prototype.close = function () { };
+                /* eslint-disable jsdoc/valid-types */
                 /**
                  * Creates an element.
                  *
-                 * @param tagName Tag name.
+                 * @param qualifiedName Tag name.
                  * @param [options] Options.
-                 * @param options.is
+                 * @param [options.is] Tag name of a custom element previously defined via customElements.define().
                  * @returns Element.
                  */
-                Document.prototype.createElement = function (tagName, options) {
-                    return this.createElementNS(NamespaceURI_1.default.html, tagName, options);
+                Document.prototype.createElement = function (qualifiedName, options) {
+                    return this.createElementNS(NamespaceURI_1.default.html, qualifiedName, options);
                 };
                 /**
                  * Creates an element with the specified namespace URI and qualified name.
                  *
-                 * @param tagName Tag name.
+                 * @param namespaceURI Namespace URI.
+                 * @param qualifiedName Tag name.
                  * @param [options] Options.
-                 * @param namespaceURI
-                 * @param qualifiedName
-                 * @param options.is
+                 * @param [options.is] Tag name of a custom element previously defined via customElements.define().
                  * @returns Element.
                  */
                 Document.prototype.createElementNS = function (namespaceURI, qualifiedName, options) {
+                    var tagName = qualifiedName.toUpperCase();
                     var customElementClass;
                     if (this.defaultView && options && options.is) {
                         customElementClass = this.defaultView.customElements.get(options.is);
                     }
                     else if (this.defaultView) {
-                        customElementClass = this.defaultView.customElements.get(qualifiedName);
+                        customElementClass = this.defaultView.customElements.get(tagName);
                     }
-                    var elementClass = customElementClass
-                        ? customElementClass
-                        : ElementTag_1.default[qualifiedName] || HTMLElement_1.default;
+                    var elementClass = customElementClass || ElementTag_1.default[tagName] || HTMLUnknownElement_1.default;
                     elementClass.ownerDocument = this;
                     var element = new elementClass();
-                    element.tagName = qualifiedName.toUpperCase();
+                    element.tagName = tagName;
                     element.ownerDocument = this;
                     element.namespaceURI = namespaceURI;
                     return element;
                 };
+                /* eslint-enable jsdoc/valid-types */
                 /**
                  * Creates a text node.
                  *
@@ -659,10 +761,13 @@ System.register(["../html-element/HTMLElement", "../text/Text", "../comment/Comm
                  * Creates an event.
                  *
                  * @deprecated
-                 * @param _type Type.
+                 * @param type Type.
                  * @returns Event.
                  */
-                Document.prototype.createEvent = function (_type) {
+                Document.prototype.createEvent = function (type) {
+                    if (this.defaultView[type]) {
+                        return new this.defaultView[type]('init');
+                    }
                     return new Event_1.default('init');
                 };
                 /**
@@ -720,6 +825,32 @@ System.register(["../html-element/HTMLElement", "../text/Text", "../comment/Comm
                     var adopted = node.parentNode ? node.parentNode.removeChild(node) : node;
                     adopted.ownerDocument = this;
                     return adopted;
+                };
+                /**
+                 * Returns selection.
+                 *
+                 * @returns Selection.
+                 */
+                Document.prototype.getSelection = function () {
+                    return new Selection_1.default();
+                };
+                /**
+                 * Returns a boolean value indicating whether the document or any element inside the document has focus.
+                 *
+                 * @returns "true" if the document has focus.
+                 */
+                Document.prototype.hasFocus = function () {
+                    return !!this.activeElement;
+                };
+                /**
+                 * @override
+                 */
+                Document.prototype.dispatchEvent = function (event) {
+                    var returnValue = _super.prototype.dispatchEvent.call(this, event);
+                    if (event.bubbles && !event._propagationStopped) {
+                        return this.defaultView.dispatchEvent(event);
+                    }
+                    return returnValue;
                 };
                 return Document;
             }(Node_1.default));

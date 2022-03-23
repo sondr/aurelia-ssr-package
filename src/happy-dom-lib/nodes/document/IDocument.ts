@@ -11,6 +11,13 @@ import IParentNode from '../parent-node/IParentNode';
 import INode from '../node/INode';
 import ICharacterData from '../character-data/ICharacterData';
 import IDocumentFragment from '../document-fragment/IDocumentFragment';
+import Selection from '../../selection/Selection';
+import IHTMLCollection from '../element/IHTMLCollection';
+import IHTMLScriptElement from '../html-script-element/IHTMLScriptElement';
+import CSSStyleSheet from '../../css/CSSStyleSheet';
+import Location from '../../location/Location';
+import DocumentReadyStateEnum from './DocumentReadyStateEnum';
+import INodeList from '../node/INodeList';
 
 /**
  * Document.
@@ -23,6 +30,15 @@ export default interface IDocument extends IParentNode {
 	readonly doctype: IDocumentType;
 	readonly body: IHTMLElement;
 	readonly head: IHTMLElement;
+	readonly scripts: IHTMLCollection<IHTMLScriptElement>;
+	readonly activeElement: IHTMLElement;
+	readonly styleSheets: CSSStyleSheet[];
+	readonly scrollingElement: IHTMLElement;
+	readonly location: Location;
+	readonly readyState: DocumentReadyStateEnum;
+	readonly charset: string;
+	readonly characterSet: string;
+	cookie: string;
 
 	/**
 	 * Replaces the document HTML with new HTML.
@@ -67,7 +83,7 @@ export default interface IDocument extends IParentNode {
 	 * @param  data Text data.
 	 * @returns Text node.
 	 */
-	createTextNode(data: string): ICharacterData;
+	createTextNode(data?: string): ICharacterData;
 
 	/**
 	 * Creates a comment node.
@@ -75,7 +91,7 @@ export default interface IDocument extends IParentNode {
 	 * @param  data Text data.
 	 * @returns Text node.
 	 */
-	createComment(data: string): ICharacterData;
+	createComment(data?: string): ICharacterData;
 
 	/**
 	 * Creates a document fragment.
@@ -136,6 +152,14 @@ export default interface IDocument extends IParentNode {
 	getElementById(id: string): IElement;
 
 	/**
+	 * Returns an elements by name.
+	 *
+	 * @param name Name.
+	 * @returns Matching element.
+	 */
+	getElementsByName(name: string): INodeList<IElement>;
+
+	/**
 	 * Clones a node.
 	 *
 	 * @override
@@ -151,4 +175,18 @@ export default interface IDocument extends IParentNode {
 	 * @returns Adopted node.
 	 */
 	adoptNode(node: INode): INode;
+
+	/**
+	 * Returns selection.
+	 *
+	 * @returns Selection.
+	 */
+	getSelection(): Selection;
+
+	/**
+	 * Returns a boolean value indicating whether the document or any element inside the document has focus.
+	 *
+	 * @returns "true" if the document has focus.
+	 */
+	hasFocus(): boolean;
 }

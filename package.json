@@ -50,9 +50,8 @@
     "aurelia-loader-webpack": "^2.2.4",
     "aurelia-framework": "^1.0.0",
     "aurelia-pal": "^1.0.0",
-    "jsdom": "^18.1.0",
+    "jsdom": "^19.0.0",
     "koa": "^2.3.0",
-    "linkedom": "^0.13.0",
     "preboot": "^4.5.2",
     "he": "^1.1.1",
     "node-fetch": "^2.6.1",
@@ -62,7 +61,7 @@
     "webidl-conversions": "^7.0.0"
   },
   "devDependencies": {
-    "@types/jsdom": "^16.2.13",
+    "@types/jsdom": "^16.2.14",
     "@types/koa": "^2.0.39",
     "@types/node": "8.0.14",
     "concurrently": "^3.1.0",

@@ -13,7 +13,7 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-define(["require", "exports", "../element/Element"], function (require, exports, Element_1) {
+define(["require", "exports", "../../css/CSSStyleDeclaration", "../element/Element"], function (require, exports, CSSStyleDeclaration_1, Element_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     /**
@@ -25,7 +25,9 @@ define(["require", "exports", "../element/Element"], function (require, exports,
     var SVGElement = /** @class */ (function (_super) {
         __extends(SVGElement, _super);
         function SVGElement() {
-            return _super !== null && _super.apply(this, arguments) || this;
+            var _this = _super !== null && _super.apply(this, arguments) || this;
+            _this._style = null;
+            return _this;
         }
         Object.defineProperty(SVGElement.prototype, "viewportElement", {
             /**
@@ -76,6 +78,47 @@ define(["require", "exports", "../element/Element"], function (require, exports,
             enumerable: false,
             configurable: true
         });
+        Object.defineProperty(SVGElement.prototype, "style", {
+            /**
+             * Returns style.
+             *
+             * @returns Style.
+             */
+            get: function () {
+                if (!this._style) {
+                    this._style = new CSSStyleDeclaration_1.default(this._attributes);
+                }
+                return this._style;
+            },
+            enumerable: false,
+            configurable: true
+        });
+        /**
+         * The setAttributeNode() method adds a new Attr node to the specified element.
+         *
+         * @override
+         * @param attribute Attribute.
+         * @returns Replaced attribute.
+         */
+        SVGElement.prototype.setAttributeNode = function (attribute) {
+            var replacedAttribute = _super.prototype.setAttributeNode.call(this, attribute);
+            if (attribute.name === 'style' && this._style) {
+                this._style.cssText = attribute.value;
+            }
+            return replacedAttribute;
+        };
+        /**
+         * Removes an Attr node.
+         *
+         * @override
+         * @param attribute Attribute.
+         */
+        SVGElement.prototype.removeAttributeNode = function (attribute) {
+            _super.prototype.removeAttributeNode.call(this, attribute);
+            if (attribute.name === 'style' && this._style) {
+                this._style.cssText = '';
+            }
+        };
         return SVGElement;
     }(Element_1.default));
     exports.default = SVGElement;

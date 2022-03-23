@@ -65,13 +65,21 @@ var Element_1 = require("../nodes/element/Element");
 var HTMLTemplateElement_1 = require("../nodes/html-template-element/HTMLTemplateElement");
 var HTMLFormElement_1 = require("../nodes/html-form-element/HTMLFormElement");
 var HTMLElement_1 = require("../nodes/html-element/HTMLElement");
+var HTMLUnknownElement_1 = require("../nodes/html-unknown-element/HTMLUnknownElement");
 var HTMLInputElement_1 = require("../nodes/html-input-element/HTMLInputElement");
 var HTMLTextAreaElement_1 = require("../nodes/html-text-area-element/HTMLTextAreaElement");
+var HTMLLinkElement_1 = require("../nodes/html-link-element/HTMLLinkElement");
+var HTMLStyleElement_1 = require("../nodes/html-style-element/HTMLStyleElement");
+var HTMLSlotElement_1 = require("../nodes/html-slot-element/HTMLSlotElement");
+var HTMLLabelElement_1 = require("../nodes/html-label-element/HTMLLabelElement");
+var HTMLMetaElement_1 = require("../nodes/html-meta-element/HTMLMetaElement");
 var SVGSVGElement_1 = require("../nodes/svg-element/SVGSVGElement");
 var SVGElement_1 = require("../nodes/svg-element/SVGElement");
 var HTMLScriptElement_1 = require("../nodes/html-script-element/HTMLScriptElement");
 var HTMLImageElement_1 = require("../nodes/html-image-element/HTMLImageElement");
+var Image_1 = require("../nodes/html-image-element/Image");
 var DocumentFragment_1 = require("../nodes/document-fragment/DocumentFragment");
+var CharacterData_1 = require("../nodes/character-data/CharacterData");
 var TreeWalker_1 = require("../tree-walker/TreeWalker");
 var Event_1 = require("../event/Event");
 var CustomEvent_1 = require("../event/events/CustomEvent");
@@ -83,18 +91,21 @@ var URL_1 = require("../location/URL");
 var Location_1 = require("../location/Location");
 var NonImplementedEventTypes_1 = require("../event/NonImplementedEventTypes");
 var MutationObserver_1 = require("../mutation-observer/MutationObserver");
-var ElementClass_1 = require("../config/ElementClass");
+var NonImplemenetedElementClasses_1 = require("../config/NonImplemenetedElementClasses");
 var DOMParser_1 = require("../dom-parser/DOMParser");
 var XMLSerializer_1 = require("../xml-serializer/XMLSerializer");
 var ResizeObserver_1 = require("../resize-observer/ResizeObserver");
-var CSSStyleSheet_1 = require("../css/CSSStyleSheet");
 var Blob_1 = require("../file/Blob");
 var File_1 = require("../file/File");
 var DOMException_1 = require("../exception/DOMException");
 var FileReader_1 = require("../file/FileReader");
 var History_1 = require("../history/History");
+var CSSStyleSheet_1 = require("../css/CSSStyleSheet");
 var CSSStyleDeclaration_1 = require("../css/CSSStyleDeclaration");
+var CSS_1 = require("../css/CSS");
+var CSSUnitValue_1 = require("../css/CSSUnitValue");
 var MouseEvent_1 = require("../event/events/MouseEvent");
+var PointerEvent_1 = require("../event/events/PointerEvent");
 var FocusEvent_1 = require("../event/events/FocusEvent");
 var WheelEvent_1 = require("../event/events/WheelEvent");
 var DataTransfer_1 = require("../event/DataTransfer");
@@ -103,14 +114,23 @@ var DataTransferItemList_1 = require("../event/DataTransferItemList");
 var InputEvent_1 = require("../event/events/InputEvent");
 var UIEvent_1 = require("../event/UIEvent");
 var ErrorEvent_1 = require("../event/events/ErrorEvent");
+var StorageEvent_1 = require("../event/events/StorageEvent");
 var Screen_1 = require("../screen/Screen");
 var AsyncTaskManager_1 = require("./AsyncTaskManager");
 var AsyncTaskTypeEnum_1 = require("./AsyncTaskTypeEnum");
 var RelativeURL_1 = require("../location/RelativeURL");
 var Storage_1 = require("../storage/Storage");
-var HTMLLinkElement_1 = require("../nodes/html-link-element/HTMLLinkElement");
-var HTMLStyleElement_1 = require("../nodes/html-style-element/HTMLStyleElement");
 var URLSearchParams_1 = require("../url-search-params/URLSearchParams");
+var HTMLCollection_1 = require("../nodes/element/HTMLCollection");
+var NodeList_1 = require("../nodes/node/NodeList");
+var MediaQueryList_1 = require("../match-media/MediaQueryList");
+var Selection_1 = require("../selection/Selection");
+var PerfHooks = require("perf_hooks");
+var Navigator_1 = require("../navigator/Navigator");
+var MimeType_1 = require("../navigator/MimeType");
+var MimeTypeArray_1 = require("../navigator/MimeTypeArray");
+var Plugin_1 = require("../navigator/Plugin");
+var PluginArray_1 = require("../navigator/PluginArray");
 var FETCH_RESPONSE_TYPE_METHODS = ['blob', 'json', 'text'];
 /**
  * Handles the Window.
@@ -140,14 +160,19 @@ var Window = /** @class */ (function (_super) {
         // Global classes
         _this.Node = Node_1.default;
         _this.HTMLElement = HTMLElement_1.default;
+        _this.HTMLUnknownElement = HTMLUnknownElement_1.default;
         _this.HTMLTemplateElement = HTMLTemplateElement_1.default;
         _this.HTMLFormElement = HTMLFormElement_1.default;
         _this.HTMLInputElement = HTMLInputElement_1.default;
         _this.HTMLTextAreaElement = HTMLTextAreaElement_1.default;
         _this.HTMLImageElement = HTMLImageElement_1.default;
+        _this.Image = Image_1.default;
         _this.HTMLScriptElement = HTMLScriptElement_1.default;
         _this.HTMLLinkElement = HTMLLinkElement_1.default;
         _this.HTMLStyleElement = HTMLStyleElement_1.default;
+        _this.HTMLLabelElement = HTMLLabelElement_1.default;
+        _this.HTMLSlotElement = HTMLSlotElement_1.default;
+        _this.HTMLMetaElement = HTMLMetaElement_1.default;
         _this.SVGSVGElement = SVGSVGElement_1.default;
         _this.SVGElement = SVGElement_1.default;
         _this.Text = Text_1.default;
@@ -155,6 +180,7 @@ var Window = /** @class */ (function (_super) {
         _this.ShadowRoot = ShadowRoot_1.default;
         _this.Element = Element_1.default;
         _this.DocumentFragment = DocumentFragment_1.default;
+        _this.CharacterData = CharacterData_1.default;
         _this.NodeFilter = NodeFilter_1.default;
         _this.TreeWalker = TreeWalker_1.default;
         _this.DOMParser = DOMParser_1.default;
@@ -169,10 +195,12 @@ var Window = /** @class */ (function (_super) {
         _this.AnimationEvent = AnimationEvent_1.default;
         _this.KeyboardEvent = KeyboardEvent_1.default;
         _this.MouseEvent = MouseEvent_1.default;
+        _this.PointerEvent = PointerEvent_1.default;
         _this.FocusEvent = FocusEvent_1.default;
         _this.WheelEvent = WheelEvent_1.default;
         _this.InputEvent = InputEvent_1.default;
         _this.ErrorEvent = ErrorEvent_1.default;
+        _this.StorageEvent = StorageEvent_1.default;
         _this.ProgressEvent = ProgressEvent_1.default;
         _this.EventTarget = EventTarget_1.default;
         _this.DataTransfer = DataTransfer_1.default;
@@ -194,23 +222,36 @@ var Window = /** @class */ (function (_super) {
         _this.Screen = Screen_1.default;
         _this.Storage = Storage_1.default;
         _this.URLSearchParams = URLSearchParams_1.default;
+        _this.HTMLCollection = HTMLCollection_1.default;
+        _this.NodeList = NodeList_1.default;
+        _this.MediaQueryList = MediaQueryList_1.default;
+        _this.CSSUnitValue = CSSUnitValue_1.default;
+        _this.Selection = Selection_1.default;
+        _this.Navigator = Navigator_1.default;
+        _this.MimeType = MimeType_1.default;
+        _this.MimeTypeArray = MimeTypeArray_1.default;
+        _this.Plugin = Plugin_1.default;
+        _this.PluginArray = PluginArray_1.default;
         // Events
         _this.onload = null;
         _this.onerror = null;
         _this.customElements = new CustomElementRegistry_1.default();
         _this.location = new Location_1.default();
         _this.history = new History_1.default();
-        _this.navigator = { userAgent: 'happy-dom' };
+        _this.navigator = new Navigator_1.default();
         _this.console = global ? global.console : null;
         _this.self = _this;
         _this.top = _this;
         _this.parent = _this;
         _this.window = _this;
+        _this.globalThis = _this;
         _this.screen = new Screen_1.default();
         _this.innerWidth = 1024;
         _this.innerHeight = 768;
+        _this.devicePixelRatio = 1;
         _this.sessionStorage = new Storage_1.default();
         _this.localStorage = new Storage_1.default();
+        _this.performance = PerfHooks.performance;
         // Node.js Globals
         _this.Array = global ? global.Array : null;
         _this.ArrayBuffer = global ? global.ArrayBuffer : null;
@@ -222,7 +263,6 @@ var Window = /** @class */ (function (_super) {
         _this.EvalError = global ? global.EvalError : null;
         _this.Float32Array = global ? global.Float32Array : null;
         _this.Float64Array = global ? global.Float64Array : null;
-        _this.Function = global ? global.Function : null;
         _this.GLOBAL = null;
         _this.Infinity = global ? global.Infinity : null;
         _this.Int16Array = global ? global.Int16Array : null;
@@ -233,7 +273,6 @@ var Window = /** @class */ (function (_super) {
         _this.Map = global ? global.Map : null;
         _this.Math = global ? global.Math : null;
         _this.NaN = global ? global.NaN : null;
-        _this.Object = global ? global.Object : null;
         _this.Number = global ? global.Number : null;
         _this.Promise = global ? global.Promise : null;
         _this.RangeError = global ? global.RangeError : null;
@@ -273,6 +312,9 @@ var Window = /** @class */ (function (_super) {
         _this.v8debug = null;
         _this.AbortController = global ? global.AbortController : null;
         _this.AbortSignal = global ? global.AbortSignal : null;
+        // Private properties
+        _this._objectClass = null;
+        _this._functionClass = null;
         _this.document = new HTMLDocument_1.default();
         _this.document.defaultView = _this;
         _this.document._readyStateManager.whenComplete().then(function () {
@@ -280,31 +322,81 @@ var Window = /** @class */ (function (_super) {
         });
         DOMParser_1.default._ownerDocument = DOMParser_1.default._ownerDocument || _this.document;
         FileReader_1.default._ownerDocument = FileReader_1.default._ownerDocument || _this.document;
+        Image_1.default.ownerDocument = Image_1.default.ownerDocument || _this.document;
         for (var _i = 0, NonImplementedEventTypes_2 = NonImplementedEventTypes_1.default; _i < NonImplementedEventTypes_2.length; _i++) {
             var eventType = NonImplementedEventTypes_2[_i];
             if (!_this[eventType]) {
                 _this[eventType] = Event_1.default;
             }
         }
-        for (var _a = 0, _b = Object.keys(ElementClass_1.default); _a < _b.length; _a++) {
-            var className = _b[_a];
+        for (var _a = 0, NonImplemenetedElementClasses_2 = NonImplemenetedElementClasses_1.default; _a < NonImplemenetedElementClasses_2.length; _a++) {
+            var className = NonImplemenetedElementClasses_2[_a];
             if (!_this[className]) {
-                _this[className] = ElementClass_1.default[className];
+                _this[className] = HTMLElement_1.default;
             }
         }
         // Binds all methods to "this", so that it will use the correct context when called globally.
-        for (var _c = 0, _d = Object.keys(Window.prototype); _c < _d.length; _c++) {
-            var key = _d[_c];
+        for (var _b = 0, _c = Object.keys(Window.prototype); _b < _c.length; _b++) {
+            var key = _c[_b];
             if (typeof _this[key] === 'function') {
                 _this[key] = _this[key].bind(_this);
             }
         }
         return _this;
     }
+    Object.defineProperty(Window.prototype, "Object", {
+        /**
+         * Returns Object class.
+         *
+         * @returns Object class.
+         */
+        get: function () {
+            if (this._objectClass) {
+                return this._objectClass;
+            }
+            // When inside a VM global.Object is not the same as ({}).constructor
+            // We will therefore run the code inside the VM to get the real constructor
+            this._objectClass = this.eval('({}).constructor');
+            return this._objectClass;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Window.prototype, "Function", {
+        /**
+         * Returns Function class.
+         *
+         * @returns Function class.
+         */
+        get: function () {
+            if (this._functionClass) {
+                return this._functionClass;
+            }
+            // When inside a VM global.Function is not the same as (() => {}).constructor
+            // We will therefore run the code inside the VM to get the real constructor
+            this._functionClass = this.eval('(() => {}).constructor');
+            return this._functionClass;
+        },
+        enumerable: false,
+        configurable: true
+    });
+    Object.defineProperty(Window.prototype, "CSS", {
+        /**
+         * The CSS interface holds useful CSS-related methods.
+         *
+         * @returns CSS interface.
+         */
+        get: function () {
+            return new CSS_1.default();
+        },
+        enumerable: false,
+        configurable: true
+    });
     /**
      * Evaluates code.
      *
      * @param code Code.
+     * @returns Result.
      */
     Window.prototype.eval = function (code) {
         var vmExists = false;
@@ -318,12 +410,10 @@ var Window = /** @class */ (function (_super) {
         if (vmExists) {
             vm = require('vm');
         }
-        if (global && vm && vm.isContext(this)) {
-            vm.runInContext(code, this);
+        if (vm && vm.isContext(this)) {
+            return vm.runInContext(code, this);
         }
-        else if (global && global.eval) {
-            global.eval(code);
-        }
+        return global.eval(code);
     };
     /**
      * Returns an object containing the values of all CSS properties of an element.
@@ -375,6 +465,17 @@ var Window = /** @class */ (function (_super) {
      */
     Window.prototype.scrollTo = function (x, y) {
         this.scroll(x, y);
+    };
+    /**
+     * Returns a new MediaQueryList object that can then be used to determine if the document matches the media query string.
+     *
+     * @param mediaQueryString A string specifying the media query to parse into a MediaQueryList.
+     * @returns A new MediaQueryList.
+     */
+    Window.prototype.matchMedia = function (mediaQueryString) {
+        var mediaQueryList = new MediaQueryList_1.default();
+        mediaQueryList._media = mediaQueryString;
+        return mediaQueryList;
     };
     /**
      * Sets a timer which executes a function once the timer expires.

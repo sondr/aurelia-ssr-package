@@ -3,6 +3,7 @@ import HTMLElement from '../html-element/HTMLElement';
 import IHTMLScriptElement from './IHTMLScriptElement';
 import Event from '../../event/Event';
 import ErrorEvent from '../../event/events/ErrorEvent';
+import INode from '../../nodes/node/INode';
 /**
  * HTML Script Element.
  *
@@ -13,18 +14,6 @@ export default class HTMLScriptElement extends HTMLElement implements IHTMLScrip
     onerror: (event: ErrorEvent) => void;
     onload: (event: Event) => void;
     _evaluateScript: boolean;
-    /**
-     * Returns "true" if connected to DOM.
-     *
-     * @returns "true" if connected.
-     */
-    get isConnected(): boolean;
-    /**
-     * Sets the connected state.
-     *
-     * @param isConnected "true" if connected.
-     */
-    set isConnected(isConnected: boolean);
     /**
      * Returns type.
      *
@@ -125,4 +114,8 @@ export default class HTMLScriptElement extends HTMLElement implements IHTMLScrip
      * @returns Cloned node.
      */
     cloneNode(deep?: boolean): IHTMLScriptElement;
+    /**
+     * @override
+     */
+    _connectToNode(parentNode?: INode): void;
 }

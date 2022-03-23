@@ -1,5 +1,5 @@
 import Element from '../element/Element';
-import HTMLElement from '../html-element/HTMLElement';
+import HTMLUnknownElement from '../html-unknown-element/HTMLUnknownElement';
 import Text from '../text/Text';
 import Comment from '../comment/Comment';
 import Window from '../../window/Window';
@@ -21,10 +21,12 @@ import CSSStyleSheet from '../../css/CSSStyleSheet';
 import DOMException from '../../exception/DOMException';
 import CookieUtility from '../../cookie/CookieUtility';
 import IElement from '../element/IElement';
+import IHTMLScriptElement from '../html-script-element/IHTMLScriptElement';
 import IHTMLElement from '../html-element/IHTMLElement';
 import IDocumentType from '../document-type/IDocumentType';
 import INode from '../node/INode';
-import ICharacterData from '../character-data/ICharacterData';
+import IComment from '../comment/IComment';
+import IText from '../text/IText';
 import IDocumentFragment from '../document-fragment/IDocumentFragment';
 import INodeList from '../node/INodeList';
 import IHTMLCollection from '../element/IHTMLCollection';
@@ -33,6 +35,8 @@ import IHTMLLinkElement from '../html-link-element/IHTMLLinkElement';
 import IHTMLStyleElement from '../html-style-element/IHTMLStyleElement';
 import DocumentReadyStateEnum from './DocumentReadyStateEnum';
 import DocumentReadyStateManager from './DocumentReadyStateManager';
+import Location from '../../location/Location';
+import Selection from '../../selection/Selection';
 
 /**
  * Document.
@@ -44,8 +48,9 @@ export default class Document extends Node implements IDocument {
 	public implementation: DOMImplementation;
 	public readonly children: IHTMLCollection<IElement> = HTMLCollectionFactory.create();
 	public readonly readyState = DocumentReadyStateEnum.interactive;
+	public readonly isConnected: boolean = true;
 	public _readyStateManager: DocumentReadyStateManager = null;
-	protected _isConnected = true;
+	public _activeElement: IHTMLElement = null;
 	protected _isFirstWrite = true;
 	protected _isFirstWriteAfterOpen = false;
 	private _defaultView: Window = null;
@@ -70,6 +75,26 @@ export default class Document extends Node implements IDocument {
 
 		documentElement.appendChild(headElement);
 		documentElement.appendChild(bodyElement);
+	}
+
+	/**
+	 * Returns character set.
+	 *
+	 * @deprecated
+	 * @returns Character set.
+	 */
+	public get charset(): string {
+		return this.characterSet;
+	}
+
+	/**
+	 * Returns character set.
+	 *
+	 * @returns Character set.
+	 */
+	public get characterSet(): string {
+		const charset = this.querySelector('meta[charset]')?.getAttributeNS(null, 'charset');
+		return charset ? charset : 'UTF-8';
 	}
 
 	/**
@@ -210,6 +235,42 @@ export default class Document extends Node implements IDocument {
 	}
 
 	/**
+	 * Returns active element.
+	 *
+	 * @returns Active element.
+	 */
+	public get activeElement(): IHTMLElement {
+		return this._activeElement || this.body || this.documentElement || null;
+	}
+
+	/**
+	 * Returns scrolling element.
+	 *
+	 * @returns Scrolling element.
+	 */
+	public get scrollingElement(): IHTMLElement {
+		return this.documentElement;
+	}
+
+	/**
+	 * Returns location.
+	 *
+	 * @returns Location.
+	 */
+	public get location(): Location {
+		return this._defaultView.location;
+	}
+
+	/**
+	 * Returns scripts.
+	 *
+	 * @returns Scripts.
+	 */
+	public get scripts(): IHTMLCollection<IHTMLScriptElement> {
+		return <IHTMLCollection<IHTMLScriptElement>>this.getElementsByTagName('script');
+	}
+
+	/**
 	 * Inserts a set of Node objects or DOMString objects after the last child of the ParentNode. DOMString objects are inserted as equivalent Text nodes.
 	 *
 	 * @param nodes List of Node or DOMString.
@@ -295,6 +356,31 @@ export default class Document extends Node implements IDocument {
 	 */
 	public getElementById(id: string): IElement {
 		return <Element>ParentNodeUtility.getElementById(this, id);
+	}
+
+	/**
+	 * Returns an element by Name.
+	 *
+	 * @returns Matching element.
+	 * @param name
+	 */
+	public getElementsByName(name: string): INodeList<IElement> {
+		const _getElementsByName = (
+			_parentNode: IElement | IDocumentFragment | IDocument,
+			_name: string
+		): INodeList<IElement> => {
+			const matches = HTMLCollectionFactory.create();
+			for (const child of _parentNode.children) {
+				if ((child.getAttributeNS(null, 'name') || '') === _name) {
+					matches.push(child);
+				}
+				for (const match of _getElementsByName(<IElement>child, _name)) {
+					matches.push(match);
+				}
+			}
+			return matches;
+		};
+		return _getElementsByName(this, name);
 	}
 
 	/**
@@ -504,53 +590,56 @@ export default class Document extends Node implements IDocument {
 	 */
 	public close(): void {}
 
+	/* eslint-disable jsdoc/valid-types */
+
 	/**
 	 * Creates an element.
 	 *
-	 * @param tagName Tag name.
+	 * @param qualifiedName Tag name.
 	 * @param [options] Options.
-	 * @param options.is
+	 * @param [options.is] Tag name of a custom element previously defined via customElements.define().
 	 * @returns Element.
 	 */
-	public createElement(tagName: string, options?: { is: string }): IElement {
-		return this.createElementNS(NamespaceURI.html, tagName, options);
+	public createElement(qualifiedName: string, options?: { is?: string }): IElement {
+		return this.createElementNS(NamespaceURI.html, qualifiedName, options);
 	}
 
 	/**
 	 * Creates an element with the specified namespace URI and qualified name.
 	 *
-	 * @param tagName Tag name.
+	 * @param namespaceURI Namespace URI.
+	 * @param qualifiedName Tag name.
 	 * @param [options] Options.
-	 * @param namespaceURI
-	 * @param qualifiedName
-	 * @param options.is
+	 * @param [options.is] Tag name of a custom element previously defined via customElements.define().
 	 * @returns Element.
 	 */
 	public createElementNS(
 		namespaceURI: string,
 		qualifiedName: string,
-		options?: { is: string }
+		options?: { is?: string }
 	): IElement {
+		const tagName = qualifiedName.toUpperCase();
+
 		let customElementClass;
 		if (this.defaultView && options && options.is) {
 			customElementClass = this.defaultView.customElements.get(options.is);
 		} else if (this.defaultView) {
-			customElementClass = this.defaultView.customElements.get(qualifiedName);
+			customElementClass = this.defaultView.customElements.get(tagName);
 		}
 
-		const elementClass = customElementClass
-			? customElementClass
-			: ElementTag[qualifiedName] || HTMLElement;
+		const elementClass = customElementClass || ElementTag[tagName] || HTMLUnknownElement;
 
 		elementClass.ownerDocument = this;
 
 		const element = new elementClass();
-		element.tagName = qualifiedName.toUpperCase();
+		element.tagName = tagName;
 		element.ownerDocument = this;
 		element.namespaceURI = namespaceURI;
 
 		return element;
 	}
+
+	/* eslint-enable jsdoc/valid-types */
 
 	/**
 	 * Creates a text node.
@@ -558,7 +647,7 @@ export default class Document extends Node implements IDocument {
 	 * @param [data] Text data.
 	 * @returns Text node.
 	 */
-	public createTextNode(data?: string): ICharacterData {
+	public createTextNode(data?: string): IText {
 		Text.ownerDocument = this;
 		return new Text(data);
 	}
@@ -569,7 +658,7 @@ export default class Document extends Node implements IDocument {
 	 * @param [data] Text data.
 	 * @returns Text node.
 	 */
-	public createComment(data?: string): ICharacterData {
+	public createComment(data?: string): IComment {
 		Comment.ownerDocument = this;
 		return new Comment(data);
 	}
@@ -599,10 +688,13 @@ export default class Document extends Node implements IDocument {
 	 * Creates an event.
 	 *
 	 * @deprecated
-	 * @param _type Type.
+	 * @param type Type.
 	 * @returns Event.
 	 */
-	public createEvent(_type: string): Event {
+	public createEvent(type: string): Event {
+		if (this.defaultView[type]) {
+			return new this.defaultView[type]('init');
+		}
 		return new Event('init');
 	}
 
@@ -664,5 +756,36 @@ export default class Document extends Node implements IDocument {
 		const adopted = node.parentNode ? node.parentNode.removeChild(node) : node;
 		(<Document>adopted.ownerDocument) = this;
 		return adopted;
+	}
+
+	/**
+	 * Returns selection.
+	 *
+	 * @returns Selection.
+	 */
+	public getSelection(): Selection {
+		return new Selection();
+	}
+
+	/**
+	 * Returns a boolean value indicating whether the document or any element inside the document has focus.
+	 *
+	 * @returns "true" if the document has focus.
+	 */
+	public hasFocus(): boolean {
+		return !!this.activeElement;
+	}
+
+	/**
+	 * @override
+	 */
+	public dispatchEvent(event: Event): boolean {
+		const returnValue = super.dispatchEvent(event);
+
+		if (event.bubbles && !event._propagationStopped) {
+			return this.defaultView.dispatchEvent(event);
+		}
+
+		return returnValue;
 	}
 }

@@ -1,3 +1,4 @@
+import CSSStyleDeclaration from '../../css/CSSStyleDeclaration';
 import IElement from '../element/IElement';
 import ISVGSVGElement from './ISVGSVGElement';
 /**
@@ -11,4 +12,5 @@ export default interface ISVGElement extends IElement {
     readonly dataset: {
         [key: string]: string;
     };
+    readonly style: CSSStyleDeclaration;
 }

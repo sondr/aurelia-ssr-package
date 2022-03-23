@@ -34,6 +34,7 @@ System.register(["../html-element/HTMLElement"], function (exports_1, context_1)
                 __extends(HTMLImageElement, _super);
                 function HTMLImageElement() {
                     var _this = _super !== null && _super.apply(this, arguments) || this;
+                    _this.tagName = 'IMG';
                     _this.complete = false;
                     _this.naturalHeight = 0;
                     _this.naturalWidth = 0;
@@ -83,7 +84,8 @@ System.register(["../html-element/HTMLElement"], function (exports_1, context_1)
                      * @returns Height.
                      */
                     get: function () {
-                        return this.getAttributeNS(null, 'height') || '';
+                        var height = this.getAttributeNS(null, 'height');
+                        return height !== null ? Number(height) : 0;
                     },
                     /**
                      * Sets height.
@@ -91,7 +93,7 @@ System.register(["../html-element/HTMLElement"], function (exports_1, context_1)
                      * @param height Height.
                      */
                     set: function (height) {
-                        this.setAttributeNS(null, 'height', height);
+                        this.setAttributeNS(null, 'height', String(height));
                     },
                     enumerable: false,
                     configurable: true
@@ -228,7 +230,8 @@ System.register(["../html-element/HTMLElement"], function (exports_1, context_1)
                      * @returns Width.
                      */
                     get: function () {
-                        return this.getAttributeNS(null, 'width') || '';
+                        var width = this.getAttributeNS(null, 'width');
+                        return width !== null ? Number(width) : 0;
                     },
                     /**
                      * Sets width.
@@ -236,7 +239,7 @@ System.register(["../html-element/HTMLElement"], function (exports_1, context_1)
                      * @param width Width.
                      */
                     set: function (width) {
-                        this.setAttributeNS(null, 'width', width);
+                        this.setAttributeNS(null, 'width', String(width));
                     },
                     enumerable: false,
                     configurable: true

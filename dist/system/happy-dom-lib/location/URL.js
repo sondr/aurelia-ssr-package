@@ -29,40 +29,6 @@ System.register([], function (exports_1, context_1) {
                         this.parse(url);
                     }
                 }
-                /**
-                 * Returns the entire URL as a string.
-                 */
-                URL.prototype.toString = function () {
-                    return this.href;
-                };
-                /**
-                 * Parses an URL.
-                 *
-                 * @param url URL.
-                 */
-                URL.prototype.parse = function (url) {
-                    var match = url.match(URL_REGEXP);
-                    if (match) {
-                        var hostnamePart = match[2] ? match[2].split('@') : '';
-                        var credentialsPart = hostnamePart.length > 1 ? hostnamePart[0].split(':') : null;
-                        this.protocol = match[1] || '';
-                        this.hostname = hostnamePart.length > 1 ? hostnamePart[1] : hostnamePart[0];
-                        this.port = match[3] || '';
-                        this.pathname = match[4] || '';
-                        this.search = match[5] || '';
-                        this.hash = match[6] || '';
-                        this.username = credentialsPart ? credentialsPart[0] : '';
-                        this.password = credentialsPart ? credentialsPart[1] : '';
-                    }
-                    else {
-                        var pathMatch = url.match(PATH_REGEXP);
-                        if (pathMatch) {
-                            this.pathname = pathMatch[1] || '';
-                            this.search = pathMatch[2] || '';
-                            this.hash = pathMatch[3] || '';
-                        }
-                    }
-                };
                 Object.defineProperty(URL.prototype, "href", {
                     /**
                      * Returns the entire URL as a string.
@@ -108,6 +74,40 @@ System.register([], function (exports_1, context_1) {
                     enumerable: false,
                     configurable: true
                 });
+                /**
+                 * Returns the entire URL as a string.
+                 */
+                URL.prototype.toString = function () {
+                    return this.href;
+                };
+                /**
+                 * Parses an URL.
+                 *
+                 * @param url URL.
+                 */
+                URL.prototype.parse = function (url) {
+                    var match = url.match(URL_REGEXP);
+                    if (match) {
+                        var hostnamePart = match[2] ? match[2].split('@') : '';
+                        var credentialsPart = hostnamePart.length > 1 ? hostnamePart[0].split(':') : null;
+                        this.protocol = match[1] || '';
+                        this.hostname = hostnamePart.length > 1 ? hostnamePart[1] : hostnamePart[0];
+                        this.port = match[3] || '';
+                        this.pathname = match[4] || '';
+                        this.search = match[5] || '';
+                        this.hash = match[6] || '';
+                        this.username = credentialsPart ? credentialsPart[0] : '';
+                        this.password = credentialsPart ? credentialsPart[1] : '';
+                    }
+                    else {
+                        var pathMatch = url.match(PATH_REGEXP);
+                        if (pathMatch) {
+                            this.pathname = pathMatch[1] || '';
+                            this.search = pathMatch[2] || '';
+                            this.hash = pathMatch[3] || '';
+                        }
+                    }
+                };
                 return URL;
             }());
             exports_1("default", URL);

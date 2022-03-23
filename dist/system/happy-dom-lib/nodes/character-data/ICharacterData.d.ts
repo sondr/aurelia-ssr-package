@@ -1,6 +1,7 @@
+import INode from '../node/INode';
 import IChildNode from '../child-node/IChildNode';
 import INonDocumentTypeChildNode from '../child-node/INonDocumentTypeChildNode';
-export default interface ICharacterData extends IChildNode, INonDocumentTypeChildNode {
+export default interface ICharacterData extends INode, IChildNode, INonDocumentTypeChildNode {
     data: string;
     readonly length: number;
     /**
@@ -45,5 +46,5 @@ export default interface ICharacterData extends IChildNode, INonDocumentTypeChil
      * @param [deep=false] "true" to clone deep.
      * @returns Cloned node.
      */
-    cloneNode(deep: boolean): ICharacterData;
+    cloneNode(deep?: boolean): ICharacterData;
 }

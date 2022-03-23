@@ -11,11 +11,11 @@ System.register(["../exception/DOMException"], function (exports_1, context_1) {
         execute: function () {
             ATTRIBUTE_REGEXP = /\[([a-zA-Z0-9-_]+)\]|\[([a-zA-Z0-9-_]+)([~|^$*]{0,1})[ ]*=[ ]*["']{0,1}([^"']+)["']{0,1}\]/g;
             ATTRIBUTE_NAME_REGEXP = /[^a-zA-Z0-9-_$]/;
-            PSUEDO_REGEXP = /:([a-zA-Z-]+)\(([0-9n+-]+|odd|even)\)|:([a-zA-Z-]+)/g;
+            PSUEDO_REGEXP = /:([a-zA-Z-]+)\(([0-9n+-]+|odd|even)\)|:not\(([^)]+)\)|:([a-zA-Z-]+)/g;
             CLASS_REGEXP = /\.([a-zA-Z0-9-_$]+)/g;
             TAG_NAME_REGEXP = /^[a-zA-Z0-9-]+/;
             /**
-             *
+             * Selector item.
              */
             SelectorItem = /** @class */ (function () {
                 /**
@@ -25,16 +25,17 @@ System.register(["../exception/DOMException"], function (exports_1, context_1) {
                  */
                 function SelectorItem(selector) {
                     this.tagName = null;
-                    this.isAll = selector === '*';
+                    var _a = selector.split(':'), baseSelector = _a[0], psuedoSelector = _a[1];
+                    this.isAll = baseSelector === '*';
                     this.isID = !this.isAll ? selector.startsWith('#') : false;
-                    this.isAttribute = !this.isAll && !this.isID && selector.includes('[');
-                    this.isPseudo = !this.isAll && !this.isID && selector.includes(':');
-                    this.isClass = !this.isAll && !this.isID && new RegExp(CLASS_REGEXP, 'g').test(selector);
-                    this.tagName = !this.isAll && !this.isID ? selector.match(TAG_NAME_REGEXP) : null;
+                    this.isAttribute = !this.isAll && !this.isID && baseSelector.includes('[');
+                    this.isPseudo = !this.isAll && !this.isID && psuedoSelector !== undefined;
+                    this.isClass = !this.isAll && !this.isID && new RegExp(CLASS_REGEXP, 'g').test(baseSelector);
+                    this.tagName = !this.isAll && !this.isID ? baseSelector.match(TAG_NAME_REGEXP) : null;
                     this.tagName = this.tagName ? this.tagName[0].toUpperCase() : null;
                     this.isTagName = this.tagName !== null;
                     this.selector = selector;
-                    this.id = !this.isAll && this.isID ? this.selector.replace('#', '') : null;
+                    this.id = !this.isAll && this.isID ? baseSelector.replace('#', '') : null;
                 }
                 /**
                  * Matches a selector against an element.
@@ -44,7 +45,6 @@ System.register(["../exception/DOMException"], function (exports_1, context_1) {
                  */
                 SelectorItem.prototype.match = function (element) {
                     var selector = this.selector;
-                    var match;
                     // Is all (*)
                     if (this.isAll) {
                         return true;
@@ -60,34 +60,41 @@ System.register(["../exception/DOMException"], function (exports_1, context_1) {
                         }
                     }
                     // Class match
-                    if (this.isClass) {
-                        var regexp = new RegExp(CLASS_REGEXP, 'g');
-                        while ((match = regexp.exec(selector))) {
-                            if (!element.classList.contains(match[1])) {
-                                return false;
-                            }
-                        }
+                    if (this.isClass && !this.matchesClass(element, selector)) {
+                        return false;
                     }
                     // Pseudo match
-                    if (this.isPseudo) {
-                        var regexp = new RegExp(PSUEDO_REGEXP, 'g');
-                        while ((match = regexp.exec(selector))) {
-                            if (match[1] && !this.matchesNthChild(element, match[1], match[2])) {
-                                return false;
-                            }
-                            else if (match[3] && !this.matchesPsuedo(element, match[3])) {
-                                return false;
-                            }
-                        }
+                    if (this.isPseudo && !this.matchesPsuedo(element, selector)) {
+                        return false;
                     }
                     // Attribute match
-                    if (this.isAttribute) {
-                        var regexp = new RegExp(ATTRIBUTE_REGEXP, 'g');
-                        while ((match = regexp.exec(selector))) {
-                            if ((match[1] && !this.matchesAttributeName(element, match[1])) ||
-                                (match[2] && !this.matchesAttributeNameAndValue(element, match[2], match[4], match[3]))) {
-                                return false;
-                            }
+                    if (this.isAttribute && !this.matchesAttribute(element, selector)) {
+                        return false;
+                    }
+                    return true;
+                };
+                /**
+                 * Matches a psuedo selector.
+                 *
+                 * @param element Element.
+                 * @param selector Selector.
+                 * @returns True if it is a match.
+                 */
+                SelectorItem.prototype.matchesPsuedo = function (element, selector) {
+                    var regexp = new RegExp(PSUEDO_REGEXP, 'g');
+                    var match;
+                    while ((match = regexp.exec(selector))) {
+                        var isNotClass = match[3] && match[3].trim()[0] === '.';
+                        if (match[1] && !this.matchesNthChild(element, match[1], match[2])) {
+                            return false;
+                        }
+                        else if (match[3] &&
+                            ((isNotClass && this.matchesClass(element, match[3])) ||
+                                (!isNotClass && this.matchesAttribute(element, match[3])))) {
+                            return false;
+                        }
+                        else if (match[4] && !this.matchesPsuedoExpression(element, match[4])) {
+                            return false;
                         }
                     }
                     return true;
@@ -143,13 +150,13 @@ System.register(["../exception/DOMException"], function (exports_1, context_1) {
                     return children[number - 1] === element;
                 };
                 /**
-                 * Matches a psuedo selector.
+                 * Matches a psuedo selector expression.
                  *
                  * @param element Element.
                  * @param psuedo Psuedo name.
                  * @returns True if it is a match.
                  */
-                SelectorItem.prototype.matchesPsuedo = function (element, psuedo) {
+                SelectorItem.prototype.matchesPsuedoExpression = function (element, psuedo) {
                     var parent = element.parentNode;
                     if (!parent) {
                         return false;
@@ -195,6 +202,44 @@ System.register(["../exception/DOMException"], function (exports_1, context_1) {
                     return false;
                 };
                 /**
+                 * Matches attribute.
+                 *
+                 * @param element Element.
+                 * @param selector Selector.
+                 * @returns True if it is a match.
+                 */
+                SelectorItem.prototype.matchesAttribute = function (element, selector) {
+                    var regexp = new RegExp(ATTRIBUTE_REGEXP, 'g');
+                    var match;
+                    while ((match = regexp.exec(selector))) {
+                        var isPsuedo = match.index > 0 && selector[match.index - 1] === '(';
+                        if (!isPsuedo &&
+                            ((match[1] && !this.matchesAttributeName(element, match[1])) ||
+                                (match[2] && !this.matchesAttributeNameAndValue(element, match[2], match[4], match[3])))) {
+                            return false;
+                        }
+                    }
+                    return true;
+                };
+                /**
+                 * Matches class.
+                 *
+                 * @param element Element.
+                 * @param selector Selector.
+                 * @returns True if it is a match.
+                 */
+                SelectorItem.prototype.matchesClass = function (element, selector) {
+                    var regexp = new RegExp(CLASS_REGEXP, 'g');
+                    var classList = element.className.split(' ');
+                    var match;
+                    while ((match = regexp.exec(selector.split(':')[0]))) {
+                        if (!classList.includes(match[1])) {
+                            return false;
+                        }
+                    }
+                    return true;
+                };
+                /**
                  * Matches attribute name only.
                  *
                  * @param element Element.
@@ -207,7 +252,7 @@ System.register(["../exception/DOMException"], function (exports_1, context_1) {
                     }
                     return !!element._attributes[attributeName.toLowerCase()];
                 };
-                /**
+                /** .
                  *
                  * Matches attribute name and value.
                  *
@@ -216,6 +261,13 @@ System.register(["../exception/DOMException"], function (exports_1, context_1) {
                  * @param attributeValue Attribute value.
                  * @param [matchType] Match type.
                  * @returns True if it is a match.
+                 */
+                /**
+                 *
+                 * @param element
+                 * @param attributeName
+                 * @param attributeValue
+                 * @param matchType
                  */
                 SelectorItem.prototype.matchesAttributeNameAndValue = function (element, attributeName, attributeValue, matchType) {
                     if (matchType === void 0) { matchType = null; }

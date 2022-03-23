@@ -11,13 +11,21 @@ import Element from '../nodes/element/Element';
 import HTMLTemplateElement from '../nodes/html-template-element/HTMLTemplateElement';
 import HTMLFormElement from '../nodes/html-form-element/HTMLFormElement';
 import HTMLElement from '../nodes/html-element/HTMLElement';
+import HTMLUnknownElement from '../nodes/html-unknown-element/HTMLUnknownElement';
 import HTMLInputElement from '../nodes/html-input-element/HTMLInputElement';
 import HTMLTextAreaElement from '../nodes/html-text-area-element/HTMLTextAreaElement';
+import HTMLLinkElement from '../nodes/html-link-element/HTMLLinkElement';
+import HTMLStyleElement from '../nodes/html-style-element/HTMLStyleElement';
+import HTMLSlotElement from '../nodes/html-slot-element/HTMLSlotElement';
+import HTMLLabelElement from '../nodes/html-label-element/HTMLLabelElement';
+import HTMLMetaElement from '../nodes/html-meta-element/HTMLMetaElement';
 import SVGSVGElement from '../nodes/svg-element/SVGSVGElement';
 import SVGElement from '../nodes/svg-element/SVGElement';
 import HTMLScriptElement from '../nodes/html-script-element/HTMLScriptElement';
 import HTMLImageElement from '../nodes/html-image-element/HTMLImageElement';
+import Image from '../nodes/html-image-element/Image';
 import DocumentFragment from '../nodes/document-fragment/DocumentFragment';
+import CharacterData from '../nodes/character-data/CharacterData';
 import TreeWalker from '../tree-walker/TreeWalker';
 import Event from '../event/Event';
 import CustomEvent from '../event/events/CustomEvent';
@@ -31,14 +39,17 @@ import MutationObserver from '../mutation-observer/MutationObserver';
 import DOMParser from '../dom-parser/DOMParser';
 import XMLSerializer from '../xml-serializer/XMLSerializer';
 import ResizeObserver from '../resize-observer/ResizeObserver';
-import CSSStyleSheet from '../css/CSSStyleSheet';
 import Blob from '../file/Blob';
 import File from '../file/File';
 import DOMException from '../exception/DOMException';
 import FileReader from '../file/FileReader';
 import History from '../history/History';
+import CSSStyleSheet from '../css/CSSStyleSheet';
 import CSSStyleDeclaration from '../css/CSSStyleDeclaration';
+import CSS from '../css/CSS';
+import CSSUnitValue from '../css/CSSUnitValue';
 import MouseEvent from '../event/events/MouseEvent';
+import PointerEvent from '../event/events/PointerEvent';
 import FocusEvent from '../event/events/FocusEvent';
 import WheelEvent from '../event/events/WheelEvent';
 import DataTransfer from '../event/DataTransfer';
@@ -47,15 +58,23 @@ import DataTransferItemList from '../event/DataTransferItemList';
 import InputEvent from '../event/events/InputEvent';
 import UIEvent from '../event/UIEvent';
 import ErrorEvent from '../event/events/ErrorEvent';
+import StorageEvent from '../event/events/StorageEvent';
 import Screen from '../screen/Screen';
 import AsyncTaskManager from './AsyncTaskManager';
 import IResponse from './IResponse';
 import Storage from '../storage/Storage';
-import HTMLLinkElement from '../nodes/html-link-element/HTMLLinkElement';
-import HTMLStyleElement from '../nodes/html-style-element/HTMLStyleElement';
 import IFetchOptions from './IFetchOptions';
 import IWindow from './IWindow';
 import URLSearchParams from '../url-search-params/URLSearchParams';
+import HTMLCollection from '../nodes/element/HTMLCollection';
+import NodeList from '../nodes/node/NodeList';
+import MediaQueryList from '../match-media/MediaQueryList';
+import Selection from '../selection/Selection';
+import Navigator from '../navigator/Navigator';
+import MimeType from '../navigator/MimeType';
+import MimeTypeArray from '../navigator/MimeTypeArray';
+import Plugin from '../navigator/Plugin';
+import PluginArray from '../navigator/PluginArray';
 /**
  * Handles the Window.
  */
@@ -67,14 +86,19 @@ export default class Window extends EventTarget implements IWindow, NodeJS.Globa
     };
     readonly Node: typeof Node;
     readonly HTMLElement: typeof HTMLElement;
+    readonly HTMLUnknownElement: typeof HTMLUnknownElement;
     readonly HTMLTemplateElement: typeof HTMLTemplateElement;
     readonly HTMLFormElement: typeof HTMLFormElement;
     readonly HTMLInputElement: typeof HTMLInputElement;
     readonly HTMLTextAreaElement: typeof HTMLTextAreaElement;
     readonly HTMLImageElement: typeof HTMLImageElement;
+    readonly Image: typeof Image;
     readonly HTMLScriptElement: typeof HTMLScriptElement;
     readonly HTMLLinkElement: typeof HTMLLinkElement;
     readonly HTMLStyleElement: typeof HTMLStyleElement;
+    readonly HTMLLabelElement: typeof HTMLLabelElement;
+    readonly HTMLSlotElement: typeof HTMLSlotElement;
+    readonly HTMLMetaElement: typeof HTMLMetaElement;
     readonly SVGSVGElement: typeof SVGSVGElement;
     readonly SVGElement: typeof SVGElement;
     readonly Text: typeof Text;
@@ -82,6 +106,7 @@ export default class Window extends EventTarget implements IWindow, NodeJS.Globa
     readonly ShadowRoot: typeof ShadowRoot;
     readonly Element: typeof Element;
     readonly DocumentFragment: typeof DocumentFragment;
+    readonly CharacterData: typeof CharacterData;
     readonly NodeFilter: {
         FILTER_ACCEPT: number;
         FILTER_REJECT: number;
@@ -113,10 +138,12 @@ export default class Window extends EventTarget implements IWindow, NodeJS.Globa
     readonly AnimationEvent: typeof AnimationEvent;
     readonly KeyboardEvent: typeof KeyboardEvent;
     readonly MouseEvent: typeof MouseEvent;
+    readonly PointerEvent: typeof PointerEvent;
     readonly FocusEvent: typeof FocusEvent;
     readonly WheelEvent: typeof WheelEvent;
     readonly InputEvent: typeof InputEvent;
     readonly ErrorEvent: typeof ErrorEvent;
+    readonly StorageEvent: typeof StorageEvent;
     readonly ProgressEvent: typeof ProgressEvent;
     readonly EventTarget: typeof EventTarget;
     readonly DataTransfer: typeof DataTransfer;
@@ -138,25 +165,36 @@ export default class Window extends EventTarget implements IWindow, NodeJS.Globa
     readonly Screen: typeof Screen;
     readonly Storage: typeof Storage;
     readonly URLSearchParams: typeof URLSearchParams;
+    readonly HTMLCollection: typeof HTMLCollection;
+    readonly NodeList: typeof NodeList;
+    readonly MediaQueryList: typeof MediaQueryList;
+    readonly CSSUnitValue: typeof CSSUnitValue;
+    readonly Selection: typeof Selection;
+    readonly Navigator: typeof Navigator;
+    readonly MimeType: typeof MimeType;
+    readonly MimeTypeArray: typeof MimeTypeArray;
+    readonly Plugin: typeof Plugin;
+    readonly PluginArray: typeof PluginArray;
     onload: (event: Event) => void;
     onerror: (event: ErrorEvent) => void;
     readonly document: Document;
     readonly customElements: CustomElementRegistry;
     readonly location: Location;
     readonly history: History;
-    readonly navigator: {
-        userAgent: string;
-    };
+    readonly navigator: Navigator;
     readonly console: Console | null;
     readonly self: this;
     readonly top: this;
     readonly parent: this;
     readonly window: this;
+    readonly globalThis: this;
     readonly screen: Screen;
     readonly innerWidth = 1024;
     readonly innerHeight = 768;
+    readonly devicePixelRatio = 1;
     readonly sessionStorage: Storage;
     readonly localStorage: Storage;
+    readonly performance: any;
     Array: ArrayConstructor | null;
     ArrayBuffer: ArrayBufferConstructor | null;
     Boolean: BooleanConstructor | null;
@@ -167,7 +205,6 @@ export default class Window extends EventTarget implements IWindow, NodeJS.Globa
     EvalError: EvalErrorConstructor | null;
     Float32Array: Float32ArrayConstructor | null;
     Float64Array: Float64ArrayConstructor | null;
-    Function: FunctionConstructor | null;
     GLOBAL: null;
     Infinity: number | null;
     Int16Array: Int16ArrayConstructor | null;
@@ -178,7 +215,6 @@ export default class Window extends EventTarget implements IWindow, NodeJS.Globa
     Map: MapConstructor | null;
     Math: Math | null;
     NaN: number | null;
-    Object: ObjectConstructor | null;
     Number: NumberConstructor | null;
     Promise: Function | null;
     RangeError: RangeErrorConstructor | null;
@@ -218,16 +254,37 @@ export default class Window extends EventTarget implements IWindow, NodeJS.Globa
     v8debug: null;
     AbortController: any;
     AbortSignal: any;
+    private _objectClass;
+    private _functionClass;
     /**
      * Constructor.
      */
     constructor();
     /**
+     * Returns Object class.
+     *
+     * @returns Object class.
+     */
+    get Object(): typeof globalThis.Object;
+    /**
+     * Returns Function class.
+     *
+     * @returns Function class.
+     */
+    get Function(): typeof globalThis.Function;
+    /**
+     * The CSS interface holds useful CSS-related methods.
+     *
+     * @returns CSS interface.
+     */
+    get CSS(): CSS;
+    /**
      * Evaluates code.
      *
      * @param code Code.
+     * @returns Result.
      */
-    eval(code: string): void;
+    eval(code: string): unknown;
     /**
      * Returns an object containing the values of all CSS properties of an element.
      *
@@ -257,6 +314,13 @@ export default class Window extends EventTarget implements IWindow, NodeJS.Globa
         left?: number;
         behavior?: string;
     } | number, y?: number): void;
+    /**
+     * Returns a new MediaQueryList object that can then be used to determine if the document matches the media query string.
+     *
+     * @param mediaQueryString A string specifying the media query to parse into a MediaQueryList.
+     * @returns A new MediaQueryList.
+     */
+    matchMedia(mediaQueryString: string): MediaQueryList;
     /**
      * Sets a timer which executes a function once the timer expires.
      *

@@ -7,18 +7,24 @@ import HTMLElement from '../html-element/HTMLElement';
  * https://developer.mozilla.org/en-US/docs/Web/API/HTMLStyleElement.
  */
 export default class HTMLStyleElement extends HTMLElement {
+    constructor() {
+        super(...arguments);
+        this._styleSheet = null;
+    }
     /**
      * Returns CSS style sheet.
      *
      * @returns CSS style sheet.
      */
     get sheet() {
-        if (!this._isConnected) {
+        if (!this.isConnected) {
             return null;
         }
-        const styleSheet = new CSSStyleSheet();
-        styleSheet.replaceSync(this.innerText);
-        return styleSheet;
+        if (!this._styleSheet) {
+            this._styleSheet = new CSSStyleSheet();
+            this._styleSheet.replaceSync(this.innerText);
+        }
+        return this._styleSheet;
     }
     /**
      * Returns media.

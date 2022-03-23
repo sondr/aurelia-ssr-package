@@ -64,11 +64,18 @@ import HTMLTextAreaElement from './nodes/html-text-area-element/HTMLTextAreaElem
 import IHTMLTextAreaElement from './nodes/html-text-area-element/IHTMLTextAreaElement';
 import HTMLImageElement from './nodes/html-image-element/HTMLImageElement';
 import IHTMLImageElement from './nodes/html-image-element/IHTMLImageElement';
+import Image from './nodes/html-image-element/Image';
 import HTMLScriptElement from './nodes/html-script-element/HTMLScriptElement';
 import HTMLLinkElement from './nodes/html-link-element/HTMLLinkElement';
 import IHTMLLinkElement from './nodes/html-link-element/IHTMLLinkElement';
 import HTMLStyleElement from './nodes/html-style-element/HTMLStyleElement';
 import IHTMLStyleElement from './nodes/html-style-element/IHTMLStyleElement';
+import HTMLSlotElement from './nodes/html-slot-element/HTMLSlotElement';
+import IHTMLSlotElement from './nodes/html-slot-element/IHTMLSlotElement';
+import HTMLLabelElement from './nodes/html-label-element/HTMLLabelElement';
+import IHTMLLabelElement from './nodes/html-label-element/IHTMLLabelElement';
+import HTMLMetaElement from './nodes/html-meta-element/HTMLMetaElement';
+import IHTMLMetaElement from './nodes/html-meta-element/IHTMLMetaElement';
 import SVGElement from './nodes/svg-element/SVGElement';
 import ISVGElement from './nodes/svg-element/ISVGElement';
 import SVGGraphicsElement from './nodes/svg-element/SVGGraphicsElement';
@@ -92,12 +99,10 @@ import TreeWalker from './tree-walker/TreeWalker';
 import CustomElementRegistry from './custom-element/CustomElementRegistry';
 import XMLParser from './xml-parser/XMLParser';
 import XMLSerializer from './xml-serializer/XMLSerializer';
-import ElementTag from './config/ElementTag';
-import SelfClosingElements from './config/SelfClosingElements';
-import UnclosedElements from './config/UnclosedElements';
 import CSSStyleSheet from './css/CSSStyleSheet';
 import Storage from './storage/Storage';
 import URLSearchParams from './url-search-params/URLSearchParams';
+import Selection from './selection/Selection';
 
 export {
 	AsyncWindow,
@@ -166,11 +171,18 @@ export {
 	IHTMLTextAreaElement,
 	HTMLImageElement,
 	IHTMLImageElement,
+	Image,
 	HTMLScriptElement,
 	HTMLLinkElement,
 	IHTMLLinkElement,
 	HTMLStyleElement,
 	IHTMLStyleElement,
+	HTMLSlotElement,
+	IHTMLSlotElement,
+	HTMLLabelElement,
+	IHTMLLabelElement,
+	HTMLMetaElement,
+	IHTMLMetaElement,
 	SVGElement,
 	ISVGElement,
 	SVGGraphicsElement,
@@ -194,10 +206,8 @@ export {
 	CustomElementRegistry,
 	XMLParser,
 	XMLSerializer,
-	ElementTag,
-	SelfClosingElements,
-	UnclosedElements,
 	CSSStyleSheet,
 	Storage,
-	URLSearchParams
+	URLSearchParams,
+	Selection
 };

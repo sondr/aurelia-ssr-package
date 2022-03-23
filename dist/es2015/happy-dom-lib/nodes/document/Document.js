@@ -1,4 +1,4 @@
-import HTMLElement from '../html-element/HTMLElement';
+import HTMLUnknownElement from '../html-unknown-element/HTMLUnknownElement';
 import Text from '../text/Text';
 import Comment from '../comment/Comment';
 import Node from '../node/Node';
@@ -18,6 +18,7 @@ import CookieUtility from '../../cookie/CookieUtility';
 import HTMLCollectionFactory from '../element/HTMLCollectionFactory';
 import DocumentReadyStateEnum from './DocumentReadyStateEnum';
 import DocumentReadyStateManager from './DocumentReadyStateManager';
+import Selection from '../../selection/Selection';
 /**
  * Document.
  */
@@ -32,8 +33,9 @@ export default class Document extends Node {
         this.adoptedStyleSheets = [];
         this.children = HTMLCollectionFactory.create();
         this.readyState = DocumentReadyStateEnum.interactive;
+        this.isConnected = true;
         this._readyStateManager = null;
-        this._isConnected = true;
+        this._activeElement = null;
         this._isFirstWrite = true;
         this._isFirstWriteAfterOpen = false;
         this._defaultView = null;
@@ -48,6 +50,25 @@ export default class Document extends Node {
         this.appendChild(documentElement);
         documentElement.appendChild(headElement);
         documentElement.appendChild(bodyElement);
+    }
+    /**
+     * Returns character set.
+     *
+     * @deprecated
+     * @returns Character set.
+     */
+    get charset() {
+        return this.characterSet;
+    }
+    /**
+     * Returns character set.
+     *
+     * @returns Character set.
+     */
+    get characterSet() {
+        var _a;
+        const charset = (_a = this.querySelector('meta[charset]')) === null || _a === void 0 ? void 0 : _a.getAttributeNS(null, 'charset');
+        return charset ? charset : 'UTF-8';
     }
     /**
      * Returns default view.
@@ -172,6 +193,38 @@ export default class Document extends Node {
         return styleSheets;
     }
     /**
+     * Returns active element.
+     *
+     * @returns Active element.
+     */
+    get activeElement() {
+        return this._activeElement || this.body || this.documentElement || null;
+    }
+    /**
+     * Returns scrolling element.
+     *
+     * @returns Scrolling element.
+     */
+    get scrollingElement() {
+        return this.documentElement;
+    }
+    /**
+     * Returns location.
+     *
+     * @returns Location.
+     */
+    get location() {
+        return this._defaultView.location;
+    }
+    /**
+     * Returns scripts.
+     *
+     * @returns Scripts.
+     */
+    get scripts() {
+        return this.getElementsByTagName('script');
+    }
+    /**
      * Inserts a set of Node objects or DOMString objects after the last child of the ParentNode. DOMString objects are inserted as equivalent Text nodes.
      *
      * @param nodes List of Node or DOMString.
@@ -249,6 +302,27 @@ export default class Document extends Node {
      */
     getElementById(id) {
         return ParentNodeUtility.getElementById(this, id);
+    }
+    /**
+     * Returns an element by Name.
+     *
+     * @returns Matching element.
+     * @param name
+     */
+    getElementsByName(name) {
+        const _getElementsByName = (_parentNode, _name) => {
+            const matches = HTMLCollectionFactory.create();
+            for (const child of _parentNode.children) {
+                if ((child.getAttributeNS(null, 'name') || '') === _name) {
+                    matches.push(child);
+                }
+                for (const match of _getElementsByName(child, _name)) {
+                    matches.push(match);
+                }
+            }
+            return matches;
+        };
+        return _getElementsByName(this, name);
     }
     /**
      * Clones a node.
@@ -431,45 +505,45 @@ export default class Document extends Node {
      * Closes the document.
      */
     close() { }
+    /* eslint-disable jsdoc/valid-types */
     /**
      * Creates an element.
      *
-     * @param tagName Tag name.
+     * @param qualifiedName Tag name.
      * @param [options] Options.
-     * @param options.is
+     * @param [options.is] Tag name of a custom element previously defined via customElements.define().
      * @returns Element.
      */
-    createElement(tagName, options) {
-        return this.createElementNS(NamespaceURI.html, tagName, options);
+    createElement(qualifiedName, options) {
+        return this.createElementNS(NamespaceURI.html, qualifiedName, options);
     }
     /**
      * Creates an element with the specified namespace URI and qualified name.
      *
-     * @param tagName Tag name.
+     * @param namespaceURI Namespace URI.
+     * @param qualifiedName Tag name.
      * @param [options] Options.
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param options.is
+     * @param [options.is] Tag name of a custom element previously defined via customElements.define().
      * @returns Element.
      */
     createElementNS(namespaceURI, qualifiedName, options) {
+        const tagName = qualifiedName.toUpperCase();
         let customElementClass;
         if (this.defaultView && options && options.is) {
             customElementClass = this.defaultView.customElements.get(options.is);
         }
         else if (this.defaultView) {
-            customElementClass = this.defaultView.customElements.get(qualifiedName);
+            customElementClass = this.defaultView.customElements.get(tagName);
         }
-        const elementClass = customElementClass
-            ? customElementClass
-            : ElementTag[qualifiedName] || HTMLElement;
+        const elementClass = customElementClass || ElementTag[tagName] || HTMLUnknownElement;
         elementClass.ownerDocument = this;
         const element = new elementClass();
-        element.tagName = qualifiedName.toUpperCase();
+        element.tagName = tagName;
         element.ownerDocument = this;
         element.namespaceURI = namespaceURI;
         return element;
     }
+    /* eslint-enable jsdoc/valid-types */
     /**
      * Creates a text node.
      *
@@ -513,10 +587,13 @@ export default class Document extends Node {
      * Creates an event.
      *
      * @deprecated
-     * @param _type Type.
+     * @param type Type.
      * @returns Event.
      */
-    createEvent(_type) {
+    createEvent(type) {
+        if (this.defaultView[type]) {
+            return new this.defaultView[type]('init');
+        }
         return new Event('init');
     }
     /**
@@ -573,5 +650,31 @@ export default class Document extends Node {
         const adopted = node.parentNode ? node.parentNode.removeChild(node) : node;
         adopted.ownerDocument = this;
         return adopted;
+    }
+    /**
+     * Returns selection.
+     *
+     * @returns Selection.
+     */
+    getSelection() {
+        return new Selection();
+    }
+    /**
+     * Returns a boolean value indicating whether the document or any element inside the document has focus.
+     *
+     * @returns "true" if the document has focus.
+     */
+    hasFocus() {
+        return !!this.activeElement;
+    }
+    /**
+     * @override
+     */
+    dispatchEvent(event) {
+        const returnValue = super.dispatchEvent(event);
+        if (event.bubbles && !event._propagationStopped) {
+            return this.defaultView.dispatchEvent(event);
+        }
+        return returnValue;
     }
 }

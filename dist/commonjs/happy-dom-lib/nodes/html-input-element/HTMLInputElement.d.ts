@@ -22,7 +22,6 @@ export default class HTMLInputElement extends HTMLElement implements IHTMLInputE
     _width: number;
     defaultChecked: boolean;
     files: File[];
-    defaultValue: string;
     private _selectionStart;
     private _selectionEnd;
     private _selectionDirection;
@@ -243,17 +242,17 @@ export default class HTMLInputElement extends HTMLElement implements IHTMLInputE
      */
     set src(src: string);
     /**
-     * Returns defaultvalue.
+     * Returns defaultValue.
      *
      * @returns Defaultvalue.
      */
-    get defaultvalue(): string;
+    get defaultValue(): string;
     /**
-     * Sets defaultvalue.
+     * Sets defaultValue.
      *
-     * @param defaultvalue Defaultvalue.
+     * @param defaultValue Defaultvalue.
      */
-    set defaultvalue(defaultvalue: string);
+    set defaultValue(defaultValue: string);
     /**
      * Returns read only.
      *
@@ -423,6 +422,10 @@ export default class HTMLInputElement extends HTMLElement implements IHTMLInputE
      */
     get valueAsNumber(): number;
     /**
+     * Selects the text.
+     */
+    select(): void;
+    /**
      * Set selection range.
      *
      * @param start Start.
@@ -446,6 +449,18 @@ export default class HTMLInputElement extends HTMLElement implements IHTMLInputE
      * @returns "true" if the field is valid.
      */
     checkValidity(): boolean;
+    /**
+     * Steps up.
+     *
+     * @param [increment] Increment.
+     */
+    stepUp(increment?: number): void;
+    /**
+     * Steps down.
+     *
+     * @param [increment] Increment.
+     */
+    stepDown(increment?: number): void;
     /**
      * Clones a node.
      *

@@ -8,15 +8,19 @@ import Attr from '../../attribute/Attr';
 import IDocument from './IDocument';
 import CSSStyleSheet from '../../css/CSSStyleSheet';
 import IElement from '../element/IElement';
+import IHTMLScriptElement from '../html-script-element/IHTMLScriptElement';
 import IHTMLElement from '../html-element/IHTMLElement';
 import IDocumentType from '../document-type/IDocumentType';
 import INode from '../node/INode';
-import ICharacterData from '../character-data/ICharacterData';
+import IComment from '../comment/IComment';
+import IText from '../text/IText';
 import IDocumentFragment from '../document-fragment/IDocumentFragment';
 import INodeList from '../node/INodeList';
 import IHTMLCollection from '../element/IHTMLCollection';
 import DocumentReadyStateEnum from './DocumentReadyStateEnum';
 import DocumentReadyStateManager from './DocumentReadyStateManager';
+import Location from '../../location/Location';
+import Selection from '../../selection/Selection';
 /**
  * Document.
  */
@@ -27,8 +31,9 @@ export default class Document extends Node implements IDocument {
     implementation: DOMImplementation;
     readonly children: IHTMLCollection<IElement>;
     readonly readyState = DocumentReadyStateEnum.interactive;
+    readonly isConnected: boolean;
     _readyStateManager: DocumentReadyStateManager;
-    protected _isConnected: boolean;
+    _activeElement: IHTMLElement;
     protected _isFirstWrite: boolean;
     protected _isFirstWriteAfterOpen: boolean;
     private _defaultView;
@@ -37,6 +42,19 @@ export default class Document extends Node implements IDocument {
      * Creates an instance of Document.
      */
     constructor();
+    /**
+     * Returns character set.
+     *
+     * @deprecated
+     * @returns Character set.
+     */
+    get charset(): string;
+    /**
+     * Returns character set.
+     *
+     * @returns Character set.
+     */
+    get characterSet(): string;
     /**
      * Returns default view.
      *
@@ -116,6 +134,30 @@ export default class Document extends Node implements IDocument {
      */
     get styleSheets(): CSSStyleSheet[];
     /**
+     * Returns active element.
+     *
+     * @returns Active element.
+     */
+    get activeElement(): IHTMLElement;
+    /**
+     * Returns scrolling element.
+     *
+     * @returns Scrolling element.
+     */
+    get scrollingElement(): IHTMLElement;
+    /**
+     * Returns location.
+     *
+     * @returns Location.
+     */
+    get location(): Location;
+    /**
+     * Returns scripts.
+     *
+     * @returns Scripts.
+     */
+    get scripts(): IHTMLCollection<IHTMLScriptElement>;
+    /**
      * Inserts a set of Node objects or DOMString objects after the last child of the ParentNode. DOMString objects are inserted as equivalent Text nodes.
      *
      * @param nodes List of Node or DOMString.
@@ -177,6 +219,13 @@ export default class Document extends Node implements IDocument {
      */
     getElementById(id: string): IElement;
     /**
+     * Returns an element by Name.
+     *
+     * @returns Matching element.
+     * @param name
+     */
+    getElementsByName(name: string): INodeList<IElement>;
+    /**
      * Clones a node.
      *
      * @override
@@ -227,26 +276,25 @@ export default class Document extends Node implements IDocument {
     /**
      * Creates an element.
      *
-     * @param tagName Tag name.
+     * @param qualifiedName Tag name.
      * @param [options] Options.
-     * @param options.is
+     * @param [options.is] Tag name of a custom element previously defined via customElements.define().
      * @returns Element.
      */
-    createElement(tagName: string, options?: {
-        is: string;
+    createElement(qualifiedName: string, options?: {
+        is?: string;
     }): IElement;
     /**
      * Creates an element with the specified namespace URI and qualified name.
      *
-     * @param tagName Tag name.
+     * @param namespaceURI Namespace URI.
+     * @param qualifiedName Tag name.
      * @param [options] Options.
-     * @param namespaceURI
-     * @param qualifiedName
-     * @param options.is
+     * @param [options.is] Tag name of a custom element previously defined via customElements.define().
      * @returns Element.
      */
     createElementNS(namespaceURI: string, qualifiedName: string, options?: {
-        is: string;
+        is?: string;
     }): IElement;
     /**
      * Creates a text node.
@@ -254,14 +302,14 @@ export default class Document extends Node implements IDocument {
      * @param [data] Text data.
      * @returns Text node.
      */
-    createTextNode(data?: string): ICharacterData;
+    createTextNode(data?: string): IText;
     /**
      * Creates a comment node.
      *
      * @param [data] Text data.
      * @returns Text node.
      */
-    createComment(data?: string): ICharacterData;
+    createComment(data?: string): IComment;
     /**
      * Creates a document fragment.
      *
@@ -280,10 +328,10 @@ export default class Document extends Node implements IDocument {
      * Creates an event.
      *
      * @deprecated
-     * @param _type Type.
+     * @param type Type.
      * @returns Event.
      */
-    createEvent(_type: string): Event;
+    createEvent(type: string): Event;
     /**
      * Creates an Attr node.
      *
@@ -314,4 +362,20 @@ export default class Document extends Node implements IDocument {
      * @returns Adopted node.
      */
     adoptNode(node: INode): INode;
+    /**
+     * Returns selection.
+     *
+     * @returns Selection.
+     */
+    getSelection(): Selection;
+    /**
+     * Returns a boolean value indicating whether the document or any element inside the document has focus.
+     *
+     * @returns "true" if the document has focus.
+     */
+    hasFocus(): boolean;
+    /**
+     * @override
+     */
+    dispatchEvent(event: Event): boolean;
 }

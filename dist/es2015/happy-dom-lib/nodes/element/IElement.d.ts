@@ -3,7 +3,7 @@ import Attr from '../../attribute/Attr';
 import NamedNodeMap from './NamedNodeMap';
 import DOMRect from './DOMRect';
 import Range from './Range';
-import ClassList from './ClassList';
+import IDOMTokenList from '../../dom-token-list/IDOMTokenList';
 import INode from './../node/INode';
 import IChildNode from '../child-node/IChildNode';
 import IParentNode from '../parent-node/IParentNode';
@@ -15,7 +15,7 @@ export declare type TInsertAdjacentPositions = 'beforebegin' | 'afterbegin' | 'b
 export default interface IElement extends IChildNode, INonDocumentTypeChildNode, IParentNode {
     readonly tagName: string;
     readonly shadowRoot: IShadowRoot;
-    readonly classList: ClassList;
+    readonly classList: IDOMTokenList;
     readonly namespaceURI: string;
     scrollTop: number;
     scrollLeft: number;
@@ -23,6 +23,9 @@ export default interface IElement extends IChildNode, INonDocumentTypeChildNode,
     className: string;
     innerHTML: string;
     outerHTML: string;
+    slot: string;
+    readonly nodeName: string;
+    readonly localName: string;
     readonly attributes: NamedNodeMap;
     /**
      * Attribute changed callback.
@@ -32,6 +35,20 @@ export default interface IElement extends IChildNode, INonDocumentTypeChildNode,
      * @param newValue New value.
      */
     attributeChangedCallback?(name: string, oldValue: string, newValue: string): void;
+    /**
+     * Returns inner HTML and optionally the content of shadow roots.
+     *
+     * This is a feature implemented in Chromium, but not supported by Mozilla yet.
+     *
+     * @see https://web.dev/declarative-shadow-dom/
+     * @see https://chromestatus.com/feature/5191745052606464
+     * @param [options] Options.
+     * @param [options.includeShadowRoots] Set to "true" to include shadow roots.
+     * @returns HTML.
+     */
+    getInnerHTML(options?: {
+        includeShadowRoots?: boolean;
+    }): string;
     /**
      * Sets an attribute.
      *
@@ -47,6 +64,12 @@ export default interface IElement extends IChildNode, INonDocumentTypeChildNode,
      * @param value Value.
      */
     setAttributeNS(namespaceURI: string, name: string, value: string): void;
+    /**
+     * Returns attribute names.
+     *
+     * @returns Attribute names.
+     */
+    getAttributeNames(): string[];
     /**
      * Returns attribute value.
      *
@@ -144,6 +167,13 @@ export default interface IElement extends IChildNode, INonDocumentTypeChildNode,
      * @returns "true" if matching.
      */
     matches(selector: string): boolean;
+    /**
+     * Traverses the Element and its parents (heading toward the document root) until it finds a node that matches the provided selector string.
+     *
+     * @param selector Selector.
+     * @returns Closest matching element.
+     */
+    closest(selector: string): IElement;
     /**
      * The setAttributeNode() method adds a new Attr node to the specified element.
      *

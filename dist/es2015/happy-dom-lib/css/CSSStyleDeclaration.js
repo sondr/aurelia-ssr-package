@@ -31,7 +31,6 @@ export default class CSSStyleDeclaration {
         }
         this.length = index;
     }
-    /* eslint-disable require-jsdoc */
     /**
      *
      */
@@ -4460,7 +4459,6 @@ export default class CSSStyleDeclaration {
     set zoom(zoom) {
         this.setProperty('zoom', zoom);
     }
-    /* eslint-enable require-jsdoc */
     /**
      * Returns the style decleration as a CSS text.
      *
@@ -4493,7 +4491,12 @@ export default class CSSStyleDeclaration {
             for (const part of parts) {
                 if (part) {
                     const [name, value] = part.trim().split(':');
-                    newStyle.push(`${name}: ${value.trim()};`);
+                    if (value) {
+                        newStyle.push(`${name}: ${value.trim()};`);
+                    }
+                    else {
+                        newStyle.push(name);
+                    }
                     this[index] = name;
                     index++;
                 }
@@ -4516,7 +4519,7 @@ export default class CSSStyleDeclaration {
      * @returns Item.
      */
     item(index) {
-        return this[String(index)] || '';
+        return this[index] || '';
     }
     /**
      * Set a property.
@@ -4547,8 +4550,11 @@ export default class CSSStyleDeclaration {
                         newStyle.push(`${name}: ${value};`);
                         isExisting = true;
                     }
-                    else {
+                    else if (existingValue) {
                         newStyle.push(`${name}: ${existingValue.trim()};`);
+                    }
+                    else {
+                        newStyle.push(`${name};`);
                     }
                     this[index] = name;
                     index++;
@@ -4617,6 +4623,9 @@ export default class CSSStyleDeclaration {
                 if (part) {
                     const [name, value] = part.trim().split(':');
                     if (name === propertyName) {
+                        if (!value) {
+                            return '';
+                        }
                         return value.trim();
                     }
                 }

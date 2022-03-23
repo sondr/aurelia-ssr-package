@@ -25,7 +25,9 @@ define(["require", "exports", "../../css/CSSStyleSheet", "../html-element/HTMLEl
     var HTMLStyleElement = /** @class */ (function (_super) {
         __extends(HTMLStyleElement, _super);
         function HTMLStyleElement() {
-            return _super !== null && _super.apply(this, arguments) || this;
+            var _this = _super !== null && _super.apply(this, arguments) || this;
+            _this._styleSheet = null;
+            return _this;
         }
         Object.defineProperty(HTMLStyleElement.prototype, "sheet", {
             /**
@@ -34,12 +36,14 @@ define(["require", "exports", "../../css/CSSStyleSheet", "../html-element/HTMLEl
              * @returns CSS style sheet.
              */
             get: function () {
-                if (!this._isConnected) {
+                if (!this.isConnected) {
                     return null;
                 }
-                var styleSheet = new CSSStyleSheet_1.default();
-                styleSheet.replaceSync(this.innerText);
-                return styleSheet;
+                if (!this._styleSheet) {
+                    this._styleSheet = new CSSStyleSheet_1.default();
+                    this._styleSheet.replaceSync(this.innerText);
+                }
+                return this._styleSheet;
             },
             enumerable: false,
             configurable: true

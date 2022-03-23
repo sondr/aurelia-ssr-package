@@ -1,3 +1,4 @@
+import CSSStyleDeclaration from '../../css/CSSStyleDeclaration';
 import Element from '../element/Element';
 /**
  * SVG Element.
@@ -6,6 +7,10 @@ import Element from '../element/Element';
  * https://developer.mozilla.org/en-US/docs/Web/API/SVGElement.
  */
 export default class SVGElement extends Element {
+    constructor() {
+        super(...arguments);
+        this._style = null;
+    }
     /**
      * Returns viewport.
      *
@@ -41,5 +46,42 @@ export default class SVGElement extends Element {
             }
         }
         return dataset;
+    }
+    /**
+     * Returns style.
+     *
+     * @returns Style.
+     */
+    get style() {
+        if (!this._style) {
+            this._style = new CSSStyleDeclaration(this._attributes);
+        }
+        return this._style;
+    }
+    /**
+     * The setAttributeNode() method adds a new Attr node to the specified element.
+     *
+     * @override
+     * @param attribute Attribute.
+     * @returns Replaced attribute.
+     */
+    setAttributeNode(attribute) {
+        const replacedAttribute = super.setAttributeNode(attribute);
+        if (attribute.name === 'style' && this._style) {
+            this._style.cssText = attribute.value;
+        }
+        return replacedAttribute;
+    }
+    /**
+     * Removes an Attr node.
+     *
+     * @override
+     * @param attribute Attribute.
+     */
+    removeAttributeNode(attribute) {
+        super.removeAttributeNode(attribute);
+        if (attribute.name === 'style' && this._style) {
+            this._style.cssText = '';
+        }
     }
 }

@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var SelfClosingElements_1 = require("../config/SelfClosingElements");
 var UnnestableElements_1 = require("../config/UnnestableElements");
+var ChildLessElements_1 = require("../config/ChildLessElements");
 var he_1 = require("he");
 var NamespaceURI_1 = require("../config/NamespaceURI");
 var MARKUP_REGEXP = /<(\/?)([a-z][-.0-9_a-z]*)\s*([^>]*?)(\/?)>/gi;
@@ -76,6 +77,17 @@ var XMLParser = /** @class */ (function () {
                     parent.appendChild(newElement);
                 }
                 lastTextIndex = markupRegexp.lastIndex;
+                // Tags which contain non-parsed content
+                // For example: <script> JavaScript should not be parsed
+                if (ChildLessElements_1.default.includes(tagName)) {
+                    var childLessMatch = null;
+                    while ((childLessMatch = markupRegexp.exec(data))) {
+                        if (childLessMatch[2] === match[2] && childLessMatch[1]) {
+                            markupRegexp.lastIndex -= childLessMatch[0].length;
+                            break;
+                        }
+                    }
+                }
             }
             else {
                 stack.pop();
@@ -87,7 +99,7 @@ var XMLParser = /** @class */ (function () {
         // Text after last element
         if ((!match && data.length > 0) || (match && lastTextIndex !== match.index)) {
             var text = data.substring(lastTextIndex);
-            this.appendTextAndCommentNodes(document, root, text);
+            this.appendTextAndCommentNodes(document, parent || root, text);
         }
         return root;
     };
@@ -128,7 +140,7 @@ var XMLParser = /** @class */ (function () {
         var lastIndex = 0;
         var match;
         while ((match = commentRegExp.exec(text))) {
-            if (match.index > 0) {
+            if (match.index > 0 && lastIndex !== match.index) {
                 var textNode = document.createTextNode(text.substring(lastIndex, match.index));
                 nodes.push(textNode);
             }
@@ -191,10 +203,7 @@ var XMLParser = /** @class */ (function () {
                 }
             }
             // Attributes with no value
-            for (var _i = 0, _a = attributes
-                .replace(ATTRIBUTE_REGEXP, '')
-                .trim()
-                .split(' '); _i < _a.length; _i++) {
+            for (var _i = 0, _a = attributes.replace(ATTRIBUTE_REGEXP, '').trim().split(' '); _i < _a.length; _i++) {
                 var name_1 = _a[_i];
                 if (name_1) {
                     element.setAttributeNS(null, this._getAttributeName(namespaceURI, name_1), '');

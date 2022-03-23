@@ -3,6 +3,7 @@ import ResourceFetcher from '../../fetch/ResourceFetcher';
 import HTMLElement from '../html-element/HTMLElement';
 import Event from '../../event/Event';
 import ErrorEvent from '../../event/events/ErrorEvent';
+import DOMTokenList from '../../dom-token-list/DOMTokenList';
 /**
  * HTML Link Element.
  *
@@ -16,68 +17,18 @@ export default class HTMLLinkElement extends HTMLElement {
         this.onload = null;
         this.sheet = null;
         this._evaluateCSS = true;
+        this._relList = null;
     }
     /**
-     * Returns "true" if connected to DOM.
+     * Returns rel list.
      *
-     * @returns "true" if connected.
+     * @returns Rel list.
      */
-    get isConnected() {
-        return this._isConnected;
-    }
-    /**
-     * Sets the connected state.
-     *
-     * @param isConnected "true" if connected.
-     */
-    set isConnected(isConnected) {
-        if (this._isConnected !== isConnected) {
-            this._isConnected = isConnected;
-            for (const child of this.childNodes) {
-                child.isConnected = isConnected;
-            }
-            // eslint-disable-next-line
-            if (this.shadowRoot) {
-                // eslint-disable-next-line
-                this.shadowRoot.isConnected = isConnected;
-            }
-            if (isConnected && this._evaluateCSS) {
-                const href = this.getAttributeNS(null, 'href');
-                const rel = this.getAttributeNS(null, 'rel');
-                if (href !== null && rel && rel.toLowerCase() === 'stylesheet') {
-                    this.ownerDocument._readyStateManager.startTask();
-                    ResourceFetcher.fetch({ window: this.ownerDocument.defaultView, url: href })
-                        .then(code => {
-                        const styleSheet = new CSSStyleSheet();
-                        styleSheet.replaceSync(code);
-                        this.sheet = styleSheet;
-                        this.dispatchEvent(new Event('load'));
-                        this.ownerDocument._readyStateManager.endTask();
-                    })
-                        .catch(error => {
-                        this.dispatchEvent(new ErrorEvent('error', {
-                            message: error.message,
-                            error
-                        }));
-                        this.ownerDocument.defaultView.dispatchEvent(new ErrorEvent('error', {
-                            message: error.message,
-                            error
-                        }));
-                        this.ownerDocument._readyStateManager.endTask();
-                        if (!this._listeners['error'] &&
-                            !this.ownerDocument.defaultView._listeners['error']) {
-                            this.ownerDocument.defaultView.console.error(error);
-                        }
-                    });
-                }
-            }
-            if (isConnected && this.connectedCallback) {
-                this.connectedCallback();
-            }
-            else if (!isConnected && this.disconnectedCallback) {
-                this.disconnectedCallback();
-            }
+    get relList() {
+        if (!this._relList) {
+            this._relList = new DOMTokenList(this, 'rel');
         }
+        return this._relList;
     }
     /**
      * Returns as.
@@ -225,14 +176,14 @@ export default class HTMLLinkElement extends HTMLElement {
             this.isConnected) {
             this.ownerDocument._readyStateManager.startTask();
             ResourceFetcher.fetch({ window: this.ownerDocument.defaultView, url: href })
-                .then(code => {
+                .then((code) => {
                 const styleSheet = new CSSStyleSheet();
                 styleSheet.replaceSync(code);
                 this.sheet = styleSheet;
                 this.dispatchEvent(new Event('load'));
                 this.ownerDocument._readyStateManager.endTask();
             })
-                .catch(error => {
+                .catch((error) => {
                 this.dispatchEvent(new ErrorEvent('error', {
                     message: error.message,
                     error
@@ -248,5 +199,51 @@ export default class HTMLLinkElement extends HTMLElement {
             });
         }
         return replacedAttribute;
+    }
+    /**
+     * @override
+     */
+    _connectToNode(parentNode = null) {
+        const isConnected = this.isConnected;
+        const isParentConnected = parentNode ? parentNode.isConnected : false;
+        super._connectToNode(parentNode);
+        if (isConnected !== isParentConnected && this._evaluateCSS) {
+            const href = this.getAttributeNS(null, 'href');
+            const rel = this.getAttributeNS(null, 'rel');
+            if (href !== null && rel && rel.toLowerCase() === 'stylesheet') {
+                this.ownerDocument._readyStateManager.startTask();
+                ResourceFetcher.fetch({ window: this.ownerDocument.defaultView, url: href })
+                    .then((code) => {
+                    const styleSheet = new CSSStyleSheet();
+                    styleSheet.replaceSync(code);
+                    this.sheet = styleSheet;
+                    this.dispatchEvent(new Event('load'));
+                    this.ownerDocument._readyStateManager.endTask();
+                })
+                    .catch((error) => {
+                    this.dispatchEvent(new ErrorEvent('error', {
+                        message: error.message,
+                        error
+                    }));
+                    this.ownerDocument.defaultView.dispatchEvent(new ErrorEvent('error', {
+                        message: error.message,
+                        error
+                    }));
+                    this.ownerDocument._readyStateManager.endTask();
+                    if (!this._listeners['error'] && !this.ownerDocument.defaultView._listeners['error']) {
+                        this.ownerDocument.defaultView.console.error(error);
+                    }
+                });
+            }
+        }
+    }
+    /**
+     * Updates DOM list indices.
+     */
+    _updateDomListIndices() {
+        super._updateDomListIndices();
+        if (this._relList) {
+            this._relList._updateIndices();
+        }
     }
 }
